@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { User, Search, ShoppingCart, Menu, X } from "lucide-react";
+import { User, Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHome, setIsHome] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -33,6 +34,75 @@ const Navbar = () => {
   const textColor = isHome && !scrolled ? "text-white" : "text-[#FF6600]";
   const hoverColor = isHome && !scrolled ? "bg-white" : "bg-[#FF6600]";
 
+  // Services data structure
+  const services = [
+    {
+      category: "Digital Marketing",
+      items: [
+        "SEO Optimization",
+        "Online Ads Campaigns",
+        "Social Media Marketing",
+        "Social Media Page Setup",
+        "Social Media Content Design",
+        "Professional Content Writing",
+        "Content Marketing"
+      ]
+    },
+    {
+      category: "Branding & Creative Design",
+      items: [
+        "Brand Development",
+        "Brand Identity Messaging",
+        "Brand Guidelines",
+        "Rebranding Services",
+        "Logo Design",
+        "Social Media Design",
+        "Ad Creative Design",
+        "Presentation Design",
+        "Email Design",
+        "Illustrations & Iconography",
+        "Corporate Reports",
+        "Product Sheets & One-Pagers",
+        "Print & Packaging Design"
+      ]
+    },
+    {
+      category: "Audio & Video Production",
+      items: [
+        "Corporate A/V Production",
+        "Corporate Films",
+        "Promotional Videos",
+        "Event Videos",
+        "Wedding Videos",
+        "Product Videos",
+        "Motion Graphics",
+        "Digital Ads (Reels/Shorts)",
+        "Video Editing"
+      ]
+    },
+    {
+      category: "Website Development",
+      items: [
+        "Business Website",
+        "Portfolio Website",
+        "Landing Page Development",
+        "CMS Website",
+        "E-Commerce Websites",
+        "Full E-Commerce Setup"
+      ]
+    },
+    {
+      category: "Mobile App Development",
+      items: [
+        "Android App Development",
+        "iOS App Development",
+        "Hybrid App Development",
+        "UI/UX for Apps",
+        "Backend API Development"
+      ]
+    }
+  ];
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-serif ${navClasses}`}
@@ -58,9 +128,90 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8 text-xl">
-          {["/", "/about", "/services", "/offers", "/contact"].map((path, i) => {
-            const labels = ["Home", "About", "Services", "Offers", "Contact Us"];
+        <div className="hidden md:flex gap-8 text-xl relative">
+          {["/", "/about"].map((path, i) => {
+            const labels = ["Home", "About"];
+            return (
+              <Link
+                key={path}
+                to={path}
+                className={`relative group ${textColor} transition`}
+              >
+                {labels[i]}
+                <span
+                  className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}
+                ></span>
+              </Link>
+            );
+          })}
+          
+          {/* Services Dropdown */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button
+              className={`relative group flex items-center gap-1 ${textColor} transition`}
+            >
+              Services
+              <ChevronDown 
+                size={16} 
+                className={`transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`}
+              />
+              <span
+                className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}
+              ></span>
+            </button>
+
+            {/* Dropdown Menu */}
+            <div
+              className={`absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-500 ease-in-out ${
+                servicesOpen 
+                  ? "opacity-100 visible translate-y-0 scale-100" 
+                  : "opacity-0 invisible -translate-y-4 scale-95"
+              }`}
+              style={{ minWidth: "800px" }}
+            >
+              <div className="p-6 grid grid-cols-2 gap-8">
+                {services.map((service, index) => (
+                  <div key={index} className="space-y-3">
+                    <h3 className="font-bold text-lg text-gray-900 border-b-2 border-orange-500 pb-2">
+                      {service.category}
+                    </h3>
+                    <ul className="space-y-2">
+                      {service.items.map((item, itemIndex) => (
+                        <li key={itemIndex}>
+                          <Link
+                            to="/services"
+                            className="text-gray-700 hover:text-orange-600 transition-colors duration-200 text-sm block py-1"
+                            onClick={() => setServicesOpen(false)}
+                          >
+                            {item}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              
+              {/* View All Services Button */}
+              <div className="border-t border-gray-200 bg-gray-50 p-4">
+                <Link
+                  to="/services"
+                  className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setServicesOpen(false)}
+                >
+                  View All Services
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Other Menu Items */}
+          {["/offers", "/contact"].map((path, i) => {
+            const labels = ["Offers", "Contact Us"];
             return (
               <Link
                 key={path}
@@ -111,9 +262,85 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="flex flex-col items-center px-6 py-6 gap-5 text-lg bg-[#f8f8f0]/90 text-[#FF6600]">
-          {["/", "/about", "/services", "/offers", "/contact"].map((path, i) => {
-            const labels = ["Home", "About", "Services", "Offers", "Contact Us"];
+        <div className="flex flex-col items-center px-6 py-6 gap-5 text-lg bg-[#f8f8f0]/90 text-[#FF6600] h-[calc(100vh-120px)] overflow-y-auto">
+          {["/", "/about"].map((path, i) => {
+            const labels = ["Home", "About"];
+            return (
+              <Link
+                key={path}
+                to={path}
+                onClick={() => setIsOpen(false)}
+                className="w-full py-2 border-b border-gray-700 hover:text-orange-400 transition text-center"
+              >
+                {labels[i]}
+              </Link>
+            );
+          })}
+          
+          {/* Mobile Services Accordion */}
+          <div className="w-full border-b border-gray-700">
+            <button
+              onClick={() => setServicesOpen(!servicesOpen)}
+              className="w-full py-2 flex items-center justify-between hover:text-orange-400 transition"
+            >
+              <span>Services</span>
+              <ChevronDown 
+                size={16} 
+                className={`transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+            
+            {/* Mobile Services Dropdown */}
+            <div
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                servicesOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="py-4 space-y-6">
+                {services.map((service, index) => (
+                  <div key={index} className="space-y-2">
+                    <h3 className="font-bold text-gray-900 border-l-4 border-orange-500 pl-3">
+                      {service.category}
+                    </h3>
+                    <ul className="space-y-1 pl-4">
+                      {service.items.map((item, itemIndex) => (
+                        <li key={itemIndex}>
+                          <Link
+                            to="/services"
+                            className="text-gray-700 hover:text-orange-600 transition-colors duration-200 text-sm block py-1"
+                            onClick={() => {
+                              setIsOpen(false);
+                              setServicesOpen(false);
+                            }}
+                          >
+                            {item}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Mobile View All Button */}
+              <div className="pt-4 border-t border-gray-300">
+                <Link
+                  to="/services"
+                  className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300"
+                  onClick={() => {
+                    setIsOpen(false);
+                    setServicesOpen(false);
+                  }}
+                >
+                  View All Services
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Other Mobile Menu Items */}
+          {["/offers", "/contact"].map((path, i) => {
+            const labels = ["Offers", "Contact Us"];
             return (
               <Link
                 key={path}
