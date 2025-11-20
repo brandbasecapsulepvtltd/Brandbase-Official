@@ -95,7 +95,7 @@ const AboutUsContent = () => {
           >
             <Tag>Our Story</Tag>
             <motion.h1
-              className="text-6xl font-bold mb-6 text-[#FF6600]"
+              className="text-6xl font-bold mb-6 text-[#FF6600] mt-5"
               whileHover={{ scale: 1.05 }}
             >
               {hero.title}

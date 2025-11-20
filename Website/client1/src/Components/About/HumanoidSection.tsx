@@ -185,7 +185,7 @@ const HumanoidSection = () => {
               </div>
             </div>
             
-            <h2 className="section-title text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 text-cente text-[#ff6600]">
+            <h2 className="section-title text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 text-cente text-[#ff6600] py-2 translate-x-10">
               Why Choose Brandbase
             </h2>
           </div>
