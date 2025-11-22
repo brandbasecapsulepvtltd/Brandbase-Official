@@ -44,7 +44,7 @@ const FloatingWhatsApp = () => {
       {/* WhatsApp Floating Icon */}
       <button
         onClick={handleClick}
-        className="fixed bottom-15 right-6 z-50 w-15 h-15 bg-orange-600 rounded-full shadow-lg flex items-center justify-center hover:bg-orange-700 transition-all duration-300"
+        className="fixed bottom-20 right-4 z-50 w-15 h-15 bg-orange-600 rounded-full shadow-lg flex items-center justify-center hover:bg-orange-700 transition-all duration-300"
         aria-label="WhatsApp Chat"
       >
         <FaWhatsapp className="text-white text-2xl bg-orange-600" />

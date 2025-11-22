@@ -209,8 +209,8 @@ const Navbar = () => {
           </div>
 
           {/* Other Menu Items */}
-          {["/offers", "/contact"].map((path, i) => {
-            const labels = ["Offers", "Contact Us"];
+          {["/blogs", "/contact"].map((path, i) => {
+            const labels = ["Blogs", "Contact Us"];
             return (
               <Link
                 key={path}
