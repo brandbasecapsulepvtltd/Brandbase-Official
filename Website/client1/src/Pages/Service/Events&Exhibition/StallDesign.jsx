@@ -5,16 +5,20 @@ import StallDesignHero from '../../../Components/StallDesign/StallDesignHero'
 import Features from '../../../Components/StallDesign/Features'
 import WhatWeDoSection from '../../../Components/StallDesign/WhatWeDoSection'
 import Country from '../../../Components/StallDesign/Country'
+import AboutSection from '../../../Components/StallDesign/AboutSection'
 
 const StallDesign = () => {
   return (
-    <>
-      <StallDesignHero/>
-      <WhatWeDoSection/>
-      <Country/>
+  <>
+  <StallDesignHero/>
+     
+      {/* CTA Section
+               <WhatWeDoSection/>
+         <Country/>
       <Features/>
       <StallDesignStats/>
-      {/* CTA Section */}
+      */}
+      <AboutSection/>
       <section
         className="relative py-20 px-6 lg:px-20 bg-gray-900 text-white mt-20 overflow-hidden"
         role="region"
