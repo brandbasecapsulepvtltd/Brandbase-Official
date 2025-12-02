@@ -46,12 +46,17 @@ export default function ServiceSlider() {
   }, [isHovered]);
 
   return (
-    <section className="">
+    <section 
+      aria-label="Services marquee slider"
+      role="region"
+    >
       <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600]">
         <motion.div
           ref={scope}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onFocus={() => setIsHovered(true)}
+          onBlur={() => setIsHovered(false)}
           className="flex flex-none gap-16 pr-16 text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium group cursor-pointer"
           animate={{
             x: ["0%", "-50%"]
@@ -62,16 +67,32 @@ export default function ServiceSlider() {
             repeat: Infinity,
             repeatType: "loop"
           }}
+          aria-label="Continuous scrolling services list"
+          tabIndex={0}
         >
           {Array.from({ length: 10 }).map((_, i) => (
-            <div className="flex items-center gap-8 md:gap-12 lg:gap-16" key={i}>
-              <span className="text-[#FF6600] text-4xl md:text-6xl lg:text-7xl">&#10038;</span>
+            <div 
+              className="flex items-center gap-8 md:gap-12 lg:gap-16" 
+              key={i}
+              role="listitem"
+              aria-label={services[i % services.length]}
+            >
+              <span 
+                className="text-[#FF6600] text-4xl md:text-6xl lg:text-7xl"
+                aria-hidden="true"
+              >&#10038;</span>
               <span className="group-hover:text-[#FF6600] transition-colors duration-300 whitespace-nowrap">
                 {services[i % services.length]}
               </span>
             </div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Hidden descriptive text for screen readers */}
+      <div className="sr-only">
+        <p>Continuously scrolling list of our services: {services.join(', ')}.</p>
+        <p>The animation slows down when you hover or focus on it.</p>
       </div>
     </section>
   );

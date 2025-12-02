@@ -62,55 +62,75 @@ const HomePage = () => {
   // Render loading state
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <main 
+        className="min-h-screen flex items-center justify-center bg-gray-50"
+        aria-label="Loading page content"
+      >
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent mx-auto mb-4"></div>
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">Loading BrandBase</h3>
+          <div 
+            className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent mx-auto mb-4"
+            aria-label="Loading indicator"
+            role="status"
+          ></div>
+          <h1 className="text-xl font-semibold text-gray-700 mb-2">Loading BrandBase</h1>
           <p className="text-gray-500">Fetching the latest content...</p>
         </div>
-      </div>
+      </main>
     );
   }
 
   // Render error state
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="max-w-md mx-auto text-center p-8 bg-white rounded-lg shadow-lg">
-          <div className="text-6xl mb-6">🚧</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Content Unavailable</h2>
+      <main 
+        className="min-h-screen flex items-center justify-center bg-gray-50"
+        aria-label="Error page"
+      >
+        <article className="max-w-md mx-auto text-center p-8 bg-white rounded-lg shadow-lg">
+          <div 
+            className="text-6xl mb-6"
+            aria-hidden="true"
+          >🚧</div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Content Unavailable</h1>
           <p className="text-gray-600 mb-6">{error}</p>
           <div className="space-y-3">
             <button
               onClick={fetchHomePageData}
               className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              aria-label="Retry loading page content"
             >
               Retry Loading
             </button>
             <div className="text-sm text-gray-500">
-              <p>Make sure:</p>
-              <ul className="list-disc list-inside mt-2 text-left">
-                <li>Backend server is running on port 5000</li>
-                <li>Database is properly seeded</li>
-                <li>API endpoint /api/homepage is accessible</li>
+              <h2 className="font-medium mb-2">Make sure:</h2>
+              <ul className="list-disc list-inside mt-2 text-left" role="list">
+                <li role="listitem">Backend server is running on port 5000</li>
+                <li role="listitem">Database is properly seeded</li>
+                <li role="listitem">API endpoint /api/homepage is accessible</li>
               </ul>
             </div>
           </div>
-        </div>
-      </div>
+        </article>
+      </main>
     );
   }
 
   // Check if we have the minimum required data
   if (!homePageData) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <main 
+        className="min-h-screen flex items-center justify-center bg-gray-50"
+        aria-label="No data available"
+      >
         <div className="text-center">
-          <div className="text-6xl mb-4">❓</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">No Data Available</h2>
+          <div 
+            className="text-6xl mb-4"
+            aria-hidden="true"
+          >❓</div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">No Data Available</h1>
           <p className="text-gray-600">Please check the backend configuration.</p>
         </div>
-      </div>
+      </main>
     );
   }
 
@@ -126,7 +146,7 @@ const HomePage = () => {
 
   // Render the complete page with fetched data
   return (
-    <div className="home-page">
+    <main className="home-page">
       {/* Hero Section */}
       {heroSection && <HeroSection data={heroSection} />}
       
@@ -150,9 +170,10 @@ const HomePage = () => {
       
       {/* FAQs Section */}
       {faqs && <Faqs data={faqs} />}      
+      
       {/* CTA Section */}
       <CTASection />
-    </div>
+    </main>
   );
 };
 

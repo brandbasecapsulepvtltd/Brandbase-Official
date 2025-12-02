@@ -13,32 +13,41 @@ export default function ServiceColumn(props) {
         ease: "linear",
       }}
       className={`flex flex-col gap-4 pb-4 ${className || ""}`}
+      aria-label="Animated service cards column"
     >
       {Array.from({ length: 2 }).map((_, i) => (
         <Fragment key={i}>
           {services.map((service) => (
-            <div
+            <article
               className={`bg-gradient-to-b from-orange-400 via-orange-500 to-orange-600 border border-white/20 rounded-3xl p-6 ${className || ""}`}
               key={service.name}
+              aria-label={`${service.name} service card`}
             >
               <div className="flex justify-center">
                 <img
                   src={service.icon}
                   className="w-24 h-24"
-                  alt={`${service.name} icon`}
+                  alt={`${service.name} service icon`}
+                  title={`${service.name} Service`}
+                  loading="lazy"
+                  width={96}
+                  height={96}
                 />
               </div>
-              <h3 className="text-3xl text-center mt-6">{service.name}</h3>
+              <h2 className="text-3xl text-center mt-6">{service.name}</h2>
               <p className="text-white/80 text-center mt-2">
                 {service.description}
               </p>
               <div className="flex justify-center mt-4">
-                <button className="text-white hover:text-gray-200 font-semibold text-sm flex items-center gap-1 transition-all duration-300">
+                <button 
+                  className="text-white hover:text-gray-200 font-semibold text-sm flex items-center gap-1 transition-all duration-300"
+                  aria-label={`Learn more about ${service.name}`}
+                >
                   Learn More
-                  <span>→</span>
+                  <span aria-hidden="true">→</span>
                 </button>
               </div>
-            </div>
+            </article>
           ))}
         </Fragment>
       ))}

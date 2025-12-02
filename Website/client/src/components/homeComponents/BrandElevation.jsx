@@ -7,11 +7,17 @@ export default function BrandElevation({ data }) {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section 
+      aria-labelledby="brand-elevation-heading"
+      className="py-24 bg-white overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        <header className="text-center mb-16">
+          <h1 
+            id="brand-elevation-heading"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+          >
             Beyond Websites – A Full{" "}
             <span className="text-[#FF6600]">360°</span>
             Approach to Brand Elevation
@@ -22,11 +28,15 @@ export default function BrandElevation({ data }) {
             to branding and marketing, Video & more, ensure your brand connects with your 
             audience across every touchpoint.
           </p>
-        </div>
+        </header>
 
         {/* Continuous Carousel */}
         <div className="relative">
-          <div className="flex overflow-hidden gap-6">
+          <div 
+            className="flex overflow-hidden gap-6"
+            role="region"
+            aria-label="Our Services Carousel"
+          >
             {/* First Set */}
             <motion.div
               className="flex gap-6 flex-none"
@@ -41,6 +51,7 @@ export default function BrandElevation({ data }) {
                   ease: "linear",
                 },
               }}
+              aria-hidden="false"
             >
               {data.services.map((service, index) => (
                 <ServiceCard 
@@ -66,6 +77,7 @@ export default function BrandElevation({ data }) {
                   ease: "linear",
                 },
               }}
+              aria-hidden="true"
             >
               {data.services.map((service, index) => (
                 <ServiceCard 
@@ -79,8 +91,14 @@ export default function BrandElevation({ data }) {
           </div>
 
           {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 w-10 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 w-10 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+          <div 
+            className="absolute left-0 top-0 w-10 h-full bg-gradient-to-r from-white to-transparent z-10"
+            aria-hidden="true"
+          ></div>
+          <div 
+            className="absolute right-0 top-0 w-10 h-full bg-gradient-to-l from-white to-transparent z-10"
+            aria-hidden="true"
+          ></div>
         </div>
       </div>
     </section>
@@ -102,17 +120,23 @@ function ServiceCard({ service, onHover, onLeave }) {
   };
 
   return (
-    <div 
+    <article 
       className="flex-shrink-0 w-80 bg-white rounded-3xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer relative h-100"
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
+      onFocus={handleHoverStart}
+      onBlur={handleHoverEnd}
+      role="article"
+      aria-label={`${service.category} services`}
+      tabIndex={0}
     >
       {/* Card Image */}
-      <div className="h-full bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+      <figure className="h-full bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden m-0">
         {/* Actual image from Unsplash */}
         <motion.img 
           src={service.image} 
-          alt={service.category}
+          alt={`${service.category} - Professional creative services including ${service.items.slice(0, 2).join(', ')} and more`}
+          title={`${service.category} Services`}
           className="w-full h-full object-cover"
           animate={{
             scale: isHovered ? 1.1 : 1
@@ -120,15 +144,18 @@ function ServiceCard({ service, onHover, onLeave }) {
           transition={{
             duration: 0.3
           }}
+          loading="lazy"
+          width={320}
+          height={400}
         />
         
         {/* Service Name Overlay */}
-        <div className="absolute inset-0 bg-black/40 flex justify-center">
-          <h3 className="text-2xl mt-5 font-bold text-white text-center px-4">
+        <figcaption className="absolute inset-0 bg-black/40 flex justify-center">
+          <h2 className="text-2xl mt-5 font-bold text-white text-center px-4">
             {service.category}
-          </h3>
-        </div>
-      </div>
+          </h2>
+        </figcaption>
+      </figure>
 
       {/* Services List - Animated from bottom on hover */}
       <motion.div 
@@ -150,11 +177,13 @@ function ServiceCard({ service, onHover, onLeave }) {
           justifyContent: 'flex-end',
           paddingBottom: '1.5rem'
         }}
+        role="complementary"
+        aria-label={`${service.category} service details`}
       >
         <div className="flex-1 flex flex-col justify-center">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
             Our Services
-          </h4>
+          </h3>
           
           <ul className="space-y-3 mb-4">
             {service.items.map((item, itemIndex) => (
@@ -162,7 +191,10 @@ function ServiceCard({ service, onHover, onLeave }) {
                 key={itemIndex} 
                 className="flex items-center gap-3 text-gray-700 text-sm"
               >
-                <div className="w-1.5 h-1.5 bg-[#FF6600] rounded-full flex-shrink-0"></div>
+                <div 
+                  className="w-1.5 h-1.5 bg-[#FF6600] rounded-full flex-shrink-0"
+                  aria-hidden="true"
+                ></div>
                 <span>{item}</span>
               </li>
             ))}
@@ -174,10 +206,11 @@ function ServiceCard({ service, onHover, onLeave }) {
           className="w-full py-3 bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold rounded-xl transition-colors duration-300"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
+          aria-label={`Learn more about our ${service.category} services`}
         >
           Learn More
         </motion.button>
       </motion.div>
-    </div>
+    </article>
   );
 }
