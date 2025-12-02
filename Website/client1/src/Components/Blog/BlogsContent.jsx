@@ -4,6 +4,11 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight, Search, Filter, TrendingUp, BookOpen, Users, Share2 } from 'lucide-react';
+import BlogHero from './BlogHero';
+import RampCareerGrid from './EditorPicksSection';
+import EditorPicksSection from './EditorPicksSection';
+import HelpfulResourcesSection from './HelpfulResourcesSection';
+import ReusableContentSection from './ReusableContentSection';
 
 // Enhanced JSON data for blog sections
 const blogSections = [
@@ -320,38 +325,6 @@ const BlogGrid = ({ blogPosts }) => (
   </div>
 );
 
-// Enhanced BlogsHero Component
-const BlogsHero = () => {
-  return (
-    <section className="bg-gradient-to-br from-orange-50 via-white to-amber-50 py-20 px-6 mt-10">
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Insights & <span className="text-orange-600">Stories</span>
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Discover the latest trends, expert tips, and innovative strategies in digital marketing, 
-            technology, and branding to grow your business.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl flex items-center gap-2">
-              <BookOpen className="w-5 h-5" />
-              Start Reading
-            </button>
-            <button className="border border-orange-600 text-orange-600 px-8 py-4 rounded-xl font-semibold hover:bg-orange-50 transition-colors flex items-center gap-2">
-              <Users className="w-5 h-5" />
-              Join Community
-            </button>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
 
 // Newsletter Subscription Component
 const NewsletterSection = () => {
@@ -486,10 +459,13 @@ const BlogsContent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <BlogsHero />
-      
-      <section className="max-w-7xl mx-auto px-6 py-16">
+    <div className="min-h-screen">
+      <BlogHero/>
+      <EditorPicksSection/>
+      <HelpfulResourcesSection/>
+      <ReusableContentSection/>
+      {/*
+            <section className="max-w-7xl mx-auto px-6 py-16">
         <BlogStats />
         
         <BlogSearchFilter 
@@ -535,6 +511,7 @@ const BlogsContent = () => {
 
         <NewsletterSection />
       </section>
+      */}
     </div>
   );
 };

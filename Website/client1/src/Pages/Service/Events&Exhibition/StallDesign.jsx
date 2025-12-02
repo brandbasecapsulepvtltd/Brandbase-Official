@@ -1,26 +1,27 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import StallDesignStats from '../../../Components/StallDesign/StallDesignStats'
-import StallDesignHero from '../../../Components/StallDesign/StallDesignHero'
 import Features from '../../../Components/StallDesign/Features'
 import WhatWeDoSection from '../../../Components/StallDesign/WhatWeDoSection'
 import Country from '../../../Components/StallDesign/Country'
 import AboutSection from '../../../Components/StallDesign/AboutSection'
+import ImageComparisonDemo from '../../../Components/StallDesign/ImageComparisonDemo'
+import StallHero from '../../../Components/StallDesign/StallHero'
 
 const StallDesign = () => {
   return (
-  <>
-  <StallDesignHero/>
-     
-      {/* CTA Section
-               <WhatWeDoSection/>
-         <Country/>
+    <>
+      <StallHero/>
+      <WhatWeDoSection/>
       <Features/>
-      <StallDesignStats/>
-      */}
       <AboutSection/>
+      <Country/>
+      <ImageComparisonDemo/>
+      <StallDesignStats/>
+      
+      {/* Updated CTA Section */}
       <section
-        className="relative py-20 px-6 lg:px-20 bg-gray-900 text-white mt-20 overflow-hidden"
+        className="relative py-20 px-6 lg:px-20 bg-orange-200 text-gray-900 mt-20 overflow-hidden"
         role="region"
         aria-labelledby="cta-heading"
       >
@@ -41,12 +42,12 @@ const StallDesign = () => {
           <div className="flex-1 text-center lg:text-left">
             <h2
               id="cta-heading"
-              className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-white font-serif"
+              className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-gray-900 font-serif"
             >
               You Found Us. <br />
               <span className="text-[#FF6600]">Let's Make Sure They Find You.</span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 mb-6 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-xl mx-auto lg:mx-0">
               Ready to scale with an actual digital strategy? Not some cookie-cutter plan?
             </p>
 

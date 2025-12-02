@@ -17,7 +17,7 @@ const StallDesignStats = () => {
       />
 
       {/* Stats Section */}
-      <div className="bg-orange-300 py-8 sm:py-12 md:py-16 px-6 sm:px-8 w-full max-w-[1200px] mx-auto -mt-12 sm:-mt-16 md:-mt-20 rounded-xl shadow-lg">
+      <div className="bg-orange-200 py-8 sm:py-12 md:py-16 px-6 sm:px-8 w-full max-w-[1200px] mx-auto -mt-12 sm:-mt-16 md:-mt-20 rounded-xl shadow-lg">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 text-center">
             {stats.map((stat, index) => (

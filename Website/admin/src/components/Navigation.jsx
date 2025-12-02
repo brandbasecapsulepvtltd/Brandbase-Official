@@ -9,6 +9,8 @@ import {
   ChevronRight,
   ChevronDown,
   ChevronUp,
+  Users,
+  Palette
 } from "lucide-react";
 
 export function Navigation() {
@@ -18,7 +20,15 @@ export function Navigation() {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const navItems = [
-    { label: "Appointments", icon: Calendar, path: "/admin/dashboard/appointments" },
+    { label: "Appointments", icon: Calendar, path: "/admin/dashboard/admin-appointment" },
+    { label: "Employees", icon: Users, path: "/admin/dashboard/employee-management" },
+    { 
+      label: "UI", 
+      icon: Palette, 
+      children: [
+        { label: "Home", path: "/admin/dashboard/ui/home" }
+      ]
+    }
   ];
 
   const toggleDropdown = (label) => {
@@ -51,7 +61,9 @@ export function Navigation() {
         <nav className="flex flex-col p-4 space-y-2 flex-grow relative">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = location.pathname.startsWith(item.path);
+            const isActive = item.children 
+              ? item.children.some(child => location.pathname.startsWith(child.path))
+              : location.pathname.startsWith(item.path);
 
             return (
               <div key={item.label} className="relative group">
@@ -161,7 +173,9 @@ export function Navigation() {
         <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-4 p-6 md:hidden">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = location.pathname.startsWith(item.path);
+            const isActive = item.children 
+              ? item.children.some(child => location.pathname.startsWith(child.path))
+              : location.pathname.startsWith(item.path);
 
             return !item.children ? (
               <Link

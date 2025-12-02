@@ -1,47 +1,9 @@
 import { useState, useEffect } from "react";
 
-const HeroSection = () => {
+const HeroSection = ({ data }) => {
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-
-  // Dummy data
-  const dummySlides = [
-    {
-      id: 1,
-      title: "Create Experiences That Stand Out",
-      subtext: "From exhibitions to large-scale events, we craft immersive experiences that leave a lasting impact on your audience.",
-      image: "https://ik.imagekit.io/vinayak06/11.jpg?updatedAt=1763372433537"
-    },
-    {
-      id: 2,
-      title: "Expert Web & App Development Solutions",
-      subtext: "Get world-class website development, app creation, and modern interface design tailored to your business goals.",
-      image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-    },
-    {
-      id: 3,
-      title: "Build a Brand That Truly Stands Out",
-      subtext: "We craft powerful brand identities with strategic design, strong messaging, and visuals that leave a lasting impression.",
-      image: "https://images.squarespace-cdn.com/content/v1/522ea6f5e4b074ba686e497c/1625541238887-BISTJ5IEUBKLV409GM31/Crowdstrike+_+NYCD-100+_+06-29-21+_+-20.jpg?format=1500w"
-    },
-    {
-      id: 4,
-      title: "Grow Faster in the Digital World",
-      subtext: "We handle everything—from SEO and social ads to social media setup, content design, and content marketing—to elevate your brand online.",
-      image: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg"
-    },
-    {
-      id: 5,
-      title: "Create Stories That Captivate",
-      subtext: "High-quality audio and video production services that bring your brand's vision to life with cinematic visuals and crystal-clear sound.",
-      image: "https://images.pexels.com/photos/8412361/pexels-photo-8412361.jpeg"
-    }
-  ];
-
-  const dummyVideo = {
-    url: "https://res.cloudinary.com/dkoqcp1g9/video/upload/Untitled_video_-_Made_with_Clipchamp_61_ib2uys_d2e8e7.mp4"
-  };
 
   // Check mobile device
   useEffect(() => {
@@ -54,10 +16,12 @@ const HeroSection = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Initialize with dummy data
+  // Initialize with data from props
   useEffect(() => {
-    setSlides(dummySlides);
-  }, []);
+    if (data && data.slides) {
+      setSlides(data.slides);
+    }
+  }, [data]);
 
   // Auto slide change every 4s
   useEffect(() => {
@@ -91,8 +55,8 @@ const HeroSection = () => {
 
       {/* Video Overlay (shade) */}
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-10 md:opacity-20"
-        src={dummyVideo.url}
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        src={data.video.url}
         autoPlay
         loop
         muted
@@ -103,7 +67,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
 
       {/* Main Content */}
-      <div className="relative flex flex-col items-center text-center px-4 sm:px-6 md:px-8 w-full max-w-7xl mx-auto mt-10">
+      <div className="relative flex flex-col items-center text-center px-4 sm:px-6 md:px-8 w-full max-w-7xl mx-auto mt-15">
         <div className="w-full transform translate-y-0 sm:translate-y-0 md:-translate-y-12 lg:-translate-y-20">
           <h1
             key={currentSlideData.id || currentSlide}

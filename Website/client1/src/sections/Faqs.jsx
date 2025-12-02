@@ -5,49 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-const faqs = [
-  {
-    question: "How is BrandBase different from other digital marketing agencies?",
-    answer:
-      "Unlike traditional agencies, BrandBase offers 360° marketing solutions with a focus on data-driven results. We combine creative strategy with advanced analytics to deliver measurable ROI.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    hasImage: true
-  },
-  {
-    question: "What's your typical project timeline?",
-    answer:
-      "Most projects are delivered within 4-8 weeks, depending on scope. Website development takes 3-6 weeks, while comprehensive marketing campaigns typically run for 3+ months.",
-    hasImage: false
-  },
-  {
-    question: "Do you work with startups and small businesses?",
-    answer:
-      "Absolutely! We offer scalable solutions for businesses of all sizes. Our startup packages are designed to deliver maximum impact with budget-friendly pricing.",
-    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    hasImage: true
-  },
-  {
-    question: "What industries do you specialize in?",
-    answer:
-      "We have extensive experience across e-commerce, SaaS, healthcare, real estate, and manufacturing. Our adaptable strategies work for any industry looking to grow their digital presence.",
-    hasImage: false
-  },
-  {
-    question: "How do you measure campaign success?",
-    answer:
-      "We track KPIs like conversion rates, ROI, engagement metrics, and customer acquisition costs. You'll receive detailed monthly reports through our client dashboard.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    hasImage: true
-  },
-  {
-    question: "Do you provide ongoing support?",
-    answer:
-      "Yes, we offer comprehensive support and maintenance packages. From website updates to continuous campaign optimization, we're here to ensure your long-term success.",
-    hasImage: false
-  }
-];
-
-export default function Faqs() {
+export default function Faqs({ data }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleQuestionClick = (index) => {
@@ -76,7 +34,7 @@ export default function Faqs() {
 
         {/* FAQ Items - Centered */}
         <div className="space-y-4">
-          {faqs.map((faq, faqIndex) => (
+          {data.faqs.map((faq, faqIndex) => (
             <div
               key={faqIndex}
               className={twMerge(

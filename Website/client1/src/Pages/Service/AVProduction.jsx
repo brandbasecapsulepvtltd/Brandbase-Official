@@ -1,10 +1,10 @@
-import React from 'react'
-import Hero from '../../Components/Service/AVProduction/Hero'
+import ImageScroller from '../../../../AV-Production/ImageScroller'
+
 
 const AVProduction = () => {
   return (
     <>
-    <Hero/>
+    <ImageScroller/>
     </>
   )
 }

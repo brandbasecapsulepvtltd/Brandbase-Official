@@ -3,83 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const services = [
-  {
-    category: "Web Design",
-    items: [
-      "Website Design & Development",
-      "WordPress Development",
-      "E-commerce Development",
-      "Website Maintenance & Hosting",
-      "Landing Page Design",
-      "Shopify Development"
-    ],
-    icon: "💻",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-  },
-  {
-    category: "Graphic Design",
-    items: [
-      "Brand Identity Design",
-      "Logo & Visual Systems",
-      "Marketing Collateral",
-      "Packaging Design",
-      "Print & Digital Assets"
-    ],
-    icon: "🎨",
-    image: "https://cdn.wallpapersafari.com/42/65/YlVLzy.jpg"
-  },
-  {
-    category: "Digital Marketing",
-    items: [
-      "Social Media Marketing",
-      "SEO Optimization",
-      "Content Strategy",
-      "PPC Advertising",
-      "Email Marketing"
-    ],
-    icon: "📱",
-    image: "https://tse2.mm.bing.net/th/id/OIP.4haPry3S_usS7LZ_KdjIhgHaE8?pid=ImgDet&w=474&h=316&rs=1&o=7&rm=3"
-  },
-  {
-    category: "Web Development",
-    items: [
-      "Custom Website Design",
-      "E-commerce Solutions",
-      "Web Applications",
-      "Mobile Responsive",
-      "Performance Optimization"
-    ],
-    icon: "🔧",
-    image: "https://tse2.mm.bing.net/th/id/OIP.FC4TBhC6mLp8WOfZex3IrgHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3"
-  },
-  {
-    category: "Video Production",
-    items: [
-      "Brand Videos",
-      "Social Media Content",
-      "Product Demos",
-      "Animation & Motion",
-      "Video Advertising"
-    ],
-    icon: "🎥",
-    image: "https://tse4.mm.bing.net/th/id/OIP.CcA6fg-ieoi3-WzmDltB7AHaEJ?rs=1&pid=ImgDetMain&o=7&rm=3"
-  },
-  {
-    category: "Brand Strategy",
-    items: [
-      "Market Research",
-      "Brand Positioning",
-      "Competitive Analysis",
-      "Audience Personas",
-      "Growth Strategy"
-    ],
-    icon: "🚀",
-    image: "https://www.ey.com/content/dam/ey-unified-site/ey-com/en-gl/campaigns/transformation-realized/images/ey-transformations-film-billboards-still-3840px-v2.jpg"
-  }
-];
-
-export default function BrandElevation() {
+export default function BrandElevation({ data }) {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
@@ -118,7 +42,7 @@ export default function BrandElevation() {
                 },
               }}
             >
-              {services.map((service, index) => (
+              {data.services.map((service, index) => (
                 <ServiceCard 
                   key={`first-${index}`} 
                   service={service} 
@@ -143,7 +67,7 @@ export default function BrandElevation() {
                 },
               }}
             >
-              {services.map((service, index) => (
+              {data.services.map((service, index) => (
                 <ServiceCard 
                   key={`second-${index}`} 
                   service={service} 

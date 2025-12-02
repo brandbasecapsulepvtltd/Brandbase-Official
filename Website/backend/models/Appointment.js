@@ -1,101 +1,61 @@
-const mongoose = require('mongoose');
+// models/Appointment.js
+const mongoose = require("mongoose");
 
 const appointmentSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: [true, 'First name is required'],
-    trim: true
+  date: { type: Date, required: true },
+  time: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  organization: String,
+  region: String,
+  industry: String,
+  otherIndustry: String,
+  category: String,
+  otherCategory: String,
+  message: String,
+  consent: { type: Boolean, default: false },
+  marketing: { type: Boolean, default: false },
+  country: String,
+  state: String,
+  city: String,
+  
+  // New fields for enhanced functionality
+  status: { 
+    type: String, 
+    enum: ['pending', 'confirmed', 'cancelled', 'completed', 'rescheduled'],
+    default: 'pending' 
   },
-  lastName: {
-    type: String,
-    required: [true, 'Last name is required'],
-    trim: true
+  assignedEmployee: {
+    name: String,
+    email: String,
+    image: String,
+    profession: String,
+    contact: String
   },
-  email: {
+  meetingLink: String,
+  contactNumber: String,
+  adminNotes: String,
+  responseSent: { type: Boolean, default: false },
+  responseType: {
     type: String,
-    required: [true, 'Email is required'],
-    trim: true,
-    lowercase: true
+    enum: ['accepted', 'rejected', 'rescheduled', 'banned', null],
+    default: null
   },
-  organization: {
-    type: String,
-    required: [true, 'Organization is required'],
-    trim: true
-  },
-  region: {
-    type: String,
-    required: [true, 'Region is required'],
-    enum: ['asia', 'europe', 'america', 'africa', 'oceania']
-  },
-  industry: {
-    type: String,
-    required: [true, 'Industry is required']
-  },
-  otherIndustry: {
-    type: String,
-    trim: true
-  },
-  category: {
-    type: String,
-    required: [true, 'Category is required']
-  },
-  otherCategory: {
-    type: String,
-    trim: true
-  },
-  message: {
-    type: String,
-    required: [true, 'Message is required'],
-    maxlength: 1500
-  },
-  country: {
-    type: String,
-    required: [true, 'Country is required'],
-    trim: true
-  },
-  state: {
-    type: String,
-    required: [true, 'State is required'],
-    trim: true
-  },
-  city: {
-    type: String,
-    required: [true, 'City is required'],
-    trim: true
-  },
-  appointmentDate: {
+  
+  createdAt: {
     type: Date,
-    required: [true, 'Appointment date is required']
+    default: Date.now,
   },
-  appointmentTime: {
-    type: String,
-    required: [true, 'Appointment time is required']
+  updatedAt: {
+    type: Date,
+    default: Date.now,
   },
-  consent: {
-    type: Boolean,
-    required: [true, 'Consent is required'],
-    validate: {
-      validator: function(v) {
-        return v === true;
-      },
-      message: 'You must consent to data processing'
-    }
-  },
-  marketing: {
-    type: Boolean,
-    default: false
-  },
-  status: {
-    type: String,
-    enum: ['pending', 'confirmed', 'cancelled', 'completed'],
-    default: 'pending'
-  }
-}, {
-  timestamps: true
 });
 
-// Index for better query performance
-appointmentSchema.index({ email: 1, appointmentDate: 1 });
-appointmentSchema.index({ status: 1 });
+appointmentSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
 
-module.exports = mongoose.model('Appointment', appointmentSchema);
+module.exports = mongoose.models.Appointment || mongoose.model("Appointment", appointmentSchema);
