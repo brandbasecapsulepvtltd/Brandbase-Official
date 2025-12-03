@@ -12,6 +12,7 @@ import WhyBuildWithBcpl from './WhyBuildWithBcpl';
 import ComparisonTable from './ComparisonTable';
 import WebDesignAdvantages from './WebDesignAdvantages';
 import VisionBanner from './VisionBanner';
+import WebsiteServices from './WebsiteServices';
 
 const WebsiteDevelopment = () => {
   const [servicesData, setServicesData] = useState([]);
@@ -58,7 +59,7 @@ const WebsiteDevelopment = () => {
       <WDHero />
       <VisionBanner/>
       <ComparisonTable/>
-      <ServicesGrid />
+      <WebsiteServices/>
       <WebDesignAdvantages/>
       <WhyBuildWithBcpl/>
       <OtherServicesAndCalculator />
