@@ -18,6 +18,9 @@ import BcplNone from "./Pages/BcplNone";
 import Footer from "./Components/General/Footer";
 import JobDetailClient from "./Components/CareersCompo/JobDetailClient";
 import WebsiteDevelopment from "./Components/WebsiteDesign/WebsiteDevelopment";
+import AppDevelopment from "./Components/WebsiteDesign/AppDevelopment";
+import DigitalMarketing from "./Components/WebsiteDesign/DigitalMarketing";
+import EventsExhibition from "./Components/WebsiteDesign/EventsExhibition";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
           <Route path="/contact" element={<ContactPage/>} />
           <Route path="/services" element={<ServicePage/>} />
           <Route path="/services/website-development" element={<WebsiteDevelopment/>} />
+          <Route path="/services/mobile-app-development" element={<AppDevelopment/>} />
+          <Route path="/services/digital-marketing" element={<DigitalMarketing/>} />
+          <Route path="/services/events-exhibition" element={<EventsExhibition/>} />
           <Route path="/services/av-production" element={<AVProduction/>} />
           <Route path="/services/events-exhibition/stall-design" element={<StallDesign/>}/>
           <Route path="/appointment" element={<AppointmentContent/>} />
