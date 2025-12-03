@@ -14,7 +14,7 @@ import ServiceSlider from '@/components/ServiceSlider';
 
 // API configuration
 const API_CONFIG = {
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://brandbase.onrender.com/api',
   timeout: 10000,
 };
 
