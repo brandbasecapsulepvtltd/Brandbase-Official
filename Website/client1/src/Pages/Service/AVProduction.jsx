@@ -1,10 +1,9 @@
-import ImageScroller from '../../../../AV-Production/ImageScroller'
 
 
 const AVProduction = () => {
   return (
     <>
-    <ImageScroller/>
+    <h1>this is home  page</h1>
     </>
   )
 }
