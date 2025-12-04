@@ -9,10 +9,11 @@ import ServiceSlider from '../Components/ServiceSlider';
 import TestimonialSlider from '../sections/TestimonalSlider';
 import Faqs from '../sections/Faqs';
 import CTASection from '../sections/CTASection';
+import HeroSlider from '../sections/HeroSlider';
 
 // API configuration
 const API_CONFIG = {
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://brandbase.onrender.com',
   timeout: 10000,
 };
 
@@ -125,8 +126,8 @@ const HomePage = () => {
   // Render the complete page with fetched data
   return (
     <div className="home-page">
-      {/* Hero Section */}
-      {heroSection && <HeroSection data={heroSection} />}
+      {/* Hero Section <HeroSection data={heroSection} />*/}
+      {heroSection && <HeroSlider/>}
       
       {/* About Us Section */}
       <AboutUs />

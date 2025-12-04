@@ -53,8 +53,8 @@ const HeroSection = ({ data }) => {
         }}
       />
 
-      {/* Video Overlay (shade) */}
-      <video
+      {/* Video Overlay (shade) 
+            <video
         className="absolute inset-0 w-full h-full object-cover opacity-30"
         src={data.video.url}
         autoPlay
@@ -62,9 +62,10 @@ const HeroSection = ({ data }) => {
         muted
         playsInline
       />
+      */}
 
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-black/10" />
 
       {/* Main Content */}
       <div className="relative flex flex-col items-center text-center px-4 sm:px-6 md:px-8 w-full max-w-7xl mx-auto mt-15">
