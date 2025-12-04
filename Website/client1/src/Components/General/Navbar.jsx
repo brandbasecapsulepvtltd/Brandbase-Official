@@ -11,7 +11,7 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const locationArr = ["/","/services/events-exhibition/stall-design"]
+    const locationArr = ["/services/events-exhibition/stall-design"]
 
     const onHome = locationArr.includes(location.pathname);
     setIsHome(onHome);

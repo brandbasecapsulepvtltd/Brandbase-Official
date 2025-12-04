@@ -13,7 +13,7 @@ import HeroSlider from '../sections/HeroSlider';
 
 // API configuration
 const API_CONFIG = {
-  baseURL: 'https://brandbase.onrender.com',
+  baseURL: 'https://brandbase.onrender.com/api',
   timeout: 10000,
 };
 
