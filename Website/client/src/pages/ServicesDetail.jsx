@@ -1,12 +1,12 @@
 // DynamicStatic.js (main page)
 import React from 'react'
-import ComparisonSection from '../Components/ServicesDetail/ComparisonSection'
-import FeatureSection from '../Components/ServicesDetail/FeatureSection'
-import VideoMakerSection from '../Components/ServicesDetail/VideoMakerSection'
-import AnimateImage from '../Components/ServicesDetail/AnimateImage'
-import WebHeroSection from '../Components/ServicesDetail/WebHeroSection'
-import ServicePackages from '../Components/ServicesDetail/ServicePackages'
-import { DynamicStatic } from '../Data/masterData' // Import master JSON
+import ComparisonSection from '@/components/ServicesDetail/ComparisonSection'
+import FeatureSection from '@/components/ServicesDetail/FeatureSection'
+import VideoMakerSection from '@/components/ServicesDetail/VideoMakerSection'
+import AnimateImage from '@/components/ServicesDetail/AnimateImage'
+import WebHeroSection from '@/components/ServicesDetail/WebHeroSection'
+import ServicePackages from '@/components/ServicesDetail/ServicePackages'
+import { DynamicStatic } from '@/Data/masterData' // Import master JSON
 
 const ServicesDetail = () => {
   return (
