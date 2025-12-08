@@ -48,78 +48,124 @@ const ComparisonSection = ({ data }) => {
           </motion.p>
         </div>
 
-        {/* DESKTOP TABLE VIEW */}
-        <div className="px-4 md:px-10 bg-gray-50 max-w-full mx-auto">
-          <div className="hidden md:block shadow-lg rounded-xl overflow-hidden">
-            {/* Table Header */}
-            <div className="grid grid-cols-4 bg-orange-100 text-black text-lg font-semibold">
-              {data.columns.map((col, i) => (
-                <div
-                  key={i}
-                  className={`p-4 ${i === 0 ? "text-left border-r border-orange-700" : "text-center border-r border-orange-700"}`}
-                >
-                  {col}
-                </div>
-              ))}
+        {/* RESPONSIVE TABLE - Works on both mobile and desktop */}
+        <div className="px-4 sm:px-6 lg:px-8 max-w-full mx-auto overflow-x-auto">
+          <div className="inline-block min-w-full align-middle bg-gray-50 rounded-xl shadow-lg">
+            {/* Table Container with horizontal scroll on very small screens */}
+            <div className="overflow-x-auto rounded-xl">
+              <table className="min-w-full divide-y divide-gray-200">
+                {/* Table Header */}
+                <thead>
+                  <tr className="bg-orange-100 text-black">
+                    {data.columns.map((col, i) => (
+                      <th
+                        key={i}
+                        scope="col"
+                        className={`px-4 py-3.5 text-left text-sm font-semibold ${i === 0 ? "sticky left-0 z-10 bg-orange-100" : ""}`}
+                      >
+                        <div className={`${i === 0 ? "" : "flex justify-center"}`}>
+                          {col}
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+
+                {/* Table Body */}
+                <tbody className="divide-y divide-gray-200 bg-white">
+                  {data.rows.map((row, index) => (
+                    <tr
+                      key={index}
+                      className={`transition-colors duration-200 ${
+                        hoveredRow === index ? "bg-orange-50" : ""
+                      }`}
+                      onMouseEnter={() => setHoveredRow(index)}
+                      onMouseLeave={() => setHoveredRow(null)}
+                    >
+                      {/* Feature Column */}
+                      <td className="whitespace-nowrap px-4 py-4 text-sm sticky left-0 z-10 bg-white">
+                        <div className="font-medium text-orange-600">
+                          {row.feature}
+                        </div>
+                      </td>
+
+                      {/* Value Columns */}
+                      {row.values.map((value, i) => (
+                        <td key={i} className="whitespace-nowrap px-4 py-4 text-sm">
+                          <div className="text-gray-800 flex justify-center">
+                            {value}
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+          </div>
+        </div>
 
-            {/* Table Rows */}
-            {data.rows.map((row, index) => (
-              <div
-                key={index}
-                className={`grid grid-cols-4 text-base border-t border-gray-200 transition duration-200 ${
-                  hoveredRow === index ? "bg-orange-100/50" : "bg-white"
-                }`}
-                onMouseEnter={() => setHoveredRow(index)}
-                onMouseLeave={() => setHoveredRow(null)}
-              >
-                <div className="p-4 border border-gray-100 font-medium text-orange-600 text-left">
-                  {row.feature}
+        {/* ALTERNATIVE MOBILE-FRIENDLY DESIGN (Optional) */}
+        {/* Uncomment below if you want a more mobile-optimized view */}
+        {/*
+        <div className="md:hidden mt-6">
+          <div className="text-center mb-4">
+            <p className="text-sm text-gray-500">Tap columns to highlight</p>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-gray-200">
+            <div className="inline-flex min-w-full">
+              <div className="flex flex-col">
+                <div className="sticky left-0 z-10 bg-orange-100 p-3 min-w-[150px] border-b border-gray-200">
+                  <div className="text-sm font-semibold text-black">Features</div>
                 </div>
-
-                {row.values.map((value, i) => (
-                  <div
-                    key={i}
-                    className="p-4 border-r border-gray-100 flex items-center justify-center text-gray-800 gap-2 text-center"
-                  >
-                    <span>{value}</span>
+                {data.rows.map((row, index) => (
+                  <div key={index} className="sticky left-0 z-10 bg-white p-3 min-w-[150px] border-b border-gray-200">
+                    <div className="text-sm font-medium text-orange-600">{row.feature}</div>
                   </div>
                 ))}
               </div>
-            ))}
-          </div>
-
-          {/* MOBILE CARD VIEW */}
-          <div className="md:hidden pt-4 space-y-4">
-            {data.rows.map((row, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-4 rounded-xl shadow-md border border-gray-200"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-                custom={index * 0.5 + 1}
-              >
-                <h4 className="text-xl font-bold text-orange-600 mb-3 border-b pb-2">
-                  {row.feature}
-                </h4>
-
-                {row.values.map((value, i) => (
-                  <div
-                    key={i}
-                    className={`p-3 ${i % 2 === 0 ? "bg-gray-50" : ""} rounded-lg mb-2`}
-                  >
-                    <p className="text-base text-gray-800 flex items-center gap-2">
-                      {value}
-                    </p>
+              
+              {data.columns.slice(1).map((col, colIndex) => (
+                <div key={colIndex} className="flex flex-col">
+                  <div className="bg-orange-100 p-3 min-w-[120px] border-l border-b border-gray-200">
+                    <div className="text-sm font-semibold text-black text-center">{col}</div>
                   </div>
-                ))}
-              </motion.div>
-            ))}
+                  {data.rows.map((row, rowIndex) => (
+                    <div key={rowIndex} className="bg-white p-3 min-w-[120px] border-l border-b border-gray-200">
+                      <div className="text-sm text-gray-800 text-center">{row.values[colIndex]}</div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+        */}
       </div>
+
+      {/* Responsive styles */}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          /* Ensure table cells have minimum width */
+          th, td {
+            min-width: 120px;
+          }
+          /* First column stays fixed */
+          th:first-child,
+          td:first-child {
+            min-width: 150px;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+          }
+        }
+        
+        /* Smooth scrolling for mobile */
+        .overflow-x-auto {
+          -webkit-overflow-scrolling: touch;
+        }
+      `}</style>
     </section>
   );
 };

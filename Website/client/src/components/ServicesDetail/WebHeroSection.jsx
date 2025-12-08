@@ -13,8 +13,8 @@ const iconMap = {
 const WebHeroSection = ({ data }) => {
   if (!data) return null;
   
-  // Duplicate for infinite loop
-  const loopFeatures = [...data.features, ...data.features];
+  // Duplicate for infinite loop - increase copies for smoother loop
+  const loopFeatures = [...data.features, ...data.features, ...data.features];
 
   return (
     <div className="min-h-screen bg-white font-sans flex flex-col items-center justify-center mt-10">
@@ -43,16 +43,20 @@ const WebHeroSection = ({ data }) => {
         </div>
 
         {/* Infinite Icon Loop */}
-        <div className="w-full overflow-hidden py-4">
-          <div className="flex items-center gap-6 animate-scroll whitespace-nowrap">
+        <div className="w-full overflow-hidden py-4 relative">
+          {/* Gradient fade effects */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
+          
+          <div className="flex animate-scroll whitespace-nowrap">
             {loopFeatures.map((feature, index) => {
               const IconComponent = iconMap[feature.icon];
               return (
                 <div
                   key={index}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white border rounded-xl shadow-sm"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm mx-2"
                 >
-                  <div className="p-2 bg-slate-200 rounded-md">
+                  <div className="p-2 bg-slate-100 rounded-md">
                     {IconComponent && <IconComponent className="w-5 h-5 text-slate-700" />}
                   </div>
                   <span className="text-slate-700 font-semibold text-sm md:text-base">
@@ -64,6 +68,33 @@ const WebHeroSection = ({ data }) => {
           </div>
         </div>
       </main>
+
+      {/* Add CSS for animation */}
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+          display: flex;
+          width: max-content;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+        
+        /* For better performance */
+        .animate-scroll {
+          will-change: transform;
+        }
+      `}</style>
     </div>
   );
 };
