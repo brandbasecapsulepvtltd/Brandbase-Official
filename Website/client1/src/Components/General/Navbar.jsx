@@ -56,12 +56,12 @@ const Navbar = () => {
       category: "Website Development",
       categoryLink: "/services/website-development",
       items: [
-        { name: "Business Website", link: "/services/business-website" },
+        { name: "Business Website", link: "/services/website-development/business-website" },
         { name: "Portfolio Website", link: "/services/portfolio-website" },
         { name: "Landing Page Development", link: "/services/landing-page-development" },
         { name: "CMS Website", link: "/services/cms-website" },
         { name: "E-Commerce Websites", link: "/services/ecommerce-websites" },
-        { name: "Full E-Commerce Setup", link: "/services/full-ecommerce-setup" }
+        { name: "Dynamic & static Web", link: "/services/dynamic-static" }
       ]
     },
     {

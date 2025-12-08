@@ -63,7 +63,7 @@ const Navbar = () => {
         { name: "Landing Page Development", link: "/services/landing-page-development" },
         { name: "CMS Website", link: "/services/cms-website" },
         { name: "E-Commerce Websites", link: "/services/ecommerce-websites" },
-        { name: "Full E-Commerce Setup", link: "/services/full-ecommerce-setup" }
+        { name: "Dynamic and Static ", link: "/services/website-development/dynamic-static" }
       ]
     },
     {

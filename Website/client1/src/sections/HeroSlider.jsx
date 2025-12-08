@@ -10,11 +10,11 @@ const HeroSlider = () => {
       id: 1,
       title: "Create Experiences That Stand Out",
       subtext: "From exhibitions to large-scale events, we craft immersive experiences that leave a lasting impact on your audience.",
-      image: "https://ik.imagekit.io/vinayak06/11.jpg?updatedAt=1763372433537",
+      image: "https://www.dubaiceberg.com/assets/images/bg/dubaiceberg-digital-production.jpg",
     },
     {
       id: 2,
-      title: "Expert Web & App Development Solutions",
+      title: "Web & App Development Solutions",
       subtext: "Get world-class website development, app creation, and modern interfaces designed to drive growth and engagement.",
       image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg",
     },
@@ -22,7 +22,7 @@ const HeroSlider = () => {
       id: 3,
       title: "Build a Brand That Truly Stands Out",
       subtext: "We craft powerful brand identities with strategic design, strong messaging, and visuals that resonate with your market.",
-      image: "https://images.squarespace-cdn.com/content/v1/522ea6f5e4b074ba686e497c/1500331078775-8D05Q26X151528641198/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UHU9zBfL7d5y27eWwM1q8Z9a7n6k8t4k7e7d8e9f0g1h/image-asset.jpeg",
+      image: "https://images.pexels.com/photos/27100681/pexels-photo-27100681.jpeg",
     },
     {
       id: 4,
@@ -146,18 +146,18 @@ const HeroSlider = () => {
             style={{ opacity: 1 - scrollProgress }}
           >
             <div key={currentSlide.id} className="my-auto max-w-lg animate-fade-in">
-              <h1 className="text-6xl font-extrabold text-black leading-tight mb-6 mt-8">
+              <h1 className="text-[60px] font-extrabold text-black leading-tight mb-6 mt-8">
                 {currentSlide.title}
               </h1>
 
-              <div className="w-16 h-1 bg-black mb-6"></div>
+              <div className="w-25 h-1 bg-orange-600 mb-6"></div>
 
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+              <p className="text-gray-800 text-lg leading-relaxed mb-10">
                 {currentSlide.subtext}
               </p>
 
-              <button className="text-sm font-bold tracking-widest text-black uppercase hover:text-gray-600 transition-colors">
-                JOIN US TO EXPLORE
+              <button className="text-md font-bold tracking-widest text-orange-500 uppercase hover:text-orange-600 transition-colors">
+                EXPLORE MORE
               </button>
             </div>
           </div>

@@ -18,7 +18,7 @@ export default function ServiceColumn(props) {
         <Fragment key={i}>
           {services.map((service) => (
             <div
-              className={`bg-gradient-to-b from-orange-400 via-orange-500 to-orange-600 border border-white/20 rounded-3xl p-6 ${className || ""}`}
+              className={`bg-gradient-to-b from-orange-100 via-orange-300 to-orange-400 border border-white/20 rounded-3xl p-6 ${className || ""}`}
               key={service.name}
             >
               <div className="flex justify-center">

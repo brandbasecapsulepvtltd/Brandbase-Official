@@ -1,0 +1,35 @@
+import React from 'react';
+
+const VideoMakerSection = ({ data }) => {
+  if (!data) return null;
+
+  return (
+    <section className="bg-white py-16 md:py-24 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto font-sans">
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-center text-gray-900 mb-12 md:mb-16 uppercase tracking-tight leading-tight">
+          {data.heading}
+        </h2>
+
+        {/* Paragraphs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-16 max-w-5xl mx-auto text-gray-700 text-lg lg:text-[1.125rem] leading-relaxed">
+          {data.paragraphs.map((text, i) => (
+            <p key={i}>{text}</p>
+          ))}
+        </div>
+
+        {/* Image */}
+        <div className="flex justify-center">
+          <img
+            src={data.imageUrl}
+            alt="Brandbase Capsule website development"
+            className="w-full max-w-6xl h-auto object-contain drop-shadow-sm"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default VideoMakerSection;

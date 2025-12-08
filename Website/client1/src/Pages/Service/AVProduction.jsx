@@ -1,9 +1,11 @@
+import AVHero from "../../Components/AVproduction/AVHero"
+import BlogDetailPage from "../../Components/AVproduction/BlogDetailPage"
 
 
 const AVProduction = () => {
   return (
     <>
-    <h1>this is home  page</h1>
+    <BlogDetailPage/>
     </>
   )
 }

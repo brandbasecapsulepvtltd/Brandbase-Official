@@ -21,6 +21,8 @@ import WebsiteDevelopment from "./Components/WebsiteDesign/WebsiteDevelopment";
 import AppDevelopment from "./Components/WebsiteDesign/AppDevelopment";
 import DigitalMarketing from "./Components/WebsiteDesign/DigitalMarketing";
 import EventsExhibition from "./Components/WebsiteDesign/EventsExhibition";
+import DynamicStatic from "./Pages/DynamicStatic";
+import BusinessWeb from "./Pages/Service/WebsiteDesign/BusinessWeb";
 
 function App() {
   return (
@@ -36,6 +38,11 @@ function App() {
           <Route path="/contact" element={<ContactPage/>} />
           <Route path="/services" element={<ServicePage/>} />
           <Route path="/services/website-development" element={<WebsiteDevelopment/>} />
+
+          
+
+          <Route path="/services/website-development/business-website" element={<BusinessWeb/>} />
+          <Route path="/services/dynamic-static" element={<DynamicStatic/>} />
           <Route path="/services/mobile-app-development" element={<AppDevelopment/>} />
           <Route path="/services/digital-marketing" element={<DigitalMarketing/>} />
           <Route path="/services/events-exhibition" element={<EventsExhibition/>} />
