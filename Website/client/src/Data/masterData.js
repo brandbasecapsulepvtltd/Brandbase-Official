@@ -2,6 +2,8 @@
 
 // All services data organized by category and slug
 export const servicesData = [
+
+//website
   {
     id: 1,
     category: "website-development",
@@ -2474,7 +2476,1364 @@ export const servicesData = [
       ]
     }
   }
+},
+
+//digital Marketing
+{
+  id: 12,
+  category: "digital-marketing",
+  slug: "seo-optimization",
+  data: {
+    hero: {
+      headline: "Dominate Search Results with Data-Driven SEO",
+      subHeadline: "Get found by customers actively searching for what you offer. Drive consistent, high-quality traffic that converts into revenue.",
+      ctaText: "Boost Your Rankings",
+      trustNote1: "Google-first approach",
+      trustNote2: "Sustainable results",
+      features: [
+        { name: "Technical SEO Audit", icon: "Search" },
+        { name: "Keyword Strategy", icon: "Target" },
+        { name: "Content Optimization", icon: "FileText" },
+        { name: "Link Building", icon: "Link" },
+        { name: "Local SEO", icon: "MapPin" },
+        { name: "Analytics & Reporting", icon: "BarChart3" },
+        { name: "Core Web Vitals", icon: "Zap" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Your Website,",
+        highlight: "Google's Favorite"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "SEO Approaches That Actually Work",
+      subheading: "Why quick fixes fail and strategic SEO delivers sustainable growth",
+      columns: ["Factor", "DIY/Surface SEO", "Agency Templates", "Strategic SEO"],
+      rows: [
+        {
+          feature: "Time to Results",
+          values: [
+            "⏳ 6-12 months (maybe)",
+            "📅 3-6 months",
+            "🚀 30-90 days (initial)"
+          ]
+        },
+        {
+          feature: "Traffic Quality",
+          values: [
+            "🎣 Random visitors",
+            "📊 Some qualified",
+            "🎯 High-intent buyers"
+          ]
+        },
+        {
+          feature: "Algorithm Updates",
+          values: [
+            "📉 Wipes out rankings",
+            "📊 Some recovery needed",
+            "📈 Gains market share"
+          ]
+        },
+        {
+          feature: "Technical Foundation",
+          values: [
+            "🛠️ Basic fixes only",
+            "⚙️ Standard setup",
+            "🏗️ Custom architecture"
+          ]
+        },
+        {
+          feature: "Content Strategy",
+          values: [
+            "📝 Keyword stuffing",
+            "📄 Generic content",
+            "🎯 User-first, search-smart"
+          ]
+        },
+        {
+          feature: "Link Building",
+          values: [
+            "🔗 Spammy links",
+            "📎 Directory submissions",
+            "🤝 Authority partnerships"
+          ]
+        },
+        {
+          feature: "Local SEO",
+          values: [
+            "📍 Basic listing",
+            "🗺️ Standard optimization",
+            "🌟 Dominant local presence"
+          ]
+        },
+        {
+          feature: "Reporting & Insights",
+          values: [
+            "📈 Basic rankings",
+            "📊 Standard metrics",
+            "📱 Business impact tracking"
+          ]
+        },
+        {
+          feature: "ROI Measurement",
+          values: [
+            "❌ Hard to measure",
+            "📊 Some tracking",
+            "💰 Full revenue attribution"
+          ]
+        },
+        {
+          feature: "Long-term Value",
+          values: [
+            "📉 Declines quickly",
+            "📊 Maintains position",
+            "📈 Compounding growth"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Technical SEO That Makes Google Love Your Site",
+        description: "Before we write a single word of content, we make Google's job easy. We conduct deep technical audits—fixing crawl errors, optimizing site speed (90+ Core Web Vitals), implementing proper schema markup, and ensuring mobile-first indexing. We structure your site like a library Google can navigate effortlessly, making every page discoverable and indexable for maximum visibility.",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Content That Ranks & Converts—Not Just Fills Pages",
+        description: "We create content that answers real user questions while strategically targeting commercial keywords. Our content follows Google's E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) guidelines, establishing your brand as an industry authority. Every piece serves dual purpose: ranking for valuable search terms while guiding visitors toward conversion—no empty content, only strategic assets.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Authority Building That Signals Trust to Search Engines",
+        description: "Google rewards websites that other websites trust. We build genuine authority through strategic link acquisition, digital PR, and relationship building. No spammy directories—we earn links from reputable industry publications, create shareable research, and position your brand as a thought leader. This authority signals to Google that your site deserves top rankings for competitive terms.",
+        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "SEO Strategy for",
+        highlighted: "Every Business Goal",
+        subtitle: "From local dominance to national authority—get found by customers ready to buy."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Local Dominance",
+          price: "₹14,999/month",
+          icon: "map-pin",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+          features: [
+            "Local SEO Optimization",
+            "Google Business Profile",
+            "Citation Building",
+            "Local Keyword Research",
+            "Monthly Ranking Reports",
+            "Review Management",
+            "Basic Technical Audit"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "National Authority",
+          price: "₹29,999/month",
+          icon: "trending-up",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Comprehensive Technical SEO",
+            "Advanced Keyword Strategy",
+            "Content Creation & Optimization",
+            "Authority Link Building",
+            "Competitor Analysis",
+            "Monthly Strategy Calls",
+            "Conversion Tracking",
+            "E-E-A-T Optimization"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Growth",
+          price: "₹59,999/month",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "International SEO",
+            "Custom SEO Technology Stack",
+            "AI-Powered Content Strategy",
+            "Digital PR Campaigns",
+            "Advanced Analytics Setup",
+            "Dedicated SEO Manager",
+            "Weekly Performance Reviews",
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "SEO Isn't Magic—It's Applied Psychology & Technology",
+      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+      paragraphs: [
+        "SEO isn't about tricking Google—it's about understanding how people search and what Google values. At Brandbase Capsule, we combine technical excellence with human psychology to create SEO strategies that deliver sustainable growth, not temporary spikes.",
+        "We approach SEO as a business investment, not a marketing expense. Every optimization serves two masters: Google's algorithms and your potential customers. From the milliseconds shaved off page load times to the strategic placement of conversion elements within content—we engineer visibility that translates directly to revenue. In a world where 93% of online experiences begin with search, being invisible isn't an option."
+      ]
+    }
+  }
+},
+{
+  id: 13,
+  category: "digital-marketing",
+  slug: "online-ads-campaigns",
+  data: {
+    hero: {
+      headline: "Paid Ads That Print Money, Not Just Impressions",
+      subHeadline: "Turn ad spend into revenue with laser-targeted campaigns on Google, Meta, LinkedIn, and TikTok that deliver measurable ROI.",
+      ctaText: "Launch Profitable Ads",
+      trustNote1: "ROI-focused",
+      trustNote2: "Data-driven",
+      features: [
+        { name: "Google Ads Mastery", icon: "Search" },
+        { name: "Meta Ads Expertise", icon: "ThumbsUp" },
+        { name: "LinkedIn B2B Campaigns", icon: "Briefcase" },
+        { name: "TikTok/Instagram Reels", icon: "Video" },
+        { name: "Conversion Tracking", icon: "Target" },
+        { name: "A/B Testing", icon: "TestTube" },
+        { name: "ROI Optimization", icon: "TrendingUp" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Your Ad Spend,",
+        highlight: "Our Revenue Machine"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Paid Advertising Approaches That Deliver Results",
+      subheading: "Why most ads waste money and performance campaigns generate profits",
+      columns: ["Metric", "DIY Campaigns", "Basic Agency Management", "Performance Marketing"],
+      rows: [
+        {
+          feature: "Cost Per Acquisition",
+          values: [
+            "💸 2-3x industry average",
+            "💰 Near industry average",
+            "📉 30-50% below average"
+          ]
+        },
+        {
+          feature: "Return on Ad Spend",
+          values: [
+            "📉 1:1 or negative",
+            "📊 2:1 to 3:1",
+            "🚀 4:1 to 10:1+"
+          ]
+        },
+        {
+          feature: "Audience Targeting",
+          values: [
+            "🎯 Basic demographics",
+            "👥 Interest-based",
+            "🧠 Psychographic + intent"
+          ]
+        },
+        {
+          feature: "Ad Creative",
+          values: [
+            "📱 Generic templates",
+            "🎨 Professionally designed",
+            "🧪 Data-optimized variations"
+          ]
+        },
+        {
+          feature: "Bid Strategy",
+          values: [
+            "⚖️ Manual guessing",
+            "🤖 Platform automation",
+            "🎯 Custom algorithms"
+          ]
+        },
+        {
+          feature: "Testing Velocity",
+          values: [
+            "🐌 1-2 tests monthly",
+            "📊 Weekly optimizations",
+            "🚀 Daily optimizations"
+          ]
+        },
+        {
+          feature: "Attribution",
+          values: [
+            "❌ Last-click only",
+            "📊 Basic multi-touch",
+            "🎯 Full-funnel tracking"
+          ]
+        },
+        {
+          feature: "Reporting Depth",
+          values: [
+            "📈 Basic platform metrics",
+            "📊 Standard reports",
+            "📱 Business impact analysis"
+          ]
+        },
+        {
+          feature: "Creative Burnout",
+          values: [
+            "🔥 Quick (2-3 weeks)",
+            "⏳ Moderate (4-6 weeks)",
+            "🔄 Proactively refreshed"
+          ]
+        },
+        {
+          feature: "Scalability",
+          values: [
+            "📉 Costs rise quickly",
+            "📊 Linear scaling",
+            "📈 Efficient scaling"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Platform-Specific Mastery That Maximizes Every Dollar",
+        description: "We don't treat all platforms equally. Google Search gets intent-based keyword sculpting. Meta gets emotional storytelling and lookalike expansion. LinkedIn gets thought leadership and account-based targeting. TikTok gets viral-first creative strategies. Each platform speaks a different language to different audiences—we become fluent in all of them, ensuring your message resonates perfectly wherever your customers are.",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Creative That Doesn't Just Get Seen—It Gets Remembered & Acted On",
+        description: "In the scroll wars, attention is currency. We create ads that stop thumbs and start conversations. Using psychological triggers, platform-native formats, and conversion-focused design, we turn impressions into actions. Every element—from headline psychology to CTA placement—is tested and optimized based on performance data, not creative opinions. We build ad libraries that work harder, longer.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Data Flywheel That Gets Smarter With Every Click",
+        description: "Our campaigns improve exponentially over time. We implement advanced tracking that connects ad clicks to revenue, build custom audiences from converter behaviors, and use machine learning to find high-value prospects competitors miss. Every conversion teaches our algorithms who to target next, creating a self-improving system that reduces CPA while increasing LTV—turning data into your unfair advantage.",
+        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Performance Marketing for",
+        highlighted: "Every Budget & Goal",
+        subtitle: "From testing new markets to scaling proven winners—spend smarter, earn more."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Starter Campaigns",
+          price: "₹19,999/month",
+          icon: "rocket",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+          features: [
+            "1 Platform Focus (Google or Meta)",
+            "Basic Campaign Setup",
+            "Standard Ad Creative",
+            "Monthly Optimization",
+            "Conversion Tracking",
+            "Weekly Performance Reports",
+            "Budget: ₹50k-₹1L/month"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Growth Accelerator",
+          price: "₹39,999/month",
+          icon: "trending-up",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "2-3 Platform Strategy",
+            "Advanced Audience Building",
+            "Custom Ad Creative",
+            "Weekly A/B Testing",
+            "ROI Optimization",
+            "Bi-weekly Strategy Calls",
+            "Competitor Analysis",
+            "Budget: ₹1L-₹3L/month"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Dominance",
+          price: "₹79,999/month",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "Full Multi-channel Strategy",
+            "Custom Attribution Modeling",
+            "AI-Powered Bidding",
+            "Creative Production Team",
+            "Market Expansion Planning",
+            "Dedicated Account Manager",
+            "Real-time Dashboard Access",
+            "Monthly Growth Strategy",
+            "Budget: ₹3L+/month"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Stop Spending on Ads—Start Investing in Customers",
+      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+      paragraphs: [
+        "Most businesses treat advertising as an expense—we treat it as customer acquisition infrastructure. Every rupee spent should return more than it cost, and then some. At Brandbase Capsule, we build paid media machines that don't just generate leads, but profitable customers who stick around.",
+        "We combine platform expertise with business acumen. We don't just optimize for clicks or impressions—we optimize for lifetime value, customer acquisition cost, and profitability. From the initial audience hypothesis to the post-conversion nurture sequence, we engineer campaigns that work as business systems, not just marketing activities. In a world where attention is scarce and competition is fierce, ordinary ads fail—performance campaigns thrive."
+      ]
+    }
+  }
+},
+{
+  id: 14,
+  category: "digital-marketing",
+  slug: "social-media-marketing",
+  data: {
+    hero: {
+      headline: "Make Your Brand Impossible to Ignore on Social",
+      subHeadline: "Stop posting into the void. Create content that stops scrolls, starts conversations, and turns followers into fanatics.",
+      ctaText: "Go Viral or Go Home",
+      trustNote1: "Algorithm-hacking",
+      trustNote2: "Community-building",
+      features: [
+        { name: "TikTok Domination", icon: "Zap" },
+        { name: "Instagram Reels Mastery", icon: "Video" },
+        { name: "LinkedIn Authority", icon: "Briefcase" },
+        { name: "Twitter/X Engagement", icon: "MessageCircle" },
+        { name: "Community Management", icon: "Users" },
+        { name: "Content Virality", icon: "TrendingUp" },
+        { name: "Influencer Collabs", icon: "Star" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Your Content,",
+        highlight: "Their Addiction"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1974&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Social Media Strategies That Actually Break Through",
+      subheading: "Why posting schedules fail and cultural moments win",
+      columns: ["Approach", "Corporate Broadcasting", "Scheduled Content", "Cultural Hacking"],
+      rows: [
+        {
+          feature: "Audience Growth",
+          values: [
+            "🐌 1-2% monthly",
+            "📈 5-10% monthly",
+            "🚀 20-50% monthly"
+          ]
+        },
+        {
+          feature: "Engagement Rate",
+          values: [
+            "📉 0.5-1% (pathetic)",
+            "📊 2-3% (decent)",
+            "🔥 5-15% (viral-ready)"
+          ]
+        },
+        {
+          feature: "Content Style",
+          values: [
+            "📄 Company updates",
+            "🎨 Branded content",
+            "🎬 Platform-native storytelling"
+          ]
+        },
+        {
+          feature: "Algorithm Relationship",
+          values: [
+            "🤖 Fighting the algorithm",
+            "🔄 Working with algorithm",
+            "🎯 Becoming the algorithm's favorite"
+          ]
+        },
+        {
+          feature: "Community Building",
+          values: [
+            "👥 Passive audience",
+            "💬 Some interaction",
+            "🤝 Cult-like following"
+          ]
+        },
+        {
+          feature: "Trend Participation",
+          values: [
+            "🙅‍♂️ Always late",
+            "📅 Scheduled",
+            "⚡ Real-time relevance"
+          ]
+        },
+        {
+          feature: "Brand Voice",
+          values: [
+            "🏢 Corporate robot",
+            "👔 Professional brand",
+            "🎭 Human personality"
+          ]
+        },
+        {
+          feature: "ROI Measurement",
+          values: [
+            "❌ Vanity metrics",
+            "📊 Basic conversions",
+            "💰 Full-funnel attribution"
+          ]
+        },
+        {
+          feature: "Content Velocity",
+          values: [
+            "🐢 3-4 posts/week",
+            "📅 Daily posting",
+            "⚡ Multiple times/day + stories"
+          ]
+        },
+        {
+          feature: "Cultural Impact",
+          values: [
+            "📰 Company mentions",
+            "📱 Brand awareness",
+            "🌟 Industry trendsetter"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Algorithm Whispering That Makes Platforms Work for You",
+        description: "We don't just post content—we hack platform algorithms. TikTok? We create irresistible hooks in the first 0.8 seconds. Instagram? We engineer reels that the Explore page can't resist. LinkedIn? We craft posts that trigger 'see more' clicks and flood your notifications. We understand each platform's secret sauce and use it to catapult your content from obscurity to omnipresence. Your posts don't just get seen—they get amplified.",
+        image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Content That Feels Like Entertainment, Not Advertising",
+        description: "People don't open social media to be sold to—they open it to be entertained, informed, or inspired. We create content that feels native to each platform: TikTok trends with a twist, Instagram reels that teach while they entertain, LinkedIn carousels that establish thought leadership, Twitter threads that spark industry conversations. We turn your brand into content people actually want to consume, share, and anticipate.",
+        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Community Cultivation That Turns Followers into Evangelists",
+        description: "Follower count is vanity—community engagement is sanity. We build tribes, not just audiences. We create inside jokes, community rituals, and exclusive access that makes followers feel like insiders. We respond to every comment, turn critics into champions, and transform customers into co-creators. Your social presence becomes a living, breathing community that defends your brand and amplifies your message organically.",
+        image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Social Media That",
+        highlighted: "Breaks the Internet",
+        subtitle: "From building communities to creating cultural moments—make noise that matters."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Platform Launchpad",
+          price: "₹24,999/month",
+          icon: "zap",
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "2 Platform Focus",
+            "Daily Content Creation",
+            "Basic Community Management",
+            "Trend Participation",
+            "Weekly Analytics Report",
+            "Content Calendar",
+            "Hashtag Strategy"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Viral Engine",
+          price: "₹49,999/month",
+          icon: "trending-up",
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "3-4 Platform Strategy",
+            "Premium Video Content",
+            "Real-time Trend Jumping",
+            "Influencer Outreach",
+            "Competitor Analysis",
+            "Community Building",
+            "Bi-weekly Strategy Sessions",
+            "Crisis Management"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Cultural Takeover",
+          price: "₹99,999/month",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "Full Multi-platform Dominance",
+            "Dedicated Content Team",
+            "Branded Hashtag Campaigns",
+            "Creator Partnerships",
+            "Social Listening Suite",
+            "Live Streaming Strategy",
+            "Crisis-to-Opportunity Pivots",
+            "Monthly Cultural Analysis",
+            "24/7 Community Management"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Social Media Isn't a Channel—It's the Main Stage",
+      imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+      paragraphs: [
+        "Forget everything you know about corporate social media. The game has changed. Social isn't about polished perfection—it's about raw authenticity, speed, and cultural relevance. At Brandbase Capsule, we don't manage social media accounts; we create cultural moments that make your brand the topic of conversation.",
+        "We treat every platform like its own ecosystem with unique rules, languages, and behaviors. We move at internet speed, turning trends into traffic, conversations into conversions, and followers into fanatics. While your competitors are scheduling next week's posts, we're already riding today's viral wave. In the attention economy, being boring is the only real crime—and we're here to make sure you're anything but."
+      ]
+    }
+  }
+},
+{
+  id: 15,
+  category: "digital-marketing",
+  slug: "content-writing",
+  data: {
+    hero: {
+      headline: "Words That Don't Just Get Read—They Get Results",
+      subHeadline: "Transform visitors into customers with strategic content that persuades, educates, and converts at every touchpoint.",
+      ctaText: "Get Converting Content",
+      trustNote1: "SEO-optimized",
+      trustNote2: "Conversion-focused",
+      features: [
+        { name: "Website Copywriting", icon: "FileText" },
+        { name: "Blog & Article Writing", icon: "Edit" },
+        { name: "SEO Content Strategy", icon: "Search" },
+        { name: "Email Marketing Copy", icon: "Mail" },
+        { name: "Social Media Content", icon: "MessageCircle" },
+        { name: "Whitepapers & Ebooks", icon: "BookOpen" },
+        { name: "Case Studies", icon: "ClipboardCheck" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Words That",
+        highlight: "Sell & Educate"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2073&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Content Quality That Actually Converts",
+      subheading: "Why generic content fails and strategic writing delivers measurable business outcomes",
+      columns: ["Aspect", "AI-Generated Content", "Generic Writers", "Strategic Content Writers"],
+      rows: [
+        {
+          feature: "SEO Performance",
+          values: [
+            "📊 Basic keyword stuffing",
+            "📈 Some optimization",
+            "🚀 Semantic search mastery"
+          ]
+        },
+        {
+          feature: "Conversion Rate",
+          values: [
+            "📉 Generic CTAs",
+            "📊 Decent conversion",
+            "🔥 Psychology-driven CTAs"
+          ]
+        },
+        {
+          feature: "Brand Voice",
+          values: [
+            "🤖 Robotic & generic",
+            "👔 Some consistency",
+            "🎭 Distinct personality"
+          ]
+        },
+        {
+          feature: "Research Depth",
+          values: [
+            "🔍 Surface-level",
+            "📚 Basic research",
+            "🎯 Industry expertise"
+          ]
+        },
+        {
+          feature: "Reader Engagement",
+          values: [
+            "📖 30-40% read rate",
+            "📚 50-60% read rate",
+            "🔥 70-90% read rate"
+          ]
+        },
+        {
+          feature: "Content Strategy",
+          values: [
+            "🎯 Keyword lists only",
+            "📅 Basic calendar",
+            "🗺️ Full-funnel mapping"
+          ]
+        },
+        {
+          feature: "Editing Quality",
+          values: [
+            "✏️ Basic grammar check",
+            "📝 Decent editing",
+            "🔍 Strategic refinement"
+          ]
+        },
+        {
+          feature: "Topic Authority",
+          values: [
+            "📰 Generic information",
+            "📊 Good information",
+            "🎓 Thought leadership"
+          ]
+        },
+        {
+          feature: "Long-term Value",
+          values: [
+            "📉 Quick obsolescence",
+            "📊 Moderate lifespan",
+            "📈 Evergreen & updatable"
+          ]
+        },
+        {
+          feature: "ROI Measurement",
+          values: [
+            "❌ Vanity metrics",
+            "📊 Some attribution",
+            "💰 Direct revenue impact"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Strategic Content That Drives Business Objectives",
+        description: "We don't write articles—we create business assets. Every piece of content serves a strategic purpose: top-of-funnel blog posts attract search traffic, middle-funnel guides nurture leads, bottom-funnel case studies close sales. We map content to your customer journey, ensuring each word moves prospects closer to conversion while establishing your brand as the undisputed industry authority.",
+        image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "SEO-Optimized Writing That Ranks & Converts",
+        description: "Our content ranks first and converts best. We master semantic SEO—understanding search intent, creating comprehensive coverage, and structuring content for both Google's algorithms and human readers. We optimize for featured snippets, answer common questions before competitors, and create pillar-cluster architectures that dominate entire topic areas. Your content becomes a traffic magnet that also turns visitors into customers.",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Brand Voice Development That Builds Recognition & Trust",
+        description: "Consistency builds trust. We develop and maintain a distinctive brand voice across all content—whether it's a technical whitepaper, a casual social post, or a persuasive sales page. Your audience learns to recognize your unique tone, creating familiarity and credibility. We ensure your messaging resonates with your target audience while differentiating you from competitors who sound like everyone else.",
+        image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2073&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Content Solutions for",
+        highlighted: "Every Business Need",
+        subtitle: "From blog posts to complete content ecosystems—communicate with clarity and impact."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Content Foundation",
+          price: "₹9,999/month",
+          icon: "file-text",
+          image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop",
+          features: [
+            "4 Blog Posts (1000 words each)",
+            "Basic SEO Optimization",
+            "Social Media Snippets",
+            "Monthly Content Calendar",
+            "Basic Keyword Research",
+            "Email Newsletter Copy",
+            "1 Revision per piece"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Content Growth",
+          price: "₹24,999/month",
+          icon: "trending-up",
+          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "8 Content Pieces Monthly",
+            "Advanced SEO Strategy",
+            "Content Cluster Development",
+            "Competitor Analysis",
+            "Brand Voice Guide",
+            "Performance Analytics",
+            "Case Study Creation",
+            "2 Revisions per piece"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Content Authority",
+          price: "₹49,999/month",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2073&auto=format&fit=crop",
+          features: [
+            "Unlimited Content Creation",
+            "Complete Content Strategy",
+            "Whitepapers & Ebooks",
+            "Thought Leadership Pieces",
+            "Content Repurposing",
+            "Dedicated Content Manager",
+            "Monthly Strategy Sessions",
+            "Performance Optimization",
+            "Team Training"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Where Clarity Meets Conversion",
+      imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop",
+      paragraphs: [
+        "In a world drowning in content, standing out requires more than just good writing—it requires strategic communication that understands both human psychology and business objectives. At Brandbase Capsule, we create content that doesn't just fill pages, but fulfills purposes.",
+        "We treat every word as a strategic asset. From the headline that stops the scroll to the call-to-action that converts the click, every element is engineered for impact. Whether educating potential customers, nurturing leads, or closing sales, our content works relentlessly to move your business forward. In the battle for attention, quality content isn't just nice to have—it's your most powerful weapon."
+      ]
+    }
+  }
+},
+{
+  id: 16,
+  category: "digital-marketing",
+  slug: "social-media-page-setup",
+  data: {
+    hero: {
+      headline: "First Impressions That Convert Scrollers into Followers",
+      subHeadline: "Launch social media profiles that look professional, communicate value instantly, and attract your ideal audience from day one.",
+      ctaText: "Setup Your Social Presence",
+      trustNote1: "Platform-optimized",
+      trustNote2: "Brand-consistent",
+      features: [
+        { name: "Profile Optimization", icon: "User" },
+        { name: "Cover & Banner Design", icon: "Image" },
+        { name: "Bio & Description Writing", icon: "Edit" },
+        { name: "Link in Bio Setup", icon: "Link" },
+        { name: "Content Strategy", icon: "Calendar" },
+        { name: "Hashtag Research", icon: "Hash" },
+        { name: "Launch Content Package", icon: "Rocket" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Profiles That",
+        highlight: "Sell at First Sight"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1611605698323-b1e99cfd37ea?q=80&w=1974&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Social Media Profile Quality Compared",
+      subheading: "Why most profiles get ignored and optimized profiles attract followers",
+      columns: ["Element", "Basic Setup", "Standard Setup", "Premium Optimized Setup"],
+      rows: [
+        {
+          feature: "Profile Picture",
+          values: [
+            "📷 Logo or random image",
+            "🎨 Branded logo",
+            "✨ Professionally designed avatar"
+          ]
+        },
+        {
+          feature: "Cover/Banner",
+          values: [
+            "🖼️ Stock image or blank",
+            "📱 Brand colors",
+            "🎯 Value proposition graphics"
+          ]
+        },
+        {
+          feature: "Bio/Description",
+          values: [
+            "📝 Generic description",
+            "✏️ Clear description",
+            "🔥 Benefit-focused storytelling"
+          ]
+        },
+        {
+          feature: "Link in Bio",
+          values: [
+            "🔗 Direct website link",
+            "📎 Multiple links",
+            "🚀 Interactive link hub"
+          ]
+        },
+        {
+          feature: "Content Strategy",
+          values: [
+            "❌ No plan",
+            "📅 Basic content ideas",
+            "🗺️ 30-day launch calendar"
+          ]
+        },
+        {
+          feature: "Hashtag Strategy",
+          values: [
+            "🏷️ Random hashtags",
+            "# Relevant hashtags",
+            "🎯 Strategic hashtag clusters"
+          ]
+        },
+        {
+          feature: "Visual Consistency",
+          values: [
+            "🎨 Random colors",
+            "🌈 Brand colors",
+            "🎭 Complete visual identity"
+          ]
+        },
+        {
+          feature: "First Impression",
+          values: [
+            "😐 Forgettable",
+            "😊 Professional",
+            "🤩 Memorable & compelling"
+          ]
+        },
+        {
+          feature: "Follower Conversion",
+          values: [
+            "📉 1-2% of visitors",
+            "📊 5-10% of visitors",
+            "🚀 15-25% of visitors"
+          ]
+        },
+        {
+          feature: "Setup Time",
+          values: [
+            "⏱️ 30 minutes",
+            "🕐 2-3 hours",
+            "⚡ Complete day with strategy"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Platform-Specific Optimization That Maximizes Impact",
+        description: "Each social platform has different psychology and best practices. Instagram needs visual storytelling in the profile. LinkedIn requires professional credibility. Twitter/X demands concise value propositions. TikTok thrives on personality and entertainment. We optimize every element for each platform's unique audience and algorithm, ensuring your profile communicates the right message in the right way to the right people.",
+        image: "https://images.unsplash.com/photo-1611605698323-b1e99cfd37ea?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Visual Identity That Stops the Scroll & Starts the Follow",
+        description: "In 3 seconds, visitors decide whether to follow or scroll past. We create stunning profile aesthetics that communicate your brand personality instantly. Custom cover graphics that tell your story, profile pictures that build recognition, highlight covers that guide exploration, and visual themes that create consistency across all platforms. Your social presence looks professional, cohesive, and impossible to ignore.",
+        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Strategic Content Foundation That Drives Growth",
+        description: "A beautiful profile is useless without great content. We don't just set up your pages—we create a complete launch package: 30 days of content ideas tailored to your audience, optimized posting schedules, hashtag strategies for maximum reach, and engagement tactics to build community from day one. We give you everything needed to maintain momentum and grow your following organically.",
+        image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Social Media Launch for",
+        highlighted: "Every Brand Size",
+        subtitle: "From starting fresh to rebranding existing profiles—make the right first impression."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Starter Setup",
+          price: "₹4,999",
+          icon: "rocket",
+          image: "https://images.unsplash.com/photo-1611605698323-b1e99cfd37ea?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "2 Platform Setup (Choose any 2)",
+            "Profile Optimization",
+            "Cover/Banner Design",
+            "Bio Writing",
+            "Basic Hashtag Research",
+            "Setup Guide Document",
+            "7 Days WhatsApp Support"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Professional Launch",
+          price: "₹9,999",
+          icon: "star",
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "4 Platform Setup",
+            "Complete Visual Identity",
+            "Strategic Bio Writing",
+            "Link in Bio Hub Setup",
+            "Hashtag Strategy",
+            "Content Calendar (15 posts)",
+            "Engagement Guidelines",
+            "14 Days Support"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Presence",
+          price: "₹19,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "All Major Platforms (6+)",
+            "Complete Brand Kit Integration",
+            "Custom Graphics Package",
+            "30-Day Content Strategy",
+            "Competitor Analysis",
+            "Team Training Session",
+            "Performance Tracking Setup",
+            "30 Days Post-launch Support",
+            "Rebranding Available"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Your Digital Handshake on Every Platform",
+      imageUrl: "https://images.unsplash.com/photo-1611605698323-b1e99cfd37ea?q=80&w=1974&auto=format&fit=crop",
+      paragraphs: [
+        "Your social media profiles are often the first interaction potential customers have with your brand. In those crucial first seconds, they're deciding: Is this brand professional? Trustworthy? Relevant to me? We ensure the answer is always yes.",
+        "At Brandbase Capsule, we treat social media setup as strategic brand positioning, not just technical configuration. Every element—from the profile picture that builds recognition to the bio that communicates value—is optimized to attract your ideal audience and convert visitors into followers. We don't just create profiles; we create digital storefronts that work 24/7 to build your brand and grow your community."
+      ]
+    }
+  }
+},
+{
+  id: 17,
+  category: "digital-marketing",
+  slug: "social-media-content-design",
+  data: {
+    hero: {
+      headline: "Visual Content That Commands Attention in the Scroll",
+      subHeadline: "Stop blending in. Create stunning, scroll-stopping graphics, videos, and carousels that make your brand impossible to ignore.",
+      ctaText: "Design Viral Content",
+      trustNote1: "Platform-native",
+      trustNote2: "Conversion-optimized",
+      features: [
+        { name: "Instagram Reels Design", icon: "Video" },
+        { name: "Story Graphics & Templates", icon: "Image" },
+        { name: "Carousel Posts", icon: "Layers" },
+        { name: "TikTok Video Editing", icon: "Film" },
+        { name: "LinkedIn Visual Content", icon: "Briefcase" },
+        { name: "Brand Kit Development", icon: "Palette" },
+        { name: "Motion Graphics", icon: "Zap" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Design That",
+        highlight: "Stops the Scroll"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1974&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Social Media Design Quality Compared",
+      subheading: "Why amateur designs get skipped and professional designs get saved & shared",
+      columns: ["Design Aspect", "Basic Templates", "Good Design", "Viral-Ready Design"],
+      rows: [
+        {
+          feature: "Visual Impact",
+          values: [
+            "🎨 Generic & forgettable",
+            "✨ Looks professional",
+            "🔥 Stops scrolling instantly"
+          ]
+        },
+        {
+          feature: "Brand Consistency",
+          values: [
+            "🌈 Random colors/fonts",
+            "🎭 Consistent branding",
+            "🏢 Complete visual system"
+          ]
+        },
+        {
+          feature: "Platform Optimization",
+          values: [
+            "📱 One-size-fits-all",
+            "📲 Platform-aware",
+            "🎯 Native to each platform"
+          ]
+        },
+        {
+          feature: "Engagement Rate",
+          values: [
+            "📉 0.5-1% engagement",
+            "📊 2-3% engagement",
+            "🚀 5-10%+ engagement"
+          ]
+        },
+        {
+          feature: "Shareability",
+          values: [
+            "🙅‍♂️ Rarely shared",
+            "📤 Sometimes shared",
+            "🔥 Designed to be shared"
+          ]
+        },
+        {
+          feature: "Content Types",
+          values: [
+            "🖼️ Static images only",
+            "🎬 Some video content",
+            "✨ Mixed media mastery"
+          ]
+        },
+        {
+          feature: "Design Speed",
+          values: [
+            "🐌 Days for simple posts",
+            "⏱️ Hours per post",
+            "⚡ Rapid production system"
+          ]
+        },
+        {
+          feature: "Trend Integration",
+          values: [
+            "📅 Always behind trends",
+            "🔄 Follows trends",
+            "⚡ Sets visual trends"
+          ]
+        },
+        {
+          feature: "Conversion Elements",
+          values: [
+            "❌ No clear CTAs",
+            "📝 Basic CTAs",
+            "🎯 Strategic CTA placement"
+          ]
+        },
+        {
+          feature: "Cost Efficiency",
+          values: [
+            "💸 High cost per post",
+            "💰 Reasonable cost",
+            "💎 High ROI per design"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Platform-Native Design That Feels Right at Home",
+        description: "Instagram demands vertical videos with text overlays. LinkedIn thrives on professional infographics. TikTok wants raw, authentic motion. Twitter/X prefers punchy visuals with minimal text. We design content that feels native to each platform—not just resized versions of the same graphic. Our designs work with platform algorithms, not against them, maximizing reach and engagement while maintaining consistent brand identity.",
+        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Scroll-Stopping Visuals That Command Attention",
+        description: "We create content that breaks through the noise. Using psychological principles of visual hierarchy, color theory, and motion design, we make graphics that stop thumbs mid-scroll. Animated text that pops, gradient overlays that draw the eye, strategic whitespace that focuses attention—every element is designed to capture and hold attention in an ocean of competing content. Your brand becomes the visual oasis in the social media desert.",
+        image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Design Systems That Scale & Stay Consistent",
+        description: "One great post isn't enough—you need a system. We create comprehensive design systems with templates, color palettes, typography hierarchies, and component libraries that ensure consistency across all platforms. This allows for rapid content production while maintaining professional quality. Your social feed becomes a cohesive visual narrative that builds brand recognition and trust over time.",
+        image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Visual Content for",
+        highlighted: "Every Social Platform",
+        subtitle: "From daily posts to complete visual systems—design content that gets seen and shared."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Content Creator Pack",
+          price: "₹12,999/month",
+          icon: "palette",
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "15 Social Graphics Monthly",
+            "5 Instagram Stories",
+            "2 Carousel Posts",
+            "Basic Animation",
+            "Brand Color Application",
+            "Monthly Content Calendar",
+            "Basic Template Creation"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Viral Visual Engine",
+          price: "₹24,999/month",
+          icon: "trending-up",
+          image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "30 Social Graphics Monthly",
+            "10 Instagram Reels/TikToks",
+            "5 Carousel Posts",
+            "Advanced Motion Graphics",
+            "Complete Design System",
+            "Competitor Visual Analysis",
+            "Performance Analytics",
+            "Weekly Design Reviews"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Premium Content Studio",
+          price: "₹49,999/month",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "Unlimited Design Requests",
+            "Video Production & Editing",
+            "Interactive Content Design",
+            "Custom Illustration",
+            "3D Animation",
+            "Dedicated Design Team",
+            "Real-time Trend Adaptation",
+            "Brand Evolution Strategy",
+            "Team Training & Assets"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Where Art Meets Algorithm",
+      imageUrl: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+      paragraphs: [
+        "Social media is a visual battlefield, and generic design is surrender. To win attention, you need content that doesn't just look good—it needs to feel right, move right, and speak the visual language of each platform. At Brandbase Capsule, we create social media design that's equal parts art and science.",
+        "We understand that great social design isn't about pretty pictures—it's about visual communication optimized for attention spans measured in milliseconds. Every gradient, every animation, every layout choice serves a strategic purpose: to stop the scroll, communicate value, and drive action. In a world where users scroll the length of the Eiffel Tower daily, being visually mediocre isn't an option—being visually exceptional is the only way to be seen."
+      ]
+    }
+  }
 }
+
 
 ];
 

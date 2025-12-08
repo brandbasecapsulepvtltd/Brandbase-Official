@@ -45,13 +45,12 @@ const Navbar = () => {
       category: "Digital Marketing Solutions",
       categoryLink: "/services/digital-marketing",
       items: [
-        { name: "SEO Optimization", link: "/services/seo-optimization" },
-        { name: "Online Ads Campaigns", link: "/services/online-ads-campaigns" },
-        { name: "Social Media Marketing", link: "/services/social-media-marketing" },
-        { name: "Social Media Page Setup", link: "/services/social-media-page-setup" },
-        { name: "Social Media Content Design", link: "/services/social-media-content-design" },
-        { name: "Professional Content Writing", link: "/services/content-writing" },
-        { name: "Content Marketing", link: "/services/content-marketing" }
+        { name: "SEO Optimization", link: "/services/digital-marketing/seo-optimization" },
+        { name: "Online Ads Campaigns", link: "/services/digital-marketing/online-ads-campaigns" },
+        { name: "Social Media Marketing", link: "/services/digital-marketing/social-media-marketing" },
+        { name: "Social Media Page Setup", link: "/services/digital-marketing/social-media-page-setup" },
+        { name: "Social Media Content Design", link: "/services/digital-marketing/social-media-content-design" },
+        { name: "Professional Content Writing", link: "/services/digital-marketing/content-writing" },
       ]
     },
     {
