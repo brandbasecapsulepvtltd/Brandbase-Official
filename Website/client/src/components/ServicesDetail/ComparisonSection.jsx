@@ -22,7 +22,7 @@ const ComparisonSection = ({ data }) => {
   if (!data) return null;
 
   return (
-    <section className="py-10 md:py-15 w-full">
+    <section className="py-10 md:py-15 w-full bg-white">
       <div className="w-full px-0">
         {/* HEADER */}
         <div className="text-center mb-10 md:mb-16 px-4 mt-10">
