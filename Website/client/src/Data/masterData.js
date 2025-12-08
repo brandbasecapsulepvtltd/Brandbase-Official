@@ -1344,7 +1344,1138 @@ export const servicesData = [
       ]
     }
   }
+},
+
+//mobile
+{
+  id: 7,
+  category: "mobile-app-development",
+  slug: "android-app-development",
+  data: {
+    hero: {
+      headline: "Native Android Apps That Dominate the Play Store",
+      subHeadline: "Build powerful, high-performance Android applications that engage users, solve real problems, and scale to millions of downloads.",
+      ctaText: "Build Your Android App",
+      trustNote1: "Play Store ready",
+      trustNote2: "Performance optimized",
+      features: [
+        { name: "Native Android Development", icon: "Smartphone" },
+        { name: "Material Design UI/UX", icon: "Palette" },
+        { name: "Play Store Optimization", icon: "TrendingUp" },
+        { name: "Offline Functionality", icon: "WifiOff" },
+        { name: "Push Notifications", icon: "Bell" },
+        { name: "API Integration", icon: "Cpu" },
+        { name: "Performance Analytics", icon: "BarChart3" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Android Apps That",
+        highlight: "Perform & Engage"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Android App Development Approaches",
+      subheading: "Choose the right technology stack for your app's performance and scalability needs",
+      columns: ["Feature", "Cross-Platform Hybrid", "Cross-Platform Native", "Pure Native Android"],
+      rows: [
+        {
+          feature: "Performance",
+          values: [
+            "🐢 Slowest (WebView based)",
+            "⚡ Good but limited",
+            "🚀 Native speed & optimization"
+          ]
+        },
+        {
+          feature: "Native Features",
+          values: [
+            "🔌 Plugin dependent",
+            "📱 Most features available",
+            "🌟 All features immediately"
+          ]
+        },
+        {
+          feature: "UI/UX Quality",
+          values: [
+            "📱 Generic look & feel",
+            "🎨 Good, but not perfect",
+            "✨ Pixel-perfect Material Design"
+          ]
+        },
+        {
+          feature: "Development Speed",
+          values: [
+            "⚡ Fastest to build",
+            "🏃 Fast",
+            "🏗️ Takes time but worth it"
+          ]
+        },
+        {
+          feature: "Maintenance",
+          values: [
+            "🔧 Complex (multiple layers)",
+            "🛠️ Moderate",
+            "⚙️ Clean & manageable"
+          ]
+        },
+        {
+          feature: "Play Store Approval",
+          values: [
+            "⚠️ May face restrictions",
+            "✅ Usually smooth",
+            "🎯 Preferred by Google"
+          ]
+        },
+        {
+          feature: "Battery Efficiency",
+          values: [
+            "🔋 High consumption",
+            "⚡ Moderate",
+            "💚 Optimized for Android"
+          ]
+        },
+        {
+          feature: "Offline Capabilities",
+          values: [
+            "📴 Limited",
+            "🔄 Good",
+            "🌟 Advanced offline features"
+          ]
+        },
+        {
+          feature: "Long-term Scalability",
+          values: [
+            "📉 Difficult to scale",
+            "📈 Can scale",
+            "🚀 Built for millions"
+          ]
+        },
+        {
+          feature: "Ideal Use Case",
+          values: [
+            "📄 Simple content apps",
+            "🛠️ Business apps",
+            "🎯 Performance-critical apps"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Native Performance That Feels Like Magic",
+        description: "We build Android apps using Kotlin and Jetpack Compose—Google's modern toolkit for native UI. This means buttery-smooth animations, instant response times, and optimal battery usage. Your app will feel like an integral part of the Android ecosystem, not a sluggish web page in disguise. From complex calculations to real-time updates, we ensure every interaction feels instant and effortless.",
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Material Design That Delights Users",
+        description: "Great Android apps follow Google's Material Design principles while adding unique brand personality. We create interfaces that are intuitive, accessible, and beautiful—with proper navigation patterns, meaningful animations, and adaptive layouts that work perfectly across phones, tablets, and foldables. Every screen is designed to guide users naturally toward their goals while maintaining your brand identity.",
+        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Play Store Optimization That Drives Downloads",
+        description: "Building the app is only half the battle. We optimize every aspect for the Play Store—from compelling screenshots and engaging preview videos to strategic keyword placement and localized descriptions. We implement app store analytics, user review management, and update strategies that keep your app visible and growing. Turn your great app into a successful business with download-focused optimization.",
+        image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Android Development Packages for",
+        highlighted: "Every App Vision",
+        subtitle: "From MVP launches to enterprise solutions—build Android apps that users love."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "MVP Launch",
+          price: "₹49,999",
+          icon: "rocket",
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Up to 10 Screens",
+            "Basic UI/UX Design",
+            "Core Features Only",
+            "Play Store Submission",
+            "Basic Analytics",
+            "3 Months Bug Support",
+            "Source Code Ownership"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Full Featured App",
+          price: "₹89,999",
+          icon: "star",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "15-25 Screens",
+            "Advanced UI/UX Design",
+            "API Integration",
+            "Push Notifications",
+            "Offline Capabilities",
+            "Advanced Analytics",
+            "Play Store Optimization",
+            "6 Months Support"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Solution",
+          price: "₹1,49,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+          features: [
+            "Unlimited Screens & Features",
+            "Custom Architecture",
+            "Real-time Features",
+            "Advanced Security",
+            "Multi-language Support",
+            "Admin Dashboard",
+            "Monthly Performance Reports",
+            "1 Year Priority Support",
+            "Scalable Infrastructure"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Your Idea, Optimized for 3 Billion Android Devices",
+      imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+      paragraphs: [
+        "Android isn't just an operating system—it's the world's most popular mobile platform with 3 billion active devices. Your app deserves to run natively on this massive ecosystem, not as a compromised cross-platform version. At Brandbase Capsule, we build Android apps that leverage the full power of the platform while maintaining the flexibility to reach your specific audience.",
+        "We stay at the forefront of Android development, working with the latest tools like Kotlin, Jetpack Compose, and Android Studio. Whether you're building a consumer-facing social app, a business productivity tool, an e-commerce platform, or a specialized utility—we create experiences that feel perfectly at home on Android while delivering your unique value proposition flawlessly."
+      ]
+    }
+  }
+},
+{
+  id: 8,
+  category: "mobile-app-development",
+  slug: "ios-app-development",
+  data: {
+    hero: {
+      headline: "Premium iOS Apps That Shine on the App Store",
+      subHeadline: "Craft elegant, high-performance iOS applications that deliver flawless experiences on iPhone, iPad, and Apple ecosystem.",
+      ctaText: "Develop Your iOS App",
+      trustNote1: "App Store ready",
+      trustNote2: "Apple design certified",
+      features: [
+        { name: "Native iOS Development", icon: "Smartphone" },
+        { name: "Swift & SwiftUI", icon: "Code" },
+        { name: "Human Interface Guidelines", icon: "Palette" },
+        { name: "App Store Optimization", icon: "TrendingUp" },
+        { name: "Offline First", icon: "WifiOff" },
+        { name: "Apple Pay Integration", icon: "CreditCard" },
+        { name: "Performance Analytics", icon: "BarChart3" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "iOS Excellence,",
+        highlight: "Crafted with Precision"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "iOS Development Approaches Compared",
+      subheading: "Choose the right strategy for premium performance and Apple ecosystem integration",
+      columns: ["Feature", "Cross-Platform Hybrid", "Cross-Platform Native", "Pure Native iOS"],
+      rows: [
+        {
+          feature: "Performance",
+          values: [
+            "🐌 WebView limitations",
+            "⚡ Good performance",
+            "🚀 Native Swift optimization"
+          ]
+        },
+        {
+          feature: "Apple Ecosystem",
+          values: [
+            "🔌 Limited integration",
+            "📱 Basic integration",
+            "🍎 Full ecosystem access"
+          ]
+        },
+        {
+          feature: "UI/UX Quality",
+          values: [
+            "📱 Generic appearance",
+            "🎨 Decent but compromised",
+            "✨ Apple Design Award level"
+          ]
+        },
+        {
+          feature: "App Store Approval",
+          values: [
+            "⚠️ Higher rejection risk",
+            "✅ Usually accepted",
+            "🎯 Preferred by Apple"
+          ]
+        },
+        {
+          feature: "Battery Efficiency",
+          values: [
+            "🔋 Higher consumption",
+            "⚡ Moderate efficiency",
+            "💚 Apple-optimized"
+          ]
+        },
+        {
+          feature: "Security",
+          values: [
+            "🛡️ Web security model",
+            "🔒 Good security",
+            "🔐 Enterprise-grade security"
+          ]
+        },
+        {
+          feature: "Feature Updates",
+          values: [
+            "⏳ Delayed access",
+            "🔄 Moderate access",
+            "⚡ Immediate iOS updates"
+          ]
+        },
+        {
+          feature: "Offline Capabilities",
+          values: [
+            "📴 Basic offline",
+            "🔄 Good offline",
+            "🌟 Advanced offline-first"
+          ]
+        },
+        {
+          feature: "Development Cost",
+          values: [
+            "💰 Lower initial cost",
+            "💵 Moderate cost",
+            "💎 Higher but better ROI"
+          ]
+        },
+        {
+          feature: "Target Audience",
+          values: [
+            "🌍 Mass market focus",
+            "📱 General users",
+            "🎯 Premium iOS users"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Swift-Powered Performance That Feels Effortless",
+        description: "We build iOS apps using Swift and SwiftUI—Apple's modern, safe, and fast programming languages. This means your app runs with native speed, uses memory efficiently, and feels perfectly integrated with iOS. From complex animations to real-time data processing, we ensure every interaction is smooth, responsive, and delightful—exactly what premium iOS users expect.",
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Human Interface Design That Feels Intuitive",
+        description: "Great iOS apps follow Apple's Human Interface Guidelines while expressing your unique brand. We create interfaces that are intuitive, accessible, and beautiful—with proper navigation patterns, meaningful haptics, and adaptive layouts for all screen sizes. Every interaction is designed to feel natural, with attention to detail that makes users feel your app was made specifically for their device.",
+        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "App Store Strategy That Maximizes Visibility",
+        description: "Building a great app is only the beginning. We optimize every aspect for the App Store—from compelling screenshots and app previews to strategic keyword optimization and localized metadata. We implement App Store Connect analytics, review management strategies, and update schedules that maximize visibility and downloads. Turn your quality app into a commercial success with data-driven store optimization.",
+        image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "iOS Development Packages for",
+        highlighted: "Premium Mobile Experiences",
+        subtitle: "From innovative startups to established brands—create iOS apps that users love."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "MVP Launch",
+          price: "₹59,999",
+          icon: "rocket",
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Up to 10 Screens",
+            "Basic UI/UX Design",
+            "Core Features Implementation",
+            "App Store Submission",
+            "Basic Analytics",
+            "3 Months Bug Support",
+            "Source Code Ownership"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Premium App",
+          price: "₹1,09,999",
+          icon: "star",
+          image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "15-25 Screens",
+            "Premium UI/UX Design",
+            "API Integration",
+            "Push Notifications",
+            "Offline-first Architecture",
+            "Advanced Analytics",
+            "App Store Optimization",
+            "6 Months Priority Support"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Solution",
+          price: "₹1,79,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+          features: [
+            "Unlimited Screens & Features",
+            "Custom Architecture Design",
+            "Real-time Features",
+            "Enterprise Security",
+            "Multi-language Support",
+            "Admin Dashboard",
+            "Monthly Performance Reports",
+            "1 Year Premium Support",
+            "Scalable Cloud Infrastructure"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Crafting Digital Excellence for the Apple Ecosystem",
+      imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+      paragraphs: [
+        "iOS users expect perfection—and that's exactly what we deliver. With over 1.8 billion active Apple devices worldwide, your app needs to meet the highest standards of quality, performance, and design. At Brandbase Capsule, we build iOS apps that not only function flawlessly but also feel like they were made by Apple themselves.",
+        "We specialize in native iOS development using the latest Apple technologies—Swift, SwiftUI, Combine, and Core frameworks. Whether you're targeting iPhone, iPad, or creating a universal app, we ensure your application leverages the full potential of Apple's hardware and software. From health and fitness apps using HealthKit to commerce apps with Apple Pay, we build experiences that feel perfectly at home in the Apple ecosystem."
+      ]
+    }
+  }
+},
+{
+  id: 9,
+  category: "mobile-app-development",
+  slug: "ui-ux-design",
+  data: {
+    hero: {
+      headline: "Stunning UI/UX That Makes Users Fall in Love with Your App",
+      subHeadline: "Transform user interactions into delightful experiences with intuitive interfaces, meaningful animations, and conversion-focused design.",
+      ctaText: "Design Your App Experience",
+      trustNote1: "User-tested designs",
+      trustNote2: "Conversion optimized",
+      features: [
+        { name: "User Research & Analysis", icon: "Search" },
+        { name: "Wireframing & Prototyping", icon: "Layout" },
+        { name: "Interactive Design Systems", icon: "Palette" },
+        { name: "Usability Testing", icon: "TestTube" },
+        { name: "Motion Design", icon: "Zap" },
+        { name: "Design Handoff", icon: "Code" },
+        { name: "Design System Creation", icon: "Layers" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Design That",
+        highlight: "Connects & Converts"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2064&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://tse3.mm.bing.net/th/id/OIP.CeaJnzsD_F5_Q7XZbmfcKQHaFj?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "UI/UX Design Approaches Compared",
+      subheading: "Choose the right design strategy for user engagement and business results",
+      columns: ["Feature", "Visual Design Only", "Basic UI/UX", "Strategic UX + UI"],
+      rows: [
+        {
+          feature: "User Research",
+          values: [
+            "❌ No research",
+            "📊 Basic assumptions",
+            "🔬 In-depth user studies"
+          ]
+        },
+        {
+          feature: "Design Process",
+          values: [
+            "🎨 Straight to visuals",
+            "📝 Wireframes then design",
+            "🔄 Full UX lifecycle"
+          ]
+        },
+        {
+          feature: "User Testing",
+          values: [
+            "🙅‍♂️ No testing",
+            "👥 Basic feedback",
+            "🧪 Iterative usability tests"
+          ]
+        },
+        {
+          feature: "Conversion Focus",
+          values: [
+            "🎯 Visual appeal only",
+            "📈 Some conversion elements",
+            "🚀 Data-driven optimization"
+          ]
+        },
+        {
+          feature: "Design System",
+          values: [
+            "🚫 One-off designs",
+            "📦 Basic component library",
+            "🏗️ Complete design system"
+          ]
+        },
+        {
+          feature: "Animation & Interaction",
+          values: [
+            "🔄 Basic transitions",
+            "✨ Some micro-interactions",
+            "🎬 Purposeful motion design"
+          ]
+        },
+        {
+          feature: "Accessibility",
+          values: [
+            "♿ Not considered",
+            "👁️ Basic compliance",
+            "🌈 WCAG 2.1 AA standard"
+          ]
+        },
+        {
+          feature: "Handoff to Development",
+          values: [
+            "📧 PDF/Image files",
+            "🔗 Basic design files",
+            "🤝 Complete developer handoff"
+          ]
+        },
+        {
+          feature: "Long-term Value",
+          values: [
+            "📉 Quick revisions needed",
+            "📊 Moderate longevity",
+            "📈 Scalable & maintainable"
+          ]
+        },
+        {
+          feature: "ROI on Design",
+          values: [
+            "💰 Aesthetic only",
+            "💵 Some business impact",
+            "💎 High conversion impact"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "User-Centered Design That Solves Real Problems",
+        description: "Great design starts with understanding users, not just making things look pretty. We conduct in-depth user research, create detailed personas, map user journeys, and identify pain points before we ever open a design tool. This ensures every screen we design solves a real user problem and contributes to your business goals—creating experiences that feel intuitive because they're built around real human behavior.",
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2064&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Visual Design That Builds Trust & Delights Users",
+        description: "We create interfaces that are not just beautiful, but functional and brand-appropriate. Every color choice, typography decision, spacing calculation, and icon selection is intentional. We design with accessibility in mind, ensure readability across devices, and create visual hierarchies that guide users naturally through your app. The result is an interface that builds trust, reinforces your brand, and makes using your app a pleasure.",
+        image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Interactive Prototypes That Feel Like the Real App",
+        description: "Static mockups can't reveal how an app really feels. We build high-fidelity interactive prototypes with realistic animations, transitions, and micro-interactions. Test user flows, validate assumptions, and experience your app before a single line of code is written. This reduces development risks, ensures alignment across teams, and gives stakeholders confidence in the final product.",
+        image: "https://tse3.mm.bing.net/th/id/OIP.CeaJnzsD_F5_Q7XZbmfcKQHaFj?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "UI/UX Design Packages for",
+        highlighted: "Every Stage of App Development",
+        subtitle: "From initial concept to polished product—create app experiences that users love."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Basic UI Design",
+          price: "₹24,999",
+          icon: "palette",
+          image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2064&auto=format&fit=crop",
+          features: [
+            "Up to 10 Screen Designs",
+            "Basic User Flow",
+            "Visual Design Only",
+            "Color & Typography Guide",
+            "Basic Prototype",
+            "Design Files Delivery",
+            "2 Revisions Included"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Complete UX + UI",
+          price: "₹49,999",
+          icon: "layers",
+          image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "User Research & Personas",
+            "Information Architecture",
+            "Wireframing & Prototyping",
+            "Complete Visual Design",
+            "Interactive Prototype",
+            "Usability Testing",
+            "Design System Setup",
+            "Developer Handoff"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Design System",
+          price: "₹89,999",
+          icon: "crown",
+          image: "https://tse3.mm.bing.net/th/id/OIP.CeaJnzsD_F5_Q7XZbmfcKQHaFj?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+          features: [
+            "Comprehensive User Research",
+            "Complete Design System",
+            "Advanced Motion Design",
+            "Accessibility Audit",
+            "Design Token Management",
+            "Component Documentation",
+            "Team Training",
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Where Psychology Meets Pixels",
+      imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2064&auto=format&fit=crop",
+      paragraphs: [
+        "Great UI/UX design isn't about making things look pretty—it's about creating experiences that feel intuitive, solve real problems, and drive business results. At Brandbase Capsule, we approach app design as a strategic business investment, not just a creative exercise.",
+        "We blend user psychology with visual design principles to create interfaces that don't just look good—they work brilliantly. From reducing cognitive load and eliminating friction points to creating emotional connections through micro-interactions, we design every element with purpose. Whether you're building a consumer app that needs to go viral or an enterprise tool that needs to boost productivity, we create designs that users love and businesses profit from."
+      ]
+    }
+  }
+},
+{
+  id: 10,
+  category: "mobile-app-development",
+  slug: "cross-platform-app-development",
+  data: {
+    hero: {
+      headline: "Build for iOS & Android with One Powerful Codebase",
+      subHeadline: "Launch faster, save costs, and maintain consistency across platforms with React Native and Flutter development.",
+      ctaText: "Start Cross-Platform",
+      trustNote1: "80% code reuse",
+      trustNote2: "Native-like performance",
+      features: [
+        { name: "React Native Development", icon: "Code" },
+        { name: "Flutter Development", icon: "Smartphone" },
+        { name: "Single Codebase", icon: "Cpu" },
+        { name: "Native Performance", icon: "Zap" },
+        { name: "Hot Reload", icon: "RefreshCw" },
+        { name: "App Store Deployment", icon: "TrendingUp" },
+        { name: "Cost Efficiency", icon: "IndianRupee" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "One Codebase,",
+        highlight: "Multiple Platforms"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Cross-Platform vs Native Development",
+      subheading: "Choose the right approach for your timeline, budget, and performance needs",
+      columns: ["Feature", "Native iOS + Android", "React Native", "Flutter"],
+      rows: [
+        {
+          feature: "Development Time",
+          values: [
+            "⏰ 8-12 months",
+            "⚡ 3-5 months",
+            "🚀 3-5 months"
+          ]
+        },
+        {
+          feature: "Development Cost",
+          values: [
+            "💸 2x Teams, 2x Cost",
+            "💰 ~40% savings",
+            "💵 ~40% savings"
+          ]
+        },
+        {
+          feature: "Code Reuse",
+          values: [
+            "🙅‍♂️ 0% (Separate code)",
+            "✅ 80-90%",
+            "✅ 80-90%"
+          ]
+        },
+        {
+          feature: "Performance",
+          values: [
+            "🚀 Best possible",
+            "⚡ Near-native",
+            "⚡ Near-native"
+          ]
+        },
+        {
+          feature: "UI Consistency",
+          values: [
+            "🎨 Platform-specific",
+            "🔄 Consistent across",
+            "✨ Perfectly consistent"
+          ]
+        },
+        {
+          feature: "Hot Reload",
+          values: [
+            "❌ Not available",
+            "✅ Available",
+            "✅ Available"
+          ]
+        },
+        {
+          feature: "App Store Approval",
+          values: [
+            "🎯 Preferred",
+            "✅ Generally smooth",
+            "✅ Generally smooth"
+          ]
+        },
+        {
+          feature: "Native Features",
+          values: [
+            "🌟 Full access",
+            "📱 Most via libraries",
+            "📱 Most via packages"
+          ]
+        },
+        {
+          feature: "Community & Support",
+          values: [
+            "🏢 Apple/Google",
+            "👨‍💻 Large (Meta)",
+            "👨‍💻 Large (Google)"
+          ]
+        },
+        {
+          feature: "Ideal For",
+          values: [
+            "🎯 Performance-critical apps",
+            "🛠️ Most business apps",
+            "🎨 Design-heavy apps"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "React Native: Facebook's Powerhouse for Rapid Development",
+        description: "We build with React Native—Meta's framework that combines React's declarative UI with native performance. Write JavaScript/TypeScript once, and run it on both iOS and Android while maintaining access to native APIs. Perfect for apps that need frequent updates, have complex business logic, or require integration with web technologies. Hot reload lets you see changes instantly, dramatically speeding up development cycles.",
+        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Flutter: Google's Beautiful, Consistent UI Framework",
+        description: "For pixel-perfect, consistent designs across platforms, we use Google's Flutter. With its own rendering engine and rich widget library, Flutter delivers buttery-smooth animations and perfectly identical UI on both iOS and Android. Dart language offers strong typing and great tooling. Ideal for startups, MVPs, and apps where design consistency and rapid iteration are top priorities.",
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Strategic Platform Selection Based on Your Needs",
+        description: "Not sure whether React Native or Flutter is right for you? We analyze your specific requirements—performance needs, team skills, timeline, design complexity, and long-term maintenance—to recommend the optimal framework. We have deep expertise in both ecosystems and can guide you to the right choice that balances development speed, cost efficiency, and end-user experience.",
+        image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Cross-Platform Solutions for",
+        highlighted: "Smart Business Decisions",
+        subtitle: "From startups to enterprises—launch on both platforms faster and smarter."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "MVP Cross-Platform",
+          price: "₹64,999",
+          icon: "rocket",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "Single Codebase (React Native/Flutter)",
+            "iOS & Android Deployment",
+            "Basic App Features",
+            "App Store Submission",
+            "Basic Analytics",
+            "3 Months Bug Support",
+            "Source Code Ownership"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Full Featured App",
+          price: "₹1,19,999",
+          icon: "star",
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Advanced Cross-Platform Features",
+            "Native Module Integration",
+            "Push Notifications",
+            "Offline Capabilities",
+            "API Integration",
+            "App Store Optimization",
+            "6 Months Support",
+            "Performance Monitoring"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Platform",
+          price: "₹1,99,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+          features: [
+            "Custom Architecture Design",
+            "Real-time Features",
+            "Advanced Security",
+            "Multi-language Support",
+            "Admin Dashboard",
+            "Monthly Performance Reports",
+            "1 Year Priority Support",
+            "Scalable Infrastructure",
+            "Team Training"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Why Choose One Platform When You Can Have Both?",
+      imageUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+      paragraphs: [
+        "Cross-platform development isn't about compromise—it's about smart strategy. Why maintain two separate codebases, two development teams, and double the testing when modern frameworks like React Native and Flutter deliver 80-90% code reuse with near-native performance? The days of choosing between iOS and Android are over.",
+        "At Brandbase Capsule, we specialize in both React Native and Flutter development, choosing the right tool for your specific needs. Whether you're a startup needing to validate your idea quickly, a business expanding to new platforms, or an enterprise maintaining multiple apps—cross-platform development offers the efficiency, consistency, and speed-to-market that today's competitive landscape demands."
+      ]
+    }
+  }
+},
+{
+  id: 11,
+  category: "mobile-app-development",
+  slug: "app-maintenance-support",
+  data: {
+    hero: {
+      headline: "Keep Your App Thriving with Expert Maintenance & Support",
+      subHeadline: "Ensure peak performance, security, and user satisfaction with proactive app maintenance, updates, and 24/7 monitoring.",
+      ctaText: "Secure Your App's Future",
+      trustNote1: "24/7 monitoring",
+      trustNote2: "Proactive updates",
+      features: [
+        { name: "Bug Fixing & Updates", icon: "Bug" },
+        { name: "Performance Monitoring", icon: "Activity" },
+        { name: "Security Patches", icon: "Shield" },
+        { name: "OS Compatibility", icon: "Smartphone" },
+        { name: "Analytics & Reports", icon: "BarChart3" },
+        { name: "Emergency Support", icon: "PhoneCall" },
+        { name: "Backup & Recovery", icon: "DatabaseBackup" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Your App's",
+        highlight: "Health & Performance"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://mobisoftinfotech.com/resources/wp-content/uploads/2017/11/mobile-app-maintenance-services-banner.png"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "App Maintenance Approaches Compared",
+      subheading: "How different support strategies impact your app's longevity and user satisfaction",
+      columns: ["Metric", "No Maintenance", "Reactive Support", "Proactive Maintenance"],
+      rows: [
+        {
+          feature: "App Store Ratings",
+          values: [
+            "⭐ Rapid decline",
+            "📊 Fluctuates",
+            "🌟 Consistently high"
+          ]
+        },
+        {
+          feature: "User Retention",
+          values: [
+            "📉 30-50% annual churn",
+            "📊 20-30% annual churn",
+            "📈 85%+ retention"
+          ]
+        },
+        {
+          feature: "Security Risk",
+          values: [
+            "🔴 High vulnerability",
+            "🟡 Moderate risk",
+            "🟢 Protected & updated"
+          ]
+        },
+        {
+          feature: "OS Compatibility",
+          values: [
+            "❌ Breaks with updates",
+            "⚠️ Manual updates",
+            "✅ Automatic compatibility"
+          ]
+        },
+        {
+          feature: "Performance",
+          values: [
+            "🐌 Gradual slowdown",
+            "⚡ Maintained when fixed",
+            "🚀 Optimized regularly"
+          ]
+        },
+        {
+          feature: "Downtime",
+          values: [
+            "⏱️ Frequent & long",
+            "🕒 Occasional",
+            "⏰ Near-zero"
+          ]
+        },
+        {
+          feature: "Cost Over 2 Years",
+          values: [
+            "💸 High (rebuild needed)",
+            "💰 Moderate (emergency fixes)",
+            "💎 Predictable & optimal"
+          ]
+        },
+        {
+          feature: "User Feedback",
+          values: [
+            "😠 Negative reviews",
+            "😐 Mixed feedback",
+            "😄 Positive engagement"
+          ]
+        },
+        {
+          feature: "Business Impact",
+          values: [
+            "📉 Lost revenue & users",
+            "📊 Unpredictable",
+            "📈 Stable growth"
+          ]
+        },
+        {
+          feature: "Peace of Mind",
+          values: [
+            "😰 Constant worry",
+            "😐 Somewhat managed",
+            "😌 Complete confidence"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Proactive Monitoring That Prevents Problems Before They Happen",
+        description: "We don't wait for users to report issues—we actively monitor your app's performance 24/7. Using advanced monitoring tools, we track crash rates, response times, API performance, and user behavior patterns. Get alerted about anomalies before they impact users, and receive monthly performance reports with actionable insights to continuously improve your app's health and user experience.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Security & Compliance That Protects Your Users & Business",
+        description: "Mobile security threats evolve constantly. We keep your app protected with regular security audits, vulnerability assessments, and timely patching. We ensure compliance with data protection regulations (GDPR, CCPA), implement secure authentication, encrypt sensitive data, and maintain security certificates. Your users' data stays safe, and your business stays protected from legal and reputational risks.",
+        image: "https://mobisoftinfotech.com/resources/wp-content/uploads/2017/11/mobile-app-maintenance-services-banner.png",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "OS & Device Compatibility That Ensures Universal Access",
+        description: "New iOS and Android versions release every year, and new devices launch constantly. We test and update your app for compatibility with the latest operating systems, screen sizes, and hardware features. From foldable phones to new iPad models, from iOS updates to Android version changes—we ensure your app works flawlessly across the entire mobile ecosystem your users inhabit.",
+        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Maintenance Plans for",
+        highlighted: "Every App Stage",
+        subtitle: "From newly launched apps to established platforms—keep your digital asset healthy and growing."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Basic Care Plan",
+          price: "₹9,999/month",
+          icon: "shield",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Bug Fixes & Critical Updates",
+            "App Store Compliance",
+            "Basic Performance Monitoring",
+            "Security Patch Updates",
+            "Monthly Health Report",
+            "Email Support (Business Hours)",
+            "Backup & Recovery"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Growth Care Plan",
+          price: "₹19,999/month",
+          icon: "trending-up",
+          image: "https://mobisoftinfotech.com/resources/wp-content/uploads/2017/11/mobile-app-maintenance-services-banner.png",
+          features: [
+            "Proactive Performance Monitoring",
+            "Advanced Analytics & Reporting",
+            "Regular Feature Updates",
+            "OS Compatibility Updates",
+            "User Feedback Analysis",
+            "Priority Email & Chat Support",
+            "Quarterly Security Audits",
+            "App Store Rating Management"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Enterprise Care Plan",
+          price: "₹39,999/month",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
+          features: [
+            "24/7 Monitoring & Alerting",
+            "Emergency Support Response",
+            "Custom Feature Development",
+            "Performance Optimization",
+            "Competitor Analysis",
+            "Dedicated Support Manager",
+            "Monthly Strategy Meetings",
+            "Compliance & Security Certifications",
+            "Team Training Sessions"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Your App is a Living Asset—Not a One-Time Project",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+      paragraphs: [
+        "Building an app is just the beginning. The real work—and real value—comes from keeping it healthy, secure, and relevant over time. Apps aren't static products; they're living assets that require care, feeding, and evolution to survive in the competitive mobile ecosystem.",
+        "At Brandbase Capsule, we treat app maintenance as strategic partnership, not just technical support. We become an extension of your team, proactively managing everything from crash prevention and security updates to performance optimization and user satisfaction. While you focus on growing your business, we ensure your app remains a reliable, high-performing asset that supports—rather than hinders—your success."
+      ]
+    }
+  }
 }
+
 ];
 
 // Helper function to find service by category and slug

@@ -70,10 +70,11 @@ const Navbar = () => {
       category: "Mobile App Development",
       categoryLink: "/services/mobile-app-development",
       items: [
-        { name: "Android App Development", link: "/services/android-app-development" },
-        { name: "iOS App Development", link: "/services/ios-app-development" },
-        { name: "UI/UX for Apps", link: "/services/ui-ux-design" },
-        { name: "Backend API Development", link: "/services/backend-api-development" }
+        { name: "Android App Development", link: "/services/mobile-app-development/android-app-development" },
+         { name: "iOS App Development", link: "/services/mobile-app-development/ios-app-development" },
+        { name: "UI/UX for Apps", link: "/services/mobile-app-development/ui-ux-design" },
+        { name: "Cross-platform App", link: "/services/mobile-app-development/cross-platform-app-development" },
+        { name: "app maintenance support", link: "/services/mobile-app-development/app-maintenance-support" }
       ]
     },
     {
