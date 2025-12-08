@@ -1,20 +1,18 @@
-// app/services/[category]/[slug]/page.jsx
 import { notFound } from 'next/navigation';
 import ServicesDetail from '@/pages/ServicesDetail';
 import { servicesData, getServiceData } from '@/Data/masterData';
 
 // Generate static params for SSG
 export async function generateStaticParams() {
-  // ✅ Make sure servicesData is imported correctly
   return servicesData.map((service) => ({
     category: service.category,
     slug: service.slug,
   }));
 }
 
-// Generate metadata for SEO
+// Generate metadata for SEO - params is still a Promise here
 export async function generateMetadata({ params }) {
-  const { category, slug } = params; // ✅ Remove 'await'
+  const { category, slug } = await params; // ✅ Add 'await' back!
   
   const service = servicesData.find(
     s => s.category === category && s.slug === slug
@@ -44,8 +42,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ServiceDetailPage({ params }) { // ✅ Remove 'async'
-  const { category, slug } = params; // ✅ Remove 'await'
+// ✅ Corrected component - params is a Promise in Next.js 15
+export default async function ServiceDetailPage({ params }) {
+  const { category, slug } = await params; // ✅ MUST use 'await'
   
   // Get the specific service data
   const serviceData = getServiceData(category, slug);
