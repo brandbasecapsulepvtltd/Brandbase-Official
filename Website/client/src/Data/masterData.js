@@ -3832,6 +3832,922 @@ export const servicesData = [
       ]
     }
   }
+},
+
+//event-exhibtion
+{
+  id: 18,
+  category: "events-exhibition",
+  slug: "event-planning-management",
+  data: {
+    hero: {
+      headline: "Turn Events Into Unforgettable Experiences That People Talk About For Years",
+      subHeadline: "Stop hosting meetings. Start creating moments that attendees remember, share, and come back for—no matter the scale.",
+      ctaText: "Create Legendary Events",
+      trustNote1: "Flawless execution",
+      trustNote2: "Memorable AF",
+      features: [
+        { name: "Strategic Event Design", icon: "Target" },
+        { name: "Venue Curation", icon: "MapPin" },
+        { name: "Vendor Ecosystem", icon: "Network" },
+        { name: "Experience Architecture", icon: "Sparkles" },
+        { name: "Tech Integration", icon: "Cpu" },
+        { name: "Crisis Management", icon: "Shield" },
+        { name: "ROI Measurement", icon: "TrendingUp" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "We Don't Plan Events,",
+        highlight: "We Engineer Experiences"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1492684223066-e9e4aab4d25e?q=80&w=2070&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Event Execution Quality Compared",
+      subheading: "Why most events are forgettable and ours become cultural moments",
+      columns: ["Factor", "DIY Events", "Basic Event Planners", "Experience Architects"],
+      rows: [
+        {
+          feature: "Attendee Experience",
+          values: [
+            "😐 Boring & predictable",
+            "😊 Nice & organized",
+            "🤯 Mind-blowing & shareable"
+          ]
+        },
+        {
+          feature: "Production Quality",
+          values: [
+            "🎤 Basic AV setup",
+            "🎬 Professional production",
+            "🎪 Broadway-level execution"
+          ]
+        },
+        {
+          feature: "Networking Value",
+          values: [
+            "🤝 Random mingling",
+            "👥 Structured networking",
+            "💫 Curated connections"
+          ]
+        },
+        {
+          feature: "Tech Integration",
+          values: [
+            "📱 Paper schedules",
+            "📲 Event apps",
+            "🤖 AI-powered experiences"
+          ]
+        },
+        {
+          feature: "Crisis Handling",
+          values: [
+            "😰 Panic mode",
+            "🛡️ Backup plans",
+            "🎭 Pivot to opportunity"
+          ]
+        },
+        {
+          feature: "ROI Generation",
+          values: [
+            "📉 Cost center",
+            "📊 Some value",
+            "🚀 Revenue generator"
+          ]
+        },
+        {
+          feature: "Social Buzz",
+          values: [
+            "📱 Few social posts",
+            "📤 Scheduled posts",
+            "🔥 Organic viral moments"
+          ]
+        },
+        {
+          feature: "Vendor Relationships",
+          values: [
+            "🤝 Random vendors",
+            "🤝 Reliable vendors",
+            "🤝 Exclusive partnerships"
+          ]
+        },
+        {
+          feature: "Post-event Impact",
+          values: [
+            "📧 Follow-up email",
+            "📊 Basic survey",
+            "🔄 Year-round community"
+          ]
+        },
+        {
+          feature: "Stress Level",
+          values: [
+            "😫 Your hair falls out",
+            "😌 They handle logistics",
+            "😎 You enjoy your own event"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Experience Architecture That Transcends Logistics",
+        description: "We don't just book venues and order catering—we design emotional journeys. Every moment is intentional: the reveal that creates awe, the transition that builds anticipation, the interaction that sparks connection, the climax that delivers transformation. We architect events as narrative experiences where attendees aren't spectators—they're protagonists in a story they'll retell for years. Logistics serve the experience, not the other way around.",
+        image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Vendor Symphony That Executes Flawlessly",
+        description: "Our network isn't a vendor list—it's a curated ecosystem of craftspeople, artists, technicians, and producers who turn vision into reality. From lighting designers who paint with photons to chefs who create edible art, from tech wizards who build immersive installations to security that's invisible but impenetrable. We conduct this orchestra so you hear the symphony, not the individual instruments. Your event runs with military precision and artistic soul.",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Tech Integration That Feels Like Magic, Not Gadgets",
+        description: "Technology should enhance humanity, not replace it. We integrate cutting-edge tech that feels invisible: RFID that remembers drink preferences, AR that reveals hidden layers, AI that facilitates perfect networking matches, immersive audio that follows you through spaces. No clunky apps or confusing interfaces—just seamless experiences that make attendees feel like they're living in the future while connecting in the present.",
+        image: "https://images.unsplash.com/photo-1492684223066-e9e4aab4d25e?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Event Experiences for",
+        highlighted: "Every Scale & Ambition",
+        subtitle: "From intimate gatherings to stadium spectacles—create moments that matter."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Signature Gathering",
+          price: "Starting at ₹4,99,999",
+          icon: "sparkles",
+          image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "Up to 100 Attendees",
+            "Venue Curation & Booking",
+            "Complete Vendor Management",
+            "Experience Design",
+            "Basic Tech Integration",
+            "On-site Management Team",
+            "Post-event Analytics",
+            "60-Day Planning Timeline"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Premier Experience",
+          price: "Starting at ₹14,99,999",
+          icon: "award",
+          image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "100-500 Attendees",
+            "Immersive Experience Design",
+            "Custom Tech Integration",
+            "Celebrity/Influencer Booking",
+            "International Vendor Network",
+            "Crisis Management Team",
+            "ROI Measurement System",
+            "90-Day Master Planning",
+            "Social Media Amplification"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Legendary Production",
+          price: "Custom Quote (₹50L+)",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1492684223066-e9e4aab4d25e?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "500+ Attendees",
+            "Complete Production House",
+            "Broadcast-Level Production",
+            "Global Talent Booking",
+            "AI-Powered Experience Design",
+            "International Crisis Protocols",
+            "Year-Round Community Building",
+            "Dedicated Executive Team",
+            "World-Class Security",
+            "Brand Legacy Creation"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Your Event Should Be The Answer To 'What Did You Do This Weekend?'",
+      imageUrl: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
+      paragraphs: [
+        "Most events are background noise in people's lives—another calendar entry, another chicken dinner, another PowerPoint presentation. We create foreground experiences that become core memories. Events so impactful that attendees rearrange their lives to be there, not just their schedules.",
+        "At Brandbase Capsule, we don't plan events—we engineer cultural moments. We blend the precision of military operations with the soul of artistic expression. From the moment someone hears about your event to the years they talk about it afterward, every touchpoint is designed to elevate, surprise, and transform. Because in a world of infinite digital distractions, physical experiences that make people feel alive aren't just valuable—they're priceless."
+      ]
+    }
+  }
+},
+
+{
+  id: 19,
+  category: "events-exhibition",
+  slug: "event-branding",
+  data: {
+    hero: {
+      headline: "Transform Your Event From Another Date On The Calendar To A Can't-Miss Cultural Phenomenon",
+      subHeadline: "Create visual identities so compelling that people don't just attend—they anticipate, participate, and become brand evangelists.",
+      ctaText: "Brand Your Event Iconic",
+      trustNote1: "Visual storytelling",
+      trustNote2: "Cultural relevance",
+      features: [
+        { name: "Event Identity Design", icon: "Palette" },
+        { name: "Campaign Creative", icon: "Target" },
+        { name: "Environmental Branding", icon: "MapPin" },
+        { name: "Digital Experience", icon: "Globe" },
+        { name: "Merchandise Design", icon: "ShoppingBag" },
+        { name: "Photography Direction", icon: "Camera" },
+        { name: "Social Media Toolkit", icon: "Share2" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Branding That",
+        highlight: "Demands Attendance"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1579546929662-711aa81148cf?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Event Branding Impact Compared",
+      subheading: "Why basic logos fail and immersive branding creates cultural movements",
+      columns: ["Brand Element", "Basic Logo & Colors", "Good Event Branding", "Iconic Event Identity"],
+      rows: [
+        {
+          feature: "Visual Identity",
+          values: [
+            "🏷️ Logo on a template",
+            "🎨 Cohesive brand system",
+            "🎭 Living visual universe"
+          ]
+        },
+        {
+          feature: "Ticket Sales",
+          values: [
+            "📈 Standard conversion",
+            "📊 Better conversion",
+            "🚀 Sold out before launch"
+          ]
+        },
+        {
+          feature: "Social Buzz",
+          values: [
+            "📱 Some event posts",
+            "📤 Consistent posting",
+            "🔥 Attendees become marketers"
+          ]
+        },
+        {
+          feature: "Photography Impact",
+          values: [
+            "📸 Random event photos",
+            "📷 Professional photos",
+            "🎬 Cinematic visual library"
+          ]
+        },
+        {
+          feature: "Venue Transformation",
+          values: [
+            "📍 Logo on a banner",
+            "🏢 Branded spaces",
+            "🌌 Complete world-building"
+          ]
+        },
+        {
+          feature: "Merchandise Value",
+          values: [
+            "👕 Basic t-shirt",
+            "🛍️ Nice merchandise",
+            "🎁 Collectible artifacts"
+          ]
+        },
+        {
+          feature: "Digital Presence",
+          values: [
+            "📄 Basic event page",
+            "📱 Good website",
+            "💫 Immersive digital journey"
+          ]
+        },
+        {
+          feature: "Year-on-Year Growth",
+          values: [
+            "📊 10-20% growth",
+            "📈 30-50% growth",
+            "🚀 100%+ growth"
+          ]
+        },
+        {
+          feature: "Cultural Impact",
+          values: [
+            "📅 Another event",
+            "🎪 Notable gathering",
+            "🌟 Defining cultural moment"
+          ]
+        },
+        {
+          feature: "ROI on Branding",
+          values: [
+            "💰 Cost of design",
+            "💵 Brand recognition",
+            "💎 Cultural equity"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Visual Universe Creation That Transcends Aesthetics",
+        description: "We don't design logos—we architect visual universes. Every color, texture, typography choice, and graphic element serves the event's narrative. The branding doesn't just decorate—it communicates the event's soul before a single word is spoken. From the first save-the-date to the last social media post six months later, every visual touchpoint builds anticipation, communicates value, and makes attendance feel inevitable, not optional.",
+        image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Environmental Storytelling That Transforms Spaces",
+        description: "Your venue isn't a location—it's a canvas. We create environmental branding that turns physical spaces into immersive storyscapes. Entrance tunnels that build anticipation, stage designs that command awe, interactive installations that spark wonder, lighting that paints emotion. Every corner, surface, and pathway becomes part of the brand narrative, ensuring that being physically present feels fundamentally different than watching online.",
+        image: "https://images.unsplash.com/photo-1579546929662-711aa81148cf?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Digital-to-Physical Continuum That Builds Hype",
+        description: "The journey begins online and culminates onsite. We design digital experiences that mirror and amplify the physical event: websites that feel like entering the venue, social media filters that preview the aesthetic, email sequences that build narrative tension, mobile apps that extend the experience. The digital presence doesn't just promote—it prepares attendees for transformation, making the physical event feel like the climax of a story they've been living for months.",
+        image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Event Branding for",
+        highlighted: "Every Stage of Fame",
+        subtitle: "From debut events to established annual gatherings—create identities that demand attention."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Signature Identity",
+          price: "₹1,99,999",
+          icon: "palette",
+          image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "Event Logo & Visual Identity",
+            "Color Palette & Typography",
+            "Social Media Templates",
+            "Digital Campaign Creative",
+            "Basic Environmental Graphics",
+            "Photography Style Guide",
+            "Brand Guidelines Document",
+            "30-Day Support"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Immersive Experience",
+          price: "₹4,99,999",
+          icon: "layers",
+          image: "https://images.unsplash.com/photo-1579546929662-711aa81148cf?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Complete Visual Universe",
+            "Environmental Branding Design",
+            "Interactive Installations",
+            "Merchandise Collection",
+            "Digital Experience Design",
+            "Motion Graphics Package",
+            "Photoshoot Art Direction",
+            "Social Media Campaign Kit",
+            "60-Day Support"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Cultural Icon",
+          price: "₹9,99,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "Multi-year Brand Strategy",
+            "Complete World-building",
+            "Broadcast-Level Production Design",
+            "Custom Typeface Development",
+            "Immersive Tech Integration",
+            "Global Campaign Rollout",
+            "Brand Legacy Documentation",
+            "Dedicated Creative Director",
+            "90-Day Intensive Support",
+            "Post-event Brand Evolution"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "Your Event Should Look As Important As It Feels",
+      imageUrl: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=2069&auto=format&fit=crop",
+      paragraphs: [
+        "Great events don't just happen—they're announced. With branding so compelling that it creates its own gravity, pulling people toward the experience before they even know what it is. We create event identities that become cultural artifacts in their own right—visual languages so distinctive that seeing them feels like remembering something important you didn't know you'd forgotten.",
+        "At Brandbase Capsule, we treat event branding as cultural engineering, not graphic design. We build visual ecosystems that live across digital and physical realms, creating cohesive experiences that begin with the first Instagram teaser and culminate in standing ovations. Because in an attention economy, your event doesn't just need to be good—it needs to look legendary before anyone even walks through the door."
+      ]
+    }
+  }
+},
+
+{
+  id: 20,
+  category: "events-exhibition",
+  slug: "onsite-event-coordination",
+  data: {
+    hero: {
+      headline: "The Backstage Magic That Makes Your Event Look Effortless",
+      subHeadline: "While you're creating moments for your attendees, we're engineering perfection behind the scenes—so everything feels seamless, magical, and flawless.",
+      ctaText: "Execute Flawlessly",
+      trustNote1: "Military precision",
+      trustNote2: "Artistic execution",
+      features: [
+        { name: "Vendor Command Center", icon: "Radio" },
+        { name: "Attendee Flow Engineering", icon: "Users" },
+        { name: "Crisis-to-Opportunity Pivots", icon: "AlertTriangle" },
+        { name: "Real-time Problem Solving", icon: "Zap" },
+        { name: "Talent & Speaker Management", icon: "Mic" },
+        { name: "Technical Production", icon: "Settings" },
+        { name: "Energy & Atmosphere Control", icon: "Wind" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Chaos Behind,",
+        highlight: "Perfection Ahead"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Onsite Execution Quality Compared",
+      subheading: "Why most events feel chaotic and ours feel like watching magic happen",
+      columns: ["Execution Aspect", "Volunteer-Run", "Basic Coordination", "Military-Grade Orchestration"],
+      rows: [
+        {
+          feature: "Start Precision",
+          values: [
+            "⏰ Usually starts late",
+            "🕐 Starts on time",
+            "⚡ Starts 30 seconds early, every time"
+          ]
+        },
+        {
+          feature: "Attendee Experience",
+          values: [
+            "😓 Confusing & frustrating",
+            "😊 Smooth & organized",
+            "🤯 Effortless & magical"
+          ]
+        },
+        {
+          feature: "Problem Response",
+          values: [
+            "😰 Panic & improvisation",
+            "🛠️ Find solutions",
+            "🎯 Already solved it"
+          ]
+        },
+        {
+          feature: "Vendor Coordination",
+          values: [
+            "🤝 Everyone does their own thing",
+            "👥 Basic coordination",
+            "🎵 Symphony of perfect timing"
+          ]
+        },
+        {
+          feature: "Energy Management",
+          values: [
+            "📉 Peaks & valleys",
+            "📊 Consistent energy",
+            "🔥 Controlled crescendos"
+          ]
+        },
+        {
+          feature: "Communication",
+          values: [
+            "📱 Yelling & confusion",
+            "📻 Basic radios",
+            "🛰️ Special ops comms system"
+          ]
+        },
+        {
+          feature: "Crisis Handling",
+          values: [
+            "🚨 Event stops",
+            "⚠️ Event continues",
+            "✨ Event improves"
+          ]
+        },
+        {
+          feature: "Talent Experience",
+          values: [
+            "😫 Stressed celebrities",
+            "😌 Happy speakers",
+            "🤩 Pampered royalty"
+          ]
+        },
+        {
+          feature: "Your Stress Level",
+          values: [
+            "😤 Putting out fires",
+            "😐 Managing details",
+            "🍸 Actually enjoying your event"
+          ]
+        },
+        {
+          feature: "Post-event Feedback",
+          values: [
+            "😠 Complaints & issues",
+            "😊 Positive feedback",
+            "🌟 Best event ever stories"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Command Center Operations That Feel Like Special Ops",
+        description: "Our onsite command center isn't a table with walkie-talkies—it's a mission control worthy of NASA. Real-time dashboards tracking every metric, encrypted comms with every team member, predictive analytics spotting issues before they happen, and strategic reserves ready to deploy instantly. We run your event with military precision and artistic soul, turning potential chaos into choreographed perfection that attendees experience as pure magic.",
+        image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Attendee Flow Engineering That Feels Invisible",
+        description: "Great flow engineering disappears into the background. We design attendee movement with psychological precision: entrance sequences that build anticipation, transition spaces that maintain energy, seating arrangements that foster connection, exit experiences that cement memories. Using real-time crowd analytics, we dynamically adjust everything from HVAC to music volume to keep energy at optimal levels—making thousands of people move like a single organism feeling exactly what you want them to feel.",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Crisis-to-Opportunity Alchemy That Elevates Everything",
+        description: "Rain during your outdoor event? Power outage? Celebrity running late? Speaker illness? We don't just manage crises—we transmute them into legendary moments. Our contingency plans have contingency plans, and our team thrives under pressure. What looks like disaster becomes an opportunity to create something even more memorable. Attendees never see the problem—they only experience the brilliant solution that makes your event feel even more special.",
+        image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Onsite Execution for",
+        highlighted: "Every Scale of Perfection",
+        subtitle: "From intimate gatherings to stadium spectacles—execute with precision that feels like magic."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Precision Coordination",
+          price: "₹2,49,999",
+          icon: "target",
+          image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "Onsite Command Center Setup",
+            "Vendor Coordination Team",
+            "Basic Crisis Management",
+            "Attendee Flow Management",
+            "Speaker & Talent Handling",
+            "Real-time Communication System",
+            "8-Hour Event Coverage",
+            "Post-event Debrief"
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Orchestrated Excellence",
+          price: "₹6,99,999",
+          icon: "music",
+          image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Advanced Command Center",
+            "Crowd Flow Engineering",
+            "Energy & Atmosphere Control",
+            "Crisis-to-Opportunity Protocols",
+            "Technical Production Oversight",
+            "VIP Experience Management",
+            "Multi-day Event Coverage",
+            "Real-time Analytics Dashboard",
+            "Strategic Reserve Team"
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Flawless Symphony",
+          price: "₹14,99,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "Broadcast-Level Command Center",
+            "Predictive Crisis Management",
+            "AI-Powered Crowd Optimization",
+            "Global Talent Protocol Management",
+            "Complete Environmental Control",
+            "Dedicated Executive Protection",
+            "International Vendor Coordination",
+            "24/7 Pre & Post Event Coverage",
+            "Crisis Simulation Training",
+            "Legacy Execution Documentation"
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "The Art of Making Complexity Feel Simple",
+      imageUrl: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+      paragraphs: [
+        "Great onsite coordination isn't about managing chaos—it's about creating order so perfect it becomes invisible. While your attendees experience wonder, connection, and transformation, we're behind the curtain conducting a symphony of thousands of moving parts, making sure every note hits at exactly the right moment.",
+        "At Brandbase Capsule, we treat onsite execution as high-performance artistry. We combine military-grade precision with creative problem-solving, turning potential disasters into defining moments. Our team doesn't just respond to problems—we anticipate them, solve them before they happen, and occasionally engineer 'happy accidents' that become the stories people tell for years. Because the best events aren't just planned—they're perfectly executed down to the millisecond."
+      ]
+    }
+  }
+},
+
+{
+  id: 21,
+  category: "events-exhibition",
+  slug: "wedding-service",
+  data: {
+    hero: {
+      headline: "We Don't Plan Weddings—We Create Love Stories That Become Family Legends",
+      subHeadline: "Your wedding isn't an event. It's the first chapter of your forever, and we make sure it's perfect, magical, and completely unforgettable.",
+      ctaText: "Create Your Love Story",
+      trustNote1: "Bollywood-level magic",
+      trustNote2: "Stress-free experience",
+      features: [
+        { name: "Complete Wedding Planning", icon: "Heart" },
+        { name: "Venue Curation & Styling", icon: "MapPin" },
+        { name: "Cultural Ceremony Expertise", icon: "Palette" },
+        { name: "Vendor Dream Team", icon: "Users" },
+        { name: "Budget Alchemy", icon: "IndianRupee" },
+        { name: "Family Diplomacy", icon: "Home" },
+        { name: "Memory Engineering", icon: "Camera" }
+      ]
+    },
+
+    animateImage: {
+      header: {
+        title: "Your Love Story,",
+        highlight: "Our Masterpiece"
+      },
+      cards: [
+        {
+          id: 1,
+          image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop"
+        },
+        {
+          id: 2,
+          image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?q=80&w=2070&auto=format&fit=crop"
+        },
+        {
+          id: 3,
+          image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?q=80&w=2070&auto=format&fit=crop"
+        }
+      ]
+    },
+
+    comparison: {
+      heading: "Wedding Planning Approaches That Define Memories",
+      subheading: "Why DIY weddings cause stress and our approach creates pure magic",
+      columns: ["Experience Factor", "DIY Stress-Fest", "Basic Wedding Planners", "Love Story Architects"],
+      rows: [
+        {
+          feature: "Your Experience",
+          values: [
+            "😫 Stress, tears, family fights",
+            "😌 Someone handles logistics",
+            "😍 You actually enjoy every moment"
+          ]
+        },
+        {
+          feature: "Family Harmony",
+          values: [
+            "👥 Tensions & compromises",
+            "🤝 Managed relationships",
+            "❤️ Everyone feels heard & happy"
+          ]
+        },
+        {
+          feature: "Budget Magic",
+          values: [
+            "💰 Always exceeds budget",
+            "📊 Stays within budget",
+            "✨ Gets more for your budget"
+          ]
+        },
+        {
+          feature: "Cultural Authenticity",
+          values: [
+            "🎎 Google-driven rituals",
+            "📜 Traditional execution",
+            "🎭 Meaningful cultural storytelling"
+          ]
+        },
+        {
+          feature: "Vendor Quality",
+          values: [
+            "🤷 Random vendors",
+            "👌 Good vendors",
+            "🌟 Curated dream team"
+          ]
+        },
+        {
+          feature: "Design Cohesion",
+          values: [
+            "🌈 Pinterest collage",
+            "🎨 Nice decor",
+            "✨ Cinematic visual narrative"
+          ]
+        },
+        {
+          feature: "Guest Experience",
+          values: [
+            "😐 Nice wedding",
+            "😊 Good experience",
+            "🤯 Best wedding ever talk for years"
+          ]
+        },
+        {
+          feature: "Problem Solving",
+          values: [
+            "😱 You handle crises",
+            "🛡️ They handle problems",
+            "🎭 You never even know problems existed"
+          ]
+        },
+        {
+          feature: "Memory Creation",
+          values: [
+            "📸 Some nice photos",
+            "📷 Good memories",
+            "💫 Core memory implantation"
+          ]
+        },
+        {
+          feature: "Post-wedding Feel",
+          values: [
+            "😴 Exhausted & relieved",
+            "😊 Happy it's over",
+            "✨ Still floating on cloud nine"
+          ]
+        }
+      ]
+    },
+
+    features: [
+      {
+        id: 1,
+        title: "Cultural Storytelling That Honors Traditions & Creates New Ones",
+        description: "We don't just execute rituals—we breathe meaning into every ceremony. Whether it's a traditional Hindu wedding with all seven pheras, a Christian ceremony with personal vows, or a fusion celebration blending cultures, we ensure every ritual tells your unique love story. We work with pandits, priests, and cultural experts to create ceremonies that feel authentic, meaningful, and deeply personal—not just a checklist of traditions.",
+        image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop",
+        imagePosition: "right"
+      },
+      {
+        id: 2,
+        title: "Visual Narrative That Looks Straight Out Of A Bollywood Dream",
+        description: "Your wedding should look like the most beautiful scene from your favorite romantic movie. We create visual stories that flow from mehendi to reception: color palettes that evoke emotion, lighting that creates magic hour all day, decor that transforms venues into dreamscapes, and styling that makes you look like royalty. Every visual element serves your love story, creating photographs and videos that you'll watch for the rest of your lives.",
+        image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "left"
+      },
+      {
+        id: 3,
+        title: "Family Diplomacy That Makes Everyone Feel Like They Won",
+        Descriptions: "Weddings bring families together—and sometimes, tensions too. We're masters of family diplomacy: managing expectations, translating between generations, finding compromises that make everyone happy, and ensuring both families feel equally honored. We handle the delicate conversations, the unspoken expectations, and the emotional landmines—so you can focus on celebrating love, not navigating family politics.",
+        image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+        imagePosition: "right"
+      }
+    ],
+
+    packages: {
+      header: {
+        titleLine1: "Love Stories Crafted for",
+        highlighted: "Every Dream & Budget",
+        subtitle: "From intimate celebrations to grand spectacles—create the wedding you've always imagined."
+      },
+      packages: {
+        essential: {
+          id: "essential",
+          title: "Intimate Affair",
+          price: "Starting at ₹9,99,999",
+          icon: "heart",
+          image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop",
+          features: [
+            "Complete Wedding Planning",
+            "Venue Selection & Styling",
+            "Vendor Curation & Management",
+            "Cultural Ceremony Guidance",
+            "Basic Decor & Design",
+            "Guest Management (up to 150)",
+          ]
+        },
+        signature: {
+          id: "signature",
+          title: "Grand Celebration",
+          price: "Starting at ₹24,99,999",
+          icon: "sparkles",
+          image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Luxury Wedding Planning",
+            "Complete Design & Styling",
+            "Premium Vendor Dream Team",
+            "Multi-event Management",
+            "Custom Cultural Experiences",
+            "Entertainment Curation",
+            "Guest Experience Design (300+)",
+            "Full Family Diplomacy",
+          ]
+        },
+        royal: {
+          id: "royal",
+          title: "Legendary Saga",
+          price: "Starting at ₹49,99,999",
+          icon: "crown",
+          image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+          features: [
+            "Bespoke Wedding Architecture",
+            "Destination Wedding Expertise",
+            "Celebrity Vendor Access",
+            "Complete Multi-day Experience",
+            "Custom Ritual Creation",
+            "Entertainment Production",
+            "International Guest Management",
+            "Dedicated Planning Team",
+          ]
+        }
+      }
+    },
+
+    videoMaker: {
+      heading: "This Isn't Just Your Wedding Day—It's The Day Your Family History Changes Forever",
+      imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop",
+      paragraphs: [
+        "Think about this: Fifty years from now, your grandchildren will ask to see your wedding photos. They'll hear stories about the magical celebration where their family began. They'll feel the love that started it all. That's not pressure—that's legacy. And that's what we're here to create.",
+        "At Brandbase Capsule, we understand that your wedding is more than an event—it's the foundation of your family's story. We don't just coordinate weddings; we craft love stories that become family legends. We handle every detail with the care it deserves, from the grandest ceremony to the smallest sentimental touch, ensuring that your wedding day isn't just perfect—it's perfectly, uniquely, unforgettably yours."
+      ]
+    }
+  }
 }
 
 

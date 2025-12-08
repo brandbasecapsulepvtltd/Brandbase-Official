@@ -82,7 +82,7 @@ const Navbar = () => {
       items: [
         { name: "Stall & Booth Design", link: "/services/events-exhibition/stall-design" },
         { name: "Event Planning & Management", link: "/services/events-exhibition/event-planning-management" },
-        { name: "Exhibition Stand Design", link: "/services/events-exhibition/exhibition-stand-design" },
+        { name: "Wedding Service", link: "/services/events-exhibition/wedding-service" },
         { name: "Event Branding", link: "/services/events-exhibition/event-branding" },
         { name: "On-site Event Coordination", link: "/services/events-exhibition/onsite-event-coordination" }
       ]
