@@ -5,6 +5,7 @@ import { servicesData, getServiceData } from '@/Data/masterData';
 
 // Generate static params for SSG
 export async function generateStaticParams() {
+  // ✅ Make sure servicesData is imported correctly
   return servicesData.map((service) => ({
     category: service.category,
     slug: service.slug,
@@ -13,7 +14,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
-  const { category, slug } = await params;
+  const { category, slug } = params; // ✅ Remove 'await'
   
   const service = servicesData.find(
     s => s.category === category && s.slug === slug
@@ -34,8 +35,6 @@ export async function generateMetadata({ params }) {
       description: service.data.hero.subHeadline,
       type: 'website',
       url: `/services/${category}/${slug}`,
-      // Add images if you have them
-      // images: [{ url: service.data.hero.image }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -45,8 +44,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ServiceDetailPage({ params }) {
-  const { category, slug } = await params;
+export default function ServiceDetailPage({ params }) { // ✅ Remove 'async'
+  const { category, slug } = params; // ✅ Remove 'await'
   
   // Get the specific service data
   const serviceData = getServiceData(category, slug);
