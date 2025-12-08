@@ -1,4 +1,4 @@
-// DynamicStatic.js (main page)
+// pages/ServicesDetail.jsx (or wherever it should be)
 import React from 'react'
 import ComparisonSection from '@/components/ServicesDetail/ComparisonSection'
 import FeatureSection from '@/components/ServicesDetail/FeatureSection'
@@ -6,17 +6,23 @@ import VideoMakerSection from '@/components/ServicesDetail/VideoMakerSection'
 import AnimateImage from '@/components/ServicesDetail/AnimateImage'
 import WebHeroSection from '@/components/ServicesDetail/WebHeroSection'
 import ServicePackages from '@/components/ServicesDetail/ServicePackages'
-import { DynamicStatic } from '@/Data/masterData' // Import master JSON
 
-const ServicesDetail = () => {
+// This component should receive data as a prop, NOT import it directly
+const ServicesDetail = ({ data }) => {
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  
+  console.log("ServicesDetail rendering with data:", data.hero.headline);
+  
   return (
     <> 
-      <WebHeroSection data={DynamicStatic.hero} />
-      <AnimateImage data={DynamicStatic.animateImage} />
-      <ComparisonSection data={DynamicStatic.comparison} />
-      <FeatureSection data={DynamicStatic.features} />
-      <ServicePackages data={DynamicStatic.packages} />
-      <VideoMakerSection data={DynamicStatic.videoMaker} />
+      <WebHeroSection data={data.hero} />
+      <AnimateImage data={data.animateImage} />
+      <ComparisonSection data={data.comparison} />
+      <FeatureSection data={data.features} />
+      <ServicePackages data={data.packages} />
+      <VideoMakerSection data={data.videoMaker} />
     </>
   )
 }

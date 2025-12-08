@@ -58,11 +58,11 @@ const Navbar = () => {
       category: "Website Development",
       categoryLink: "/services/website-development",
       items: [
-        { name: "Business Website", link: "/services/business-website" },
-        { name: "Portfolio Website", link: "/services/portfolio-website" },
-        { name: "Landing Page Development", link: "/services/landing-page-development" },
-        { name: "CMS Website", link: "/services/cms-website" },
-        { name: "E-Commerce Websites", link: "/services/ecommerce-websites" },
+        { name: "Business Website", link: "/services/website-development/business-website" },
+        { name: "Portfolio Website", link: "/services/website-development/portfolio-website" },
+        { name: "Landing Page Development", link: "/services/website-development/landing-page-development" },
+        { name: "CMS Website", link: "/services/website-development/cms-website" },
+        { name: "E-Commerce Websites", link: "/services/website-development/ecommerce-websites" },
         { name: "Dynamic and Static ", link: "/services/website-development/dynamic-static" }
       ]
     },
