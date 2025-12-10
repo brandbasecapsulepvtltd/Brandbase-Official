@@ -1,11 +1,6 @@
 import { notFound } from 'next/navigation';
 import ServicesDetail from '@/pages/ServicesDetail';
 
-{/*
-process.env.NODE_ENV === 'production' 
-  ? process.env.NEXT_PUBLIC_API_URL 
-  :  
-*/}
 
 const API_URL = 'https://brandbase.onrender.com/api';
 
