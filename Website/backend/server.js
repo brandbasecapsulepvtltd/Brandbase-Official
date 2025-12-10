@@ -20,7 +20,8 @@ const corsOptions = {
     'http://localhost:5174', 
     'http://localhost:3000',
     'https://brandbase-nu.vercel.app', 
-    'https://brandbase1.netlify.app'
+    'https://brandbase1.netlify.app',
+    'https://bcpl-admin.netlify.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
