@@ -1,13 +1,15 @@
 import { notFound } from 'next/navigation';
 import ServicesDetail from '@/pages/ServicesDetail';
 
-
 const API_URL = 'https://brandbase.onrender.com/api';
 
-// Generate static params for SSG - Fetch from API
+// 1. Keep generateStaticParams (This makes the page Static)
 export async function generateStaticParams() {
   try {
-    const response = await fetch(`${API_URL}/services/all`);
+    const response = await fetch(`${API_URL}/services/all`, { 
+       // Optional: Cache this list for a while so build is faster
+       next: { revalidate: 3600 } 
+    });
     const { data } = await response.json();
     
     const services = data || [];
@@ -26,25 +28,16 @@ export async function generateMetadata({ params }) {
   const { category, slug } = await params;
   
   try {
+    // 2. FIX: Remove 'cache: no-store'. Use revalidate instead.
     const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
-      cache: 'no-store'
+      next: { revalidate: 3600 } // Checks for updates every 1 hour
     });
     
-    if (!response.ok) {
-      return {
-        title: 'Service Not Found',
-        description: 'The requested service could not be found.'
-      };
-    }
+    if (!response.ok) return { title: 'Service Not Found' };
     
     const { data: service } = await response.json();
     
-    if (!service) {
-      return {
-        title: 'Service Not Found',
-        description: 'The requested service could not be found.'
-      };
-    }
+    if (!service) return { title: 'Service Not Found' };
     
     return {
       title: `${service.data.hero.headline} | ${category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`,
@@ -55,11 +48,6 @@ export async function generateMetadata({ params }) {
         type: 'website',
         url: `/services/${category}/${slug}`,
       },
-      twitter: {
-        card: 'summary_large_image',
-        title: service.data.hero.headline,
-        description: service.data.hero.subHeadline,
-      }
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
@@ -74,31 +62,24 @@ export default async function ServiceDetailPage({ params }) {
   const { category, slug } = await params;
   
   try {
+    // 3. FIX: Remove 'cache: no-store'. Use revalidate instead.
     const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
-      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      next: { revalidate: 3600 } // Checks for updates every 1 hour
     });
     
     if (!response.ok) {
-      console.error(`API Error: ${response.status} - ${response.statusText}`);
+      console.error(`API Error: ${response.status}`);
       notFound();
     }
     
     const { data: service } = await response.json();
     
     if (!service || !service.data) {
-      console.error('Service data is null or undefined');
       notFound();
     }
-    
-    console.log("Page Component - Data fetched successfully:", {
-      category,
-      slug,
-      headline: service.data.hero?.headline,
-      hasData: !!service.data
-    });
     
     return <ServicesDetail data={service.data} />;
   } catch (error) {
