@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Layers, Server, Cpu, CornerDownRight, Star } from 'lucide-react';
+import { Layers, Server, Cpu, CornerDownRight, Star, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ICON MAPPER
@@ -14,6 +14,7 @@ const iconMap = {
 const ServicePackages = ({ data }) => {
   const [activeTab, setActiveTab] = useState("signature");
   const [direction, setDirection] = useState(0);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   if (!data) return null;
 
@@ -26,6 +27,7 @@ const ServicePackages = ({ data }) => {
     const newIndex = packageKeys.indexOf(newTabId);
     setDirection(newIndex > currentIndex ? 1 : -1);
     setActiveTab(newTabId);
+    setShowMobileMenu(false);
   };
 
   const slideVariants = {
@@ -42,11 +44,11 @@ const ServicePackages = ({ data }) => {
   };
 
   return (
-    <section className="w-full bg-white py-12 md:py-20 px-4 sm:px-6 md:px-12 font-sans"> {/* Adjusted section padding */}
+    <section className="w-full bg-white py-10 md:py-20 px-4 sm:px-6 md:px-12 font-sans">
       <div className="max-w-7xl mx-auto overflow-hidden">
         {/* HEADER */}
-        <div className="text-center mb-10 md:mb-16 space-y-2 md:space-y-4"> {/* Adjusted header spacing */}
-          <h2 className="text-3xl sm:text-4xl md:text-6xl text-gray-800 leading-tight"> {/* Adjusted font size for smaller screens */}
+        <div className="text-center mb-10 md:mb-16 space-y-3 md:space-y-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl text-gray-800 leading-snug md:leading-tight">
             <span className="block font-bold">{data.header.titleLine1}</span>
             <span className="block font-normal">
               {" "}
@@ -55,21 +57,64 @@ const ServicePackages = ({ data }) => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto text-base sm:text-lg leading-relaxed"> {/* Adjusted font size for smaller screens */}
+          <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed px-4 sm:px-0">
             {data.header.subtitle}
           </p>
         </div>
 
-        {/* TABS */}
-        <div className="flex justify-center mb-8 md:mb-12"> {/* Adjusted margin */}
-          <div className="bg-gray-50/80 p-1.5 rounded-full inline-flex w-full max-w-lg md:max-w-4xl"> {/* Adjusted max-width for mobile */}
+        {/* MOBILE TABS DROPDOWN */}
+        <div className="md:hidden mb-6 relative">
+          <button
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            className="w-full flex items-center justify-between bg-gray-50/80 p-4 rounded-xl"
+          >
+            <div className="flex items-center gap-3">
+              <span className={activeTab ? "text-gray-800" : "text-gray-400"}>
+                {iconMap[activePackage.icon]}
+              </span>
+              <span className="font-medium text-gray-800">{activePackage.title}</span>
+            </div>
+            {showMobileMenu ? <X size={20} /> : <Menu size={20} />}
+          </button>
+          
+          <AnimatePresence>
+            {showMobileMenu && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg z-50"
+              >
+                {Object.values(packages).map((pkg) => {
+                  if (pkg.id === activeTab) return null;
+                  return (
+                    <button
+                      key={pkg.id}
+                      onClick={() => handleTabChange(pkg.id)}
+                      className="w-full flex items-center gap-3 p-4 hover:bg-gray-50 transition-colors text-left border-b last:border-b-0"
+                    >
+                      <span className="text-gray-400">
+                        {iconMap[pkg.icon]}
+                      </span>
+                      <span className="text-gray-700">{pkg.title}</span>
+                    </button>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* DESKTOP TABS */}
+        <div className="hidden md:flex justify-center mb-12">
+          <div className="bg-gray-50/80 p-1.5 rounded-full inline-flex w-full max-w-4xl">
             {Object.values(packages).map((pkg) => {
               const active = activeTab === pkg.id;
               return (
                 <button
                   key={pkg.id}
                   onClick={() => handleTabChange(pkg.id)}
-                  className={`flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2 sm:py-4 rounded-full text-sm sm:text-base transition-all duration-300 text-center ${ // Adjusted padding and text size
+                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-full text-base transition-all duration-300 ${
                     active
                       ? "bg-white shadow-sm text-gray-800 font-medium"
                       : "text-gray-500 hover:text-gray-700"
@@ -85,8 +130,8 @@ const ServicePackages = ({ data }) => {
           </div>
         </div>
 
-        {/* SLIDING CONTENT: KEY CHANGE HERE */}
-        <div className="relative min-h-[850px] lg:h-[600px] overflow-hidden"> {/* Changed fixed h-[600px] to min-h for mobile stack and fixed h-[600px] for lg */}
+        {/* SLIDING CONTENT */}
+        <div className="relative h-auto md:h-[600px] overflow-hidden">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={activePackage.id}
@@ -99,11 +144,11 @@ const ServicePackages = ({ data }) => {
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 }
               }}
-              className="absolute top-0 left-0 w-full" // Removed h-full to let content determine height on mobile
+              className="absolute md:relative top-0 left-0 w-full h-full"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start"> {/* Adjusted gap */}
-                {/* IMAGE */}
-                <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden bg-gray-100 shadow-sm"> {/* Adjusted height and border-radius for mobile */}
+              <div className="flex flex-col lg:grid lg:grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start h-full">
+                {/* IMAGE - Mobile: Full width, Desktop: Left column */}
+                <div className="relative h-[300px] sm:h-[350px] md:h-[500px] w-full rounded-2xl md:rounded-[2.5rem] overflow-hidden bg-gray-100 shadow-sm order-1 lg:order-1">
                   <img
                     src={activePackage.image}
                     alt={activePackage.title}
@@ -111,31 +156,31 @@ const ServicePackages = ({ data }) => {
                   />
                 </div>
 
-                {/* TEXT CONTENT */}
-                <div className="pt-0 lg:pt-4 space-y-6 sm:space-y-8"> {/* Adjusted top padding and spacing */}
-                  <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-50 rounded-xl"> {/* Adjusted padding */}
-                    <span className="font-semibold text-base sm:text-lg text-orange-600"> {/* Adjusted font size */}
+                {/* TEXT CONTENT - Mobile: Below image, Desktop: Right column */}
+                <div className="pt-2 md:pt-4 space-y-6 md:space-y-8 order-2 lg:order-2">
+                  <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gray-50 rounded-lg md:rounded-xl">
+                    <span className="font-semibold text-base md:text-lg text-orange-600">
                       {activePackage.price}
                     </span>
                   </div>
 
-                  <h3 className="text-3xl sm:text-4xl font-normal text-gray-900"> {/* Adjusted font size */}
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-gray-900">
                     {activePackage.title}
                   </h3>
 
-                  <ul className="space-y-3 sm:space-y-4"> {/* Adjusted spacing */}
+                  <ul className="space-y-3 md:space-y-4">
                     {activePackage.features.map((feature, idx) => (
                       <li
                         key={idx}
-                        className="flex items-start gap-3 text-gray-500 text-base sm:text-lg" // Adjusted font size
+                        className="flex items-start gap-3 text-gray-500 text-base md:text-lg"
                       >
-                        <Star className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 mt-0.5 sm:mt-0" strokeWidth={1.5} />
-                        <span>{feature}</span>
+                        <Star className="w-5 h-5 md:w-6 md:h-6 text-gray-400 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                        <span className="leading-relaxed">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <button className="mt-4 flex items-center gap-2 text-white px-6 py-3 sm:px-8 sm:py-3.5 rounded-lg font-medium text-base hover:opacity-90 bg-orange-600"> {/* Adjusted padding and font size */}
+                  <button className="mt-2 md:mt-4 flex items-center justify-center md:justify-start gap-2 text-white px-6 py-3 md:px-8 md:py-3.5 rounded-lg font-medium hover:opacity-90 bg-orange-600 w-full md:w-auto">
                     <CornerDownRight size={18} />
                     Get This Plan
                   </button>
