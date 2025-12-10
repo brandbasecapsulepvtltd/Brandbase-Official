@@ -7,7 +7,7 @@ process.env.NODE_ENV === 'production'
   :  
 */}
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://brandbase.onrender.com/api';
 
 // Generate static params for SSG - Fetch from API
 export async function generateStaticParams() {
