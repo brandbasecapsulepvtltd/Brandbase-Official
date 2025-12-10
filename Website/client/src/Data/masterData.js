@@ -3,13 +3,12 @@
 // All services data organized by category and slug
 export const servicesData = [
 
-//website
   {
     id: 1,
     category: "website-development",
     slug: "dynamic-static",
     data: {
-      // WebHeroSection Data
+      
       hero: {
         headline: "Build Stunning Static & Dynamic Websites",
         subHeadline: "High-performance custom websites built for speed, SEO, conversions, and business growth.",
@@ -27,7 +26,7 @@ export const servicesData = [
         ]
       },
 
-      // AnimateImage Data
+      
       animateImage: {
         header: {
           title: "Designed to Convert,",
@@ -49,7 +48,7 @@ export const servicesData = [
         ]
       },
 
-      // ComparisonSection Data
+      
       comparison: {
         heading: "Static vs WordPress vs Dynamic",
         subheading: "Compare the three approaches to find what's right for your project",
@@ -138,7 +137,7 @@ export const servicesData = [
         ]
       },
 
-      // FeatureSection Data
+      
       features: [
         {
           id: 1,
@@ -163,7 +162,7 @@ export const servicesData = [
         },
       ],
 
-      // ServicePackages Data
+      
       packages: {
         header: {
           titleLine1: "Smart Web Solutions for",
@@ -216,7 +215,7 @@ export const servicesData = [
         }
       },
 
-      // VideoMakerSection Data
+      
       videoMaker: {
         heading: "More Than Just a Website Service",
         imageUrl: "https://ik.imagekit.io/vinayak06/Mavnox/websiteimage",
@@ -1348,7 +1347,6 @@ export const servicesData = [
   }
 },
 
-//mobile
 {
   id: 7,
   category: "mobile-app-development",
@@ -2478,7 +2476,6 @@ export const servicesData = [
   }
 },
 
-//digital Marketing
 {
   id: 12,
   category: "digital-marketing",
@@ -3834,7 +3831,6 @@ export const servicesData = [
   }
 },
 
-//event-exhibtion
 {
   id: 18,
   category: "events-exhibition",

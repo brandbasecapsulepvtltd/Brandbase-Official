@@ -11,6 +11,7 @@ import Faqs from '@/components/homeComponents/Faqs';
 import CTASection from '@/components/homeComponents/CTASection';
 import TestimonialSlider from '@/components/homeComponents/TestimonalSlider';
 import ServiceSlider from '@/components/ServiceSlider';
+import HeroSlider from '@/components/homeComponents/HeroSlider';
 
 // API configuration
 const API_CONFIG = {
@@ -148,8 +149,8 @@ const HomePage = () => {
   return (
     <main className="home-page">
       {/* Hero Section */}
-      {heroSection && <HeroSection data={heroSection} />}
-      
+      {/*{heroSection && <HeroSection data={heroSection} />} */}
+      <HeroSlider/>
       {/* About Us Section */}
       <AboutUs />
       

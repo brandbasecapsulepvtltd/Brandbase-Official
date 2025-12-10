@@ -1,66 +1,113 @@
-// app/services/[category]/[slug]/page.js
 import { notFound } from 'next/navigation';
-import ServicesDetail from '@/pages/ServicesDetail'; // Make sure this is the correct path
-import { getServiceData } from '@/Data/masterData';
+import ServicesDetail from '@/pages/ServicesDetail';
 
-// Generate static params for SSG
+{/*
+process.env.NODE_ENV === 'production' 
+  ? process.env.NEXT_PUBLIC_API_URL 
+  :  
+*/}
+
+const API_URL = 'http://localhost:5000/api';
+
+// Generate static params for SSG - Fetch from API
 export async function generateStaticParams() {
-  const { servicesData } = await import('@/Data/masterData');
-  
-  return servicesData.map((service) => ({
-    category: service.category,
-    slug: service.slug,
-  }));
+  try {
+    const response = await fetch(`${API_URL}/services/all`);
+    const { data } = await response.json();
+    
+    const services = data || [];
+    
+    return services.map((service) => ({
+      category: service.category,
+      slug: service.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }) {
   const { category, slug } = await params;
   
-  const { servicesData } = await import('@/Data/masterData');
-  
-  const service = servicesData.find(
-    s => s.category === category && s.slug === slug
-  );
-  
-  if (!service) {
+  try {
+    const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
+      cache: 'no-store'
+    });
+    
+    if (!response.ok) {
+      return {
+        title: 'Service Not Found',
+        description: 'The requested service could not be found.'
+      };
+    }
+    
+    const { data: service } = await response.json();
+    
+    if (!service) {
+      return {
+        title: 'Service Not Found',
+        description: 'The requested service could not be found.'
+      };
+    }
+    
     return {
-      title: 'Service Not Found',
-      description: 'The requested service could not be found.'
+      title: `${service.data.hero.headline} | ${category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`,
+      description: service.data.hero.subHeadline,
+      openGraph: {
+        title: service.data.hero.headline,
+        description: service.data.hero.subHeadline,
+        type: 'website',
+        url: `/services/${category}/${slug}`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: service.data.hero.headline,
+        description: service.data.hero.subHeadline,
+      }
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Service',
+      description: 'Service details'
     };
   }
-  
-  return {
-    title: `${service.data.hero.headline} | ${category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`,
-    description: service.data.hero.subHeadline,
-    openGraph: {
-      title: service.data.hero.headline,
-      description: service.data.hero.subHeadline,
-      type: 'website',
-      url: `/services/${category}/${slug}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: service.data.hero.headline,
-      description: service.data.hero.subHeadline,
-    }
-  };
 }
 
 export default async function ServiceDetailPage({ params }) {
   const { category, slug } = await params;
   
-  const serviceData = getServiceData(category, slug);
-  
-  console.log("Page Component - Data being passed:", {
-    category,
-    slug,
-    headline: serviceData?.hero?.headline,
-    hasData: !!serviceData
-  });
-  
-  if (!serviceData) {
+  try {
+    const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    
+    if (!response.ok) {
+      console.error(`API Error: ${response.status} - ${response.statusText}`);
+      notFound();
+    }
+    
+    const { data: service } = await response.json();
+    
+    if (!service || !service.data) {
+      console.error('Service data is null or undefined');
+      notFound();
+    }
+    
+    console.log("Page Component - Data fetched successfully:", {
+      category,
+      slug,
+      headline: service.data.hero?.headline,
+      hasData: !!service.data
+    });
+    
+    return <ServicesDetail data={service.data} />;
+  } catch (error) {
+    console.error('Error fetching service data:', error);
     notFound();
   }
-  
-  return <ServicesDetail data={serviceData} />;
 }

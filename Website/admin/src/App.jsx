@@ -5,6 +5,7 @@ import AdminAppointmentPage from "./components/Appointment/AdminAppointmentPage"
 import AppointmentDetailPage from "./components/Appointment/AppointmentDetailPage";
 import AdminHome from './pages/AdminHome';
 import EmployeeManagementPage from './pages/EmployeeManagementPage';
+import AdminServicesDashboard from './pages/AdminServicesDashboard';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
             {/* Add other nested routes here */}
 
             <Route path="employee-management" element={<EmployeeManagementPage />} />
+
+            <Route path="service-management" element={<AdminServicesDashboard />} />
           
           </Route>
           {/* Add other top-level routes here */}
