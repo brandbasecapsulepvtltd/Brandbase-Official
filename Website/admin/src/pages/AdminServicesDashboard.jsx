@@ -49,7 +49,7 @@ import {
 } from 'lucide-react';
 
 // Use environment variable or default process.env.NEXT_PUBLIC_API_URL || 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://brandbase.onrender.com/api';
 
 const AdminServicesDashboard = () => {
   // States

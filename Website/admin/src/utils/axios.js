@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000', // ✅ Point to your backend
+  baseURL: 'https://brandbase.onrender.com', // ✅ Point to your backend
   withCredentials: true,                // If using cookies or auth
 });
 

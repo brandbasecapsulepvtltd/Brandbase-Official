@@ -17,7 +17,7 @@ import {
   Menu
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://brandbase.onrender.com/api';
 
 const AdminHome = () => {
   const [homePageData, setHomePageData] = useState(null);
