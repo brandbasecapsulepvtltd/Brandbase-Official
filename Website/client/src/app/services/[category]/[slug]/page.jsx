@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   try {
     const response = await fetch(`${API_URL}/services/all`, { 
        // Optional: Cache this list for a while so build is faster
-       next: { revalidate: 3600 } 
+       next: { revalidate: 10 } 
     });
     const { data } = await response.json();
     
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
   try {
     // 2. FIX: Remove 'cache: no-store'. Use revalidate instead.
     const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
-      next: { revalidate: 3600 } // Checks for updates every 1 hour
+      next: { revalidate: 10 } // Checks for updates every 1 hour
     });
     
     if (!response.ok) return { title: 'Service Not Found' };
@@ -67,7 +67,7 @@ export default async function ServiceDetailPage({ params }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 3600 } // Checks for updates every 1 hour
+      next: { revalidate: 10 } // Checks for updates every 1 hour
     });
     
     if (!response.ok) {
