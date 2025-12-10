@@ -42,11 +42,11 @@ const ServicePackages = ({ data }) => {
   };
 
   return (
-    <section className="w-full bg-white py-20 px-6 md:px-12 font-sans">
+    <section className="w-full bg-white py-12 md:py-20 px-4 sm:px-6 md:px-12 font-sans"> {/* Adjusted section padding */}
       <div className="max-w-7xl mx-auto overflow-hidden">
         {/* HEADER */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-6xl text-gray-800 leading-tight">
+        <div className="text-center mb-10 md:mb-16 space-y-2 md:space-y-4"> {/* Adjusted header spacing */}
+          <h2 className="text-3xl sm:text-4xl md:text-6xl text-gray-800 leading-tight"> {/* Adjusted font size for smaller screens */}
             <span className="block font-bold">{data.header.titleLine1}</span>
             <span className="block font-normal">
               {" "}
@@ -55,21 +55,21 @@ const ServicePackages = ({ data }) => {
               </span>
             </span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-500 max-w-xl mx-auto text-base sm:text-lg leading-relaxed"> {/* Adjusted font size for smaller screens */}
             {data.header.subtitle}
           </p>
         </div>
 
         {/* TABS */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-gray-50/80 p-1.5 rounded-full inline-flex w-full max-w-4xl">
+        <div className="flex justify-center mb-8 md:mb-12"> {/* Adjusted margin */}
+          <div className="bg-gray-50/80 p-1.5 rounded-full inline-flex w-full max-w-lg md:max-w-4xl"> {/* Adjusted max-width for mobile */}
             {Object.values(packages).map((pkg) => {
               const active = activeTab === pkg.id;
               return (
                 <button
                   key={pkg.id}
                   onClick={() => handleTabChange(pkg.id)}
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-full text-base transition-all duration-300 ${
+                  className={`flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2 sm:py-4 rounded-full text-sm sm:text-base transition-all duration-300 text-center ${ // Adjusted padding and text size
                     active
                       ? "bg-white shadow-sm text-gray-800 font-medium"
                       : "text-gray-500 hover:text-gray-700"
@@ -85,8 +85,8 @@ const ServicePackages = ({ data }) => {
           </div>
         </div>
 
-        {/* SLIDING CONTENT */}
-        <div className="relative h-[600px] overflow-hidden">
+        {/* SLIDING CONTENT: KEY CHANGE HERE */}
+        <div className="relative min-h-[850px] lg:h-[600px] overflow-hidden"> {/* Changed fixed h-[600px] to min-h for mobile stack and fixed h-[600px] for lg */}
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={activePackage.id}
@@ -99,11 +99,11 @@ const ServicePackages = ({ data }) => {
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 }
               }}
-              className="absolute top-0 left-0 w-full h-full"
+              className="absolute top-0 left-0 w-full" // Removed h-full to let content determine height on mobile
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start h-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start"> {/* Adjusted gap */}
                 {/* IMAGE */}
-                <div className="relative h-[500px] w-full rounded-[2.5rem] overflow-hidden bg-gray-100 shadow-sm">
+                <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden bg-gray-100 shadow-sm"> {/* Adjusted height and border-radius for mobile */}
                   <img
                     src={activePackage.image}
                     alt={activePackage.title}
@@ -112,30 +112,30 @@ const ServicePackages = ({ data }) => {
                 </div>
 
                 {/* TEXT CONTENT */}
-                <div className="pt-4 space-y-8">
-                  <div className="inline-block px-4 py-2 bg-gray-50 rounded-xl">
-                    <span className="font-semibold text-lg text-orange-600">
+                <div className="pt-0 lg:pt-4 space-y-6 sm:space-y-8"> {/* Adjusted top padding and spacing */}
+                  <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-50 rounded-xl"> {/* Adjusted padding */}
+                    <span className="font-semibold text-base sm:text-lg text-orange-600"> {/* Adjusted font size */}
                       {activePackage.price}
                     </span>
                   </div>
 
-                  <h3 className="text-4xl font-normal text-gray-900">
+                  <h3 className="text-3xl sm:text-4xl font-normal text-gray-900"> {/* Adjusted font size */}
                     {activePackage.title}
                   </h3>
 
-                  <ul className="space-y-4">
+                  <ul className="space-y-3 sm:space-y-4"> {/* Adjusted spacing */}
                     {activePackage.features.map((feature, idx) => (
                       <li
                         key={idx}
-                        className="flex items-start gap-3 text-gray-500 text-lg"
+                        className="flex items-start gap-3 text-gray-500 text-base sm:text-lg" // Adjusted font size
                       >
-                        <Star className="w-6 h-6 text-gray-400" strokeWidth={1.5} />
+                        <Star className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 mt-0.5 sm:mt-0" strokeWidth={1.5} />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <button className="mt-4 flex items-center gap-2 text-white px-8 py-3.5 rounded-lg font-medium hover:opacity-90 bg-orange-600">
+                  <button className="mt-4 flex items-center gap-2 text-white px-6 py-3 sm:px-8 sm:py-3.5 rounded-lg font-medium text-base hover:opacity-90 bg-orange-600"> {/* Adjusted padding and font size */}
                     <CornerDownRight size={18} />
                     Get This Plan
                   </button>

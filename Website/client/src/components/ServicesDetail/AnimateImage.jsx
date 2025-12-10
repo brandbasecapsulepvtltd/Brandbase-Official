@@ -55,12 +55,13 @@ const MediaCard = ({ data, isSelected, onClick }) => {
         className="absolute inset-0 bg-cover bg-center transition-all duration-500 ease-in-out hover:shadow-xl"
         style={{ backgroundImage: `url(${data.image})` }}
       ></div>
-      {/* Optional: Add content overlay for mobile view to show context when stacked */}
-      {finalWidthClass.includes('w-full') && (
+      {/* Optional: Add content overlay for mobile view to show context when stacked 
+       {finalWidthClass.includes('w-full') && (
          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white">
            <h2 className="text-xl font-bold">{data.title || `Item ${data.id}`}</h2>
          </div>
       )}
+      */}
     </div>
   );
 };
