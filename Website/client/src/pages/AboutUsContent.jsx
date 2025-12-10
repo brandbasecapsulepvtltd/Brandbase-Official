@@ -1,11 +1,20 @@
+// app/components/AboutUsContent.jsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import Timeline from '@/components/AboutComponents/Timeline';
-import HumanoidSection from '@/components/AboutComponents/HumanoidSection';
+import dynamic from 'next/dynamic';
 import Tag from '@/components/Tag';
+
+// Dynamically import components that might use window
+const Timeline = dynamic(() => import('@/components/AboutComponents/Timeline'), {
+  ssr: false
+});
+
+const HumanoidSection = dynamic(() => import('@/components/AboutComponents/HumanoidSection'), {
+  ssr: false
+});
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -40,7 +49,7 @@ const dummyData = {
       "Push the boundaries of what's possible in web and mobile technology"
     ],
     image: {
-      url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       alt: "Our team collaborating in modern office space",
       captionTitle: "Innovation in Action",
       captionText: "Our team working together to create exceptional digital solutions"
@@ -57,7 +66,7 @@ const dummyData = {
       "Build a legacy of excellence that inspires future generations"
     ],
     image: {
-      url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       alt: "Visionary team planning future projects",
       captionTitle: "Future Forward",
       captionText: "Planning the next generation of digital innovations"
@@ -80,6 +89,33 @@ const dummyData = {
 
 const AboutUsContent = () => {
   const { hero, mission, vision, impact } = dummyData;
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Don't render components that depend on window until client-side
+  if (!isClient) {
+    return (
+      <div className="bg-white min-h-screen">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center">
+            <div className="inline-block mb-6">
+              <span className="inline-block px-4 py-2 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold">
+                Our Story
+              </span>
+            </div>
+            <h1 className="text-6xl font-bold text-[#FF6600] mb-6">Brandbase Capsule</h1>
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">
@@ -122,7 +158,8 @@ const AboutUsContent = () => {
         </div>
       </section>
 
-      <HumanoidSection/>
+      {/* Only render HumanoidSection on client side */}
+      {isClient && <HumanoidSection />}
 
       {/* Mission Section */}
       <section className="py-20 mt-10">
@@ -176,8 +213,7 @@ const AboutUsContent = () => {
                 width={800}
                 height={384}
                 className="w-full h-96 object-cover"
-                priority
-                fetchPriority="high"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-0 w-full text-white bg-black/50 py-4 text-center">
@@ -208,6 +244,7 @@ const AboutUsContent = () => {
                 width={800}
                 height={384}
                 className="w-full h-96 object-cover"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-0 w-full text-white bg-black/50 py-4 text-center">
@@ -251,7 +288,8 @@ const AboutUsContent = () => {
         </div>
       </section>
 
-      <Timeline/>
+      {/* Only render Timeline on client side */}
+      {isClient && <Timeline />}
 
       {/* Impact Section */}
       <section className="py-20">
@@ -366,6 +404,7 @@ const AboutUsContent = () => {
                         src="https://ik.imagekit.io/vinayak06/businesst.jpg"
                         alt="Brandbase Business Impact and Success"
                         className="w-full h-80 object-cover"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
                     </div>
@@ -399,7 +438,7 @@ const AboutUsContent = () => {
             Your Growth. Our Mission.
           </div>
           <h2 className="text-6xl font-bold mb-6 text-gray-900">
-            Let’s Create Something {' '}
+            Let's Create Something {' '}
             <span className="text-[#FF6600] font-extrabold">That Stands Out.</span>
           </h2>
           <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
