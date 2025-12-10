@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import HeroSection from '@/components/homeComponents/HeroSection';
 import AboutUs from '@/components/homeComponents/AboutUs';
@@ -25,6 +25,21 @@ const HomePage = () => {
   const [homePageData, setHomePageData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Fix: Scroll to top on page load/reload
+  useLayoutEffect(() => {
+    // Reset scroll position immediately when component mounts
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' // Use 'instant' for immediate scroll without animation
+    });
+    
+    // Disable browser's automatic scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
 
   useEffect(() => {
     fetchHomePageData();

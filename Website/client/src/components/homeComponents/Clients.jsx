@@ -29,7 +29,7 @@ export default function Clients({ data }) {
   return (
     <section 
       aria-labelledby="clients-heading"
-      className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-20 mt-10 mx-auto"
+      className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-20 mt-10 mx-auto bg-white"
     >
       {/* Title */}
       <header className="mx-auto text-center mb-6">

@@ -96,7 +96,7 @@ const HeroSlider = () => {
 
           {/* Mobile Content */}
           <div className="w-full px-6 py-8 flex flex-col gap-4">
-            <h1 className="text-3xl font-extrabold leading-snug">
+            <h1 className="text-3xl font-extrabold leading-snug text-black">
               {currentSlide.title}
             </h1>
 

@@ -19,7 +19,7 @@ export default function ServiceColumn(props) {
         <Fragment key={i}>
           {services.map((service) => (
             <article
-              className={`bg-gradient-to-b from-orange-400 via-orange-500 to-orange-600 border border-white/20 rounded-3xl p-6 ${className || ""}`}
+              className={`bg-gradient-to-b from-orange-100 via-orange-200 to-orange-400 border border-white/20 rounded-3xl p-6 ${className || ""}`}
               key={service.name}
               aria-label={`${service.name} service card`}
             >
@@ -35,7 +35,7 @@ export default function ServiceColumn(props) {
                 />
               </div>
               <h2 className="text-3xl text-center mt-6">{service.name}</h2>
-              <p className="text-white/80 text-center mt-2">
+              <p className="text-gray-900 text-center mt-2">
                 {service.description}
               </p>
               <div className="flex justify-center mt-4">
