@@ -1,156 +1,200 @@
 // app/blog/[category]/[slug]/page.jsx
 import BlogDetailPage from '@/components/Blog/BlogDetailPage';
-import { getBlogBySlug, BlogsData } from '@/Data/BlogsData'; 
 import { notFound } from 'next/navigation';
+
+const API_BASE_URL = 'https://brandbase.onrender.com/api';
+
+// Set revalidation time (in seconds)
+export const revalidate = 10; // Revalidate every 60 seconds
 
 /**
  * Generate static params from blog data
  */
 export async function generateStaticParams() {
-  return BlogsData.map((blog) => ({
-    category: blog.metadata.category,
-    slug: blog.metadata.slug,
-  }));
+  try {
+    const response = await fetch(`${API_BASE_URL}/blogs`, {
+      next: { revalidate: 60 } // Revalidate params every minute
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to fetch blogs for static params:', response.status);
+      return [];
+    }
+    
+    const result = await response.json();
+    const blogs = result.data || [];
+    
+    return blogs.map((blog) => ({
+      category: blog.metadata.category,
+      slug: blog.metadata.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
 
 /**
  * Generate metadata for each blog post
  */
 export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
-  const blogData = getBlogBySlug(slug);
-  
-  if (!blogData) {
-    return {
-      title: 'Blog Post Not Found | Brandbase Capsule',
-      description: 'The requested blog post could not be found.',
-    };
-  }
-
-  const { metadata } = blogData;
-  const siteUrl = 'https://brandbase-nu.vercel.app';
-  const blogUrl = `${siteUrl}/blog/${metadata.category}/${metadata.slug}`;
-  
-  return {
-    // 🌐 Basic SEO
-    title: `${metadata.title} | Brandbase Capsule Blog`,
-    description: metadata.description,
+  try {
+    const resolvedParams = await params;
+    const { slug } = resolvedParams;
     
-    keywords: [
-      metadata.category,
-      metadata.title.toLowerCase(),
-      `${metadata.category} blog`,
-      `${metadata.title.split(' ')[0]} tips`,
-      "digital marketing blog",
-      "productivity blog",
-      "technology insights",
-      "freelancer resources",
-      "business growth",
-      "creative professionals"
-    ],
+    // Fetch fresh data with no-store to get latest updates
+    const response = await fetch(`${API_BASE_URL}/blogs/slug/${slug}`, {
+      cache: 'no-store' // Don't cache for metadata to get latest data
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to fetch blog for metadata:', response.status);
+      return {
+        title: 'Blog Post | Brandbase Capsule',
+        description: 'Read our latest blog post on Brandbase Capsule.',
+      };
+    }
+    
+    const result = await response.json();
+    const blogData = result.data;
+    
+    if (!blogData) {
+      return {
+        title: 'Blog Post Not Found | Brandbase Capsule',
+        description: 'The requested blog post could not be found.',
+      };
+    }
 
-    // 👤 Authorship
-    authors: [{ name: metadata.author.name }],
-    generator: "Next.js",
-    applicationName: "Brandbase Capsule",
-    publisher: "Brandbase Capsule",
+    const { metadata } = blogData;
+    const siteUrl = 'https://brandbase-nu.vercel.app';
+    const blogUrl = `${siteUrl}/blog/${metadata.category}/${metadata.slug}`;
+    
+    return {
+      // 🌐 Basic SEO
+      title: `${metadata.title} | Brandbase Capsule Blog`,
+      description: metadata.description,
+      
+      keywords: [
+        metadata.category,
+        metadata.title.toLowerCase(),
+        `${metadata.category} blog`,
+        `${metadata.title.split(' ')[0]} tips`,
+        "digital marketing blog",
+        "productivity blog",
+        "technology insights",
+        "freelancer resources",
+        "business growth",
+        "creative professionals"
+      ],
 
-    // 🤖 Robots & SEO Controls
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
+      // 👤 Authorship
+      authors: [{ name: metadata.author.name }],
+      generator: "Next.js",
+      applicationName: "Brandbase Capsule",
+      publisher: "Brandbase Capsule",
+
+      // 🤖 Robots & SEO Controls
+      robots: {
         index: true,
         follow: true,
-        "max-snippet": -1,
-        "max-image-preview": "large",
-        "max-video-preview": -1,
-      },
-    },
-
-    // 🌍 Canonical URL
-    metadataBase: new URL("https://www.brandbasecapsule.com"),
-    alternates: {
-      canonical: blogUrl,
-    },
-
-    // 🖼️ Social Sharing (Open Graph) - WhatsApp Friendly
-    openGraph: {
-      title: metadata.title,
-      description: metadata.description,
-      url: blogUrl,
-      siteName: "Brandbase Capsule Blog",
-      locale: "en_IN",
-      type: "article",
-      publishedTime: metadata.publishDate,
-      modifiedTime: metadata.publishDate,
-      authors: [metadata.author.name],
-      tags: [metadata.category],
-      section: metadata.category.charAt(0).toUpperCase() + metadata.category.slice(1),
-      images: [
-        {
-          url: metadata.featuredImage,
-          width: 1200,
-          height: 630,
-          alt: metadata.title,
-          type: "image/jpeg",
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-snippet": -1,
+          "max-image-preview": "large",
+          "max-video-preview": -1,
         },
-      ],
-    },
+      },
 
-    // 🐦 Twitter SEO
-    twitter: {
-      card: "summary_large_image",
-      title: metadata.title,
-      description: metadata.description,
-      images: [metadata.featuredImage],
-      creator: `@${metadata.author.name.toLowerCase().replace(/\s+/g, '')}`,
-      site: "@brandbasecapsule",
-    },
+      // 🌍 Canonical URL
+      metadataBase: new URL("https://www.brandbasecapsule.com"),
+      alternates: {
+        canonical: blogUrl,
+      },
 
-    // 📱 WhatsApp/Telegram Specific Meta Tags
-    other: {
-      // WhatsApp Link Preview
-      "og:image:secure_url": metadata.featuredImage,
-      "og:image:width": "1200",
-      "og:image:height": "630",
-      "og:image:alt": metadata.title,
-      "og:image:type": "image/jpeg",
-      
-      // Article Specific
-      "article:published_time": metadata.publishDate,
-      "article:modified_time": metadata.publishDate,
-      "article:author": metadata.author.name,
-      "article:section": metadata.category,
-      "article:tag": metadata.category,
-      
-      // Reading Time
-      "twitter:label1": "Written by",
-      "twitter:data1": metadata.author.name,
-      "twitter:label2": "Est. reading time",
-      "twitter:data2": metadata.readTime,
-      
-      // Location/Contact
-      "business:hours": "Always Available",
-      "business:timezone": "IST (GMT+5:30)",
-    },
+      // 🖼️ Social Sharing (Open Graph) - WhatsApp Friendly
+      openGraph: {
+        title: metadata.title,
+        description: metadata.description,
+        url: blogUrl,
+        siteName: "Brandbase Capsule Blog",
+        locale: "en_IN",
+        type: "article",
+        publishedTime: metadata.publishDate,
+        modifiedTime: metadata.publishDate,
+        authors: [metadata.author.name],
+        tags: [metadata.category],
+        section: metadata.category.charAt(0).toUpperCase() + metadata.category.slice(1),
+        images: [
+          {
+            url: metadata.featuredImage,
+            width: 1200,
+            height: 630,
+            alt: metadata.title,
+            type: "image/jpeg",
+          },
+        ],
+      },
 
-    // 🌐 Browser Settings
-    referrer: "origin-when-cross-origin",
-    viewport: 
-      "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
+      // 🐦 Twitter SEO
+      twitter: {
+        card: "summary_large_image",
+        title: metadata.title,
+        description: metadata.description,
+        images: [metadata.featuredImage],
+        creator: `@${metadata.author.name.toLowerCase().replace(/\s+/g, '')}`,
+        site: "@brandbasecapsule",
+      },
 
-    // 📌 Icons
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.png",
-      apple: "/apple-touch-icon.png",
-    },
+      // 📱 WhatsApp/Telegram Specific Meta Tags
+      other: {
+        // WhatsApp Link Preview
+        "og:image:secure_url": metadata.featuredImage,
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": metadata.title,
+        "og:image:type": "image/jpeg",
+        
+        // Article Specific
+        "article:published_time": metadata.publishDate,
+        "article:modified_time": metadata.publishDate,
+        "article:author": metadata.author.name,
+        "article:section": metadata.category,
+        "article:tag": metadata.category,
+        
+        // Reading Time
+        "twitter:label1": "Written by",
+        "twitter:data1": metadata.author.name,
+        "twitter:label2": "Est. reading time",
+        "twitter:data2": metadata.readTime,
+        
+        // Location/Contact
+        "business:hours": "Always Available",
+        "business:timezone": "IST (GMT+5:30)",
+      },
 
-    // 🏷️ Category
-    category: "Blog",
-  };
+      // 🌐 Browser Settings
+      referrer: "origin-when-cross-origin",
+      viewport: 
+        "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
+
+      // 📌 Icons
+      icons: {
+        icon: "/favicon.ico",
+        shortcut: "/favicon.png",
+        apple: "/apple-touch-icon.png",
+      },
+
+      // 🏷️ Category
+      category: "Blog",
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Blog Post | Brandbase Capsule',
+      description: 'Read our latest blog post on Brandbase Capsule.',
+    };
+  }
 }
 
 /**
@@ -313,103 +357,120 @@ function generateJsonLd(blogData) {
  * 🔵 PAGE COMPONENT
  */
 export default async function BlogPage({ params }) {
-  // Await the params object
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
-  
-  // Get the blog data by slug
-  const blogData = getBlogBySlug(slug);
-  
-  // If blog not found, show 404
-  if (!blogData) {
+  try {
+    // Await the params object
+    const resolvedParams = await params;
+    const { slug } = resolvedParams;
+    
+    // IMPORTANT: Use cache: 'no-store' to get fresh data on every request
+    const response = await fetch(`${API_BASE_URL}/blogs/slug/${slug}`, {
+      cache: 'no-store', // This ensures fresh data from DB
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      console.error(`API Error: ${response.status}`);
+      notFound();
+    }
+    
+    const result = await response.json();
+    const blogData = result.data;
+    
+    if (!blogData) {
+      notFound();
+    }
+
+    // Generate JSON-LD
+    const jsonLd = generateJsonLd(blogData);
+    const { metadata } = blogData;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brandbasecapsule.com';
+
+    return (
+      <>
+        {/* Inject JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        
+        {/* Additional Schema for Social Sharing */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": metadata.title,
+              "description": metadata.description,
+              "image": metadata.featuredImage,
+              "datePublished": metadata.publishDate,
+              "dateModified": metadata.publishDate,
+              "author": {
+                "@type": "Person",
+                "name": metadata.author.name,
+                "url": `${siteUrl}/author/${metadata.author.name.toLowerCase().replace(/\s+/g, '-')}`
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Brandbase Capsule",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": `${siteUrl}/logo.png`
+                }
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `${siteUrl}/blog/${metadata.category}/${metadata.slug}`
+              }
+            })
+          }}
+        />
+        
+        {/* Additional Breadcrumb for Rich Snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": siteUrl
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog",
+                  "item": `${siteUrl}/blog`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": metadata.category.charAt(0).toUpperCase() + metadata.category.slice(1),
+                  "item": `${siteUrl}/blog/${metadata.category}`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": metadata.title,
+                  "item": `${siteUrl}/blog/${metadata.category}/${metadata.slug}`
+                }
+              ]
+            })
+          }}
+        />
+        
+        {/* Pass the blog data as props to the BlogDetailPage component */}
+        <BlogDetailPage blogData={blogData} />
+      </>
+    );
+  } catch (error) {
+    console.error('Error fetching blog data:', error);
     notFound();
   }
-
-  // Generate JSON-LD
-  const jsonLd = generateJsonLd(blogData);
-  const { metadata } = blogData;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brandbasecapsule.com';
-
-  return (
-    <>
-      {/* Inject JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      {/* Additional Schema for Social Sharing */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": metadata.title,
-            "description": metadata.description,
-            "image": metadata.featuredImage,
-            "datePublished": metadata.publishDate,
-            "dateModified": metadata.publishDate,
-            "author": {
-              "@type": "Person",
-              "name": metadata.author.name,
-              "url": `${siteUrl}/author/${metadata.author.name.toLowerCase().replace(/\s+/g, '-')}`
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "Brandbase Capsule",
-              "logo": {
-                "@type": "ImageObject",
-                "url": `${siteUrl}/logo.png`
-              }
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": `${siteUrl}/blog/${metadata.category}/${metadata.slug}`
-            }
-          })
-        }}
-      />
-      
-      {/* Additional Breadcrumb for Rich Snippets */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": siteUrl
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Blog",
-                "item": `${siteUrl}/blog`
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": metadata.category.charAt(0).toUpperCase() + metadata.category.slice(1),
-                "item": `${siteUrl}/blog/${metadata.category}`
-              },
-              {
-                "@type": "ListItem",
-                "position": 4,
-                "name": metadata.title,
-                "item": `${siteUrl}/blog/${metadata.category}/${metadata.slug}`
-              }
-            ]
-          })
-        }}
-      />
-      
-      {/* Pass the blog data as props to the BlogDetailPage component */}
-      <BlogDetailPage blogData={blogData} />
-    </>
-  );
 }
