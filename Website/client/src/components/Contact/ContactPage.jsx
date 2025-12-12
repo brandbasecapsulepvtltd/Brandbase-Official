@@ -237,7 +237,7 @@ const [formData, setFormData] = useState({
   };
 
   return (
-    <div className="min-h-screen text-gray-900 mt-15">
+    <div className="min-h-screen text-gray-900 mt-15 bg-white">
       {/* Hero Section */}
       <section className="text-black py-24 text-center px-4">
         <div className="max-w-4xl mx-auto">

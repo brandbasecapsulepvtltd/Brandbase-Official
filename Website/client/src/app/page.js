@@ -54,7 +54,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.brandbasecapsule.com/og-image.jpg",
+        url: "https://ik.imagekit.io/vinayak06/Screenshot%202025-12-12%20185904.png",
         width: 1200,
         height: 630,
         alt: "BrandBase Capsule Homepage",
@@ -68,7 +68,7 @@ export const metadata = {
     title: "BrandBase Capsule | Creative Digital Agency",
     description:
       "BrandBase Capsule is a digital services company based in Mumbai specializing in web development, branding, and digital marketing.",
-    images: ["https://www.brandbasecapsule.com/og-image.jpg"],
+    images: ["https://ik.imagekit.io/vinayak06/Screenshot%202025-12-12%20185904.png"],
     creator: "@brandbasecapsule",
   },
 
@@ -98,7 +98,7 @@ const jsonLd = {
   name: "BrandBase Capsule",
   legalName: "BrandBase Capsule Pvt. Ltd.",
   url: "https://www.brandbasecapsule.com",
-  logo: "https://www.brandbasecapsule.com/logo.png",
+  logo: "https://ik.imagekit.io/vinayak06/Screenshot%202025-12-12%20185904.png",
   description:
     "BrandBase Capsule is a creative digital agency based in Mumbai specializing in web development, branding, and marketing solutions.",
 

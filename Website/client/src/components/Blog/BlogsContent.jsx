@@ -30,7 +30,7 @@ const BlogSearchFilter = ({ onSearch, onFilter, activeCategory }) => {
   };
 
   return (
-    <div className="mb-12 px-5">
+    <div className="mb-12 px-5 bg-white">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -145,7 +145,7 @@ const BlogsContent = () => {
   const helpfulResources = BlogsData.filter(blog => blog.metadata.isHelpfulResources);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <BlogHero sliderBlogs={sliderBlogs} />
       <EditorPicksSection editorPicks={editorPicks} />
       <HelpfulResourcesSection helpfulResources={helpfulResources} />
