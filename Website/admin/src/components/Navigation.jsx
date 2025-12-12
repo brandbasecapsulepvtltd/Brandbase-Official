@@ -26,7 +26,9 @@ export function Navigation() {
       label: "UI", 
       icon: Palette, 
       children: [
-        { label: "Home", path: "/admin/dashboard/ui/home" }
+        { label: "Home", path: "/admin/dashboard/ui/home" },
+        { label: "Blogs", path: "/admin/dashboard/blogs-management" },
+        { label: "Service", path: "/admin/dashboard/service-management" }
       ]
     }
   ];

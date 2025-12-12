@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import axios from '../../utils/axios';
+import axios from '../../sections/utils/axios';
 
 const ApplyFormModal = ({ job, onClose, user }) => {
   const [answers, setAnswers] = useState([]);

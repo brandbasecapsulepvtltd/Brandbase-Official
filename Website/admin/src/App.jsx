@@ -6,6 +6,7 @@ import AppointmentDetailPage from "./components/Appointment/AppointmentDetailPag
 import AdminHome from './pages/AdminHome';
 import EmployeeManagementPage from './pages/EmployeeManagementPage';
 import AdminServicesDashboard from './pages/AdminServicesDashboard';
+import BlogManagement from './pages/BlogManagement';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
             <Route path="employee-management" element={<EmployeeManagementPage />} />
 
             <Route path="service-management" element={<AdminServicesDashboard />} />
+
+            <Route path="blogs-management" element={<BlogManagement />} />
           
           </Route>
           {/* Add other top-level routes here */}

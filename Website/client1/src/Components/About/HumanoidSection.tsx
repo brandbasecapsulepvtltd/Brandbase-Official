@@ -108,7 +108,7 @@ const HumanoidSection = () => {
       ))}
     </div>
   );
-
+ 
   // Animated grid pattern
   const GridPattern = ({ opacity = 0.1 }) => (
     <div 
@@ -132,7 +132,7 @@ const HumanoidSection = () => {
       <div className="absolute top-1/2 left-1/2 w-12 h-12 bg-gradient-to-r from-[#FF6600]/10 to-transparent rotate-45 animate-float" />
     </div>
   );
-
+ 
   return (
     <div 
       ref={sectionRef} 

@@ -4,28 +4,29 @@ import StallDesignStats from '../../../Components/StallDesign/StallDesignStats'
 import Features from '../../../Components/StallDesign/Features'
 import WhatWeDoSection from '../../../Components/StallDesign/WhatWeDoSection'
 import Country from '../../../Components/StallDesign/Country'
-import AboutSection from '../../../Components/StallDesign/AboutSection'
+//import AboutSection from '../../../Components/StallDesign/AboutSection'
 import ImageComparisonDemo from '../../../Components/StallDesign/ImageComparisonDemo'
 import StallHero from '../../../Components/StallDesign/StallHero'
+import VeedLearnSection from '../../../Components/StallDesign/VeedLearnSection'
 
 const StallDesign = () => {
   return (
     <>
       <StallHero/>
       <WhatWeDoSection/>
-      <Features/>
-      <AboutSection/>
+      <VeedLearnSection/>
       <Country/>
       <ImageComparisonDemo/>
       <StallDesignStats/>
       
-      {/* Updated CTA Section */}
-      <section
+      {/* Updated CTA Section <AboutSection/> <Features/>*/}
+      {/*
+            <section
         className="relative py-20 px-6 lg:px-20 bg-orange-200 text-gray-900 mt-20 overflow-hidden"
         role="region"
         aria-labelledby="cta-heading"
       >
-        {/* Background Pattern */}
+        
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-32 h-32 bg-[#FF6600] rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 bg-[#FF6600] rounded-full blur-3xl"></div>
@@ -38,7 +39,7 @@ const StallDesign = () => {
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Text Content */}
+          
           <div className="flex-1 text-center lg:text-left">
             <h2
               id="cta-heading"
@@ -60,7 +61,7 @@ const StallDesign = () => {
             </motion.a>
           </div>
 
-          {/* Image */}
+          
           <div className="flex-1 flex justify-center lg:justify-end">
             <div className="w-full max-w-md">
               <img
@@ -73,6 +74,7 @@ const StallDesign = () => {
           </div>
         </motion.div>
       </section>
+      */}
     </>
   )
 }

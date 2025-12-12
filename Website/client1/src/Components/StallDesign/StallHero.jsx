@@ -29,19 +29,6 @@ const StallHero = () => {
     const images = []
     let loadedImages = 0
 
-    // FRAME LOADER
-    {/*
-        for (let i = 1; i <= frames.maxFrames; i++) {
-      const img = new Image()
-      img.src = `/media/stall/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`
-      img.onerror = () => console.error(`Failed to load: ${img.src}`)
-      img.onload = () => {
-        loadedImages++
-        if (loadedImages === frames.maxFrames) drawFrame(frames.currentFrame)
-      }
-      images.push(img)
-    }  
-    */}
 
     // FRAME LOADER
 for (let i = 1; i <= frames.maxFrames; i++) {
@@ -54,6 +41,8 @@ for (let i = 1; i <= frames.maxFrames; i++) {
   };
   images.push(img);
 }
+
+
 
 
     const drawFrame = (index) => {
@@ -201,3 +190,4 @@ for (let i = 1; i <= frames.maxFrames; i++) {
 }
 
 export default StallHero
+

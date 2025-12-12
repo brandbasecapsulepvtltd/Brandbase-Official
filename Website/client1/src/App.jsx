@@ -23,6 +23,7 @@ import DigitalMarketing from "./Components/WebsiteDesign/DigitalMarketing";
 import EventsExhibition from "./Components/WebsiteDesign/EventsExhibition";
 import DynamicStatic from "./Pages/DynamicStatic";
 import BusinessWeb from "./Pages/Service/WebsiteDesign/BusinessWeb";
+import Demo from "./Components/Location/demo";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <CursorFollower/>
         <Routes>
           <Route path="/" element={<HomePage/>} />
+          <Route path="/location" element={<Demo/>} />
           <Route path="/about" element={<Aboutpage/>}/>
           <Route path="/contact" element={<ContactPage/>} />
           <Route path="/services" element={<ServicePage/>} />

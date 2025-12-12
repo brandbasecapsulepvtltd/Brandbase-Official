@@ -49,29 +49,15 @@ const BlogHero = () => {
 
   const goToSlide = (index) => setCurrentSlide(index);
 
-  const currentArticle = slides[currentSlide];
-
   return (
     <div className="mt-20 bg-white min-h-[600px] font-sans text-white relative overflow-hidden">
 
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
         
-        {/* Responsive Title 
-                <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#303236] leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#303236] leading-tight">
           The <span className="text-orange-600">Brandbase Capsule</span> Blog
         </h1>
-        */}
-
-        {/* Search Bar */}
-        <div className="relative w-full sm:w-auto">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-white rounded-full pl-10 pr-4 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 border border-gray-700 w-full sm:w-48 focus:sm:w-64 transition-all duration-300"
-          />
-          <Search size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        </div>
       </div>
 
       {/* SLIDER */}

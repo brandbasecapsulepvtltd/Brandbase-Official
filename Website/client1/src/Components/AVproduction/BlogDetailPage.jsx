@@ -14,13 +14,105 @@ import { Twitter, Linkedin, Mail } from "lucide-react";
  * Paste into your project (TailwindCSS required).
  */
 
+// ============================
+// BLOG DATA (Move to separate file later)
+// ============================
+const BLOG_DATA = {
+  // Main blog metadata
+  metadata: {
+    slug: "best-productivity-hacks-for-creative-freelancers-today",
+    category: "productivity",
+    isEditorPick: true,
+    isSlider: true,
+    isHelpfulResources: true,
+    title: "Best productivity hacks for creative freelancers today",
+    description: "Smart tools and routines to help freelancers stay organized, inspired, and productive.",
+    author: {
+      name: "Michael Smith",
+      role: "Creative & Lifestyle",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+      twitter: "#",
+      linkedin: "#"
+    },
+    readTime: "5 min read",
+    featuredImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=800&fit=crop",
+    publishDate: "2024-03-15"
+  },
+
+  // Article sections
+  sections: [
+    {
+      id: "intro",
+      title: "Introduction",
+      content: [
+        "Freelancers have limitless potential to deliver high-quality work while managing multiple projects, clients, and deadlines. However, increased flexibility and autonomy often bring increased pressure to stay organized and competitive in this growing industry.",
+        "Smart routines, organizational projects, and productivity hacks can play a crucial role in ensuring consistent and exceptional output. In this article, we explore effective strategies that help freelancers achieve and maintain sustainable work-life balance and create a healthy friction between work and rest."
+      ]
+    },
+    {
+      id: "why",
+      title: "Why smart routines matter for efficiency",
+      content: [
+        "Freelancers need flexibility, but structure is what keeps productivity moving. Creating a daily routine helps with distribution and improves concentration.",
+        "Planning tasks in advance and setting priorities keeps you focused under control. This leads to more focused work and better results and reduces stress."
+      ]
+    },
+    {
+      id: "tools",
+      title: "Tools that enhance creativity and workflow",
+      content: [
+        "The right tools are essential to any productive freelancer's kit. From apps for tracking work, storing ideas, and scheduling tasks various tools can assist in reducing errors and improving overall productivity. With the right tools, freelancers can simplify complex work, make faster decisions, and finish projects on time."
+      ]
+    },
+    {
+      id: "focus",
+      title: "Staying focused while working independently",
+      content: [
+        "Working alone can make it tough to stay motivated. Creating a dedicated workspace, setting time blocks, and removing digital distractions help boost focus.",
+        "Finding a balance between tackling your daily goals and taking strategic breaks is crucial. Regular check-ins with yourself and setting realistic deadlines improve productivity and maintain notifications. This improves workflow and keeps attention on important tasks."
+      ]
+    },
+    {
+      id: "balance",
+      title: "A balance of work and well being",
+      content: [
+        "A good productivity strategy acknowledges the importance of mental and physical health. Break regularly, exercise, and maintain creative capacity for long-term success."
+      ],
+      listItems: [
+        "Regular breaks boost productivity throughout the day",
+        "Better clarity and idea generation",
+        "Balanced emotional and mental health"
+      ]
+    },
+    {
+      id: "confidence",
+      title: "Boosting confidence through consistent progress",
+      content: [
+        "Productivity thrives from tracking progress and celebrating wins continuously.",
+        "Small improvements every day lead to stronger confidence and better performance across all tasks. Consistency builds trust in yourself and showcases your capabilities."
+      ]
+    },
+    {
+      id: "conclusion",
+      title: "Conclusion",
+      content: [
+        "Productivity is essential for creative freelancers who want to grow in a competitive market. Smart routines, helpful tools, and healthy habits create work-life balance that supports long-term success. By implementing these productivity hacks, you can unlock your full potential as a freelancer. Consistency and dedication are the foundations of success, and productivity is not just about doing more. It's about working smarter and creating a sustainable path for long-term success."
+      ]
+    }
+  ]
+};
+
+// ============================
+// COMPONENT
+// ============================
 export default function BlogDetailPage() {
+  const { metadata, sections } = BLOG_DATA;
+  
   const articleRef = useRef(null);
   const boxRef = useRef(null);
   const [visible, setVisible] = useState(false); // whether black box is shown
   const [open, setOpen] = useState(false); // expanded panel
   const [percent, setPercent] = useState(0);
-  const [sections, setSections] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
 
   // circle parameters
@@ -44,8 +136,6 @@ export default function BlogDetailPage() {
     headings.forEach((h, i) => {
       if (!h.node.id) h.node.id = h.id;
     });
-
-    setSections(headings);
 
     // IntersectionObserver for active section
     const observerOptions = {
@@ -108,28 +198,32 @@ export default function BlogDetailPage() {
 
   // click a section: scroll to it smoothly and close panel optionally
   const goToSection = (idx) => {
-  const s = sections[idx];
-  if (!s) return;
-  setOpen(false);
-  
-  // Calculate dynamic offset - 20% of viewport height
-  const VIEWPORT_OFFSET_PERCENT = 0.2;
-  const offset = window.innerHeight * VIEWPORT_OFFSET_PERCENT;
-  
-  // Get element position
-  const elementTop = s.node.getBoundingClientRect().top + window.scrollY;
-  
-  // Scroll to element with offset (20% down from the top)
-  const targetPosition = elementTop - offset;
-  
-  window.scrollTo({
-    top: targetPosition,
-    behavior: "smooth"
-  });
-  
-  // Set active immediately for visual feedback
-  setActiveIndex(idx);
-};
+    const section = sections[idx];
+    if (!section) return;
+    setOpen(false);
+    
+    // Calculate dynamic offset - 20% of viewport height
+    const VIEWPORT_OFFSET_PERCENT = 0.2;
+    const offset = window.innerHeight * VIEWPORT_OFFSET_PERCENT;
+    
+    // Find the element by id
+    const element = document.getElementById(section.id);
+    if (!element) return;
+    
+    // Get element position
+    const elementTop = element.getBoundingClientRect().top + window.scrollY;
+    
+    // Scroll to element with offset (20% down from the top)
+    const targetPosition = elementTop - offset;
+    
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth"
+    });
+    
+    // Set active immediately for visual feedback
+    setActiveIndex(idx);
+  };
 
   // toggle open/close with animation-friendly state
   const toggleOpen = () => {
@@ -144,6 +238,13 @@ export default function BlogDetailPage() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
+
+  // Prepare section data for the progress panel
+  const sectionDataForPanel = sections.map((section, idx) => ({
+    id: section.id,
+    title: section.title,
+    index: idx
+  }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -170,28 +271,6 @@ export default function BlogDetailPage() {
           >
             {/* Left: circular loader + title */}
             <div className="flex items-center gap-3">
-              {/* Circular Loader (SVG) 
-                            <svg width={CIRCLE_SIZE} height={CIRCLE_SIZE} viewBox={`0 0 ${CIRCLE_SIZE} ${CIRCLE_SIZE}`} className="block">
-                <g transform={`translate(${CIRCLE_SIZE / 2}, ${CIRCLE_SIZE / 2})`}>
-                  
-                  <circle r={R} stroke="#ff7b00ff" strokeWidth="4" fill="none" />
-                 
-                  <circle
-                    r={R}
-                    stroke="black"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    fill="none"
-                    strokeDasharray={C}
-                    strokeDashoffset={C - (C * Math.min(percent, 100)) / 100}
-                    style={{ transition: "stroke-dashoffset 140ms linear" }}
-                    transform="rotate(-90)"
-                  />
-                </g>
-              </svg>
-              */}
-
-
               <div className="text-left">
                 <div className="text-sm font-bold tracking-wide">EXPLORE </div>
               </div>
@@ -215,16 +294,16 @@ export default function BlogDetailPage() {
 
             {/* List of sections */}
             <div className="max-h-72 overflow-auto px-2 pb-4 custom-scrollbar">
-              {sections.length === 0 ? (
+              {sectionDataForPanel.length === 0 ? (
                 <div className="text-sm text-gray-400">No sections found</div>
               ) : (
                 <ul className="space-y-2">
-                  {sections.map((s, idx) => (
+                  {sectionDataForPanel.map((s) => (
                     <li key={s.id}>
                       <button
-                        onClick={() => goToSection(idx)}
+                        onClick={() => goToSection(s.index)}
                         className={`w-full text-left text-sm block px-3 py-2 rounded-md transition-colors duration-150
-                          ${idx === activeIndex ? "bg-white/10 text-white font-semibold" : "text-gray-300 hover:bg-white/5"}
+                          ${s.index === activeIndex ? "bg-white/10 text-white font-semibold" : "text-gray-300 hover:bg-white/5"}
                         `}
                       >
                         {s.title}
@@ -257,15 +336,21 @@ export default function BlogDetailPage() {
         {/* Header Section */}
         <header className="mb-12 max-w-2xl mt-15">
           <h1 className="text-5xl font-serif font-bold text-black mb-4 leading-tight">
-            Best productivity hacks for creative freelancers today
+            {metadata.title}
           </h1>
           <p className="text-gray-600 text-base mb-4">
-            Smart tools and routines to help freelancers stay organized, inspired, and productive.
+            {metadata.description}
           </p>
           <div className="flex items-center gap-6 text-sm text-gray-500">
-            <span>by Michael Smith</span>
+            <span>by {metadata.author.name}</span>
             <span>•</span>
-            <span>5 min read</span>
+            <span>{metadata.readTime}</span>
+            {metadata.isEditorPick && (
+              <>
+                <span>•</span>
+                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Editor's Pick</span>
+              </>
+            )}
           </div>
         </header>
 
@@ -276,86 +361,31 @@ export default function BlogDetailPage() {
             {/* Featured Image */}
             <div className="mb-12 rounded-lg overflow-hidden bg-gray-300 h-96">
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=800&fit=crop"
-                alt="Creative freelancer working"
+                src={metadata.featuredImage}
+                alt={metadata.title}
                 className="w-full h-full object-cover"
               />
             </div>
 
             {/* Article Sections */}
             <article ref={articleRef} className="prose prose-lg max-w-none">
-              {/* Introduction */}
-              <section id="intro" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">Introduction</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Freelancers have limitless potential to deliver high-quality work while managing multiple projects, clients, and deadlines. However, increased flexibility and autonomy often bring increased pressure to stay organized and competitive in this growing industry.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Smart routines, organizational projects, and productivity hacks can play a crucial role in ensuring consistent and exceptional output. In this article, we explore effective strategies that help freelancers achieve and maintain sustainable work-life balance and create a healthy friction between work and rest.
-                </p>
-              </section>
-
-              {/* Why Smart Routines */}
-              <section id="why" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">Why smart routines matter for efficiency</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Freelancers need flexibility, but structure is what keeps productivity moving. Creating a daily routine helps with distribution and improves concentration.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Planning tasks in advance and setting priorities keeps you focused under control. This leads to more focused work and better results and reduces stress.
-                </p>
-              </section>
-
-              {/* Tools Section */}
-              <section id="tools" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">Tools that enhance creativity and workflow</h2>
-                <p className="text-gray-700 leading-relaxed">
-                  The right tools are essential to any productive freelancer's kit. From apps for tracking work, storing ideas, and scheduling tasks various tools can assist in reducing errors and improving overall productivity. With the right tools, freelancers can simplify complex work, make faster decisions, and finish projects on time.
-                </p>
-              </section>
-
-              {/* Staying Focused */}
-              <section id="focus" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">Staying focused while working independently</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Working alone can make it tough to stay motivated. Creating a dedicated workspace, setting time blocks, and removing digital distractions help boost focus.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Finding a balance between tackling your daily goals and taking strategic breaks is crucial. Regular check-ins with yourself and setting realistic deadlines improve productivity and maintain notifications. This improves workflow and keeps attention on important tasks.
-                </p>
-              </section>
-
-              {/* Balance Section */}
-              <section id="balance" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">A balance of work and well being</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  A good productivity strategy acknowledges the importance of mental and physical health. Break regularly, exercise, and maintain creative capacity for long-term success.
-                </p>
-                <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
-                  <li>Regular breaks boost productivity throughout the day</li>
-                  <li>Better clarity and idea generation</li>
-                  <li>Balanced emotional and mental health</li>
-                </ul>
-              </section>
-
-              {/* Confidence Section */}
-              <section id="confidence" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">Boosting confidence through consistent progress</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Productivity thrives from tracking progress and celebrating wins continuously.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Small improvements every day lead to stronger confidence and better performance across all tasks. Consistency builds trust in yourself and showcases your capabilities.
-                </p>
-              </section>
-
-              {/* Conclusion */}
-              <section id="conclusion" className="mb-12">
-                <h2 className="text-2xl font-serif font-bold text-black mb-4">Conclusion</h2>
-                <p className="text-gray-700 leading-relaxed">
-                  Productivity is essential for creative freelancers who want to grow in a competitive market. Smart routines, helpful tools, and healthy habits create work-life balance that supports long-term success. By implementing these productivity hacks, you can unlock your full potential as a freelancer. Consistency and dedication are the foundations of success, and productivity is not just about doing more. It's about working smarter and creating a sustainable path for long-term success.
-                </p>
-              </section>
+              {sections.map((section) => (
+                <section key={section.id} id={section.id} className="mb-12">
+                  <h2 className="text-2xl font-serif font-bold text-black mb-4">{section.title}</h2>
+                  {section.content.map((paragraph, idx) => (
+                    <p key={idx} className="text-gray-700 leading-relaxed mb-4">
+                      {paragraph}
+                    </p>
+                  ))}
+                  {section.listItems && (
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
+                      {section.listItems.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
             </article>
 
             {/* Navigation Footer */}
@@ -394,18 +424,18 @@ export default function BlogDetailPage() {
               <h3 className="text-lg font-bold text-black mb-4">Author info</h3>
               <div className="flex gap-4">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
-                  alt="Michael Smith"
+                  src={metadata.author.image}
+                  alt={metadata.author.name}
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div className="flex-1">
-                  <h4 className="font-bold text-black mb-1">Michael Smith</h4>
-                  <p className="text-sm text-gray-600 mb-3">Creative & Lifestyle</p>
+                  <h4 className="font-bold text-black mb-1">{metadata.author.name}</h4>
+                  <p className="text-sm text-gray-600 mb-3">{metadata.author.role}</p>
                   <div className="flex gap-3">
-                    <a href="#" className="text-gray-500 hover:text-black transition">
+                    <a href={metadata.author.twitter} className="text-gray-500 hover:text-black transition">
                       <Twitter size={16} />
                     </a>
-                    <a href="#" className="text-gray-500 hover:text-black transition">
+                    <a href={metadata.author.linkedin} className="text-gray-500 hover:text-black transition">
                       <Linkedin size={16} />
                     </a>
                   </div>
@@ -414,24 +444,26 @@ export default function BlogDetailPage() {
             </div>
 
             {/* Editor's Choice */}
-            <div className="mb-12 border-b border-gray-300 pb-8">
-              <h3 className="text-lg font-bold text-black mb-6">Editor's choice</h3>
-              <div className="space-y-6">
-                <article className="flex gap-4 cursor-pointer hover:opacity-75 transition">
-                  <img
-                    src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=100&h=100&fit=crop"
-                    alt="Article thumbnail"
-                    className="w-20 h-20 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <h4 className="font-bold text-black text-sm mb-2 leading-tight">
-                      How modern work is reshaping modern lifestyles
-                    </h4>
-                    <p className="text-xs text-gray-500">by Samantha Grant | 3 min read</p>
-                  </div>
-                </article>
+            {metadata.isEditorPick && (
+              <div className="mb-12 border-b border-gray-300 pb-8">
+                <h3 className="text-lg font-bold text-black mb-6">Editor's choice</h3>
+                <div className="space-y-6">
+                  <article className="flex gap-4 cursor-pointer hover:opacity-75 transition">
+                    <img
+                      src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=100&h=100&fit=crop"
+                      alt="Article thumbnail"
+                      className="w-20 h-20 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-bold text-black text-sm mb-2 leading-tight">
+                        How modern work is reshaping modern lifestyles
+                      </h4>
+                      <p className="text-xs text-gray-500">by Samantha Grant | 3 min read</p>
+                    </div>
+                  </article>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Recent Posts */}
             <div>
