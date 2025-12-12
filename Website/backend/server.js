@@ -38,12 +38,15 @@ const appointmentRoutes = require("./routes/appointments");
 const homePageRoutes = require('./routes/homePageRoutes');
 const employeeRoutes = require("./routes/employees");
 const serviceRoutes = require('./routes/serviceRoutes'); // Add service routes
+const blogRoutes = require('./routes/blogRoutes');
+
 
 // Routes
 app.use("/api/appointments", appointmentRoutes);
 app.use('/api/homepage', homePageRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use('/api/services', serviceRoutes); // Add service routes
+app.use('/api/blogs', blogRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
