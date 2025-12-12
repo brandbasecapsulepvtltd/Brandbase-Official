@@ -36,7 +36,7 @@ export default function Clients({ data }) {
         <Tag>Our Clients</Tag>
         <h1 
           id="clients-heading"
-          className="text-4xl lg:text-6xl font-medium mt-4"
+          className="text-4xl lg:text-6xl font-medium mt-4 text-black"
         >
           Trusted by Top  
           <span className="text-[#FF6600]"> 200+ </span>
