@@ -53,7 +53,7 @@ export default function RecentWork() {
           </div>
           <h1 
             id="recent-work-heading"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium mt-3 sm:mt-4 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium mt-3 sm:mt-4 leading-tight text-black"
           >
             Work We're Proud Of
           </h1>
