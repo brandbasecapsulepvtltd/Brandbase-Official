@@ -57,7 +57,7 @@ export default function ServiceSlider() {
           onMouseLeave={() => setIsHovered(false)}
           onFocus={() => setIsHovered(true)}
           onBlur={() => setIsHovered(false)}
-          className="flex flex-none gap-16 pr-16 text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium group cursor-pointer"
+          className="flex flex-none gap-16 pr-16 text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium group cursor-pointer text-black"
           animate={{
             x: ["0%", "-50%"]
           }}
@@ -81,7 +81,7 @@ export default function ServiceSlider() {
                 className="text-[#FF6600] text-4xl md:text-6xl lg:text-7xl"
                 aria-hidden="true"
               >&#10038;</span>
-              <span className="group-hover:text-[#FF6600] transition-colors duration-300 whitespace-nowrap">
+              <span className="group-hover:text-[#FF6600] transition-colors duration-300 whitespace-nowrap text-black">
                 {services[i % services.length]}
               </span>
             </div>

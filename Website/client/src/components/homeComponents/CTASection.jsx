@@ -46,7 +46,7 @@ export default function CTASection() {
             {/* Heading */}
             <h1 
               id="cta-section-heading"
-              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mt-2 sm:mt-4 leading-tight sm:leading-snug"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mt-2 sm:mt-4 leading-tight sm:leading-snug text-black"
             >
               Transform your{" "}
               <span className="text-[#FF6A00]">digital</span> presence

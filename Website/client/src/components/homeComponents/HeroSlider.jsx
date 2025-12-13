@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+// Assuming lucide-react or similar is available for simple icons
+import { ArrowLeft, ArrowRight } from 'lucide-react'; 
 
 const HeroSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,13 +40,26 @@ const HeroSlider = () => {
     }
   ];
 
+  const totalSlides = slides.length;
+
+  // --- New Navigation Logic ---
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }, [totalSlides]);
+
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+  }, [totalSlides]);
+  // ---------------------------
+
+
   // Auto Slide
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % slides.length);
+      goToNext();
     }, 5000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [goToNext]);
 
   // Screen Size + Scroll Logic
   useEffect(() => {
@@ -79,6 +94,27 @@ const HeroSlider = () => {
   const imageClipX = isLargeScreen ? 20 - (20 * scrollProgress) : 0;
   const outerHeightClass = isLargeScreen ? "h-[200vh]" : "h-auto min-h-screen";
 
+
+  // Component for Navigation Arrows
+  const NavArrows = ({ onPrev, onNext, className, iconColor = 'text-white' }) => (
+    <div className={`flex items-center space-x-4 ${className}`}>
+      <button 
+        onClick={onPrev} 
+        aria-label="Previous slide"
+        className={`p-3 rounded-full bg-black/30 hover:bg-black/50 transition-colors ${iconColor}`}
+      >
+        <ArrowLeft className="w-5 h-5" />
+      </button>
+      <button 
+        onClick={onNext} 
+        aria-label="Next slide"
+        className={`p-3 rounded-full bg-black/30 hover:bg-black/50 transition-colors ${iconColor}`}
+      >
+        <ArrowRight className="w-5 h-5" />
+      </button>
+    </div>
+  );
+
   return (
     <div className={`relative w-full ${outerHeightClass} bg-white font-sans`}>
 
@@ -86,11 +122,18 @@ const HeroSlider = () => {
       {!isLargeScreen && (
         <div className="w-full flex flex-col pb-10">
           {/* Mobile Image */}
-          <div className="w-full h-[55vh]">
+          <div className="relative w-full h-[55vh]">
             <img
               src={currentSlide.image}
               alt="Hero Slide"
               className="w-full h-full object-cover animate-fade-in rounded-none"
+            />
+             {/* Mobile Navigation Arrows: Overlaying the image */}
+             <NavArrows
+                onPrev={goToPrev}
+                onNext={goToNext}
+                className="absolute bottom-4 left-6 z-10"
+                iconColor="text-white"
             />
           </div>
 
@@ -111,7 +154,7 @@ const HeroSlider = () => {
         </div>
       )}
 
-      {/* Desktop Layout (unchanged) */}
+      {/* Desktop Layout (unchanged structure) */}
       {isLargeScreen && (
         <div className="w-full h-screen overflow-hidden flex flex-col justify-between sticky top-0 mt-1">
 
@@ -160,6 +203,16 @@ const HeroSlider = () => {
                 EXPLORE MORE
               </button>
             </div>
+          </div>
+
+           {/* Desktop Navigation Arrows: Positioned at the bottom left */}
+          <div className='absolute bottom-10 left-16 z-20'>
+            <NavArrows
+                onPrev={goToPrev}
+                onNext={goToNext}
+                className=""
+                iconColor="text-black"
+            />
           </div>
         </div>
       )}

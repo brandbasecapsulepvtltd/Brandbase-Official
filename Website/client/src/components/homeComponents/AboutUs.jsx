@@ -16,7 +16,7 @@ function AboutUs() {
           <div className="flex justify-center mb-4 md:mb-6">
             <Tag>About BCPL</Tag>
           </div>
-          <motion.h1 
+          <h1 
             id="about-bcpl-heading"
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6 px-2"
             initial={{ opacity: 0, y: 20 }}
@@ -27,8 +27,8 @@ function AboutUs() {
             Elevating Brands Through{" "}
             <span className="text-[#FF6600]" itemProp="slogan">Innovation</span> &{" "}
             <span className="text-[#FF6600]">Excellence</span>
-          </motion.h1>
-          <motion.p 
+          </h1>
+          <p 
             className="text-base sm:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -38,14 +38,14 @@ function AboutUs() {
             BCPL is a premier global event management and marketing solutions provider specializing in 
             customized strategies for businesses worldwide. Since 2010, we've delivered over 1000 successful 
             projects across 50+ countries with unparalleled professionalism and creativity.
-          </motion.p>
+          </p>
         </header>
 
         {/* Main Content with Image */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mb-16 md:mb-20">
           {/* Text Content */}
           <div className="space-y-4 md:space-y-6 order-2 lg:order-1" itemProp="makesOffer" itemScope itemType="https://schema.org/Offer">
-            <motion.div
+            <div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -64,10 +64,10 @@ function AboutUs() {
                 integrated marketing campaigns. Each project receives personalized attention to ensure 
                 your brand stands out and achieves its strategic objectives.
               </p>
-            </motion.div>
+            </div>
 
             {/* Stats */}
-            <motion.div 
+            <div 
               className="grid grid-cols-2 gap-4 md:gap-6 pt-4 md:pt-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -82,11 +82,11 @@ function AboutUs() {
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#FF6600] mb-1 md:mb-2">1000+</div>
                 <div className="text-sm sm:text-base text-gray-600 font-medium">Projects Completed</div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Image */}
-          <motion.figure
+          <figure
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -109,7 +109,7 @@ function AboutUs() {
               <meta itemProp="description" content="BCPL event management professionals organizing a corporate conference" />
             </div>
             {/* Floating Badge */}
-            <motion.div 
+            <div 
               className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-2 bg-[#FF6600] text-white px-4 py-3 sm:px-6 sm:py-4 rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -119,12 +119,12 @@ function AboutUs() {
             >
               <div className="text-xs sm:text-sm font-semibold">Since 2010</div>
               <div className="text-sm sm:text-lg font-bold">Trusted Worldwide</div>
-            </motion.div>
-          </motion.figure>
+            </div>
+          </figure>
         </div>
 
         {/* Key Services Section */}
-        <motion.div 
+        <div 
           className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ function AboutUs() {
             <h3 className="text-lg font-bold text-gray-900 mb-2">Proven Excellence</h3>
             <p className="text-gray-600 text-sm">1000+ successful event and marketing projects with measurable ROI</p>
           </article>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
