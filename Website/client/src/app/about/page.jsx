@@ -60,7 +60,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://ik.imagekit.io/vinayak06/Screenshot%202025-12-12%20185747.png",
+        url: "https://ik.imagekit.io/vinayak06/wmremove-transformed.png",
         width: 1200,
         height: 630,
         alt: "BrandBase Capsule Team - About Us",
@@ -74,7 +74,7 @@ export const metadata = {
     title: "About Our Digital Agency | BrandBase Capsule",
     description:
       "Get to know BrandBase Capsule - our expertise in web development, branding, and digital marketing. Meet our Mumbai-based creative team.",
-    images: ["https://ik.imagekit.io/vinayak06/Screenshot%202025-12-12%20185747.png"],
+    images: ["https://ik.imagekit.io/vinayak06/wmremove-transformed.png"],
     creator: "@brandbasecapsule",
   },
 
