@@ -1,5 +1,7 @@
 // app/about/page.jsx
+
 import AboutUsContent from "@/pages/AboutUsContent";
+
 
 // -------------------------------------------
 // 🔵 FULL NEXT.JS SEO METADATA FOR ABOUT PAGE
@@ -416,8 +418,7 @@ export default function About() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       */}
-      
-      <AboutUsContent />
+      <AboutUsContent/>
     </>
   );
 }

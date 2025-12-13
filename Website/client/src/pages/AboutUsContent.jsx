@@ -1,20 +1,10 @@
-// app/components/AboutUsContent.jsx
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import Timeline from '@/components/About/Timeline';
 import Tag from '@/components/Tag';
-
-// Dynamically import components that might use window
-const Timeline = dynamic(() => import('@/components/AboutComponents/Timeline'), {
-  ssr: false
-});
-
-const HumanoidSection = dynamic(() => import('@/components/AboutComponents/HumanoidSection'), {
-  ssr: false
-});
+import DemoOne from '@/components/About/AboutSec/demo';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -49,7 +39,7 @@ const dummyData = {
       "Push the boundaries of what's possible in web and mobile technology"
     ],
     image: {
-      url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       alt: "Our team collaborating in modern office space",
       captionTitle: "Innovation in Action",
       captionText: "Our team working together to create exceptional digital solutions"
@@ -66,7 +56,7 @@ const dummyData = {
       "Build a legacy of excellence that inspires future generations"
     ],
     image: {
-      url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       alt: "Visionary team planning future projects",
       captionTitle: "Future Forward",
       captionText: "Planning the next generation of digital innovations"
@@ -89,207 +79,313 @@ const dummyData = {
 
 const AboutUsContent = () => {
   const { hero, mission, vision, impact } = dummyData;
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  return (
+    <div className="bg-white">
+      {/* Hero Section  <HumanoidSection/>*/}
+<section className="relative overflow-hidden pt-24 pb-20 bg-white">
+  {/* Background decorative elements */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#FF6600]/5 rounded-full blur-3xl"></div>
+    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gray-200/20 rounded-full"></div>
+  </div>
 
-  // Don't render components that depend on window until client-side
-  if (!isClient) {
-    return (
-      <div className="bg-white min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center">
-            <div className="inline-block mb-6">
-              <span className="inline-block px-4 py-2 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold">
-                Our Story
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <div className="text-center">
+      {/* Main Title with sophisticated animation */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        className="mb-12"
+      >
+        <div className="relative inline-block">
+          <motion.h1
+            className="text-5xl md:text-7xl font-bold mb-6 text-gray-900 tracking-tight"
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.6, 0.05, 0.01, 0.9]
+                }
+              }
+            }}
+          >
+            Redefining{' '}
+            <span className="relative">
+              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6600] to-orange-500">
+                Brand Excellence
               </span>
+              <motion.div
+                className="absolute -bottom-2 left-0 right-0 h-3 bg-gradient-to-r from-[#FF6600]/20 to-orange-500/20 -skew-y-1"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.8 }}
+              />
+            </span>
+          </motion.h1>
+        </div>
+
+        {/* Subheading with elegant underline */}
+        <motion.h2
+          className="text-2xl md:text-3xl font-semibold text-gray-800 mb-10 max-w-4xl mx-auto leading-relaxed"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          Where strategic vision meets{' '}
+          <span className="relative">
+            <span className="text-[#FF6600] font-bold">transformative execution</span>
+            <svg
+              className="absolute -bottom-2 left-0 w-full h-3"
+              viewBox="0 0 200 12"
+            >
+              <motion.path
+                d="M0,6 C40,2 80,10 120,4 C160,-2 200,8 200,4"
+                stroke="#FF6600"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{
+                  duration: 1.5,
+                  delay: 1,
+                  ease: "easeInOut"
+                }}
+              />
+            </svg>
+          </span>
+        </motion.h2>
+      </motion.div>
+
+      {/* Professional Description with grid layout */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="max-w-5xl mx-auto"
+      >
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          <div className="space-y-4">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              At Brandbase Capsule, we architect brand narratives that resonate across markets. 
+              Our methodology blends deep market intelligence with creative precision to deliver 
+              measurable impact.
+            </p>
+            <div className="flex items-center gap-3 pt-4">
+              <div className="w-1 h-8 bg-gradient-to-b from-[#FF6600] to-orange-400 rounded-full"></div>
+              <p className="text-gray-600 italic">
+                "Excellence is not an act, but a habit of strategic innovation"
+              </p>
             </div>
-            <h1 className="text-6xl font-bold text-[#FF6600] mb-6">Brandbase Capsule</h1>
-            <div className="animate-pulse">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+          </div>
+          
+          <div className="space-y-4">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Through integrated solutions spanning digital transformation, experiential marketing, 
+              and brand strategy, we empower organizations to achieve sustainable growth in an 
+              evolving commercial landscape.
+            </p>
+          </div>
+        </div>
+
+        {/* Stats Bar - Professional Metrics */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mt-16 pt-8"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { value: "95%", label: "Client Retention", sublabel: "Long-term partnerships" },
+              { value: "350+", label: "Projects Delivered", sublabel: "Global reach" },
+              { value: "₹15Cr+", label: "Revenue Generated", sublabel: "For clients" },
+              { value: "24/7", label: "Strategic Support", sublabel: "Dedicated teams" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
+                className="text-center group"
+              >
+                <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 group-hover:text-[#FF6600] transition-colors duration-300">
+                  {stat.value}
+                </div>
+                <div className="text-sm font-medium text-gray-700 uppercase tracking-wider mb-1">
+                  {stat.label}
+                </div>
+                <div className="text-xs text-gray-500">
+                  {stat.sublabel}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
+{/* DemoOne Component */}
+<DemoOne/>
+
+{/* Mission Section       <DemoOne/>*/}
+<section className="py-12 md:py-20">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div className="space-y-6 md:space-y-8">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-3 h-8 bg-[#FF6600] rounded-full"></div>
+            <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">Our Mission</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            Delivering <span className="text-[#FF6600]">Exceptional Value</span> Through Strategic Solutions
+          </h2>
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            We are committed to providing innovative marketing, event management, and digital solutions that drive measurable results and foster sustainable growth for our clients.
+          </p>
+        </div>
+
+        <div className="space-y-4 md:space-y-6">
+          <div className="p-4 md:p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-[#FF6600]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-[#FF6600] font-bold">01</span>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Strategic Brand Development</h4>
+                <p className="text-gray-600">Crafting compelling brand narratives that resonate with target audiences across multiple platforms.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 md:p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-[#FF6600]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-[#FF6600] font-bold">02</span>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Integrated Digital Solutions</h4>
+                <p className="text-gray-600">Comprehensive digital marketing, website development, and online presence management.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
 
-  return (
-    <div className="bg-white">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-4 py-10 lg:mt-15">
-          <motion.div
-            className="text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <Tag>Our Story</Tag>
-            <motion.h1
-              className="text-6xl font-bold mb-6 text-[#FF6600] mt-5"
-              whileHover={{ scale: 1.05 }}
-            >
-              {hero.title}
-            </motion.h1>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              {hero.heading}{' '}
-              <span className="text-[#FF6600] relative inline-block font-extrabold">
-                {hero.highlighted}
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FF6600]" viewBox="0 0 100 10">
-                  <motion.path
-                    d="M0,8 Q25,2 50,6 Q75,10 100,4"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2, delay: 0.5 }}
-                  />
-                </svg>
-              </span>
-            </h2>
-            <p className="text-xl text-gray-700 max-w-4xl mx-auto">{hero.description}</p>
-          </motion.div>
+      <div className="relative mt-8 lg:mt-0">
+        <div className="overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl">
+          <img
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Team collaboration in modern office"
+            className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8">
+            <h3 className="text-white text-xl md:text-2xl font-bold mb-2">Innovation in Action</h3>
+            <p className="text-white/90 text-sm md:text-base">Our team delivers cutting-edge solutions that transform business objectives into tangible results.</p>
+          </div>
         </div>
-      </section>
+        
+        {/* Decorative elements */}
+        <div className="hidden lg:block absolute -bottom-4 -right-4 w-24 h-24 bg-[#FF6600]/10 rounded-full -z-10"></div>
+        <div className="hidden lg:block absolute -top-4 -left-4 w-16 h-16 bg-gray-200 rounded-full -z-10"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      {/* Only render HumanoidSection on client side */}
-      {isClient && <HumanoidSection />}
+{/* Vision Section */}
+<section className="py-12 md:py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div className="relative order-2 lg:order-1 mt-8 lg:mt-0">
+        <div className="overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl">
+          <img
+            src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Strategic planning and vision"
+            className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8">
+            <h3 className="text-white text-xl md:text-2xl font-bold mb-2">Future-Forward Thinking</h3>
+            <p className="text-white/90 text-sm md:text-base">Shaping tomorrow's marketing landscape through innovation and strategic foresight.</p>
+          </div>
+        </div>
+        
+        {/* Decorative elements */}
+        <div className="hidden lg:block absolute -bottom-4 -left-4 w-24 h-24 bg-[#FF6600]/10 rounded-full -z-10"></div>
+        <div className="hidden lg:block absolute -top-4 -right-4 w-16 h-16 bg-gray-200 rounded-full -z-10"></div>
+      </div>
 
-      {/* Mission Section */}
-      <section className="py-20 mt-10">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            className="space-y-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
+      <div className="space-y-6 md:space-y-8 order-1 lg:order-2">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-3 h-8 bg-[#FF6600] rounded-full"></div>
+            <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">Our Vision</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            Leading the <span className="text-[#FF6600]">Future</span> of Marketing Excellence
+          </h2>
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            To become the premier global partner for brands seeking transformative marketing, event, and digital solutions that drive sustainable growth.
+          </p>
+        </div>
+
+        <div className="space-y-4 md:space-y-6">
+          <div className="flex items-start gap-4 p-4 md:p-6 bg-white rounded-xl border border-gray-200">
+            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+            </div>
             <div>
-              <h2 className="text-6xl font-bold text-[#FF6600] mb-4">{mission.title}</h2>
-              <p className="text-3xl font-bold text-gray-900 mb-4">{mission.subheading}</p>
-              <p className="text-xl text-gray-700 mb-6">{mission.description}</p>
-              <h3 className="text-xl text-[#FF6600] font-bold mb-6">{mission.highlight}</h3>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Global Market Leadership</h4>
+              <p className="text-gray-600">Expanding our presence across international markets while maintaining exceptional service quality.</p>
             </div>
-            <div className="space-y-4">
-              {mission.points.map((point, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-colors"
-                  custom={i + 2}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  <div className="w-6 h-6 bg-[#FF6600] rounded-full flex items-center justify-center mt-1">
-                    <ArrowRight className="w-3 h-3 text-white" />
-                  </div>
-                  <p className="text-gray-700 text-lg">{point}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="overflow-hidden rounded-3xl shadow-2xl relative">
-              <img
-                src={mission.image.url}
-                alt={mission.image.alt}
-                width={800}
-                height={384}
-                className="w-full h-96 object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="absolute bottom-0 w-full text-white bg-black/50 py-4 text-center">
-                <h3 className="text-2xl font-bold mb-2">{mission.image.captionTitle}</h3>
-                <p className="text-lg">{mission.image.captionText}</p>
-              </div>
+          <div className="flex items-start gap-4 p-4 md:p-6 bg-white rounded-xl border border-gray-200">
+            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="py-20 mt-10">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="overflow-hidden rounded-3xl shadow-2xl relative">
-              <img
-                src={vision.image.url}
-                alt={vision.image.alt}
-                width={800}
-                height={384}
-                className="w-full h-96 object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="absolute bottom-0 w-full text-white bg-black/50 py-4 text-center">
-                <h3 className="text-2xl font-bold mb-2">{vision.image.captionTitle}</h3>
-                <p className="text-lg">{vision.image.captionText}</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="space-y-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
             <div>
-              <h2 className="text-6xl font-bold text-[#FF6600] mb-4">{vision.title}</h2>
-              <p className="text-3xl font-bold text-gray-900 mb-4">{vision.subheading}</p>
-              <p className="text-xl text-gray-700 mb-6">{vision.description}</p>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Technology Innovation</h4>
+              <p className="text-gray-600">Leveraging cutting-edge technologies to deliver superior digital solutions and analytics.</p>
             </div>
-            <div className="space-y-4">
-              {vision.points.map((point, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-start gap-4 p-4 bg-white rounded-xl hover:bg-orange-50 transition-colors shadow-sm"
-                  custom={i + 2}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  <div className="w-6 h-6 bg-[#FF6600] rounded-full flex items-center justify-center mt-1">
-                    <ArrowRight className="w-3 h-3 text-white" />
-                  </div>
-                  <p className="text-gray-700 text-lg">{point}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
 
-      {/* Only render Timeline on client side */}
-      {isClient && <Timeline />}
+          <div className="flex items-start gap-4 p-4 md:p-6 bg-white rounded-xl border border-gray-200">
+            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Sustainable Partnerships</h4>
+              <p className="text-gray-600">Building long-term relationships based on trust, transparency, and mutual success.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <Timeline/>
 
       {/* Impact Section */}
       <section className="py-20">
@@ -334,7 +430,7 @@ const AboutUsContent = () => {
           </div>
 
           {/* Main Content */}
-          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden">
+          <div className="bg-orange-100 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden">
             
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -356,10 +452,10 @@ const AboutUsContent = () => {
                 viewport={{ once: true }}
               >
                 <div>
-                  <h3 className="text-3xl font-bold text-white mb-6">
+                  <h3 className="text-3xl font-bold text-black mb-6">
                     {impact.subheading}
                   </h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <p className="text-gray-900 text-lg leading-relaxed">
                     {impact.body}
                   </p>
                 </div>
@@ -369,14 +465,14 @@ const AboutUsContent = () => {
                   {impact.stats.map((stat, i) => (
                     <motion.div
                       key={i}
-                      className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-300"
+                      className="bg-white/5 backdrop-blur-sm border border-orange-500 rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-300"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 + i * 0.1 }}
                       whileHover={{ scale: 1.05 }}
                       viewport={{ once: true }}
                     >
-                      <div className="text-white font-semibold text-lg">
+                      <div className="text-black font-semibold text-lg">
                         {stat}
                       </div>
                     </motion.div>
@@ -404,7 +500,6 @@ const AboutUsContent = () => {
                         src="https://ik.imagekit.io/vinayak06/businesst.jpg"
                         alt="Brandbase Business Impact and Success"
                         className="w-full h-80 object-cover"
-                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
                     </div>
@@ -438,7 +533,7 @@ const AboutUsContent = () => {
             Your Growth. Our Mission.
           </div>
           <h2 className="text-6xl font-bold mb-6 text-gray-900">
-            Let's Create Something {' '}
+            Let’s Create Something {' '}
             <span className="text-[#FF6600] font-extrabold">That Stands Out.</span>
           </h2>
           <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
