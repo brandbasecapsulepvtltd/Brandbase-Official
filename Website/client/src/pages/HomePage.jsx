@@ -162,7 +162,7 @@ const HomePage = () => {
 
   // Render the complete page with fetched data
   return (
-    <main className="home-page">
+    <main className="home-page bg-white">
       {/* Hero Section */}
       {/*{heroSection && <HeroSection data={heroSection} />} */}
       <HeroSlider/>
