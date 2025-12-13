@@ -147,8 +147,8 @@ const HeroSlider = () => {
               {currentSlide.subtext}
             </p>
 
-            <button className="mt-4 text-sm font-bold tracking-widest text-black uppercase hover:text-gray-600 transition-colors">
-              JOIN US TO EXPLORE
+            <button className="mt-4 text-sm font-bold tracking-widest text-orange-500 uppercase hover:text-orange-600 transition-colors">
+              EXPLORE MORE
             </button>
           </div>
         </div>
