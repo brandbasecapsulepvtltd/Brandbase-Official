@@ -130,112 +130,166 @@ export default function Clients({ data }) {
       )}
 
       {/* Modal Popup */}
-      {selectedClient && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-all duration-300"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-heading"
-          aria-describedby="modal-description"
-        >
-          <div 
-            className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500 scale-95 opacity-0 animate-in fade-in-0 zoom-in-95"
-            style={{ animation: 'modalEnter 0.5s ease-out forwards' }}
+{selectedClient && (
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-all duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-heading"
+    aria-describedby="modal-description"
+    onClick={closeModal} // Close when clicking backdrop
+  >
+    <div
+      className="bg-white relative rounded-2xl md:rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl transform transition-all duration-500 scale-95 opacity-0 animate-in fade-in-0 zoom-in-95"
+      style={{ animation: "modalEnter 0.5s ease-out forwards" }}
+      onClick={(e) => e.stopPropagation()} // Prevent close when clicking inside modal
+    >
+      {/* Scrollable Container */}
+      <div className="overflow-y-auto custom-scrollbar">
+        
+        {/* Modal Header / Image Section */}
+        <div className="relative">
+          <figure>
+            <img
+              src={selectedClient.projectImage}
+              alt={`${selectedClient.name} project showcase`}
+              title={`${selectedClient.name} Success Story`}
+              className="w-full h-48 sm:h-64 md:h-80 object-cover"
+              loading="lazy"
+              width={800}
+              height={320}
+            />
+          </figure>
+          
+          {/* Close Button */}
+          <button
+            onClick={closeModal}
+            className="absolute top-3 right-3 md:top-4 md:right-4 bg-white/90 hover:bg-white rounded-full p-2 transition-all duration-300 hover:scale-110 shadow-sm z-10"
+            aria-label="Close modal"
           >
-            {/* Modal Header */}
-            <div className="relative">
-              <figure>
-                <img 
-                  src={selectedClient.projectImage} 
-                  alt={`${selectedClient.name} project showcase`}
-                  title={`${selectedClient.name} Success Story`}
-                  className="w-full h-64 md:h-80 object-cover"
-                  loading="lazy"
-                  width={800}
-                  height={320}
-                />
-              </figure>
-              <button 
-                onClick={closeModal}
-                className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 transition-all duration-300 hover:scale-110"
-                aria-label="Close modal"
+            <svg
+              className="w-5 h-5 md:w-6 md:h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Logo Badge */}
+          <div className="absolute -bottom-6 left-5 md:bottom-4 md:left-4 bg-white shadow-md rounded-xl p-2 md:p-4 border border-gray-100">
+            <img
+              src={selectedClient.logo}
+              alt={selectedClient.name}
+              className="w-12 h-12 md:w-16 md:h-16 object-contain"
+              width={64}
+              height={64}
+            />
+          </div>
+        </div>
+
+        {/* Modal Content */}
+        <div className="pt-10 px-5 pb-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+            <div>
+              <h2
+                id="modal-heading"
+                className="text-2xl md:text-3xl font-bold text-gray-900 mb-3"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4">
-                <img 
-                  src={selectedClient.logo} 
-                  alt={selectedClient.name}
-                  className="w-16 h-16 object-contain"
-                  width={64}
-                  height={64}
-                />
+                {selectedClient.name} Case Study
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2.5 py-1 bg-[#FF6600] text-white rounded-full text-xs md:text-sm font-medium">
+                  {selectedClient.service}
+                </span>
+                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs md:text-sm font-medium">
+                  {selectedClient.location}
+                </span>
+                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs md:text-sm font-medium">
+                  {selectedClient.date}
+                </span>
               </div>
             </div>
+            
+            {/* Results Highlight */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-3 md:p-4 mt-2 md:mt-0">
+              <p
+                id="modal-description"
+                className="text-green-800 font-semibold text-sm md:text-lg"
+              >
+                {selectedClient.results}
+              </p>
+            </div>
+          </div>
 
-            {/* Modal Content */}
-            <div className="p-6 md:p-8">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-                <div>
-                  <h2 id="modal-heading" className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                    {selectedClient.name} Case Study
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-[#FF6600] text-white rounded-full text-sm font-medium">
-                      {selectedClient.service}
-                    </span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
-                      {selectedClient.location}
-                    </span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
-                      {selectedClient.date}
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-green-50 border border-green-200 rounded-2xl p-4">
-                  <p id="modal-description" className="text-green-800 font-semibold text-lg">
-                    {selectedClient.results}
-                  </p>
-                </div>
+          <div className="prose max-w-none">
+            <p className="text-gray-600 md:text-gray-700 text-base md:text-lg leading-relaxed text-justify md:text-left">
+              {selectedClient.description}
+            </p>
+          </div>
+
+          {/* Key Achievements - Responsive Grid */}
+          <div
+            className="mt-8 grid grid-cols-3 gap-2 md:gap-4"
+            role="list"
+            aria-label="Key achievements"
+          >
+            <div
+              className="text-center p-2 md:p-4 bg-blue-50 rounded-xl md:rounded-2xl"
+              role="listitem"
+            >
+              <div className="text-lg md:text-2xl font-bold text-blue-600">
+                45%
               </div>
-
-              <div className="prose max-w-none">
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  {selectedClient.description}
-                </p>
+              <div className="text-[10px] md:text-sm text-blue-800 font-medium leading-tight">
+                Growth
               </div>
-
-              {/* Key Achievements */}
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4" role="list" aria-label="Key achievements">
-                <div className="text-center p-4 bg-blue-50 rounded-2xl" role="listitem">
-                  <div className="text-2xl font-bold text-blue-600">45%</div>
-                  <div className="text-sm text-blue-800">Growth Increase</div>
-                </div>
-                <div className="text-center p-4 bg-green-50 rounded-2xl" role="listitem">
-                  <div className="text-2xl font-bold text-green-600">6M</div>
-                  <div className="text-sm text-green-800">Project Duration</div>
-                </div>
-                <div className="text-center p-4 bg-purple-50 rounded-2xl" role="listitem">
-                  <div className="text-2xl font-bold text-purple-600">98%</div>
-                  <div className="text-sm text-purple-800">Client Satisfaction</div>
-                </div>
+            </div>
+            <div
+              className="text-center p-2 md:p-4 bg-green-50 rounded-xl md:rounded-2xl"
+              role="listitem"
+            >
+              <div className="text-lg md:text-2xl font-bold text-green-600">
+                6M
               </div>
-
-              {/* CTA Button */}
-              <div className="mt-8 text-center">
-                <button 
-                  className="py-3 px-8 bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6600]/25"
-                  aria-label={`View full case study for ${selectedClient.name}`}
-                >
-                  View Full Case Study
-                </button>
+              <div className="text-[10px] md:text-sm text-green-800 font-medium leading-tight">
+                Duration
+              </div>
+            </div>
+            <div
+              className="text-center p-2 md:p-4 bg-purple-50 rounded-xl md:rounded-2xl"
+              role="listitem"
+            >
+              <div className="text-lg md:text-2xl font-bold text-purple-600">
+                98%
+              </div>
+              <div className="text-[10px] md:text-sm text-purple-800 font-medium leading-tight">
+                Satisfaction
               </div>
             </div>
           </div>
+
+          {/* CTA Button */}
+          <div className="mt-8 text-center pb-2">
+            <button
+              className="w-full md:w-auto py-3 px-8 bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold rounded-xl md:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6600]/25 text-sm md:text-base"
+              aria-label={`View full case study for ${selectedClient.name}`}
+            >
+              View Full Case Study
+            </button>
+          </div>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Custom Animation */}
       <style jsx>{`
