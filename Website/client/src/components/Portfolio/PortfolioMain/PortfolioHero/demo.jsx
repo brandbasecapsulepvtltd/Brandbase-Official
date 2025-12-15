@@ -78,7 +78,7 @@ const PortfolioHero = () => {
             className="relative z-10 block h-auto w-full max-h-[600px] object-cover"
           >
             <source
-              src="https://videos.pexels.com/video-files/8084758/8084758-uhd_2560_1440_25fps.mp4"
+              src="https://www.pexels.com/download/video/6774633/"
               type="video/mp4"
             />
           </video>
