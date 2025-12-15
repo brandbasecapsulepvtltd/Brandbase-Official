@@ -59,8 +59,8 @@ router.post("/", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.SMTP_EMAIL,
-        pass: process.env.SMTP_PASS,
+        user: process.env.EMAIL_PASS,
+        pass: process.env.EMAIL_USER,
       },
     });
 
@@ -196,7 +196,7 @@ router.post("/", async (req, res) => {
 
     // Send notification email
     const notificationMailOptions = {
-      from: process.env.SMTP_EMAIL,
+      from: process.env.EMAIL_USER,
       to: "vinayakandhere4@gmail.com",
       subject: `🗓️ New Appointment Request - ${appointment.firstName} ${appointment.lastName}`,
       html: notificationEmailHtml,
@@ -311,8 +311,8 @@ router.post("/:id/respond", async (req, res) => {
     const transporter = nodemailer.createTransporter({
       service: "gmail",
       auth: {
-        user: process.env.SMTP_EMAIL,
-        pass: process.env.SMTP_PASS,
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
@@ -338,7 +338,7 @@ router.post("/:id/respond", async (req, res) => {
 
     // Send email to user
     const userMailOptions = {
-      from: process.env.SMTP_EMAIL,
+      from: process.env.EMAIL_USER,
       to: email,
       subject: `Your Appointment has been ${actionType.charAt(0).toUpperCase() + actionType.slice(1)}`,
       html: userEmailHtml,
@@ -349,7 +349,7 @@ router.post("/:id/respond", async (req, res) => {
     // Send email to assigned employee ONLY in accept case
     if (actionType === "accept" && assignedEmployee?.email) {
       const employeeMailOptions = {
-        from: process.env.SMTP_EMAIL,
+        from: process.env.EMAIL_USER,
         to: assignedEmployee.email,
         subject: "New Appointment Assigned to You",
         html: `
