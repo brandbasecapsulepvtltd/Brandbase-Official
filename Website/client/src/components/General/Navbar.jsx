@@ -254,8 +254,8 @@ const Navbar = () => {
           </div>
 
           {/* Other Menu Items */}
-          {["/careers", "/blogs", "/contact"].map((path, i) => {
-            const labels = ["Careers", "Blogs", "Contact Us"];
+          {["/careers", "/portfolio", "/blogs", "/contact"].map((path, i) => {
+            const labels = ["Careers", "Portfolio", "Blogs", "Contact Us"];
             return (
               <Link
                 key={path}
@@ -397,8 +397,8 @@ const Navbar = () => {
             </div>
 
             {/* Other Mobile Menu Items */}
-            {["/careers", "/blogs", "/contact"].map((path, i) => {
-              const labels = ["Careers", "Blogs", "Contact Us"];
+            {["/careers", "/portfolio", "/blogs", "/contact"].map((path, i) => {
+              const labels = ["Careers", "Portfolio", "Blogs", "Contact Us"];
               return (
                 <Link
                   key={path}
