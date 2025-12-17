@@ -1,10 +1,10 @@
 // src/components/Portfolio/PorfolioDetail/PortfolioDetailContent.jsx
 import React from 'react'
-import { AccordionComponent } from '@/components/Portfolio/PorfolioDetail/PortfolioDetailFaq/faq-accordion'
-import PortfolioDetailBento from '@/components/Portfolio/PorfolioDetail/PortfolioDetailBento'
-import ClientPortfolioSection from '@/components/Portfolio/PorfolioDetail/ClientPortfolioSection'
-import TestimonalsOne from '@/components/Portfolio/PorfolioDetail/PortfolioDetailTestimonal/Demo'
-import AnimatedHeroDemo from '@/components/Portfolio/PorfolioDetail/PortfolioDetailHero/Demo'
+import { AccordionComponent } from './PortfolioDetailFaq/faq-accordion'
+import PortfolioDetailBento from './PortfolioDetailBento'
+import ClientPortfolioSection from './ClientPortfolioSection'
+import TestimonalsOne from './PortfolioDetailTestimonal/Demo'
+import AnimatedHeroDemo from './PortfolioDetailHero/Demo'
 
 const PortfolioDetailContent = ({ portfolioItem }) => {
   // Destructure the data sections from the prop
