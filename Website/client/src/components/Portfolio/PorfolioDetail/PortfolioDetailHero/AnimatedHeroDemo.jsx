@@ -46,6 +46,6 @@ const AnimatedHeroDemo = ({ heroData }) => {
       </div>
     </>
   );
-};
+};  
 
 export default AnimatedHeroDemo;

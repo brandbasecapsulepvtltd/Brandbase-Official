@@ -4,7 +4,7 @@ import { AccordionComponent } from './PortfolioDetailFaq/faq-accordion'
 import PortfolioDetailBento from './PortfolioDetailBento'
 import ClientPortfolioSection from './ClientPortfolioSection'
 import TestimonalsOne from './PortfolioDetailTestimonal/Demo'
-import AnimatedHeroDemo from './PortfolioDetailHero/Demo'
+import AnimatedHeroDemo from './PortfolioDetailHero/AnimatedHeroDemo'
 
 const PortfolioDetailContent = ({ portfolioItem }) => {
   // Destructure the data sections from the prop
