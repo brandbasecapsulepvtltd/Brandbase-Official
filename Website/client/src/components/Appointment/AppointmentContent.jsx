@@ -109,6 +109,11 @@ export default function AppointmentContent() {
       return;
     }
 
+    if (!selectedDate || !selectedTime) {
+      setError("Please select both date and time to continue.");
+      return;
+    }
+
     setIsLoading(true);
     setError("");
 
@@ -123,39 +128,59 @@ export default function AppointmentContent() {
 
       console.log("Frontend sending payload:", payload);
 
-      const response = await axios.post("/api/appointments", payload);
+      // Use fetch API instead of axios for better error handling
+      const response = await fetch("https://brandbase.onrender.com/api/appointments", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
+
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      let data;
       
-      if (response.data.success) {
-        setShowSuccess(true);
-        setSelectedDate(null);
-        setSelectedTime("");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          organization: "",
-          region: "",
-          industry: "",
-          otherIndustry: "",
-          category: "",
-          otherCategory: "",
-          message: "",
-          country: "",
-          state: "",
-          city: "",
-          consent: false,
-          marketing: false,
-        });
-        setCurrentStep(1);
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+        console.log("Response data:", data);
       } else {
-        setError(response.data.message || "Failed to book appointment");
+        const text = await response.text();
+        console.log("Response text:", text);
+        throw new Error("Server returned non-JSON response");
+      }
+
+      // SUCCESS CONDITIONS - Handle both 200 and 201 status codes
+      if (response.ok || response.status === 200 || response.status === 201) {
+        // Also check if backend returns success flag
+        if (data.success === true || data.success === undefined) {
+          setShowSuccess(true);
+          console.log("Appointment created successfully!");
+        } else {
+          setError(data.message || "Appointment created but server returned unexpected response");
+        }
+      } else {
+        setError(data.message || `Server error: ${response.status}`);
       }
     } catch (err) {
-      console.error("Error booking appointment:", err);
-      const errorMessage = err.response?.data?.message || 
-        err.response?.data?.error || 
-        "Failed to book appointment. Please try again.";
-      setError(errorMessage);
+      console.error("Error details:", {
+        name: err.name,
+        message: err.message,
+        stack: err.stack
+      });
+      
+      // Handle specific error cases
+      if (err.name === "TypeError" && err.message.includes("fetch")) {
+        setError("Network error. Please check your internet connection.");
+      } else if (err.message.includes("JSON")) {
+        setError("Server returned invalid response. The appointment may have been created - please check your email.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -182,7 +207,29 @@ export default function AppointmentContent() {
             </p>
           </div>
           <button
-            onClick={() => setShowSuccess(false)}
+            onClick={() => {
+              setShowSuccess(false);
+              setSelectedDate(null);
+              setSelectedTime("");
+              setCurrentStep(1);
+              setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                organization: "",
+                region: "",
+                industry: "",
+                otherIndustry: "",
+                category: "",
+                otherCategory: "",
+                message: "",
+                country: "",
+                state: "",
+                city: "",
+                consent: false,
+                marketing: false,
+              });
+            }}
             className="bg-gradient-to-r from-orange-500 to-amber-500 text-white py-4 px-8 rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl"
           >
             Schedule Another Appointment
@@ -209,19 +256,16 @@ export default function AppointmentContent() {
 
         {/* Progress Steps */}
         <div className="flex items-center">
-  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>1</div>
-
-  <div
-    className={`flex-1 h-1 mx-4 transition-all duration-300 ${
-      currentStep > 1
-        ? 'bg-gradient-to-r from-orange-500 to-amber-500'
-        : 'bg-gray-300'
-    }`}
-  />
-
-  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>2</div>
-</div>
-
+          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>1</div>
+          <div
+            className={`flex-1 h-1 mx-4 transition-all duration-300 ${
+              currentStep > 1
+                ? 'bg-gradient-to-r from-orange-500 to-amber-500'
+                : 'bg-gray-300'
+            }`}
+          />
+          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>2</div>
+        </div>
 
         <div className="flex justify-center mb-8">
           <div className="text-center">

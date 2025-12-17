@@ -1,10 +1,11 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link"; // Next.js App Router import
 
 // Utility for merging class names
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
-// Array of portfolio services
+// Array of portfolio services with links
 const services = [
   {
     name: "WEB DEVELOPMENT",
@@ -12,31 +13,39 @@ const services = [
     description: "Scalable solutions with cutting-edge tech",
     imageSrc: "https://ik.imagekit.io/vinayak06/website_dev-removebg-preview.png",
     themeColor: "bg-gradient-to-br from-blue-50 to-white",
-    borderColor: "border-blue-200"
+    borderColor: "border-blue-200",
+    link: "portfolio/web-development", // Make sure this is a string
+    linkText: "Explore Web Development"
   },
   {
-    name: "DIGITAL MARKETING",
-    role: "Strategic Campaigns",
-    description: "Data-driven growth strategies",
+    name: "STALL DESIGN",
+    role: "Exhibition & Booth Design",
+    description: "Custom exhibition stall solutions",
     imageSrc: "https://ik.imagekit.io/vinayak06/stallde-removebg-preview.png",
     themeColor: "bg-gradient-to-br from-orange-50 to-white",
-    borderColor: "border-orange-200"
+    borderColor: "border-orange-200",
+    link: "portfolio/exhibition-stalls", // Make sure this is a string
+    linkText: "View Stall Designs"
   },
   {
-    name: "BRAND DESIGN",
-    role: "Visual Identity Creation",
-    description: "Memorable brand experiences",
-    imageSrc: "https://ik.imagekit.io/vinayak06/eventma-removebg-preview.png",
-    themeColor: "bg-gradient-to-br from-green-50 to-white",
-    borderColor: "border-green-200"
-  },
-  {
-    name: "CONTENT PRODUCTION",
+    name: "VIDEO PRODUCTION",
     role: "Professional Media Content",
     description: "Engaging video and visual content",
     imageSrc: "https://ik.imagekit.io/vinayak06/video-prod-removebg-preview.png",
     themeColor: "bg-gradient-to-br from-purple-50 to-white",
-    borderColor: "border-purple-200"
+    borderColor: "border-purple-200",
+    link: "portfolio/video-production", // Make sure this is a string
+    linkText: "See Our Videos"
+  },
+  {
+    name: "CONTENT WRITING",
+    role: "Strategic Content Creation",
+    description: "Compelling brand storytelling",
+    imageSrc: "https://ik.imagekit.io/vinayak06/content_writing-removebg-preview.png",
+    themeColor: "bg-gradient-to-br from-green-50 to-white",
+    borderColor: "border-green-200",
+    link: "portfolio/content-writing", // Make sure this is a string
+    linkText: "Read Our Content"
   }
 ];
 
@@ -87,9 +96,11 @@ const ServicesShowcase = ({
             {description}
           </p>
           
-          <button className="rounded-lg bg-[#FF6600] text-white hover:bg-[#E55A00] px-10 py-4 text-lg font-bold transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
-            {buttonText}
-          </button>
+          <Link href="/our-work">
+            <button className="rounded-lg bg-[#FF6600] text-white hover:bg-[#E55A00] px-10 py-4 text-lg font-bold transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
+              {buttonText}
+            </button>
+          </Link>
         </div>
 
         {/* Services Grid */}
@@ -104,58 +115,64 @@ const ServicesShowcase = ({
             {services.map((service, index) => (
               <motion.div
                 key={service.name}
-                className="relative"
+                className="relative group"
                 variants={cardVariants}
                 whileHover={{ 
                   y: -20,
                   transition: { type: "spring", stiffness: 300, damping: 20 }
                 }}
               >
-                <div className={cn(
-                  "relative pt-10 pb-6 px-6 rounded-2xl h-[380px] md:h-[400px] flex flex-col items-center justify-between text-center overflow-hidden border-2",
-                  service.themeColor,
-                  service.borderColor,
-                  "shadow-lg hover:shadow-2xl transition-all duration-300 group"
-                )}>
-                  {/* Service Badge */}
-                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-white text-gray-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
-                      Service {index + 1}
+                {/* Link wrapper for the entire card */}
+                <Link 
+                  href={service.link || "#"} // Fallback to "#" if undefined
+                  className="block"
+                  aria-label={`Learn more about ${service.name}`}
+                >
+                  <div className={cn(
+                    "relative pt-10 pb-6 px-6 rounded-2xl h-[420px] md:h-[440px] flex flex-col items-center justify-between text-center overflow-hidden border-2 cursor-pointer",
+                    service.themeColor,
+                    service.borderColor,
+                    "shadow-lg hover:shadow-2xl transition-all duration-300"
+                  )}>
+                    {/* Service Badge */}
+                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-white text-gray-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        Service {index + 1}
+                      </div>
+                    </div>
+
+                    {/* Service Content */}
+                    <div className="text-center z-10 mt-6">
+                      <h3 className="font-black text-xl lg:text-2xl text-gray-900 mb-2 tracking-tight">
+                        {service.name}
+                      </h3>
+                      <p className="text-[#FF6600] font-semibold text-sm md:text-base mb-3">
+                        {service.role}
+                      </p>
+                      <p className="text-gray-600 text-sm md:text-base mb-6">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    {/* Service Image */}
+                    <div className="relative w-full h-[180px] md:h-[200px] flex items-center justify-center">
+                      <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-50"></div>
+                      <img
+                        src={service.imageSrc}
+                        alt={service.name}
+                        className="h-full w-auto object-contain object-bottom transform group-hover:scale-110 transition-transform duration-500"
+                        style={{ 
+                          maxWidth: '90%',
+                          maxHeight: '90%',
+                        }}
+                      />
+                    </div>
+                    {/* Hover Effect Indicator */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-2 h-2 bg-[#FF6600] rounded-full animate-pulse"></div>
                     </div>
                   </div>
-
-                  {/* Service Content */}
-                  <div className="text-center z-10 mt-6">
-                    <h3 className="font-black text-xl lg:text-2xl text-gray-900 mb-2 tracking-tight">
-                      {service.name}
-                    </h3>
-                    <p className="text-[#FF6600] font-semibold text-sm md:text-base mb-3">
-                      {service.role}
-                    </p>
-                    <p className="text-gray-600 text-sm md:text-base mb-6">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Service Image */}
-                  <div className="relative w-full h-[180px] md:h-[200px] flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-50"></div>
-                    <img
-                      src={service.imageSrc}
-                      alt={service.name}
-                      className="h-full w-auto object-contain object-bottom transform group-hover:scale-110 transition-transform duration-500"
-                      style={{ 
-                        maxWidth: '90%',
-                        maxHeight: '90%',
-                      }}
-                    />
-                  </div>
-
-                  {/* Hover Effect Indicator */}
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-2 h-2 bg-[#FF6600] rounded-full animate-pulse"></div>
-                  </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </AnimatePresence>
@@ -167,16 +184,20 @@ const ServicesShowcase = ({
             Ready to transform your digital presence?
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <button
-              className="rounded-lg bg-[#FF6600] text-white hover:bg-[#E55A00] px-10 py-4 text-lg font-bold transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
-            >
-              Start Your Project
-            </button>
-            <button
-              className="rounded-lg border-2 border-gray-300 text-gray-700 hover:border-[#FF6600] hover:text-[#FF6600] px-10 py-4 text-lg font-bold transition-all duration-300 bg-transparent hover:bg-white"
-            >
-              View Case Studies
-            </button>
+            <Link href="/contact">
+              <button
+                className="rounded-lg bg-[#FF6600] text-white hover:bg-[#E55A00] px-10 py-4 text-lg font-bold transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Start Your Project
+              </button>
+            </Link>
+            <Link href="/case-studies">
+              <button
+                className="rounded-lg border-2 border-gray-300 text-gray-700 hover:border-[#FF6600] hover:text-[#FF6600] px-10 py-4 text-lg font-bold transition-all duration-300 bg-transparent hover:bg-white"
+              >
+                View Case Studies
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -187,4 +208,3 @@ const ServicesShowcase = ({
 ServicesShowcase.displayName = "ServicesShowcase";
 
 export { ServicesShowcase };
-

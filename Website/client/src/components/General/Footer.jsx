@@ -7,8 +7,11 @@ import {
   Instagram, 
   MapPin, 
   Mail, 
-  Phone
+  Phone,
+  Shield,
+  FileText
 } from 'lucide-react';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -114,11 +117,38 @@ const Footer = () => {
 
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="pt-8 text-center">
-          <p className="text-gray-500 text-sm">
-            © 2025 Brandbase Capsule. All rights reserved.
-          </p>
+        {/* Bottom Section with Links and Copyright */}
+        <div className="pt-8 border-t border-gray-100">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            {/* Legal Links */}
+            <div className="flex items-center gap-6">
+              <Link 
+                href="/terms" 
+                className="flex items-center gap-2 text-gray-500 hover:text-orange-400 transition-colors text-sm group"
+              >
+                <FileText size={16} className="group-hover:text-orange-400 transition-colors" />
+                <span>Terms & Conditions</span>
+              </Link>
+              <div className="h-4 w-px bg-gray-300"></div>
+              <Link 
+                href="/privacy-policy" 
+                className="flex items-center gap-2 text-gray-500 hover:text-orange-400 transition-colors text-sm group"
+              >
+                <Shield size={16} className="group-hover:text-orange-400 transition-colors" />
+                <span>Privacy Policy</span>
+              </Link>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-center md:text-right">
+              <p className="text-gray-500 text-sm">
+                © 2025 Brandbase Capsule. All rights reserved.
+              </p>
+              <p className="text-gray-400 text-xs mt-1">
+                Registered in India | GSTIN: 27AAFCB8754H1Z7
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -130,7 +160,7 @@ const Footer = () => {
 const FooterLink = ({ children, href = "#" }) => {
   return (
     <li>
-      <a 
+      <Link 
         href={href} 
         className="text-gray-800 text-sm inline-block relative group"
       >
@@ -138,7 +168,7 @@ const FooterLink = ({ children, href = "#" }) => {
           {children}
         </span>
         <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-orange-400 transition-all duration-300 ease-out group-hover:w-full"></span>
-      </a>
+      </Link>
     </li>
   );
 };
