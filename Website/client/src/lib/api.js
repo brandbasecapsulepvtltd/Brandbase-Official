@@ -1,6 +1,6 @@
 // Simple API client for Next.js
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://brandbase.onrender.com';
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_KEY = "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de";
 
 // Simple function to make API calls
 export async function apiCall(endpoint, options = {}) {
