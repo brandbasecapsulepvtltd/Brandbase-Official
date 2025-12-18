@@ -1,6 +1,6 @@
 // components/Employee/EmployeeManagementPage.jsx
 import React, { useEffect, useState } from "react";
-import axios from "../utils/axios";
+import adminAxios from "../utils/axios"; // ← CHANGED: Use admin axios
 import { 
   Users, 
   Plus, 
@@ -55,9 +55,9 @@ const EmployeeManagementPage = () => {
       });
 
       const [employeesRes, teamsRes, statsRes] = await Promise.all([
-        axios.get(`/api/employees?${params}`),
-        axios.get("/api/employees/teams"),
-        axios.get("/api/employees/stats/summary")
+        adminAxios.get(`/api/employees?${params}`), // ← CHANGED
+        adminAxios.get("/api/employees/teams"), // ← CHANGED
+        adminAxios.get("/api/employees/stats/summary") // ← CHANGED
       ]);
 
       setEmployees(employeesRes.data.data);
@@ -97,7 +97,7 @@ const EmployeeManagementPage = () => {
     }
 
     try {
-      await axios.delete(`/api/employees/${employeeId}`);
+      await adminAxios.delete(`/api/employees/${employeeId}`); // ← CHANGED
       alert("✅ Employee deleted successfully!");
       fetchData(pagination.current);
     } catch (error) {
@@ -108,7 +108,7 @@ const EmployeeManagementPage = () => {
 
   const handleToggleRecommend = async (employee) => {
     try {
-      await axios.put(`/api/employees/${employee._id}`, {
+      await adminAxios.put(`/api/employees/${employee._id}`, { // ← CHANGED
         isRecommended: !employee.isRecommended
       });
       alert(`✅ Employee ${employee.isRecommended ? 'removed from' : 'added to'} recommended list!`);
@@ -612,11 +612,11 @@ const EmployeeModal = ({ employee, teams, onClose, onSave }) => {
     try {
       if (employee) {
         // Update existing employee
-        await axios.put(`/api/employees/${employee._id}`, formData);
+        await adminAxios.put(`/api/employees/${employee._id}`, formData); // ← CHANGED
         alert("✅ Employee updated successfully!");
       } else {
         // Create new employee
-        await axios.post("/api/employees", formData);
+        await adminAxios.post("/api/employees", formData); // ← CHANGED
         alert("✅ Employee created successfully!");
       }
       onSave();
@@ -857,7 +857,7 @@ const TeamManagementModal = ({ teams, onClose }) => {
     setError("");
 
     try {
-      await axios.post("/api/employees/teams", {
+      await adminAxios.post("/api/employees/teams", { // ← CHANGED
         name: teamName,
         description: teamDescription
       });
@@ -879,7 +879,7 @@ const TeamManagementModal = ({ teams, onClose }) => {
     }
 
     try {
-      await axios.delete(`/api/employees/teams/${teamId}`);
+      await adminAxios.delete(`/api/employees/teams/${teamId}`); // ← CHANGED
       alert("✅ Team deleted successfully!");
       onClose(); // Refresh will happen in parent
     } catch (error) {

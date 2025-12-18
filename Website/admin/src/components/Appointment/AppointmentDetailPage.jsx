@@ -1,7 +1,7 @@
 // components/Appointment/AppointmentDetailPage.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "../../utils/axios";
+import adminAxios from "../../utils/axios";
 import { 
   ArrowLeft, 
   Calendar, 
@@ -108,9 +108,9 @@ const AppointmentDetailPage = () => {
       try {
         setLoading(true);
         const [appointmentRes, employeesRes, teamsRes] = await Promise.all([
-          axios.get(`/api/appointments/${id}`),
-          axios.get("/api/employees?isActive=true&limit=100"),
-          axios.get("/api/employees/teams?isActive=true")
+          adminAxios.get(`/api/appointments/${id}`),
+          adminAxios.get("/api/employees?isActive=true&limit=100"),
+          adminAxios.get("/api/employees/teams?isActive=true")
         ]);
 
         setAppointment(appointmentRes.data.data);
@@ -220,13 +220,13 @@ const AppointmentDetailPage = () => {
         })
       };
 
-      await axios.post(`/api/appointments/${id}/respond`, payload);
+      await adminAxios.post(`/api/appointments/${id}/respond`, payload);
       
       // Show success notification
       alert(`✅ ${actions[actionType].title} completed successfully!`);
       
       // Refresh appointment data
-      const res = await axios.get(`/api/appointments/${id}`);
+      const res = await adminAxios.get(`/api/appointments/${id}`);
       setAppointment(res.data.data);
       
       // Reset form
@@ -246,8 +246,8 @@ const AppointmentDetailPage = () => {
 
   const handleStatusUpdate = async (newStatus) => {
     try {
-      await axios.put(`/api/appointments/${id}`, { status: newStatus });
-      const res = await axios.get(`/api/appointments/${id}`);
+      await adminAxios.put(`/api/appointments/${id}`, { status: newStatus });
+      const res = await adminAxios.get(`/api/appointments/${id}`);
       setAppointment(res.data.data);
       alert(`✅ Status updated to ${newStatus} successfully!`);
     } catch (error) {
@@ -381,7 +381,7 @@ const AppointmentDetailPage = () => {
               <button
                 onClick={async () => {
                   try {
-                    await axios.put(`/api/appointments/${id}`, { adminNotes });
+                    await adminAxios.put(`/api/appointments/${id}`, { adminNotes });
                     alert("✅ Notes saved successfully!");
                   } catch (error) {
                     setError("Failed to save notes.");

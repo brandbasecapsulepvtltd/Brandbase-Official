@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import adminAxios from '../utils/axios';
 import {
   Plus, Search, Edit, Trash2, Eye,
-  Filter, Calendar, User, Tag, Upload,
+  Filter, Upload,
   ChevronLeft, ChevronRight, CheckCircle,
   XCircle, AlertCircle, Loader2, FileText
 } from 'lucide-react';
 
-const API_BASE_URL = 'https://brandbase.onrender.com/api';
+//const API_BASE_URL = 'https://brandbase.onrender.com/api';
 
 const BlogManagement = () => {
   const [blogs, setBlogs] = useState([]);
@@ -64,7 +64,7 @@ const BlogManagement = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get(`${API_BASE_URL}/blogs`);
+      const response = await adminAxios.get(`/api/blogs`);
       setBlogs(response.data.data);
       
       // Calculate pagination
@@ -81,7 +81,7 @@ const BlogManagement = () => {
   // Fetch categories
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/blogs/categories`);
+      const response = await adminAxios.get(`/api/blogs/categories`);
       setCategories(response.data.data);
     } catch (err) {
       console.error('Error fetching categories:', err);
@@ -369,10 +369,10 @@ const BlogManagement = () => {
       setLoading(true);
       
       if (modalType === 'create') {
-        await axios.post(`${API_BASE_URL}/blogs`, formData);
+        await adminAxios.post('/api/blogs', formData);
         setSuccessMessage('Blog created successfully!');
       } else {
-        await axios.put(`${API_BASE_URL}/blogs/${currentBlog._id}`, formData);
+        await adminAxios.put(`/api/blogs/${currentBlog._id}`, formData);
         setSuccessMessage('Blog updated successfully!');
       }
       
@@ -394,7 +394,7 @@ const BlogManagement = () => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`${API_BASE_URL}/blogs/${deleteConfirm}`);
+      await adminAxios.delete(`/api/blogs/${deleteConfirm}`);
       setSuccessMessage('Blog deleted successfully!');
       setDeleteConfirm(null);
       await fetchBlogs();

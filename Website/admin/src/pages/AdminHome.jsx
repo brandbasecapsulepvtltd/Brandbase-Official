@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import adminAxios from '../utils/axios';
 import { 
   Plus, 
   Edit, 
@@ -35,7 +35,7 @@ const AdminHome = () => {
   const fetchHomePageData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/homepage`);
+      const response = await adminAxios.get('/api/homepage');
       
       const data = response.data.data || response.data;
       
@@ -71,7 +71,7 @@ const AdminHome = () => {
   const saveHomePageData = async () => {
     setSaving(true);
     try {
-      const response = await axios.put(`${API_BASE_URL}/homepage`, homePageData);
+      const response = await adminAxios.put('/api/homepage', homePageData);
       
       if (response.data.success) {
         alert('Data saved successfully!');

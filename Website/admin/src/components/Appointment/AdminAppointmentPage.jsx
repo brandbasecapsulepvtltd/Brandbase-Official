@@ -1,6 +1,6 @@
 // components/Appointment/AdminAppointmentPage.jsx
 import React, { useEffect, useState } from "react";
-import axios from "../../utils/axios";
+import adminAxios from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 import { 
   Calendar, 
@@ -55,8 +55,8 @@ const AdminAppointmentPage = () => {
       });
 
       const [appointmentsRes, statsRes] = await Promise.all([
-        axios.get(`/api/appointments?${params}`),
-        axios.get("/api/appointments/stats/summary")
+        adminAxios.get(`/api/appointments?${params}`),
+        adminAxios.get("/api/appointments/stats/summary")
       ]);
 
       setAppointments(appointmentsRes.data.data);

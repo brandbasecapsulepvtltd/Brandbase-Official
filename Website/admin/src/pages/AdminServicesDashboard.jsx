@@ -1,8 +1,7 @@
 // AdminServicesDashboard.jsx
-'use client';
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import adminAxios from '../utils/axios';
 import { 
   Plus, 
   Edit, 
@@ -209,7 +208,7 @@ const AdminServicesDashboard = () => {
     try {
       setLoading(true);
       setError('');
-      const response = await axios.get(`${API_URL}/services`);
+      const response = await adminAxios.get('/api/services');
       
       // Backend returns { success: true, data: [...] }
       setServices(response.data.data || []);
@@ -233,7 +232,7 @@ const AdminServicesDashboard = () => {
   // Fetch categories from backend
   const fetchCategoriesFromAPI = async () => {
     try {
-      const response = await axios.get(`${API_URL}/services/categories`);
+      const response = await adminAxios.get('/api/services/categories');
       setCategories(response.data.data || []);
     } catch (err) {
       console.error('Error fetching categories:', err);
@@ -451,11 +450,11 @@ const AdminServicesDashboard = () => {
       
       if (selectedService) {
         // Update existing service
-        await axios.put(`${API_URL}/services/${selectedService._id}`, dataToSend);
+        await adminAxios.put('/api/services/${selectedService._id}', dataToSend);
         setSuccess('Service updated successfully!');
       } else {
         // Create new service
-        await axios.post(`${API_URL}/services`, dataToSend);
+        await adminAxios.post('/api/services', dataToSend);
         setSuccess('Service created successfully!');
       }
       
@@ -539,7 +538,7 @@ const AdminServicesDashboard = () => {
     if (!selectedService) return;
     
     try {
-      await axios.delete(`${API_URL}/services/${selectedService._id}`);
+      await adminAxios.delete(`/api/services/${selectedService._id}`);
       setSuccess('Service deleted successfully!');
       
       // Refresh services
@@ -560,7 +559,7 @@ const AdminServicesDashboard = () => {
   const handleBulkImport = async () => {
     try {
       const data = JSON.parse(bulkJson);
-      await axios.post(`${API_URL}/services/bulk`, data);
+      await adminAxios.post('/api/services/bulk', data);
       setSuccess('Services imported successfully!');
       setIsImportModalOpen(false);
       setBulkJson('');
@@ -809,7 +808,7 @@ const AdminServicesDashboard = () => {
       
       {success && (
         <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg flex items-center">
-          <CheckCircle className="w-5 h-5 mr-2" />
+          <CheckCircle className="w-5 h-5 mr-2"/>
           {success}
           <button onClick={() => setSuccess('')} className="ml-auto">
             <X className="w-5 h-5" />
