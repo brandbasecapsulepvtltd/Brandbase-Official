@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "@/lib/axios";
+import { api } from "@/lib/api"; // Import your API client
 import DatePicker from "react-datepicker";
 import {
   format,
@@ -124,62 +124,42 @@ export default function AppointmentContent() {
         ...formData,
         appointmentDate: formattedDate,
         appointmentTime: selectedTime,
+        name: `${formData.firstName} ${formData.lastName}`, // Combine first and last name
+        phone: "N/A", // Add phone field if your backend expects it
       };
 
       console.log("Frontend sending payload:", payload);
 
-      // Use fetch API instead of axios for better error handling
-      const response = await fetch("https://brandbase.onrender.com/api/appointments", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
-
-      console.log("Response status:", response.status);
-      console.log("Response ok:", response.ok);
-
-      // Check if response is JSON
-      const contentType = response.headers.get("content-type");
-      let data;
+      // Use your API client instead of direct fetch
+      const response = await api.createAppointment(payload);
       
-      if (contentType && contentType.includes("application/json")) {
-        data = await response.json();
-        console.log("Response data:", data);
-      } else {
-        const text = await response.text();
-        console.log("Response text:", text);
-        throw new Error("Server returned non-JSON response");
-      }
+      console.log("API Response:", response);
 
-      // SUCCESS CONDITIONS - Handle both 200 and 201 status codes
-      if (response.ok || response.status === 200 || response.status === 201) {
-        // Also check if backend returns success flag
-        if (data.success === true || data.success === undefined) {
-          setShowSuccess(true);
-          console.log("Appointment created successfully!");
-        } else {
-          setError(data.message || "Appointment created but server returned unexpected response");
-        }
+      // Check if appointment was created successfully
+      if (response.success === true || response.status === 200 || response.status === 201) {
+        setShowSuccess(true);
+        console.log("Appointment created successfully!");
       } else {
-        setError(data.message || `Server error: ${response.status}`);
+        // Handle different error formats from API
+        const errorMessage = response.message || 
+                            response.error?.message || 
+                            "Failed to create appointment. Please try again.";
+        setError(errorMessage);
       }
     } catch (err) {
-      console.error("Error details:", {
+      console.error("Error creating appointment:", {
         name: err.name,
         message: err.message,
         stack: err.stack
       });
       
       // Handle specific error cases
-      if (err.name === "TypeError" && err.message.includes("fetch")) {
-        setError("Network error. Please check your internet connection.");
-      } else if (err.message.includes("JSON")) {
-        setError("Server returned invalid response. The appointment may have been created - please check your email.");
+      if (err.message?.includes("401") || err.message?.includes("403")) {
+        setError("Authentication failed. Please check your API key configuration.");
+      } else if (err.message?.includes("Network") || err.message?.includes("fetch")) {
+        setError("Network error. Please check your internet connection and try again.");
       } else {
-        setError("An unexpected error occurred. Please try again.");
+        setError(err.message || "An unexpected error occurred. Please try again.");
       }
     } finally {
       setIsLoading(false);
@@ -255,16 +235,20 @@ export default function AppointmentContent() {
         </div>
 
         {/* Progress Steps */}
-        <div className="flex items-center">
+        <div className="flex items-center justify-center mb-6">
           <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>1</div>
           <div
-            className={`flex-1 h-1 mx-4 transition-all duration-300 ${
+            className={`flex-1 h-1 mx-4 transition-all duration-300 max-w-40 ${
               currentStep > 1
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500'
                 : 'bg-gray-300'
             }`}
           />
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>2</div>
+          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold ${
+            currentStep > 1 
+              ? 'bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg'
+              : 'bg-gray-100 border-gray-300 text-gray-400'
+          }`}>2</div>
         </div>
 
         <div className="flex justify-center mb-8">

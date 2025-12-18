@@ -51,6 +51,7 @@ export const api = {
     body: data
   }),
 
+
   // Services
   getServices: () => apiCall('/services'),
   getServiceByCategorySlug: (category, slug) => 
