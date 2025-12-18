@@ -1,18 +1,13 @@
 import { notFound } from 'next/navigation';
 import ServicesDetail from '@/pages/ServicesDetail';
-
-const API_URL = 'https://brandbase.onrender.com/api';
+import { api } from '@/lib/api';
 
 // 1. Keep generateStaticParams (This makes the page Static)
 export async function generateStaticParams() {
   try {
-    const response = await fetch(`${API_URL}/services/all`, { 
-       // Optional: Cache this list for a while so build is faster
-       next: { revalidate: 10 } 
-    });
-    const { data } = await response.json();
-    
-    const services = data || [];
+    // Use the API client
+    const servicesData = await api.getServices();
+    const services = servicesData.data || [];
     
     return services.map((service) => ({
       category: service.category,
@@ -24,64 +19,76 @@ export async function generateStaticParams() {
   }
 }
 
+// 2. Generate Metadata
 export async function generateMetadata({ params }) {
   const { category, slug } = await params;
   
   try {
-    // 2. FIX: Remove 'cache: no-store'. Use revalidate instead.
-    const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
-      next: { revalidate: 10 } // Checks for updates every 1 hour
-    });
+    // Fetch service data
+    const serviceData = await api.getService(`${category}/${slug}`);
     
-    if (!response.ok) return { title: 'Service Not Found' };
+    if (!serviceData.success || !serviceData.data) {
+      return { 
+        title: 'Service Not Found',
+        description: 'The requested service could not be found.' 
+      };
+    }
     
-    const { data: service } = await response.json();
+    const service = serviceData.data;
     
-    if (!service) return { title: 'Service Not Found' };
+    // Format category for title (e.g., "web-development" → "Web Development")
+    const formattedCategory = category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
     
     return {
-      title: `${service.data.hero.headline} | ${category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`,
-      description: service.data.hero.subHeadline,
+      title: `${service.title} | ${formattedCategory} | BrandBase`,
+      description: service.description || service.subHeadline || `${service.title} services from BrandBase`,
+      keywords: service.keywords || [category, service.title, 'services'].join(', '),
       openGraph: {
-        title: service.data.hero.headline,
-        description: service.data.hero.subHeadline,
+        title: service.title,
+        description: service.description || service.subHeadline || '',
         type: 'website',
         url: `/services/${category}/${slug}`,
+        images: service.image ? [{ url: service.image }] : [],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: service.title,
+        description: service.description || service.subHeadline || '',
+        images: service.image ? [service.image] : [],
       },
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
     return {
-      title: 'Service',
-      description: 'Service details'
+      title: 'Service Details | BrandBase',
+      description: 'View detailed information about our services'
     };
   }
 }
 
+// 3. Main Page Component
 export default async function ServiceDetailPage({ params }) {
   const { category, slug } = await params;
   
   try {
-    // 3. FIX: Remove 'cache: no-store'. Use revalidate instead.
-    const response = await fetch(`${API_URL}/services/${category}/${slug}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      next: { revalidate: 10 } // Checks for updates every 1 hour
-    });
+    // Fetch service data using API client
+    const response = await api.getService(`${category}/${slug}`);
     
-    if (!response.ok) {
-      console.error(`API Error: ${response.status}`);
+    if (!response.success) {
+      console.error('API Error:', response.message);
       notFound();
     }
     
-    const { data: service } = await response.json();
+    const service = response.data;
     
-    if (!service || !service.data) {
+    if (!service) {
       notFound();
     }
     
-    return <ServicesDetail data={service.data} />;
+    return <ServicesDetail data={service} category={category} slug={slug} />;
   } catch (error) {
     console.error('Error fetching service data:', error);
     notFound();
