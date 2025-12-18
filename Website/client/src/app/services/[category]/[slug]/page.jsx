@@ -2,12 +2,11 @@ import { notFound } from 'next/navigation';
 import ServicesDetail from '@/pages/ServicesDetail';
 import { api } from '@/lib/api';
 
-// 1. Keep generateStaticParams (This makes the page Static)
+// Generate static params
 export async function generateStaticParams() {
   try {
-    // Use the API client
-    const servicesData = await api.getServices();
-    const services = servicesData.data || [];
+    const response = await api.getServices();
+    const services = response.data || [];
     
     return services.map((service) => ({
       category: service.category,
@@ -19,76 +18,63 @@ export async function generateStaticParams() {
   }
 }
 
-// 2. Generate Metadata
+// Generate metadata
 export async function generateMetadata({ params }) {
   const { category, slug } = await params;
   
   try {
-    // Fetch service data
-    const serviceData = await api.getService(`${category}/${slug}`);
+    const response = await api.getServiceByCategorySlug(category, slug);
     
-    if (!serviceData.success || !serviceData.data) {
-      return { 
-        title: 'Service Not Found',
-        description: 'The requested service could not be found.' 
-      };
+    // Normalize data: handle both Array and Object responses
+    const rawData = response.data;
+    const serviceWrapper = Array.isArray(rawData) ? rawData[0] : rawData;
+    const service = serviceWrapper?.data;
+    
+    if (!service || !service.hero) {
+      return { title: 'Service Details | BrandBase' };
     }
     
-    const service = serviceData.data;
-    
-    // Format category for title (e.g., "web-development" → "Web Development")
     const formattedCategory = category
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
     
     return {
-      title: `${service.title} | ${formattedCategory} | BrandBase`,
-      description: service.description || service.subHeadline || `${service.title} services from BrandBase`,
-      keywords: service.keywords || [category, service.title, 'services'].join(', '),
-      openGraph: {
-        title: service.title,
-        description: service.description || service.subHeadline || '',
-        type: 'website',
-        url: `/services/${category}/${slug}`,
-        images: service.image ? [{ url: service.image }] : [],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: service.title,
-        description: service.description || service.subHeadline || '',
-        images: service.image ? [service.image] : [],
-      },
+      title: `${service.hero.headline} | ${formattedCategory}`,
+      description: service.hero.subHeadline,
     };
   } catch (error) {
-    console.error('Error generating metadata:', error);
-    return {
-      title: 'Service Details | BrandBase',
-      description: 'View detailed information about our services'
-    };
+    return { title: 'Service Details | BrandBase' };
   }
 }
 
-// 3. Main Page Component
+// Main page component
 export default async function ServiceDetailPage({ params }) {
   const { category, slug } = await params;
   
   try {
-    // Fetch service data using API client
-    const response = await api.getService(`${category}/${slug}`);
+    const response = await api.getServiceByCategorySlug(category, slug);
     
-    if (!response.success) {
-      console.error('API Error:', response.message);
+    // 1. Identify if we have data at all
+    const rawData = response.data;
+    
+    // 2. Normalize the data: If it's an array, take the first item. If not, use it directly.
+    const serviceWrapper = Array.isArray(rawData) ? rawData[0] : rawData;
+
+    console.log('Processed Service Data:', {
+      found: !!serviceWrapper,
+      hasNestedData: !!serviceWrapper?.data
+    });
+
+    // 3. Validation: Check if the "data" property exists inside the wrapper
+    if (!serviceWrapper || !serviceWrapper.data) {
+      console.error('Service data structure invalid or missing');
       notFound();
     }
     
-    const service = response.data;
+    // Pass the nested data object to ServicesDetail
+    return <ServicesDetail data={serviceWrapper.data} />;
     
-    if (!service) {
-      notFound();
-    }
-    
-    return <ServicesDetail data={service} category={category} slug={slug} />;
   } catch (error) {
     console.error('Error fetching service data:', error);
     notFound();
