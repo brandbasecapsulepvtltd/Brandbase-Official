@@ -15,7 +15,11 @@ const transporter = nodemailer.createTransport({
 });
 
 // ✅ POST - Create appointment
+// ✅ POST - Create appointment (FIXED VERSION)
+
 router.post("/", async (req, res) => {
+  let appointment;
+  
   try {
     const {
       firstName,
@@ -73,21 +77,12 @@ router.post("/", async (req, res) => {
       status: 'pending'
     };
 
-    const appointment = new Appointment(appointmentData);
+    appointment = new Appointment(appointmentData);
     await appointment.save();
 
-    // Send notification email
-    const notificationEmailHtml = createNotificationEmail(appointment);
-    
-    const notificationMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Send to admin
-      subject: `📅 New Appointment Request - ${appointment.firstName} ${appointment.lastName}`,
-      html: notificationEmailHtml,
-    };
+    console.log("✅ Appointment saved to database:", appointment._id);
 
-    await transporter.sendMail(notificationMailOptions);
-
+    // 🚨 CRITICAL FIX: Send response FIRST, then send email in background
     res.status(201).json({ 
       success: true,
       message: "Appointment booked successfully!",
@@ -98,15 +93,81 @@ router.post("/", async (req, res) => {
       }
     });
 
-  } catch (error) {
-    console.error("Error saving appointment:", error);
-    res.status(500).json({ 
-      success: false,
-      message: "Internal server error",
-      error: error.message 
+    // 🔥 EMAIL IN BACKGROUND (non-blocking)
+    // This happens AFTER the response is sent
+    sendEmailInBackground(appointment).catch(emailError => {
+      console.error("❌ Email failed (but appointment was saved):", emailError.message);
+      // Don't throw error - appointment is already saved
     });
+
+  } catch (error) {
+    console.error("❌ Error saving appointment:", error);
+    
+    // Special handling for email errors
+    if (error.message.includes('EMAIL_FAILED_BUT_APPOINTMENT_SAVED')) {
+      // Appointment was saved but email failed
+      res.status(201).json({ 
+        success: true,
+        message: "Appointment booked! (Email notification failed)",
+        data: {
+          id: appointment?._id,
+          date: appointment?.date,
+          time: appointment?.time
+        }
+      });
+    } else {
+      res.status(500).json({ 
+        success: false,
+        message: "Internal server error",
+        error: error.message 
+      });
+    }
   }
 });
+
+// Helper function for background email sending
+async function sendEmailInBackground(appointment) {
+  try {
+    console.log("📧 Attempting to send email for appointment:", appointment._id);
+    
+    const notificationEmailHtml = createNotificationEmail(appointment);
+    
+    const notificationMailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Send to admin
+      subject: `📅 New Appointment Request - ${appointment.firstName} ${appointment.lastName}`,
+      html: notificationEmailHtml,
+    };
+
+    // Add timeout to email sending
+    const emailPromise = transporter.sendMail(notificationMailOptions);
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Email timeout')), 10000); // 10 second timeout
+    });
+
+    await Promise.race([emailPromise, timeoutPromise]);
+    
+    console.log("✅ Email sent successfully for appointment:", appointment._id);
+    
+  } catch (emailError) {
+    console.error("❌ Email error for appointment", appointment._id, ":", emailError.message);
+    
+    // Don't throw the error - just log it
+    // We'll mark this in the database that email failed
+    try {
+      await Appointment.findByIdAndUpdate(appointment._id, {
+        emailSent: false,
+        emailError: emailError.message,
+        updatedAt: Date.now()
+      });
+    } catch (updateError) {
+      console.error("Failed to update email status:", updateError.message);
+    }
+    
+    // Throw a special error that won't crash the main request
+    throw new Error('EMAIL_FAILED_BUT_APPOINTMENT_SAVED');
+  }
+}
 
 // ✅ GET - Fetch appointments with filtering
 router.get("/", async (req, res) => {

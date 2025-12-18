@@ -103,63 +103,69 @@ export default function AppointmentContent() {
     );
   };
 
-  const handleSubmit = async () => {
-    if (!isFormValid()) {
-      setError("Please fill in all required fields correctly.");
-      return;
+const handleSubmit = async () => {
+  if (!isFormValid()) {
+    setError("Please fill in all required fields correctly.");
+    return;
+  }
+
+  // CRITICAL FIX: Add null check for selectedDate
+  if (!selectedDate || !selectedTime) {
+    setError("Please select both date and time to continue.");
+    return;
+  }
+
+  setIsLoading(true);
+  setError("");
+
+  try {
+    const formattedDate = selectedDate.toISOString();
+    
+    const payload = {
+      ...formData,
+      appointmentDate: formattedDate,  // Backend expects this
+      appointmentTime: selectedTime,   // Backend expects this
+    };
+
+    console.log("Frontend sending payload:", payload);
+
+    const response = await axios.post("/api/appointments", payload);
+    
+    if (response.data.success) {
+      setShowSuccess(true);
+      setSelectedDate(null);
+      setSelectedTime("");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        organization: "",
+        region: "",
+        industry: "",
+        otherIndustry: "",
+        category: "",
+        otherCategory: "",
+        message: "",
+        country: "",
+        state: "",
+        city: "",
+        consent: false,
+        marketing: false,
+      });
+      setCurrentStep(1);
+    } else {
+      setError(response.data.message || "Failed to book appointment");
     }
-
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const formattedDate = selectedDate.toISOString();
-      
-      const payload = {
-        ...formData,
-        appointmentDate: formattedDate,
-        appointmentTime: selectedTime,
-      };
-
-      console.log("Frontend sending payload:", payload);
-
-      const response = await axios.post("/api/appointments", payload);
-      
-      if (response.data.success) {
-        setShowSuccess(true);
-        setSelectedDate(null);
-        setSelectedTime("");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          organization: "",
-          region: "",
-          industry: "",
-          otherIndustry: "",
-          category: "",
-          otherCategory: "",
-          message: "",
-          country: "",
-          state: "",
-          city: "",
-          consent: false,
-          marketing: false,
-        });
-        setCurrentStep(1);
-      } else {
-        setError(response.data.message || "Failed to book appointment");
-      }
-    } catch (err) {
-      console.error("Error booking appointment:", err);
-      const errorMessage = err.response?.data?.message || 
-        err.response?.data?.error || 
-        "Failed to book appointment. Please try again.";
-      setError(errorMessage);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (err) {
+    console.error("Error booking appointment:", err);
+    const errorMessage = err.response?.data?.message || 
+      err.response?.data?.error || 
+      "Failed to book appointment. Please try again.";
+    setError(errorMessage);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   if (showSuccess) {
     return (

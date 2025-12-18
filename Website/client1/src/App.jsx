@@ -24,6 +24,7 @@ import EventsExhibition from "./Components/WebsiteDesign/EventsExhibition";
 import DynamicStatic from "./Pages/DynamicStatic";
 import BusinessWeb from "./Pages/Service/WebsiteDesign/BusinessWeb";
 import Demo from "./Components/Location/demo";
+import PortfolioContent from "./Components/Portfolio/PortfolioMain/PortfolioContent";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="/services/av-production" element={<AVProduction/>} />
           <Route path="/services/events-exhibition/stall-design" element={<StallDesign/>}/>
           <Route path="/appointment" element={<AppointmentContent/>} />
+          <Route path="/portfolio" element={<PortfolioContent/>} />
           <Route path="/blogs" element={<BlogsContent/>}/>
           <Route path="/blogs/:slug" element={<BlogDetailPage/>}/>
 

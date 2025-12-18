@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import axios from 'axios';
+// Remove axios import since we're using our API client
+// import axios from 'axios';
 import HeroSection from '@/components/homeComponents/HeroSection';
 import AboutUs from '@/components/homeComponents/AboutUs';
 import BrandElevation from '@/components/homeComponents/BrandElevation';
@@ -12,14 +13,8 @@ import CTASection from '@/components/homeComponents/CTASection';
 import TestimonialSlider from '@/components/homeComponents/TestimonalSlider';
 import ServiceSlider from '@/components/ServiceSlider';
 import HeroSlider from '@/components/homeComponents/HeroSlider';
-
-// API configuration
-const API_CONFIG = {
-  baseURL: 'https://brandbase.onrender.com/api',
-  timeout: 10000,
-};
-
-const api = axios.create(API_CONFIG);
+// Import the API client
+import { api } from '@/lib/api';
 
 const HomePage = () => {
   const [homePageData, setHomePageData] = useState(null);
@@ -50,10 +45,15 @@ const HomePage = () => {
       setLoading(true);
       setError(null);
       
-      const response = await api.get('/homepage');
+      // Use the API client instead of axios directly
+      const response = await api.getHomepage();
       
-      if (response.data.success && response.data.data) {
-        setHomePageData(response.data.data);
+      // Check the response structure (adjust based on your API response)
+      if (response.success && response.data) {
+        setHomePageData(response.data);
+      } else if (response.data) {
+        // If the response is the data directly
+        setHomePageData(response.data);
       } else {
         throw new Error('Invalid data format received from server');
       }
@@ -61,14 +61,16 @@ const HomePage = () => {
       console.error('Error fetching home page data:', err);
       
       // Handle different types of errors
-      if (err.code === 'NETWORK_ERROR' || err.code === 'ECONNREFUSED') {
+      if (err.name === 'TypeError' && err.message.includes('fetch')) {
         setError('Unable to connect to server. Please make sure the backend is running.');
-      } else if (err.response?.status === 404) {
+      } else if (err.message?.includes('401') || err.message?.includes('403')) {
+        setError('Authentication failed. Please check your API key configuration.');
+      } else if (err.message?.includes('404')) {
         setError('Home page data not found. Please seed the database first.');
-      } else if (err.response?.status >= 500) {
+      } else if (err.message?.includes('500')) {
         setError('Server error. Please try again later.');
       } else {
-        setError(err.response?.data?.message || err.message || 'An unexpected error occurred');
+        setError(err.message || 'An unexpected error occurred');
       }
     } finally {
       setLoading(false);
@@ -118,11 +120,11 @@ const HomePage = () => {
               Retry Loading
             </button>
             <div className="text-sm text-gray-500">
-              <h2 className="font-medium mb-2">Make sure:</h2>
+              <h2 className="font-medium mb-2">Troubleshooting:</h2>
               <ul className="list-disc list-inside mt-2 text-left" role="list">
                 <li role="listitem">Backend server is running on port 5000</li>
+                <li role="listitem">API key is properly set in .env.local</li>
                 <li role="listitem">Database is properly seeded</li>
-                <li role="listitem">API endpoint /api/homepage is accessible</li>
               </ul>
             </div>
           </div>
@@ -144,7 +146,10 @@ const HomePage = () => {
             aria-hidden="true"
           >❓</div>
           <h1 className="text-2xl font-bold text-gray-800 mb-2">No Data Available</h1>
-          <p className="text-gray-600">Please check the backend configuration.</p>
+          <p className="text-gray-600">
+            Please check your .env.local file contains:<br />
+            NEXT_PUBLIC_API_KEY=your_api_key_here
+          </p>
         </div>
       </main>
     );
@@ -164,8 +169,8 @@ const HomePage = () => {
   return (
     <main className="home-page bg-white">
       {/* Hero Section */}
-      {/*{heroSection && <HeroSection data={heroSection} />} */}
       <HeroSlider/>
+      
       {/* About Us Section */}
       <AboutUs />
       
