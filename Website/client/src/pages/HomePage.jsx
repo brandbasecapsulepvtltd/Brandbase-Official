@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-// Remove axios import since we're using our API client
-// import axios from 'axios';
 import HeroSection from '@/components/homeComponents/HeroSection';
 import AboutUs from '@/components/homeComponents/AboutUs';
 import BrandElevation from '@/components/homeComponents/BrandElevation';
