@@ -3,7 +3,7 @@ import React from 'react';
 
 const VideoProductionHero = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center mt-6">
+    <section className="relative h-screen w-full overflow-hidden flex items-center mt-5">
       {/* Background Video */}
       <video
         autoPlay
@@ -23,7 +23,7 @@ const VideoProductionHero = () => {
       <div className="absolute inset-0 bg-white/10"></div>
 
       {/* Content Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 mt-15">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 mt-12">
         <div className="max-w-4xl">
           
           {/* Badge Tag */}
