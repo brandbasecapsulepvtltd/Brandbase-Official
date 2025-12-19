@@ -3,7 +3,7 @@ import React from 'react';
 
 const VideoProductionHero = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center mt-2">
+    <section className="relative h-screen w-full overflow-hidden flex items-center mt-7">
       {/* Background Video */}
       <video
         autoPlay

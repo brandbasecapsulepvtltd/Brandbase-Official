@@ -9,8 +9,8 @@ const AVProduction = () => {
   return (
     <>
     <VideoProductionHero/>
-    <CircularGalleryDemo/>
     <DemoOne/>
+    <CircularGalleryDemo/>
     <AVtypes/>
     </>
   )
