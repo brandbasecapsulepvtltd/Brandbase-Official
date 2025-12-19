@@ -411,7 +411,7 @@ export default function About() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+      <meta name="google-site-verification" content="FPOO4DhO411nxsu-z3MXNumhevuBGMhbv0mfKdj9y2Q" />
       {/* Inject Local Business Schema 
             <script
         type="application/ld+json"
