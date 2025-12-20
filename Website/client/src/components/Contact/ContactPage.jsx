@@ -106,20 +106,19 @@ const ContactPage = () => {
   };
 
   const [selectedLocation, setSelectedLocation] = useState("india-mumbai");
-const [formData, setFormData] = useState({
-  firstName: "",
-  lastName: "",
-  email: "",
-  organization: "",
-  contactNumber: "",   // ✅ added
-  region: "",
-  industry: "",
-  category: "",
-  message: "",
-  consent: false,
-  marketing: false,
-});
-
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    organization: "",
+    contactNumber: "",
+    region: "",
+    industry: "",
+    category: "",
+    message: "",
+    consent: false,
+    marketing: false,
+  });
 
   const [loading, setLoading] = useState(false);
 
@@ -135,49 +134,66 @@ const [formData, setFormData] = useState({
     }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Basic Validation
-  if (!formData.firstName || !formData.lastName || !formData.email || !formData.message || !formData.consent) {
-    alert("Please fill all required fields.");
-    return;
-  }
-
-  try {
-    setLoading(true);
-    
-    // Axios POST request
-    const response = await api.post("/contacts", formData);
-
-    // Axios considers 2xx status codes as success
-    if (response.data.success) {
-      alert("Message sent successfully!");
-      
-      // Reset form
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        organization: "",
-        contactNumber: "",
-        region: "",
-        industry: "",
-        category: "",
-        message: "",
-        consent: false,
-        marketing: false,
-      });
+    // Basic Validation
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message || !formData.consent) {
+      alert("Please fill all required fields.");
+      return;
     }
-  } catch (error) {
-    // Axios error handling is much more detailed than fetch
-    const errorMessage = error.response?.data?.message || "Something went wrong. Please try again.";
-    console.error("Submission Error:", error.response?.data || error.message);
-    alert(errorMessage);
-  } finally {
-    setLoading(false);
-  }
-};
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    // Validate phone number (basic validation)
+    if (formData.contactNumber && !/^[\d\s\-\+\(\)]{10,}$/.test(formData.contactNumber)) {
+      alert("Please enter a valid phone number.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      
+      // Use the updated API function
+      const response = await api.createContact(formData);
+
+      if (response.success) {
+        if (response.emailSent) {
+          alert("✅ Message sent successfully! We've also sent you a confirmation email.");
+        } else {
+          alert("✅ Message submitted successfully! (Email notification failed, but your message is saved)");
+        }
+        
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          organization: "",
+          contactNumber: "",
+          region: "",
+          industry: "",
+          category: "",
+          message: "",
+          consent: false,
+          marketing: false,
+        });
+      } else {
+        alert("Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission Error:", error.message);
+      alert(error.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Icon component
   const Icon = ({ type, className = "w-6 h-6" }) => {
     const icons = {
@@ -349,19 +365,21 @@ const handleSubmit = async (e) => {
                   </div>
                 ))}
               </div>
+              
               <div>
-  <label className="text-sm font-medium block mb-1">
-    Contact Number *
-  </label>
-  <input
-    type="tel"
-    name="contactNumber"
-    value={formData.contactNumber}
-    onChange={handleInputChange}
-    className="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] outline-none transition-colors"
-    required
-  />
-</div>
+                <label className="text-sm font-medium block mb-1">
+                  Contact Number *
+                </label>
+                <input
+                  type="tel"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleInputChange}
+                  className="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] outline-none transition-colors"
+                  required
+                  placeholder="+91 12345 67890"
+                />
+              </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {["region", "industry"].map((field) => (
@@ -419,6 +437,7 @@ const handleSubmit = async (e) => {
                   maxLength={1500}
                   className="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] outline-none transition-colors resize-vertical"
                   required
+                  placeholder="Describe your project or inquiry..."
                 ></textarea>
                 <div className="text-xs text-right text-gray-500">
                   {formData.message.length}/1500
@@ -456,13 +475,28 @@ const handleSubmit = async (e) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#FF6600] text-white py-3 px-6 rounded font-semibold flex items-center justify-center gap-2 hover:bg-[#E55A00] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-[#FF6600] text-white py-3 px-6 rounded font-semibold flex items-center justify-center gap-2 hover:bg-[#E55A00] transition-colors disabled:opacity-50 disabled:cursor-not-allowed relative"
               >
-                {loading ? "Sending..." : "Send Message"}
-                <Icon type="send" className="w-5 h-5" />
+                {loading ? (
+                  <>
+                    <span>Sending...</span>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </>
+                )}
               </button>
 
               <div className="text-xs text-gray-500 border-t pt-4">
+                <p className="mb-2">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  <span className="text-green-600 font-medium">Using EmailJS:</span> Your submission will trigger an automatic confirmation email.
+                </p>
                 <p>
                   For more information on how your personal data is processed and how your consent can be managed, refer to our{" "}
                   <a href="#" className="text-[#FF6600] underline">
