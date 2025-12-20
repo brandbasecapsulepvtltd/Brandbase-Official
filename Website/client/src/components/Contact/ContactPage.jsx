@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import ContactInfo from "./ContactInfo";
+import { api } from '@/lib/api';
 
 const ContactPage = () => {
   // Location data with complete contact information
@@ -134,21 +135,23 @@ const [formData, setFormData] = useState({
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message || !formData.category || !formData.organization || !formData.region || !formData.industry || !formData.consent) {
-      alert("Please fill all required fields.");
-      return;
-    }
+  // Basic Validation
+  if (!formData.firstName || !formData.lastName || !formData.email || !formData.message || !formData.consent) {
+    alert("Please fill all required fields.");
+    return;
+  }
 
-    try {
-      setLoading(true);
-      
-      // Simulate API call
-      console.log("Form submitted with data:", formData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+  try {
+    setLoading(true);
+    
+    // Axios POST request
+    const response = await api.post("/contacts", formData);
+
+    // Axios considers 2xx status codes as success
+    if (response.data.success) {
       alert("Message sent successfully!");
       
       // Reset form
@@ -157,6 +160,7 @@ const [formData, setFormData] = useState({
         lastName: "",
         email: "",
         organization: "",
+        contactNumber: "",
         region: "",
         industry: "",
         category: "",
@@ -164,14 +168,16 @@ const [formData, setFormData] = useState({
         consent: false,
         marketing: false,
       });
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
     }
-  };
-
+  } catch (error) {
+    // Axios error handling is much more detailed than fetch
+    const errorMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+    console.error("Submission Error:", error.response?.data || error.message);
+    alert(errorMessage);
+  } finally {
+    setLoading(false);
+  }
+};
   // Icon component
   const Icon = ({ type, className = "w-6 h-6" }) => {
     const icons = {
