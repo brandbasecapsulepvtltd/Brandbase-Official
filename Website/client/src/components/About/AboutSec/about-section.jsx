@@ -23,7 +23,7 @@ export default function AboutSection3() {
                 className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
-                  src="https://pro-section.ui-layouts.com/facebook.svg"
+                  src="https://ik.imagekit.io/vinayak06/aboutus.jpg"
                   alt="fb"
                   width={24}
                   height={24}
