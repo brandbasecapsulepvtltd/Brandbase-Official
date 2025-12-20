@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import adminAxios from '../utils/axios';
+import emailjs from '@emailjs/browser';
 import { 
   ArrowLeft, 
   Mail, 
@@ -28,10 +29,18 @@ const ContactDetail = () => {
   const [replying, setReplying] = useState(false);
   const [replyMessage, setReplyMessage] = useState('');
   const [adminName, setAdminName] = useState('Support Team');
-  const [activeTab, setActiveTab] = useState('details');
   const [status, setStatus] = useState('pending');
 
+  // EmailJS Credentials - Replace with yours
+  const EMAILJS_CONFIG = {
+    SERVICE_ID: 'service_wotevqq',
+    TEMPLATE_ID: 'template_skf12gl',
+    PUBLIC_KEY: 'maLQ-G7P2BQOoOVoY'
+  };
+
   useEffect(() => {
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
     fetchContactDetails();
   }, [id]);
 
@@ -78,21 +87,60 @@ const ContactDetail = () => {
 
     try {
       setReplying(true);
-      const response = await adminAxios.post(`/api/contacts/${id}/reply`, {
+      
+      // Step 1: Send email via EmailJS
+      const emailResult = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          to_name: `${contact.firstName} ${contact.lastName}`,
+          to_email: contact.email,
+          category: contact.category,
+          reply_message: replyMessage,
+          admin_name: adminName,
+          original_message: contact.message.substring(0, 500), // Limit length
+          reply_to: 'vinayakandhere4@gmail.com' // Your email for replies
+        }
+      );
+
+      console.log('✅ Email sent via EmailJS:', emailResult);
+
+      // Step 2: Save reply to database
+      const dbResponse = await adminAxios.post(`/api/contacts/${id}/reply`, {
         message: replyMessage,
         adminName: adminName
       });
 
-      if (response.data.success) {
-        alert('Reply sent successfully!');
-        setReplyMessage('');
-        fetchContactDetails(); // Refresh contact details to show the new reply
-      } else {
-        alert(response.data.message || 'Failed to send reply');
-      }
+      // Step 3: Update status to replied
+      await handleStatusUpdate('replied');
+
+      alert('✅ Reply sent and saved successfully!');
+      setReplyMessage('');
+      fetchContactDetails(); // Refresh contact details
+
     } catch (error) {
-      console.error("Error sending reply:", error);
-      alert('Failed to send reply. Please check your email configuration.');
+      console.error("❌ Error sending reply:", error);
+      
+      // Check what type of error occurred
+      if (error.text && error.text.includes('No service with id')) {
+        alert('EmailJS Service ID is incorrect. Please check your EmailJS configuration.');
+      } else if (error.text && error.text.includes('No template with id')) {
+        alert('EmailJS Template ID is incorrect. Please check your EmailJS configuration.');
+      } else if (error.text && error.text.includes('Invalid public key')) {
+        alert('EmailJS Public Key is incorrect. Please check your EmailJS configuration.');
+      } else {
+        // Try to save to database even if email fails
+        try {
+          await adminAxios.post(`/api/contacts/${id}/reply`, {
+            message: replyMessage,
+            adminName: adminName
+          });
+          await handleStatusUpdate('replied');
+          alert('⚠️ Reply saved to database but email failed. Please check EmailJS setup.');
+        } catch (dbError) {
+          alert('❌ Failed to save reply. Please try again.');
+        }
+      }
     } finally {
       setReplying(false);
     }
@@ -173,14 +221,6 @@ const ContactDetail = () => {
             <option value="resolved">Resolved</option>
             <option value="spam">Spam</option>
           </select>
-          
-          <button
-            onClick={() => setActiveTab('reply')}
-            className="flex items-center gap-2 px-4 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-orange-600"
-          >
-            <Send size={16} />
-            Reply
-          </button>
         </div>
       </div>
 
@@ -328,10 +368,9 @@ const ContactDetail = () => {
                       <div>
                         <p className="font-medium text-gray-900">Admin Response</p>
                         <p className="text-xs text-gray-500">
-                          {reply.repliedBy ? `By User ID: ${reply.repliedBy}` : 'By Support Team'}
+                          {formatDate(reply.repliedAt)}
                         </p>
                       </div>
-                      <span className="text-xs text-gray-500">{formatDate(reply.repliedAt)}</span>
                     </div>
                     <p className="text-gray-700 whitespace-pre-wrap">{reply.message}</p>
                   </div>
@@ -340,13 +379,29 @@ const ContactDetail = () => {
             </div>
           )}
 
-          {/* Reply Form */}
+          {/* Reply Form - Updated for EmailJS */}
           <div className="bg-white rounded-xl border shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Send Reply</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              Send Reply via EmailJS
+              <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded ml-2">
+                No App Password Needed!
+              </span>
+            </h2>
+            
+            <div className="mb-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
+              <p className="font-medium">ℹ️ Using EmailJS:</p>
+              <p>• Emails sent directly from your browser</p>
+              <p>• No backend email configuration required</p>
+              <p>• 200 free emails/month included</p>
+              <p className="mt-1 text-xs">
+                Service ID: {EMAILJS_CONFIG.SERVICE_ID.substring(0, 10)}...
+              </p>
+            </div>
+            
             <form onSubmit={handleReplySubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Admin Name (Will appear in email)
+                  Your Name (Appears in email)
                 </label>
                 <input
                   type="text"
@@ -370,19 +425,20 @@ const ContactDetail = () => {
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  This message will be sent to {contact.email}
+                  This will send email to: <strong>{contact.email}</strong>
                 </p>
               </div>
               
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-500">
-                  <p>This will:</p>
+                  <p className="font-medium">What will happen:</p>
                   <ul className="list-disc list-inside">
-                    <li>Send email to {contact.firstName}</li>
-                    <li>Mark inquiry as "replied"</li>
-                    <li>Save reply in history</li>
+                    <li>Email sent via EmailJS</li>
+                    <li>Reply saved to database</li>
+                    <li>Status updated to "replied"</li>
                   </ul>
                 </div>
+                
                 <button
                   type="submit"
                   disabled={replying || !replyMessage.trim()}
@@ -396,7 +452,7 @@ const ContactDetail = () => {
                   ) : (
                     <>
                       <Send size={16} />
-                      Send Reply
+                      Send Reply via EmailJS
                     </>
                   )}
                 </button>
