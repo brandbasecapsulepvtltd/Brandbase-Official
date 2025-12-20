@@ -1,5 +1,4 @@
 const Contact = require('../models/Contact');
-const { sendReplyEmail, sendNewSubmissionNotification } = require('../utils/emailService');
 
 // @desc    Submit a contact form
 // @route   POST /api/contacts
@@ -7,14 +6,6 @@ const { sendReplyEmail, sendNewSubmissionNotification } = require('../utils/emai
 exports.submitContactForm = async (req, res, next) => {
   try {
     const contact = await Contact.create(req.body);
-    
-    // Send notification email to admin (optional)
-    try {
-      await sendNewSubmissionNotification(contact);
-    } catch (emailError) {
-      console.error('Failed to send notification email:', emailError);
-      // Don't fail the main request if email notification fails
-    }
     
     res.status(201).json({
       success: true,
@@ -139,26 +130,12 @@ exports.replyToContact = async (req, res, next) => {
     
     await contact.save();
     
-    // Send email reply
-    try {
-      await sendReplyEmail(contact, message, adminName);
-      
-      res.status(200).json({
-        success: true,
-        data: contact,
-        message: 'Reply sent successfully'
-      });
-    } catch (emailError) {
-      // If email fails, still save the reply but notify admin
-      await contact.save();
-      
-      res.status(200).json({
-        success: true,
-        data: contact,
-        message: 'Reply saved but failed to send email. Please check email configuration.',
-        warning: 'Email sending failed'
-      });
-    }
+    // Return success - Email will be sent from frontend
+    res.status(200).json({
+      success: true,
+      data: contact,
+      message: 'Reply saved successfully. Email will be sent from frontend.'
+    });
     
   } catch (error) {
     next(error);
