@@ -7,6 +7,9 @@ import AdminHome from './pages/AdminHome';
 import EmployeeManagementPage from './pages/EmployeeManagementPage';
 import AdminServicesDashboard from './pages/AdminServicesDashboard';
 import BlogManagement from './pages/BlogManagement';
+import { FullScreenSignup } from './pages/FullScreenSignup';
+import ContactManagement from './pages/ContactManagement';
+import ContactDetail from './pages/ContactDetail'; // Import the new component
 
 function App() {
   return (
@@ -21,12 +24,17 @@ function App() {
 
             <Route path="employee-management" element={<EmployeeManagementPage />} />
 
+            <Route path="contact-management" element={<ContactManagement />} />
+            {/* Add contact detail route */}
+            <Route path="contact-management/:id" element={<ContactDetail />} />
+
             <Route path="service-management" element={<AdminServicesDashboard />} />
 
             <Route path="blogs-management" element={<BlogManagement />} />
           
           </Route>
           {/* Add other top-level routes here */}
+          <Route path="/admin/login" element={<FullScreenSignup />} />
         </Routes>
       </div>
     </Router>

@@ -138,8 +138,6 @@ const AdminAppointmentPage = () => {
             </button>
           </div>
         </div>
-
-        {/* Statistics Cards */}
 {/* Statistics Cards */}
 {stats && (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
