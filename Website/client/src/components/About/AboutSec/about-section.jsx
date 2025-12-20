@@ -23,7 +23,7 @@ export default function AboutSection3() {
                 className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
-                  src="https://ik.imagekit.io/vinayak06/aboutus.jpg"
+                  src="https://pro-section.ui-layouts.com/facebook.svg"
                   alt="fb"
                   width={24}
                   height={24}
@@ -94,7 +94,7 @@ export default function AboutSection3() {
                 preserveAspectRatio="xMidYMid slice"
                 width={"100%"}
                 height={"100%"}
-                xlinkHref="https://images.unsplash.com/photo-1718601980986-0ce75101d52d?w=1200&auto=format&fit=crop"
+                xlinkHref="https://ik.imagekit.io/vinayak06/aboutus.jpg"
               ></image>
             </svg>
           </figure>
