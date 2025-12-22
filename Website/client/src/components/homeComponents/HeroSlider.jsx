@@ -331,7 +331,7 @@ const HeroSlider = () => {
           {/* Desktop Navigation Arrows */}
           {slides.length > 1 && (
             <>
-              <div className='absolute bottom-10 left-16 z-20'>
+              <div className='absolute bottom-5 right-1/2 z-20'>
                 <NavArrows
                   onPrev={goToPrev}
                   onNext={goToNext}
