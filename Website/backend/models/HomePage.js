@@ -6,6 +6,7 @@ const slideSchema = new mongoose.Schema({
   subtext: String,
   image: String,
   link: String,
+  linkText: String,  // Add this line
 });
 
 const videoSchema = new mongoose.Schema({
