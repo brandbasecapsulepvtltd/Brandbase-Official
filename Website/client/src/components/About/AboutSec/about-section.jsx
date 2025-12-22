@@ -94,7 +94,7 @@ export default function AboutSection3() {
                 preserveAspectRatio="xMidYMid slice"
                 width={"100%"}
                 height={"100%"}
-                xlinkHref="https://ik.imagekit.io/vinayak06/aboutus.jpg"
+                xlinkHref="https://img.freepik.com/premium-photo/interior-modern-office-with-glass-walls-tiled-floor-rows-orange-armchairs-3d-rendering_979520-62343.jpg"
               ></image>
             </svg>
           </figure>
