@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import HeroSection from '@/components/homeComponents/HeroSection';
 import AboutUs from '@/components/homeComponents/AboutUs';
 import BrandElevation from '@/components/homeComponents/BrandElevation';
 import RecentWork from '@/components/homeComponents/RecentWork';
@@ -25,7 +24,7 @@ const HomePage = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant' // Use 'instant' for immediate scroll without animation
+      behavior: 'instant'
     });
     
     // Disable browser's automatic scroll restoration
@@ -34,6 +33,7 @@ const HomePage = () => {
     }
   }, []);
 
+  // Fetch all home page data once
   useEffect(() => {
     fetchHomePageData();
   }, []);
@@ -43,10 +43,10 @@ const HomePage = () => {
       setLoading(true);
       setError(null);
       
-      // Use the API client instead of axios directly
+      // Use the API client to fetch all home page data
       const response = await api.getHomepage();
       
-      // Check the response structure (adjust based on your API response)
+      // Check the response structure
       if (response.success && response.data) {
         setHomePageData(response.data);
       } else if (response.data) {
@@ -166,8 +166,8 @@ const HomePage = () => {
   // Render the complete page with fetched data
   return (
     <main className="home-page bg-white">
-      {/* Hero Section */}
-      <HeroSlider/>
+      {/* Hero Section - Now fetches its own data */}
+      <HeroSlider />
       
       {/* About Us Section */}
       <AboutUs />
