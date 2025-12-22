@@ -136,131 +136,131 @@ const AdminHome = () => {
   }
 
   return (
-<div className="min-h-screen bg-gray-50">
-  {/* Header */}
-  <header className="bg-white shadow-sm border-b">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between py-4">
-        {/* Left side - Title */}
-        <div className="flex items-center space-x-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Home Page Admin</h1>
-        </div>
-        
-        {/* Right side - Hamburger and Save button */}
-        <div className="flex items-center space-x-4">
-          {/* Hamburger menu for both desktop and mobile */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={saveHomePageData}
-            disabled={saving}
-            className="px-6 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-[#E55A00] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
-          >
-            {saving ? (
-              <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Saving...
-              </>
-            ) : (
-              <>
-                <Save className="w-4 h-4 mr-2" />
-                Save Changes
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Navigation Menu - Shows on both desktop and mobile when open */}
-      {mobileMenuOpen && (
-        <div className="bg-white border border-gray-200 rounded-lg shadow-lg mt-2">
-          {sections.map((section) => {
-            const Icon = section.icon;
-            return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between py-4">
+            {/* Left side - Title */}
+            <div className="flex items-center space-x-4">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Home Page Admin</h1>
+            </div>
+            
+            {/* Right side - Hamburger and Save button */}
+            <div className="flex items-center space-x-4">
+              {/* Hamburger menu for both desktop and mobile */}
               <button
-                key={section.id}
-                onClick={() => {
-                  setActiveSection(section.id);
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex items-center w-full px-4 py-3 text-left border-b border-gray-100 last:border-b-0 transition-colors ${
-                  activeSection === section.id
-                    ? 'bg-[#FF6600] text-white'
-                    : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
               >
-                <Icon className="w-4 h-4 mr-2" />
-                {section.name}
+                <Menu className="w-6 h-6" />
               </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  </header>
 
-  {/* Current Section Indicator */}
-  <div className="bg-white border-b">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="py-3">
-        <div className="flex items-center space-x-2 text-sm text-gray-600">
-          <span>Currently editing:</span>
-          <span className="font-semibold text-[#FF6600]">{getActiveSectionName()}</span>
+              <button
+                onClick={saveHomePageData}
+                disabled={saving}
+                className="px-6 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-[#E55A00] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+              >
+                {saving ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Changes
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation Menu - Shows on both desktop and mobile when open */}
+          {mobileMenuOpen && (
+            <div className="bg-white border border-gray-200 rounded-lg shadow-lg mt-2">
+              {sections.map((section) => {
+                const Icon = section.icon;
+                return (
+                  <button
+                    key={section.id}
+                    onClick={() => {
+                      setActiveSection(section.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center w-full px-4 py-3 text-left border-b border-gray-100 last:border-b-0 transition-colors ${
+                      activeSection === section.id
+                        ? 'bg-[#FF6600] text-white'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 mr-2" />
+                    {section.name}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Current Section Indicator */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="py-3">
+            <div className="flex items-center space-x-2 text-sm text-gray-600">
+              <span>Currently editing:</span>
+              <span className="font-semibold text-[#FF6600]">{getActiveSectionName()}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white rounded-xl shadow-sm border p-4 sm:p-6">
+          {activeSection === 'hero' && (
+            <HeroSectionManager 
+              data={homePageData.heroSection} 
+              onChange={(data) => updateSectionData('heroSection', data)} 
+            />
+          )}
+          {activeSection === 'brandElevation' && (
+            <BrandElevationManager 
+              data={homePageData.brandElevation} 
+              onChange={(data) => updateSectionData('brandElevation', data)} 
+            />
+          )}
+          {activeSection === 'recentWork' && (
+            <RecentWorkManager 
+              data={homePageData.recentWork} 
+              onChange={(data) => updateSectionData('recentWork', data)} 
+            />
+          )}
+          {activeSection === 'clients' && (
+            <ClientsManager 
+              data={homePageData.clients} 
+              onChange={(data) => updateSectionData('clients', data)} 
+            />
+          )}
+          {activeSection === 'testimonials' && (
+            <TestimonialsManager 
+              data={homePageData.testimonials} 
+              onChange={(data) => updateSectionData('testimonials', data)} 
+            />
+          )}
+          {activeSection === 'faqs' && (
+            <FaqsManager 
+              data={homePageData.faqs} 
+              onChange={(data) => updateSectionData('faqs', data)} 
+            />
+          )}
         </div>
       </div>
     </div>
-  </div>
-
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div className="bg-white rounded-xl shadow-sm border p-4 sm:p-6">
-      {activeSection === 'hero' && (
-        <HeroSectionManager 
-          data={homePageData.heroSection} 
-          onChange={(data) => updateSectionData('heroSection', data)} 
-        />
-      )}
-      {activeSection === 'brandElevation' && (
-        <BrandElevationManager 
-          data={homePageData.brandElevation} 
-          onChange={(data) => updateSectionData('brandElevation', data)} 
-        />
-      )}
-      {activeSection === 'recentWork' && (
-        <RecentWorkManager 
-          data={homePageData.recentWork} 
-          onChange={(data) => updateSectionData('recentWork', data)} 
-        />
-      )}
-      {activeSection === 'clients' && (
-        <ClientsManager 
-          data={homePageData.clients} 
-          onChange={(data) => updateSectionData('clients', data)} 
-        />
-      )}
-      {activeSection === 'testimonials' && (
-        <TestimonialsManager 
-          data={homePageData.testimonials} 
-          onChange={(data) => updateSectionData('testimonials', data)} 
-        />
-      )}
-      {activeSection === 'faqs' && (
-        <FaqsManager 
-          data={homePageData.faqs} 
-          onChange={(data) => updateSectionData('faqs', data)} 
-        />
-      )}
-    </div>
-  </div>
-</div>
   );
 };
 
-// Hero Section Manager - FIXED
+// Hero Section Manager
 const HeroSectionManager = ({ data, onChange }) => {
   const [editingSlide, setEditingSlide] = useState(null);
   const [showSlideForm, setShowSlideForm] = useState(false);
@@ -275,7 +275,9 @@ const HeroSectionManager = ({ data, onChange }) => {
       id: Date.now().toString(),
       title: 'New Slide Title',
       subtext: 'New slide description',
-      image: ''
+      image: '',
+      link: '',
+      linkText: 'Learn More'
     };
     setEditingSlide(newSlide);
     setShowSlideForm(true);
@@ -382,7 +384,24 @@ const HeroSectionManager = ({ data, onChange }) => {
                       }}
                     />
                   )}
-                  <p className="text-gray-600 text-sm">{slide.subtext}</p>
+                  <p className="text-gray-600 text-sm mb-2">{slide.subtext}</p>
+                  
+                  {/* Display link if exists */}
+                  {slide.link && (
+                    <div className="mt-2">
+                      <span className="text-xs font-medium text-gray-500">Link:</span>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="text-sm text-blue-600 break-all">
+                          {slide.link}
+                        </span>
+                        {slide.linkText && (
+                          <span className="text-xs text-gray-600">
+                            (Text: "{slide.linkText}")
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="flex space-x-2 self-end sm:self-auto">
                   <button
@@ -479,6 +498,42 @@ const HeroSectionManager = ({ data, onChange }) => {
                 </div>
               )}
 
+              {/* Link Fields */}
+              <div className="border-t pt-4">
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Call-to-Action Link</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Link URL
+                    </label>
+                    <input
+                      type="url"
+                      value={editingSlide?.link || ''}
+                      onChange={(e) => setEditingSlide({ ...editingSlide, link: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600]"
+                      placeholder="Enter link URL (e.g., https://example.com/page)"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Leave empty if no link is needed
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Link Text
+                    </label>
+                    <input
+                      type="text"
+                      value={editingSlide?.linkText || ''}
+                      onChange={(e) => setEditingSlide({ ...editingSlide, linkText: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600]"
+                      placeholder="Enter button text (e.g., Learn More)"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row sm:justify-end space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
                 <button
                   onClick={() => {
@@ -504,7 +559,7 @@ const HeroSectionManager = ({ data, onChange }) => {
   );
 };
 
-// Brand Elevation Manager - FIXED
+// Brand Elevation Manager
 const BrandElevationManager = ({ data, onChange }) => {
   const [editingService, setEditingService] = useState(null);
   const [showServiceForm, setShowServiceForm] = useState(false);
@@ -766,7 +821,7 @@ const BrandElevationManager = ({ data, onChange }) => {
   );
 };
 
-// Recent Work Manager - FIXED
+// Recent Work Manager
 const RecentWorkManager = ({ data, onChange }) => {
   const [editingWork, setEditingWork] = useState(null);
   const [showWorkForm, setShowWorkForm] = useState(false);
@@ -982,7 +1037,7 @@ const RecentWorkManager = ({ data, onChange }) => {
   );
 };
 
-// Clients Manager - FIXED
+// Clients Manager
 const ClientsManager = ({ data, onChange }) => {
   const [editingClient, setEditingClient] = useState(null);
   const [showClientForm, setShowClientForm] = useState(false);
@@ -1257,7 +1312,7 @@ const ClientsManager = ({ data, onChange }) => {
   );
 };
 
-// Testimonials Manager - FIXED
+// Testimonials Manager
 const TestimonialsManager = ({ data, onChange }) => {
   const [editingTestimonial, setEditingTestimonial] = useState(null);
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
@@ -1495,7 +1550,7 @@ const TestimonialsManager = ({ data, onChange }) => {
   );
 };
 
-// FAQs Manager - FIXED
+// FAQs Manager
 const FaqsManager = ({ data, onChange }) => {
   const [editingFaq, setEditingFaq] = useState(null);
   const [showFaqForm, setShowFaqForm] = useState(false);
