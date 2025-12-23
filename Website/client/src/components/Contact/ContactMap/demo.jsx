@@ -1,19 +1,20 @@
 "use client";
 import { WorldMap } from "./map"; // Adjust this import if your path is different
-import { motion } from "framer-motion";
+//import { motion } from "framer-motion";
 
 export default function MapDemo() {
   return (
     <div className="py-40 bg-white w-full">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="font-bold text-xl md:text-4xl text-black">
-          Global Network
-        </p>
-        <p className="text-sm md:text-lg text-gray-900 max-w-2xl mx-auto py-4">
-          Connect with teams and clients worldwide. Our platform enables seamless 
-          collaboration across continents, bringing the world to your workspace.
-        </p>
-      </div>
+     <div className="max-w-7xl mx-auto text-center">
+  <p className="font-bold text-xl md:text-4xl text-black">
+    Worldwide Presence
+  </p>
+  <p className="text-sm md:text-lg text-gray-900 max-w-2xl mx-auto py-4">
+    Delivering our services across the globe with consistency, creativity, and
+    precision. No matter where you are, we bring world-class solutions right to your doorstep.
+  </p>
+</div>
+
       <WorldMap
 dots={[
   {
@@ -44,7 +45,7 @@ dots={[
     start: {
       lat: 45.52,
       lng: 13.405,
-      label: "Europe",
+      label: "Europe", // Berlin
     },
     end: {
       lat: 24.7136,
