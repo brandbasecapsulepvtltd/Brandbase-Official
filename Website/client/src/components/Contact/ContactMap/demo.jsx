@@ -35,14 +35,14 @@ dots={[
       label: "UK",
     },
     end: {
-      lat: 57.52,
+      lat: 45.52,
       lng: 13.405,
       label: "Europe", // Berlin
     },
   },
   {
     start: {
-      lat: 57.52,
+      lat: 45.52,
       lng: 13.405,
       label: "Europe",
     },
