@@ -35,14 +35,14 @@ dots={[
       label: "UK",
     },
     end: {
-      lat: 52.52,
+      lat: 57.52,
       lng: 13.405,
       label: "Europe", // Berlin
     },
   },
   {
     start: {
-      lat: 52.52,
+      lat: 57.52,
       lng: 13.405,
       label: "Europe",
     },
@@ -85,9 +85,9 @@ dots={[
       label: "Singapore",
     },
     end: {
-      lat: 34.0522,
-      lng: -118.2437,
-      label: "USA", // Los Angeles
+      lat: 40.7128,
+      lng: -74.006,
+      label: "USA", // New York
     },
   },
 ]}
