@@ -251,7 +251,7 @@ const ContactPage = () => {
       // Draw ocean (globe background) - use a subtle color
       context.beginPath();
       context.arc(containerWidth / 2, containerHeight / 2, currentScale, 0, 2 * Math.PI);
-      context.fillStyle = "rgba(0, 0, 0, 0.7)";
+      context.fillStyle = "rgba(255, 255, 255, 0)";
       context.fill();
       context.strokeStyle = "rgba(255, 255, 255, 0.3)";
       context.lineWidth = 2 * scaleFactor;
