@@ -7,20 +7,7 @@ export default function MapDemo() {
     <div className="py-40 bg-white w-full">
       <div className="max-w-7xl mx-auto text-center">
         <p className="font-bold text-xl md:text-4xl text-black">
-          Global{" "}
-          <span className="text-neutral-400">
-            {"Network".split("").map((word, idx) => (
-              <motion.span
-                key={idx}
-                className="inline-block"
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.04 }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
+          Global Network
         </p>
         <p className="text-sm md:text-lg text-gray-900 max-w-2xl mx-auto py-4">
           Connect with teams and clients worldwide. Our platform enables seamless 
@@ -36,14 +23,14 @@ dots={[
       label: "USA", // New York
     },
     end: {
-      lat: 51.5074,
+      lat: 57.5074,
       lng: -0.1278,
       label: "UK", // London
     },
   },
   {
     start: {
-      lat: 51.5074,
+      lat: 57.5074,
       lng: -0.1278,
       label: "UK",
     },
