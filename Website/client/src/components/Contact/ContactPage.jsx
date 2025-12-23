@@ -138,7 +138,7 @@ const ContactPage = () => {
 
     // Set dimensions to cover the entire hero section
     const containerWidth = window.innerWidth;
-    const containerHeight = 600; // Hero section height
+    const containerHeight = 1200; // Hero section height
     const radius = Math.min(containerWidth, containerHeight) / 3.5;
 
     const dpr = window.devicePixelRatio || 1;
@@ -328,7 +328,7 @@ const ContactPage = () => {
     // Set up rotation and interaction (disable interaction for background)
     const rotation = [0, 0];
     let autoRotate = true;
-    const rotationSpeed = 0.5; // Slower for background
+    const rotationSpeed = 1; // Slower for background
 
     const rotate = () => {
       if (autoRotate) {
@@ -347,7 +347,7 @@ const ContactPage = () => {
     // Handle window resize
     const handleResize = () => {
       const newWidth = window.innerWidth;
-      const newHeight = 800;
+      const newHeight = 1200;
       const newRadius = Math.min(newWidth, newHeight) / 3.5;
 
       canvas.width = newWidth * dpr;
@@ -480,14 +480,9 @@ const ContactPage = () => {
         {/* Globe Canvas Background */}
         <canvas
           ref={canvasRef}
-          className="absolute top-10 left-0 w-full h-full z-0"
+          className="absolute top-0 left-0 w-full h-full z-0"
           style={{ opacity: 4 }}
         />
-        
-        {/* Dark overlay for better text readability 
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/60 via-black/40 to-transparent z-1"></div>
-        */}
-
         
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl mx-auto">
@@ -507,7 +502,7 @@ const ContactPage = () => {
             {heroSection.description}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="relative overflow-hidden group px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-xl transition-all duration-300 text-white bg-transparent border-2 border-[#FF6600] hover:bg-[#FF6600] hover:text-white backdrop-blur-sm">
+            <button className="relative overflow-hidden group px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-xl transition-all duration-300 text-black bg-transparent border-2 border-[#FF6600] hover:bg-[#FF6600] hover:text-white backdrop-blur-sm">
               <a href="/appointment" className="relative z-10 text-2xl">
                 {heroSection.buttonText}
               </a>
