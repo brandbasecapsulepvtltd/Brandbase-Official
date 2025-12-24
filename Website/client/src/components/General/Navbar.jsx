@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
-import { User, Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { User, Search, Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,6 +12,9 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
+  
+  // Ref to handle the closing timeout for a smooth "hover" experience
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const locationArr = ["/", "/services/events-exhibition/stall-design"];
@@ -27,8 +30,24 @@ const Navbar = () => {
       setScrolled(true);
     }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [pathname]);
+
+  // Smooth hover handlers
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setServicesOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    // Small delay before closing to allow mouse to travel over gaps
+    timeoutRef.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 150); 
+  };
 
   const navClasses = isHome
     ? scrolled
@@ -39,7 +58,6 @@ const Navbar = () => {
   const textColor = isHome && !scrolled ? "text-white" : "text-[#FF6600]";
   const hoverColor = isHome && !scrolled ? "bg-white" : "bg-[#FF6600]";
 
-  // Updated services data structure with separate categories
   const services = [
     {
       category: "Digital Marketing Solutions",
@@ -70,7 +88,7 @@ const Navbar = () => {
       categoryLink: "/services/mobile-app-development",
       items: [
         { name: "Android App Development", link: "/services/mobile-app-development/android-app-development" },
-         { name: "iOS App Development", link: "/services/mobile-app-development/ios-app-development" },
+        { name: "iOS App Development", link: "/services/mobile-app-development/ios-app-development" },
         { name: "UI/UX for Apps", link: "/services/mobile-app-development/ui-ux-design" },
         { name: "Cross-platform App", link: "/services/mobile-app-development/cross-platform-app-development" },
         { name: "app maintenance support", link: "/services/mobile-app-development/app-maintenance-support" }
@@ -89,19 +107,11 @@ const Navbar = () => {
     }
   ];
 
-  // Direct link services (moved to bottom row)
   const directLinkServices = [
-    {
-      category: "Branding & Creative Design",
-      link: "/services/branding-design"
-    },
-    {
-      category: "Audio & Video Production", 
-      link: "/services/av-production"
-    }
+    { category: "Branding & Creative Design", link: "/services/branding-design" },
+    { category: "Audio & Video Production", link: "/services/av-production" }
   ];
 
-  // Function to handle link clicks
   const handleLinkClick = () => {
     setIsOpen(false);
     setServicesOpen(false);
@@ -109,115 +119,81 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-serif ${navClasses}`}
-    >
-      {/* Increased max-width from max-w-7xl to max-w-8xl for laptop screens */}
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-serif ${navClasses}`}>
       <div className="max-w-8xl mx-auto flex justify-between items-center px-6 sm:px-8 md:px-12 lg:px-16 py-4">
-        {/* Logo - Conditionally rendered based on route and scroll state */}
+        {/* Logo */}
         <Link href="/" className="flex items-center">
-          {isHome && !scrolled ? (
-            // Special logo for home page when not scrolled
-            <img 
-              src="https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png"
-              alt="Brandbase capsule Logo" 
-              className="h-17 w-auto"
-              width={180}
-              height={60}
-            />
-          ) : (
-            // Default logo for all other cases
-            <img 
-              src="https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"
-              alt="Brandbase capsule Logo" 
-              className="h-17 w-auto"
-              width={180}
-              height={60}
-            />
-          )}
+          <img 
+            src={isHome && !scrolled ? "https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png" : "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"}
+            alt="Brandbase capsule Logo" 
+            className="h-17 w-auto"
+            width={180}
+            height={60}
+          />
         </Link>
 
-        {/* Desktop Menu - Increased gap for better spacing */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex gap-10 text-xl relative">
-          {["/", "/about"].map((path, i) => {
-            const labels = ["Home", "About"];
-            return (
-              <Link
-                key={path}
-                href={path}
-                className={`relative group ${textColor} transition`}
-              >
-                {labels[i]}
-                <span
-                  className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}
-                ></span>
-              </Link>
-            );
-          })}
+          {["/", "/about"].map((path, i) => (
+            <Link
+              key={path}
+              href={path}
+              className={`relative group ${textColor} transition`}
+            >
+              {i === 0 ? "Home" : "About"}
+              <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
+            </Link>
+          ))}
           
-          {/* Services Dropdown */}
+          {/* Services Dropdown - WRAPPER */}
           <div 
             className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            <button
-              className={`relative group flex items-center gap-1 ${textColor} transition`}
-            >
+            <button className={`relative group flex items-center gap-1 ${textColor} transition`}>
               Services
-              <ChevronDown 
-                size={16} 
-                className={`transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`}
-              />
-              <span
-                className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}
-              ></span>
+              <ChevronDown size={16} className={`transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
+              <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
             </button>
 
-            {/* Dropdown Menu - Increased width for better content display */}
+            {/* Dropdown Menu Container */}
             <div
-              className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 ease-in-out ${
-                servicesOpen 
-                  ? "opacity-100 visible translate-y-0" 
-                  : "opacity-0 invisible -translate-y-2 pointer-events-none"
+              className={`absolute top-full left-1/2 transform -translate-x-1/2 pt-4 transition-all duration-300 ease-in-out ${
+                servicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
               }`}
-              style={{ minWidth: "1000px", maxWidth: "95vw", maxHeight: "80vh" }}
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              style={{ minWidth: "1000px" }}
             >
-              <div className="overflow-y-auto" style={{ maxHeight: "calc(80vh - 80px)" }}>
-                <div className="p-8">
-                  {/* Main services in 4 columns with increased gap */}
+              {/* Inner content box */}
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+                <div className="overflow-y-auto p-8" style={{ maxHeight: "70vh" }}>
                   <div className="grid grid-cols-4 gap-8 mb-8">
                     {services.map((service, index) => (
                       <div key={index} className="space-y-4">
-                        <div className="space-y-4">
-                          <Link
-                            href={service.categoryLink}
-                            className="font-bold text-xl text-gray-900 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
-                            onClick={() => setServicesOpen(false)}
-                          >
-                            {service.category}
-                          </Link>
-                          <ul className="space-y-2">
-                            {service.items.map((item, itemIndex) => (
-                              <li key={itemIndex}>
-                                <Link
-                                  href={item.link}
-                                  className="text-gray-600 hover:text-orange-600 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
-                                  onClick={() => setServicesOpen(false)}
-                                >
-                                  {item.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                        <Link
+                          href={service.categoryLink}
+                          className="font-bold text-xl text-gray-900 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
+                          onClick={handleLinkClick}
+                        >
+                          {service.category}
+                        </Link>
+                        <ul className="space-y-2">
+                          {service.items.map((item, itemIndex) => (
+                            <li key={itemIndex}>
+                              <Link
+                                href={item.link}
+                                className="text-gray-600 hover:text-orange-600 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
+                                onClick={handleLinkClick}
+                              >
+                                {item.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     ))}
                   </div>
 
-                  {/* Direct link services in 2 columns at bottom */}
                   <div className="border-t border-gray-200 pt-8">
                     <div className="grid grid-cols-2 gap-8">
                       {directLinkServices.map((service, index) => (
@@ -225,9 +201,9 @@ const Navbar = () => {
                           key={index}
                           href={service.link}
                           className="group flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-orange-50 transition-all duration-300 border border-transparent hover:border-orange-200"
-                          onClick={() => setServicesOpen(false)}
+                          onClick={handleLinkClick}
                         >
-                          <h3 className="font-bold text-xl text-gray-900 group-hover:text-orange-600 transition-colors">
+                          <h3 className="font-bold text-xl text-gray-900 group-hover:text-orange-600">
                             {service.category}
                           </h3>
                           <div className="text-orange-500 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
@@ -238,58 +214,44 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              {/* View All Services Button */}
-              <div className="border-t border-gray-200 bg-gray-50 p-4">
-                <Link
-                  href="/services"
-                  className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm"
-                  onClick={() => setServicesOpen(false)}
-                >
-                  View All Services
-                </Link>
+                
+                <div className="border-t border-gray-200 bg-gray-50 p-4">
+                  <Link
+                    href="/services"
+                    className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all"
+                    onClick={handleLinkClick}
+                  >
+                    View All Services
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-
-          {/* Other Menu Items */}
-          {["/careers", "/portfolio", "/blogs", "/contact"].map((path, i) => {
-            const labels = ["Careers", "Portfolio", "Blogs", "Contact Us"];
+{/*"/careers" "Careers" */}
+          {["/portfolio", "/blogs", "/contact"].map((path, i) => {
+            const labels = ["Portfolio", "Blogs", "Contact Us"];
             return (
-              <Link
-                key={path}
-                href={path}
-                className={`relative group ${textColor} transition`}
-              >
+              <Link key={path} href={path} className={`relative group ${textColor} transition`}>
                 {labels[i]}
-                <span
-                  className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}
-                ></span>
+                <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
               </Link>
             );
           })}
         </div>
 
-        {/* Icons + Mobile Toggle - Increased gap for better spacing */}
+        {/* Icons + Mobile Toggle */}
         <div className={`flex items-center gap-6 sm:gap-7 ${textColor}`}>
-          <button className="hover:opacity-70 transition">
-            <User size={24} />
-          </button>
-          <button className="hover:opacity-70 transition">
-            <Search size={24} />
-          </button>
-          <button
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <></> : <Menu size={28} />}
+          <button className="hover:opacity-70 transition"><User size={24} /></button>
+          <button className="hover:opacity-70 transition"><Search size={24} /></button>
+          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu (unchanged logic, applied handleLinkClick) */}
+      {/* ... keeping your mobile logic for consistency ... */}
+     {/* Mobile Menu */}
       <div
         className={`fixed inset-0 h-screen w-full md:hidden transform transition-transform duration-300 ease-in-out z-[60] ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -396,9 +358,9 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Other Mobile Menu Items */}
-            {["/careers", "/portfolio", "/blogs", "/contact"].map((path, i) => {
-              const labels = ["Careers", "Portfolio", "Blogs", "Contact Us"];
+            {/* Other Mobile Menu Items "/careers" "Careers" */}
+            {["/portfolio", "/blogs", "/contact"].map((path, i) => {
+              const labels = ["Portfolio", "Blogs", "Contact Us"];
               return (
                 <Link
                   key={path}
@@ -417,6 +379,8 @@ const Navbar = () => {
           © {new Date().getFullYear()} Brandbase Capsule
         </div>
       </div>
+
+
     </nav>
   );
 };
