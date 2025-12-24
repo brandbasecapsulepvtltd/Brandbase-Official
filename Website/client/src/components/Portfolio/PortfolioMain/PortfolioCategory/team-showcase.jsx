@@ -8,17 +8,17 @@ const cn = (...classes) => classes.filter(Boolean).join(' ');
 // Array of portfolio services with links
 const services = [
   {
-    name: "WEB DEVELOPMENT",
-    role: "Modern Web Applications",
-    description: "Scalable solutions with cutting-edge tech",
-    imageSrc: "https://ik.imagekit.io/vinayak06/website_dev-removebg-preview.png",
-    themeColor: "bg-gradient-to-br from-blue-50 to-white",
-    borderColor: "border-blue-200",
-    link: "portfolio/web-development", // Make sure this is a string
-    linkText: "Explore Web Development"
+    name: "CONTENT WRITING",
+    role: "Strategic Content Creation",
+    description: "Compelling brand storytelling",
+    imageSrc: "https://ik.imagekit.io/vinayak06/content_writing-removebg-preview.png",
+    themeColor: "bg-gradient-to-br from-green-50 to-white",
+    borderColor: "border-green-200",
+    link: "portfolio/content-writing", // Make sure this is a string
+    linkText: "Read Our Content"
   },
   {
-    name: "STALL DESIGN",
+    name: "EXHIBITION STALL DESIGN",
     role: "Exhibition & Booth Design",
     description: "Custom exhibition stall solutions",
     imageSrc: "https://ik.imagekit.io/vinayak06/stallde-removebg-preview.png",
@@ -38,15 +38,15 @@ const services = [
     linkText: "See Our Videos"
   },
   {
-    name: "CONTENT WRITING",
-    role: "Strategic Content Creation",
-    description: "Compelling brand storytelling",
-    imageSrc: "https://ik.imagekit.io/vinayak06/content_writing-removebg-preview.png",
-    themeColor: "bg-gradient-to-br from-green-50 to-white",
-    borderColor: "border-green-200",
-    link: "portfolio/content-writing", // Make sure this is a string
-    linkText: "Read Our Content"
-  }
+    name: "WEB DEVELOPMENT",
+    role: "Modern Web Applications",
+    description: "Scalable solutions with cutting-edge tech",
+    imageSrc: "https://ik.imagekit.io/vinayak06/website_dev-removebg-preview.png",
+    themeColor: "bg-gradient-to-br from-blue-50 to-white",
+    borderColor: "border-blue-200",
+    link: "portfolio/web-development", // Make sure this is a string
+    linkText: "Explore Web Development"
+  },
 ];
 
 const ServicesShowcase = ({ 
