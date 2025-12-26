@@ -49,8 +49,8 @@ function CardContent({ contentType }) {
       </div>
       <div className="flex w-full items-center justify-between gap-2 px-2 pb-2">
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate text-sm font-semibold text-gray-900 dark:text-white">{data.title}</span>
-          <span className="truncate text-xs text-gray-500">{data.description}</span>
+          <span className="truncate text-sm font-semibold text-gray-900">{data.title}</span>
+          <span className="truncate text-xs text-gray-700">{data.description}</span>
         </div>
         <button className="flex h-8 shrink-0 items-center gap-1 rounded-full bg-black px-3 text-xs font-medium text-white dark:bg-white dark:text-black">
           Read
