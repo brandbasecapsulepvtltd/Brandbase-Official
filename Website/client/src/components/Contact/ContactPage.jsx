@@ -477,13 +477,15 @@ const ContactPage = () => {
     <div className="min-h-screen text-gray-900 mt-15 bg-white relative">
       {/* Hero Section with Globe Background */}
       <section className="relative text-black py-24 text-center px-4 overflow-hidden">
-        {/* Globe Canvas Background */}
-        <canvas
+        {/* Globe Canvas Background 
+        */}
+                        <canvas
           ref={canvasRef}
           className="absolute top-0 left-0 w-full h-full z-0"
           style={{ opacity: 4 }}
         />
         
+
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="mb-4 text-3xl font-extrabold uppercase tracking-wide text-[#FF6600]">
