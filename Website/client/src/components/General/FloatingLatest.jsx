@@ -6,21 +6,35 @@ import { motion, AnimatePresence } from 'framer-motion';
 // --- Card Data ---
 const cardData = {
   1: {
-    title: "SHADWAY",
-    description: "SHADCN WEBSITE COLLECTION",
-    image: "https://shadway.online/og-image.png",
+    title: "Website Development",
+    description: "Need a website that actually converts? Explore how we design fast, scalable, high-impact websites for modern brands.",
+    image: "https://images.unsplash.com/photo-1522199710521-72d69614c702",
+    link: "https://brandbase-nu.vercel.app/services/website-development",
   },
+
   2: {
-    title: "Rizz Ai",
-    description: "Dating Ai wingmen",
-    image: "https://wrizzai.online/og.png",
+    title: "Productivity Playbook",
+    description: "Struggling to stay productive? Check out our latest blog packed with powerful productivity hacks for creative freelancers.",
+    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe",
+    link: "https://brandbase-nu.vercel.app/blogs/productivity/best-productivity-hacks-for-creative-freelancers-today",
   },
+
   3: {
-    title: "21st.dev",
-    description: "Vibe Crafting Platform",
-    image: "https://21st.dev/opengraph-image.png",
+    title: "Book an Appointment",
+    description: "Got a project in mind? Let’s talk strategy, design, and growth. Book a quick call with our experts today.",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    link: "https://brandbase-nu.vercel.app/appointment",
+  },
+
+  4: {
+    title: "About BrandBase",
+    description: "We’re not just another agency. Discover who we are, how we think, and why brands trust us to build digital success.",
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+    link: "https://brandbase-nu.vercel.app/about",
   },
 };
+
+
 
 const initialCards = [
   { id: 1, contentType: 1 },
@@ -52,12 +66,12 @@ function CardContent({ contentType }) {
           <span className="truncate text-sm font-semibold text-gray-900">{data.title}</span>
           <span className="truncate text-xs text-gray-700">{data.description}</span>
         </div>
-        <button className="flex h-8 shrink-0 items-center gap-1 rounded-full bg-black px-3 text-xs font-medium text-white dark:bg-white dark:text-black">
-          Read
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <path d="M9.5 18L15.5 12L9.5 6" />
-          </svg>
-        </button>
+        <button
+  onClick={() => window.location.href = data.link}
+  className="flex h-8 shrink-0 items-center gap-1 rounded-full bg-black px-3 text-xs font-medium text-white"
+>
+  Read
+</button>
       </div>
     </div>
   );
