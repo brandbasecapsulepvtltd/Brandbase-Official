@@ -39,7 +39,7 @@ const positionStyles = [
 function CardContent({ contentType }) {
   const data = cardData[contentType];
   return (
-    <div className="flex h-full w-full flex-col gap-3">
+    <div className="flex h-full w-full flex-col gap-3 bg-white">
       <div className="flex h-[140px] w-full items-center justify-center overflow-hidden rounded-xl outline outline-black/10 dark:outline-white/10">
         <img
           src={data.image || "/placeholder.svg"}
@@ -127,7 +127,7 @@ const FloatingLatest = () => {
       {/* Floating Globe Icon Button */}
       <button
         onClick={toggleOpen}
-        className={`group relative flex h-17 w-17 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110 active:scale-90 dark:bg-zinc-900 ${
+        className={`group relative flex h-17 w-17 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110 active:scale-90 ${
           isOpen ? 'ring-2 ring-orange-500' : ''
         }`}
         aria-label="Latest Resources"
