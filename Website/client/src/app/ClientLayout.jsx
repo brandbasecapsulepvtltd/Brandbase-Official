@@ -7,6 +7,7 @@ import FloatingWhatsApp from '@/components/General/FloatingWhatsApp';
 import Footer from '@/components/General/Footer';
 import ChatbaseWidget from '@/components/General/ChatbaseWidget';
 import FloatingLatest from '@/components/General/FloatingLatest';
+import GlobalSearch from '@/components/General/GlobalSearch';
 
 export default function ClientLayout({ children }) {
   const pathname = usePathname();
@@ -22,6 +23,7 @@ export default function ClientLayout({ children }) {
   return (
     <>
       <Navbar />
+      <GlobalSearch/>
       <FloatingWhatsApp />
       <FloatingLatest/>
       <ChatbaseWidget/>
