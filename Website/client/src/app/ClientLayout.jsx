@@ -23,7 +23,6 @@ export default function ClientLayout({ children }) {
   return (
     <>
       <Navbar />
-      <GlobalSearch/>
       <FloatingWhatsApp />
       <FloatingLatest/>
       <ChatbaseWidget/>

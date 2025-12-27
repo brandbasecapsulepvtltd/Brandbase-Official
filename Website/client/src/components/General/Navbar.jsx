@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { User, Search, Menu, X, ChevronDown, Calendar } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import GlobalSearch from "./GlobalSearch";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -242,6 +243,7 @@ const Navbar = () => {
         {/* Icons + Mobile Toggle */}
         <div className={`flex items-center gap-6 sm:gap-7 ${textColor}`}>
           <button className="hover:opacity-70 transition"><User size={24} /></button>
+          <GlobalSearch/>
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
