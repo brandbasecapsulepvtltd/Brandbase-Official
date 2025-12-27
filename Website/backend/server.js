@@ -92,6 +92,8 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const contactRoutes = require('./routes/contactRoutes'); // 1. Add this
 
+const serviceCategoryRoutes = require('./routes/serviceCategoryRoutes');
+
 
 // Routes (all protected by API key except health check)
 app.use("/api/appointments", appointmentRoutes);
@@ -100,6 +102,8 @@ app.use("/api/employees", employeeRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/contacts', contactRoutes);
+app.use('/api/service-categories', serviceCategoryRoutes); // Add this
+
 
 // Health check route (public)
 app.get('/api/health', (req, res) => {
