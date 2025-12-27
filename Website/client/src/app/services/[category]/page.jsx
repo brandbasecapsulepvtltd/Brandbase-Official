@@ -1,32 +1,70 @@
 import CategoryContent from '@/components/ServiceCategory/CategoryContent';
-import categoriesData from '@/Data/Categories.json';
+import { apiCall } from '@/lib/api';
 
-// Helper function inside the file
-function getCategoryData(categorySlug) {
-  return categoriesData.categoryMaster.find(
-    cat => cat.category === categorySlug
-  );
+// Helper function to fetch category data from API
+async function getCategoryData(categorySlug) {
+  try {
+    // Fetch from your API
+    const response = await apiCall(`/service-categories/${categorySlug}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching category:', error);
+    return null;
+  }
+}
+
+// Helper function to fetch all category slugs from API
+async function getAllCategorySlugs() {
+  try {
+    const response = await apiCall('/service-categories/slugs');
+    return response.data || [];
+  } catch (error) {
+    console.error('Error fetching category slugs:', error);
+    return [];
+  }
 }
 
 // 1. Static Params Generation (Runs at build time)
-export function generateStaticParams() {
-  return categoriesData.categoryMaster.map((cat) => ({
-    category: cat.category,
-  }));
+export async function generateStaticParams() {
+  try {
+    const categorySlugs = await getAllCategorySlugs();
+    
+    return categorySlugs.map((slug) => ({
+      category: slug,
+    }));
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    // Fallback to empty array
+    return [];
+  }
 }
 
-// 2. Metadata Generation (Updated: async/await params)
+// 2. Metadata Generation
 export async function generateMetadata({ params }) {
   const { category } = await params;
-  const pageData = getCategoryData(category);
-
+  
+  try {
+    const pageData = await getCategoryData(category);
+    
+    if (pageData) {
+      return {
+        title: pageData?.pageMetadata?.title || `${category?.replace('-', ' ')} Services`,
+        description: pageData?.pageMetadata?.description || `Professional ${category?.replace('-', ' ')} services`,
+        keywords: pageData?.pageMetadata?.keywords || [],
+      };
+    }
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+  }
+  
+  // Fallback metadata
   return {
-    title: pageData?.pageMetadata?.title || `${category?.replace('-', ' ')} Services`,
-    description: pageData?.pageMetadata?.description || `Professional ${category?.replace('-', ' ')} services`,
+    title: `${category?.replace('-', ' ')} Services`,
+    description: `Professional ${category?.replace('-', ' ')} services`,
   };
 }
 
-// 3. Main Page Component (Updated: async/await params)
+// 3. Main Page Component
 export default async function CategoryPage({ params }) {
   // In Next.js 15+, params is a Promise. We must await it.
   const resolvedParams = await params;
@@ -42,17 +80,56 @@ export default async function CategoryPage({ params }) {
     );
   }
 
-  const pageData = getCategoryData(category);
+  let pageData;
+  let error = null;
+  
+  try {
+    pageData = await getCategoryData(category);
+  } catch (err) {
+    console.error('Error fetching category data:', err);
+    error = err.message;
+  }
 
   // Data validation check
-  if (!pageData) {
+  if (!pageData || error) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Category Not Found</h1>
-        <p className="text-gray-600">The requested service category does not exist.</p>
+        <p className="text-gray-600">
+          {error 
+            ? `Error loading category: ${error}` 
+            : 'The requested service category does not exist.'}
+        </p>
       </div>
     );
   }
 
   return <CategoryContent pageData={pageData} />;
 }
+
+// Simple API call function (you can also use your existing apiCall from lib/api)
+{/*
+async function apiCall(endpoint) {
+  const API_URL = "https://brandbase.onrender.com/api";
+  const API_KEY = "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de";
+  
+  const url = `${API_URL}${endpoint}`;
+  
+  const response = await fetch(url, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'Content-Type': 'application/json',
+    },
+    next: {
+      revalidate: 3600, // Revalidate every hour (adjust as needed)
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`API Error ${response.status}: ${errorText}`);
+  }
+
+  return response.json();
+}  
+*/}

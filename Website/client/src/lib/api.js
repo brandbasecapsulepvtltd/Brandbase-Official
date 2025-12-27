@@ -259,6 +259,40 @@ export const api = {
   
   getBlogBySlug: (slug) => apiCall(`/blogs/slug/${slug}`),
 
+
+  // Add these to your existing api object:
+
+// Service Categories
+getServiceCategoryBySlug: (slug) => 
+  apiCall(`/service-categories/${slug}`),
+  
+getServiceCategoryById: (id) => 
+  apiCall(`/service-categories/id/${id}`),
+  
+getServiceCategories: (params = {}) => {
+  const queryString = new URLSearchParams(params).toString();
+  return apiCall(`/service-categories${queryString ? `?${queryString}` : ''}`);
+},
+
+getCategorySlugs: () => apiCall('/service-categories/slugs'),
+
+createServiceCategory: (data) => apiCall('/service-categories', {
+  method: 'POST',
+  body: data
+}),
+
+updateServiceCategory: (id, data) => apiCall(`/service-categories/${id}`, {
+  method: 'PUT',
+  body: data
+}),
+
+deleteServiceCategory: (id) => apiCall(`/service-categories/${id}`, {
+  method: 'DELETE'
+}),
+
+// Continue with existing methods...
+  
+  
   // Contact us page api
   createContact: submitContactForm,
   
