@@ -70,9 +70,9 @@ export default function Demotwo() {
 
             className="size-full object-cover object-[50%_50%]"
 
-            src="https://images.unsplash.com/photo-1508849789987-4e5333c12b78?q=80&w=1593&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg"
 
-            alt="street"
+            alt="camera"
 
           />
 
@@ -94,7 +94,7 @@ export default function Demotwo() {
 
             className="size-full object-cover object-[50%_50%]"
 
-            src="https://images.unsplash.com/photo-1666053691228-5f2c957b1755?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.pexels.com/photos/2925312/pexels-photo-2925312.jpeg"
 
             alt="street"
 
@@ -116,9 +116,9 @@ export default function Demotwo() {
 
             className="size-full object-cover object-[50%_50%]"
 
-            src="https://images.unsplash.com/photo-1705693346612-bbc9f38f1621?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.pexels.com/photos/7803253/pexels-photo-7803253.jpeg"
 
-            alt="street"
+            alt="drone"
 
           />
 
@@ -138,9 +138,9 @@ export default function Demotwo() {
 
             className="size-full object-cover object-[50%_50%]"
 
-            src="https://images.unsplash.com/photo-1534270804882-6b5048b1c1fc?q=80&w=706&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.pexels.com/photos/6405771/pexels-photo-6405771.jpeg"
 
-            alt="street"
+            alt="corporate"
 
           />
 
@@ -162,9 +162,9 @@ export default function Demotwo() {
 
             className="size-full object-cover object-[50%_50%]"
 
-            src="https://images.unsplash.com/photo-1643451481461-f73ff49a3f93?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.pexels.com/photos/6883796/pexels-photo-6883796.jpeg"
 
-            alt="street"
+            alt="film production"
 
           />
 
