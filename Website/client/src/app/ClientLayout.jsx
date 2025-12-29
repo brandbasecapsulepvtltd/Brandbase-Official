@@ -1,37 +1,51 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import Navbar from '@/components/General/Navbar';
 import CursorFollower from '@/components/General/CursorFollower';
 import FloatingWhatsApp from '@/components/General/FloatingWhatsApp';
 import Footer from '@/components/General/Footer';
 import ChatbaseWidget from '@/components/General/ChatbaseWidget';
 import FloatingLatest from '@/components/General/FloatingLatest';
-import GlobalSearch from '@/components/General/GlobalSearch';
+import EventPopup from '@/components/General/EventPopup';
 
 export default function ClientLayout({ children }) {
   const pathname = usePathname();
+  const [showPopup, setShowPopup] = useState(false);
 
-  // ❌ List of paths where no UI elements should be shown
+  // ❌ Paths where UI should be hidden
   const excludedPaths = ['/signin', '/signup', '/service/film-making'];
   const hideAllUI = excludedPaths.includes(pathname);
 
+  useEffect(() => {
+    const popupShown = sessionStorage.getItem('eventPopupShown');
+
+    if (!popupShown) {
+      setShowPopup(true);
+      sessionStorage.setItem('eventPopupShown', 'true');
+    }
+  }, []);
+
   if (hideAllUI) {
-    return <>{children}</>; // Show only the page content
+    return <>{children}</>;
   }
 
   return (
     <>
       <Navbar />
+
+      {/* ✅ Show popup only first time */}
+      {showPopup && <EventPopup />}
+
       <FloatingWhatsApp />
-      <FloatingLatest/>
-      <ChatbaseWidget/>
+      <FloatingLatest />
+      <ChatbaseWidget />
       <CursorFollower />
 
-      {/* ✅ Page content */}
       {children}
 
-      {/* ✅ Footer will always be last */}
       <Footer />
     </>
   );

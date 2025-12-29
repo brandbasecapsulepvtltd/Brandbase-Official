@@ -478,12 +478,14 @@ const ContactPage = () => {
       {/* Hero Section with Globe Background */}
       <section className="relative text-black py-24 text-center px-4 overflow-hidden">
         {/* Globe Canvas Background 
-        */}
-                        <canvas
+
+         <canvas
           ref={canvasRef}
           className="absolute top-0 left-0 w-full h-full z-0"
           style={{ opacity: 4 }}
         />
+        */}
+                
         
 
         {/* Hero Content */}
