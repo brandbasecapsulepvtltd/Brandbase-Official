@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, Outlet } from "react-router-dom";
+import { Link, useLocation, Outlet, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Calendar,
@@ -10,14 +10,20 @@ import {
   ChevronDown,
   ChevronUp,
   Users,
-  Palette
+  Palette,
+  LogOut,
+  User
 } from "lucide-react";
+import { useAuth } from "../context/AuthContext"; // Make sure to import your AuthContext
 
 export function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth(); // Get logout function from AuthContext
   const [menuOpen, setMenuOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const navItems = [
     { label: "Appointments", icon: Calendar, path: "/admin/dashboard/admin-appointment" },
@@ -37,8 +43,46 @@ export function Navigation() {
     setOpenDropdown(openDropdown === label ? null : label);
   };
 
+  const handleLogout = () => {
+    logout(); // Call the logout function from AuthContext
+    navigate('/admin/login'); // Navigate to login page
+    setShowLogoutConfirm(false); // Close confirmation dialog
+  };
+
   return (
     <>
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4">
+            <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
+              <LogOut className="h-6 w-6 text-red-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 text-center mb-2">
+              Confirm Logout
+            </h3>
+            <p className="text-gray-600 text-center mb-6">
+              Are you sure you want to logout from the admin dashboard?
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => setShowLogoutConfirm(false)}
+                className="flex-1 py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors duration-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex-1 py-3 px-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Desktop Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-screen bg-white shadow-lg border-r border-orange-200 
@@ -146,14 +190,52 @@ export function Navigation() {
           })}
         </nav>
 
-        {/* Sidebar Footer */}
-        {!collapsed && (
-          <div className="p-4 border-t border-orange-200">
-            <div className="text-xs text-gray-500 text-center">
-              Brandbase Capsule Admin
-            </div>
-          </div>
-        )}
+        {/* Sidebar Footer with User Info and Logout */}
+        <div className="p-4 border-t border-orange-200">
+          {!collapsed ? (
+            <>
+              {/* User Info */}
+              <div className="flex items-center space-x-3 mb-4 p-2 rounded-lg bg-orange-50">
+                <div className="flex items-center justify-center w-8 h-8 bg-[#FF6600] rounded-full">
+                  <User className="h-4 w-4 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900">Admin User</p>
+                  <p className="text-xs text-gray-500">Administrator</p>
+                </div>
+              </div>
+              
+              {/* Logout Button */}
+              <button
+                onClick={() => setShowLogoutConfirm(true)}
+                className="flex items-center justify-center w-full py-2 px-3 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 rounded-lg font-medium transition-all duration-200 group"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                <span>Logout</span>
+              </button>
+              
+              {/* Footer Text */}
+              <div className="text-xs text-gray-500 text-center mt-3">
+                Brandbase Capsule Admin
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Collapsed Logout Button */}
+              <div className="relative group">
+                <button
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className="flex items-center justify-center w-full py-2 px-3 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 rounded-lg transition-all duration-200"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
+                <span className="absolute left-16 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 shadow-lg transition-opacity z-50 whitespace-nowrap">
+                  Logout
+                </span>
+              </div>
+            </>
+          )}
+        </div>
       </aside>
 
       {/* Mobile Topbar */}
@@ -162,84 +244,116 @@ export function Navigation() {
           <LayoutDashboard className="h-7 w-7 text-[#FF6600]" />
           <span className="text-lg font-bold text-gray-900">Admin Dashboard</span>
         </div>
-        <button 
-          className="text-gray-600 hover:text-[#FF6600] transition-colors" 
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-        </button>
+        <div className="flex items-center space-x-3">
+          {/* Mobile Logout Button */}
+          <button 
+            onClick={() => setShowLogoutConfirm(true)}
+            className="p-2 text-gray-600 hover:text-red-600 transition-colors"
+          >
+            <LogOut className="h-5 w-5" />
+          </button>
+          <button 
+            className="text-gray-600 hover:text-[#FF6600] transition-colors" 
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-4 p-6 md:hidden">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = item.children 
-              ? item.children.some(child => location.pathname.startsWith(child.path))
-              : location.pathname.startsWith(item.path);
+        <div className="fixed inset-0 bg-white z-40 flex flex-col p-6 md:hidden pt-20">
+          {/* User Info in Mobile */}
+          <div className="flex items-center space-x-3 mb-6 p-3 rounded-lg bg-orange-50">
+            <div className="flex items-center justify-center w-10 h-10 bg-[#FF6600] rounded-full">
+              <User className="h-5 w-5 text-white" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-medium text-gray-900">Admin User</p>
+              <p className="text-xs text-gray-500">Administrator</p>
+            </div>
+          </div>
 
-            return !item.children ? (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setMenuOpen(false)}
-                className={`flex items-center w-full rounded-lg px-4 py-3 text-lg transition-all font-medium
-                  ${
-                    isActive
-                      ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                      : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
-                  }`}
-              >
-                <Icon className="h-5 w-5 mr-3" />
-                <span>{item.label}</span>
-              </Link>
-            ) : (
-              <div key={item.label} className="w-full">
-                <button
-                  onClick={() => toggleDropdown(item.label)}
-                  className={`flex items-center justify-between w-full rounded-lg px-4 py-3 text-lg transition-all font-medium
+          {/* Navigation Links */}
+          <div className="space-y-2 flex-grow">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = item.children 
+                ? item.children.some(child => location.pathname.startsWith(child.path))
+                : location.pathname.startsWith(item.path);
+
+              return !item.children ? (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={`flex items-center w-full rounded-lg px-4 py-3 text-base transition-all font-medium
                     ${
                       isActive
                         ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
                         : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                     }`}
                 >
-                  <div className="flex items-center">
-                    <Icon className="h-5 w-5 mr-3" />
-                    <span>{item.label}</span>
-                  </div>
-                  {openDropdown === item.label ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                </button>
+                  <Icon className="h-5 w-5 mr-3" />
+                  <span>{item.label}</span>
+                </Link>
+              ) : (
+                <div key={item.label} className="w-full">
+                  <button
+                    onClick={() => toggleDropdown(item.label)}
+                    className={`flex items-center justify-between w-full rounded-lg px-4 py-3 text-base transition-all font-medium
+                      ${
+                        isActive
+                          ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                          : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                      }`}
+                  >
+                    <div className="flex items-center">
+                      <Icon className="h-5 w-5 mr-3" />
+                      <span>{item.label}</span>
+                    </div>
+                    {openDropdown === item.label ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                  </button>
 
-                {openDropdown === item.label && (
-                  <div className="ml-6 mt-2 space-y-2">
-                    {item.children.map((child) => {
-                      const childActive = location.pathname.startsWith(child.path);
-                      return (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          onClick={() => setMenuOpen(false)}
-                          className={`block px-3 py-2 rounded-lg text-base transition-all font-medium
-                            ${
-                              childActive
-                                ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                                : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
-                            }`}
-                        >
-                          {child.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+                  {openDropdown === item.label && (
+                    <div className="ml-6 mt-2 space-y-2">
+                      {item.children.map((child) => {
+                        const childActive = location.pathname.startsWith(child.path);
+                        return (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            onClick={() => setMenuOpen(false)}
+                            className={`block px-3 py-2 rounded-lg text-sm transition-all font-medium
+                              ${
+                                childActive
+                                  ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                                  : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                              }`}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile Logout Button */}
+          <button
+            onClick={() => setShowLogoutConfirm(true)}
+            className="mt-6 flex items-center justify-center w-full py-3 px-4 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors duration-200"
+          >
+            <LogOut className="h-5 w-5 mr-2" />
+            Logout
+          </button>
 
           {/* Mobile Menu Footer */}
-          <div className="mt-8 pt-4 border-t border-orange-200 w-full">
+          <div className="mt-6 pt-4 border-t border-orange-200">
             <div className="text-sm text-gray-500 text-center">
               Brandbase Capsule Admin
             </div>
