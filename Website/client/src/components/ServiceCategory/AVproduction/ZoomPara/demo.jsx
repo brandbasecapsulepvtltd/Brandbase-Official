@@ -20,31 +20,31 @@ export default function DefaultDemo() {
 
     const images = [
         {
-            src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/2510425/pexels-photo-2510425.jpeg',
             alt: 'Modern architecture building',
         },
         {
-            src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/3062545/pexels-photo-3062545.jpeg',
             alt: 'Urban cityscape at sunset',
         },
         {
-            src: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&h=800&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/2883160/pexels-photo-2883160.jpeg',
             alt: 'Abstract geometric pattern',
         },
         {
-            src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/3062547/pexels-photo-3062547.jpeg',
             alt: 'Mountain landscape',
         },
         {
-            src: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=800&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/3062539/pexels-photo-3062539.jpeg',
             alt: 'Minimalist design elements',
         },
         {
-            src: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/67654/pexels-photo-67654.jpeg',
             alt: 'Ocean waves and beach',
         },
         {
-            src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+            src: 'https://images.pexels.com/photos/8088378/pexels-photo-8088378.jpeg',
             alt: 'Forest trees and sunlight',
         },
     ];
