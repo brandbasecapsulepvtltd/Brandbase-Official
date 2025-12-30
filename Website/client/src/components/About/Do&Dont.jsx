@@ -41,7 +41,7 @@ const StickyCard = ({ i, item, progress, range, targetScale }) => {
         <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-gray-100 h-full border border-gray-200">
           <img src={item.dont.src} className="absolute inset-0 w-full h-full object-cover grayscale contrast-125" alt="dont" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end text-center text-white pb-12 px-6">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white pb-12 px-6">
             <h4 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tighter">{item.dont.title}</h4>
             <p className="text-sm md:text-lg opacity-90 italic max-w-md">“{item.dont.text}”</p>
           </div>
@@ -71,13 +71,13 @@ const DoAndDont = () => {
             
             <div className="grid grid-cols-2 gap-10 relative">
               <h3 className="text-sm md:text-2xl font-black uppercase text-[#FF6600]">What We Do</h3>
-              <h3 className="text-sm md:text-2xl font-black uppercase text-gray-400">What We Don't</h3>
+              <h3 className="text-sm md:text-2xl font-black uppercase text-gray-900">What We Don't</h3>
               
               {/* Progress Bar Underneath Labels */}
               <div className="absolute -bottom-4 left-0 w-full h-[3px] bg-gray-100">
                 <motion.div 
                   style={{ scaleX: scrollYProgress }} 
-                  className="absolute inset-0 bg-[#FF6600] origin-left" 
+                  className="absolute inset-0 bg-orange-100 origin-left" 
                 />
               </div>
             </div>
@@ -85,7 +85,7 @@ const DoAndDont = () => {
         </div>
 
         {/* Vertical Center Line */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-px h-full bg-gray-200 hidden md:block z-10" />
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-px h-full bg-orange-100 hidden md:block z-10" />
 
         {/* --- STACKING CARDS --- */}
         <div className="relative">
