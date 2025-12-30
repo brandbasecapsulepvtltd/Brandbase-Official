@@ -242,7 +242,9 @@ const Navbar = () => {
 
         {/* Icons + Mobile Toggle */}
         <div className={`flex items-center gap-6 sm:gap-7 ${textColor}`}>
-          <button className="hover:opacity-70 transition"><User size={24} /></button>
+          <a href="https://brandbase-nu.vercel.app/event-calendar" className="hover:opacity-70 transition">
+            <Calendar size={24} />
+          </a>
           <GlobalSearch/>
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
