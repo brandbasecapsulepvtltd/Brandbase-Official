@@ -44,7 +44,7 @@ const EventPopup = () => {
 
           <div className="flex flex-col gap-4">
             <a 
-              href="https://brandbase-nu.vercel.app/calendar"
+              href="https://brandbase-nu.vercel.app/event-calendar"
               className="inline-block text-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg shadow-orange-200 transition-all transform hover:-translate-y-1 active:scale-95"
             >
               Explore Event Calendar

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Timeline from '@/components/About/Timeline';
 import Tag from '@/components/Tag';
 import DemoOne from '@/components/About/AboutSec/demo';
+import DoAndDont from '@/components/About/Do&Dont';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -520,6 +521,7 @@ const AboutUsContent = () => {
         </motion.div>
       </section>
 
+      <DoAndDont/>
       {/* CTA Section */}
       <section className="py-20 px-4">
         <motion.div 
