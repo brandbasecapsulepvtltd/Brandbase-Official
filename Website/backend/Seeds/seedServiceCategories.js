@@ -1,0 +1,1565 @@
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const ServiceCategory = require('../models/ServiceCategory'); // Adjust path as needed
+
+dotenv.config();
+
+// Your JSON data - you can paste it directly or load from file
+const categoriesData =
+{ 
+  "categoryMaster": [
+    {
+      "category": "website-development",
+      "hero": {
+        "title": "Website Design & Development Services",
+        "subtitle": "From business websites to full-scale e-commerce solutions, we build websites that convert.",
+        "highlightedText": ["websites that convert"],
+        "description": "Whether you need a static website, a CMS platform, or a full online store, we build it with performance and growth in mind.",
+        "imgUrl": "https://static.vecteezy.com/system/resources/previews/005/283/061/original/web-development-concept-in-3d-isometric-design-designer-works-with-code-interface-engineering-programming-settings-and-optimizes-pages-template-with-people-scene-illustration-for-webpage-vector.jpg",
+        "cta": {
+          "primary": "Start Your Project",
+          "secondary": "Explore Our Work"
+        }
+      },
+      "visionBanner": {
+        "heading": "A good website is fast, clear, and easy to use. We build user-friendly, high-performance websites that help you get more leads and customers.",
+        "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.LS4raPuo6scGjjHLv8qi2gHaEK?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+      },
+      "comparisonTable": {
+        "category": "Website Development",
+        "brand": {
+          "logoUrl": "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819",
+          "features": [
+            "End-to-end web design + development + marketing in one place",
+            "Websites built strategically to increase conversions and revenue",
+            "Dedicated experts who understand your business and industry",
+            "Experience of 1,000+ successful website projects",
+            "We use modern tech stacks to ensure long-term success and scalability"
+          ]
+        },
+        "others": [
+          {
+            "title": "In-House Teams",
+            "points": [
+              "Small teams with limited design and marketing expertise",
+              "Often lack advanced technology needed for growth-focused websites",
+              "Limited exposure leads to less innovative and strategic designs",
+              "Lower experience in high-impact UI/UX design",
+              "Restricted tools and collaboration capabilities"
+            ]
+          },
+          {
+            "title": "Typical Web Design Agencies",
+            "points": [
+              "Most agencies do not integrate marketing with design",
+              "Focus is often on visuals instead of business results & conversions",
+              "Inconsistent account management and project communication",
+              "Industry-specific expertise may be limited",
+              "Basic tools and outdated workflows reduce performance potential"
+            ]
+          }
+        ]
+      },
+      "categoryServices": {
+        "title": "Website Development Services",
+        "subtitle": "Our Core Website Solutions",
+        "description": "We build modern, responsive, and high-converting websites tailored to your business goals. From portfolio websites to e-commerce stores, we deliver custom solutions for every industry.",
+        "services": [
+          {
+            "title": "Business Website",
+            "description": "Professional corporate websites designed for brand credibility, lead generation, and strong online presence. Perfect for service-based businesses and organizations.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/Business-removebg-preview.png",
+            "link": "#"
+          },
+          {
+            "title": "Portfolio Website",
+            "description": "Creative websites to showcase your work, case studies, and achievements. Ideal for designers, photographers, studios, and agencies.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/portfolioWeb-removebg-preview.png",
+            "link": "#"
+          },
+          {
+            "title": "Landing Page Development",
+            "description": "High-converting landing pages created for marketing campaigns, ads, and product launches — with strong CTAs and optimized UX.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/LandingPage-removebg-preview.png",
+            "link": "#"
+          },
+          {
+            "title": "CMS Website",
+            "description": "Easy-to-manage CMS websites with blog support, admin dashboards, and seamless content editing. Built using WordPress, Webflow, or custom CMS.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/CMS-removebg-preview.png",
+            "link": "#"
+          },
+          {
+            "title": "E-Commerce Websites",
+            "description": "Full-featured online stores with product pages, payments, cart systems, shipping options, coupons, and analytics. Built using Shopify, WooCommerce, or custom stacks.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/E-commerce-removebg-preview.png",
+            "link": "#"
+          },
+          {
+            "title": "Full E-Commerce Setup",
+            "description": "A complete e-commerce ecosystem including inventory management, marketing automation, CRM integration, multi-channel selling, and analytics dashboards.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/Dynamic-removebg-preview.png",
+            "link": "#"
+          }
+        ]
+      },
+      "categoryAdvantages": {
+        "mainTitle": "Advantages of Professional Website Design & Development",
+        "sections": {
+          "overview": {
+            "id": "overview",
+            "title": "Overview",
+            "heading": "Why Professional Web Design Matters",
+            "content": [
+              {
+                "type": "text",
+                "value": "Professional website design directly impacts your conversion rate, user experience, search ranking, and overall brand perception. A well-designed website helps your business increase leads, sales, and customer engagement."
+              },
+              {
+                "type": "text",
+                "value": "Here are the top benefits of professional website design:"
+              },
+              {
+                "type": "list",
+                "items": [
+                  "1. Increase your conversion rate",
+                  "2. Improve your user experience",
+                  "3. Gain a competitive advantage",
+                  "4. Rank higher on search engines",
+                  "5. Enhance your digital marketing performance"
+                ]
+              }
+            ]
+          },
+          "conversionRate": {
+            "id": "conversion-rate",
+            "title": "1. Increase your conversion rate",
+            "heading": "1. Increase Your Conversion Rate",
+            "content": [
+              {
+                "type": "text",
+                "value": "Conversions include actions like purchases, form submissions, booking appointments, or newsletter sign-ups. A well-designed website guides users smoothly toward taking these actions."
+              },
+              {
+                "type": "text",
+                "value": "Since most conversions start with an online interaction, your website needs to be fast, clean, modern, and intuitive."
+              },
+              {
+                "type": "image",
+                "src": "https://dy3ctaqqzdwfd.cloudfront.net/2025/02/web-conversion-rate-cover.png",
+                "alt": "Conversion Rate Banner"
+              },
+              {
+                "type": "text",
+                "value": "A modern, user-friendly website creates a strong first impression and encourages users to trust your business — increasing the chances of them converting."
+              }
+            ]
+          },
+          "userExperience": {
+            "id": "user-experience",
+            "title": "2. Optimize your user experience",
+            "heading": "2. Optimize Your User Experience (UX)",
+            "content": [
+              {
+                "type": "text",
+                "value": "User experience determines how easy and enjoyable your website is to use. Good UX lowers bounce rates, increases session duration, and improves customer satisfaction."
+              },
+              {
+                "type": "image",
+                "src": "https://blog.cubos.academy/content/images/2023/02/Designer-UI.jpg",
+                "alt": "User Experience Banner"
+              },
+              {
+                "type": "text",
+                "value": "We optimize navigation, page speed, mobile responsiveness, accessibility, and visual clarity — helping users find what they need instantly."
+              }
+            ]
+          },
+          "competitiveEdge": {
+            "id": "competitive-edge",
+            "title": "3. Maximize your competitive edge",
+            "heading": "3. Gain a Competitive Advantage",
+            "content": [
+              {
+                "type": "text",
+                "value": "A custom-designed website sets you apart from competitors using basic templates. Your website becomes a strong branding asset that highlights your strengths."
+              },
+              {
+                "type": "image",
+                "src": "https://firmao.net/blog_net/wp-content/uploads/2023/04/blog-7.png",
+                "alt": "Competitive Edge Banner"
+              },
+              {
+                "type": "text",
+                "value": "With better design, structure, SEO, and visuals — you can outperform competitors and win more customers."
+              }
+            ]
+          },
+          "searchRankings": {
+            "id": "search-rankings",
+            "title": "4. Improve your search rankings",
+            "heading": "4. Improve Your Search Rankings",
+            "content": [
+              {
+                "type": "text",
+                "value": "Over 80% of users search online before making a decision. If your website does not appear on the first page of Google, you lose potential customers."
+              },
+              {
+                "type": "text",
+                "value": "We combine SEO with smart web design to help your website rank for relevant keywords, drive organic traffic, and generate leads."
+              },
+              {
+                "type": "image",
+                "src": "https://bs.uenicdn.com/blog/wp-content/uploads/2020/03/how_to_rank_higher_in_google-768x432.jpg",
+                "alt": "SEO Ranking Banner"
+              }
+            ]
+          },
+          "digitalMarketing": {
+            "id": "digital-marketing",
+            "title": "5. Enhance your digital marketing strategy",
+            "heading": "5. Strengthen Your Digital Marketing Strategy",
+            "content": [
+              {
+                "type": "text",
+                "value": "Your website is the core of your digital marketing. All paid ads, social media campaigns, and email marketing efforts lead users back to your website."
+              },
+              {
+                "type": "image",
+                "src": "https://www.notiontechnologies.com/blog/wp-content/uploads/2023/07/digital-marketing-advantages.webp",
+                "alt": "Digital Marketing Banner"
+              },
+              {
+                "type": "text",
+                "value": "A well-designed website improves ad quality scores, reduces cost per click, and increases conversions across all marketing channels."
+              }
+            ]
+          }
+        }
+      },
+      "whyBuildWithBcpl": {
+        "title": "Why Build With BCPL",
+        "subtitle": "A trusted development partner delivering performance, scalability, and long-term digital growth.",
+        "reasons": [
+          {
+            "id": 1,
+            "reason": "100% in-house full-stack engineering — no outsourcing."
+          },
+          {
+            "id": 2,
+            "reason": "UI/UX design systems that focus on conversions and performance."
+          },
+          {
+            "id": 3,
+            "reason": "Scalable technology stacks built for future growth."
+          },
+          {
+            "id": 4,
+            "reason": "You own the complete source code — zero vendor lock-in."
+          }
+        ]
+      },
+      "weCreate": {
+        "header": {
+          "titleOrange": "WEBSITE",
+          "titleBlack": "DEVELOPMENT",
+          "description": "We create high-quality, responsive, business-driven websites designed to convert visitors into customers."
+        },
+        "leftFeatured": {
+          "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop",
+          "title": "Premium Website Development",
+          "subtitle": "From UI/UX to deployment — we build sleek, fast, and scalable websites for brands that want to stand out.",
+          "tags": [
+            {
+              "label": "RESPONSIVE",
+              "type": "primary"
+            },
+            {
+              "label": "SEO OPTIMIZED",
+              "type": "secondary"
+            },
+            {
+              "label": "FAST PERFORMANCE",
+              "type": "secondary"
+            }
+          ]
+        },
+        "rightColumnItems": [
+          {
+            "title": "Custom Business Websites",
+            "subtitle": "Built for conversion, speed & brand identity",
+            "image": "https://images.unsplash.com/photo-1525182008055-f88b95ff7980?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "BRANDING",
+                "type": "primary"
+              },
+              {
+                "label": "PERFORMANCE",
+                "type": "secondary"
+              },
+              {
+                "label": "UX FIRST",
+                "type": "secondary"
+              }
+            ]
+          },
+          {
+            "title": "E-Commerce Development",
+            "subtitle": "High-converting online stores with seamless checkout",
+            "image": "https://th.bing.com/th/id/OIP.zOQEjy6gq7QyUPNDLNaKzQHaEo?rs=1&pid=ImgDetMain",
+            "tags": [
+              {
+                "label": "SHOPIFY",
+                "type": "primary"
+              },
+              {
+                "label": "MERN",
+                "type": "secondary"
+              }
+            ]
+          }
+        ]
+      },
+      "pageMetadata": {
+        "title": "Website Design & Development Services in Mumbai | Custom Websites & E-Commerce",
+        "description": "Professional website design and development company in Mumbai. We build fast, responsive, SEO-optimized, and high-converting business websites, e-commerce stores, and custom web platforms.",
+        "keywords": [
+          "website development",
+          "website design company",
+          "web design Mumbai",
+          "best website developer",
+          "ecommerce website development",
+          "custom website design",
+          "responsive web design",
+          "web design agency in Mumbai"
+        ]
+      },
+      "ctaData": {
+        "title": "Want to elevate your brand experience? Get in touch",
+        "subheading": "Just bring your creative business idea or communication problem. Let us craft the solution together with a powerful web presence."
+      },
+      "faqData": [
+        {
+          "question": "What services do you offer in website design and development?",
+          "answer": "We provide complete website design and development services including UI/UX design, responsive layouts, SEO setup, AEO optimization, content structuring, website speed optimization, and full deployment."
+        },
+        {
+          "question": "How long does it take to build a website?",
+          "answer": "Most business websites take 10–20 days to build depending on the number of pages, features, content, and design complexity."
+        },
+        {
+          "question": "How much does a website cost?",
+          "answer": "The cost depends on your requirements such as design, features, number of pages, and customization. We provide pricing after understanding your exact needs."
+        },
+        {
+          "question": "Will my website be mobile-friendly?",
+          "answer": "Yes, all websites we build are fully responsive and optimized for mobile, tablet, and desktop."
+        },
+        {
+          "question": "Do you create SEO-friendly websites?",
+          "answer": "Yes, every website we build includes SEO best practices like proper structure, metadata, fast loading speed, responsive design, and AEO-friendly content."
+        },
+        {
+          "question": "Can you redesign my existing website?",
+          "answer": "Yes, we can redesign your existing website to improve design, performance, SEO, and overall user experience."
+        },
+        {
+          "question": "Will I be able to edit my website later?",
+          "answer": "Yes, we provide easy-to-use CMS or admin panels so you can update content, images, and pages anytime."
+        },
+        {
+          "question": "Do you provide website maintenance?",
+          "answer": "Yes, we offer monthly and yearly maintenance plans that include updates, backups, bug fixes, and performance monitoring."
+        },
+        {
+          "question": "Can you build an e-commerce website?",
+          "answer": "Yes, we develop complete e-commerce websites with product management, payment integration, order tracking, and more."
+        },
+        {
+          "question": "Will you integrate analytics?",
+          "answer": "Yes, we integrate Google Analytics and Search Console to help you track visitors and measure website performance."
+        }
+      ]
+    },
+    {
+      "category": "mobile-app-development",
+      "hero": {
+        "title": "Mobile App Development Services",
+        "subtitle": "We build high-performance iOS, Android, and cross-platform mobile apps that scale with your business.",
+        "highlightedText": ["high-performance mobile apps"],
+        "description": "Whether you need a native iOS app, Android app, or a cross-platform solution, we design and develop mobile applications built for speed, usability, security, and long-term growth.",
+        "imgUrl": "https://ik.imagekit.io/vinayak06/app_dev-removebg-preview.png",
+        "cta": {
+          "primary": "Start Your App Project",
+          "secondary": "Explore Our Work"
+        }
+      },
+      "visionBanner": {
+        "heading": "A successful mobile app is fast, intuitive, and user-centered. We create seamless app experiences that help you increase engagement, retention, and revenue.",
+        "imageUrl": "https://wallpaperaccess.com/full/9228148.jpg"
+      },
+      "comparisonTable": {
+        "category": "Mobile App Development",
+        "brand": {
+          "logoUrl": "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819",
+          "features": [
+            "End-to-end app design, development, and post-launch support",
+            "Apps built for performance, engagement, and business growth",
+            "Dedicated mobile app experts specializing in iOS, Android, and cross-platform",
+            "Experience delivering 500+ successful mobile applications",
+            "Modern app tech stacks ensuring scalability, security, and long-term stability"
+          ]
+        },
+        "others": [
+          {
+            "title": "Freelancers / Small In-House Teams",
+            "points": [
+              "Limited expertise in both design and advanced mobile development",
+              "Outdated tech stack and lack of enterprise-level architecture",
+              "Slow delivery due to smaller team size",
+              "Limited experience with App Store & Play Store optimization",
+              "Minimal support after app launch"
+            ]
+          },
+          {
+            "title": "Typical Mobile App Agencies",
+            "points": [
+              "Focus more on development than product strategy",
+              "Weak UI/UX foundation affecting engagement and retention",
+              "Inconsistent communication throughout the project",
+              "Limited experience with large-scale apps",
+              "Basic tools and workflows leading to performance limitations"
+            ]
+          }
+        ]
+      },
+      "categoryServices": {
+        "title": "Mobile App Development Services",
+        "subtitle": "Our Core Mobile App Solutions",
+        "description": "We build secure, scalable, and user-friendly mobile applications tailored to your industry. From prototype to full-scale development, we deliver apps that users love.",
+        "services": [
+          {
+            "title": "iOS App Development",
+            "description": "Native iOS applications built using Swift and modern Apple frameworks. Optimized for performance, security, and smooth user experience.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/iosapp_no_bg_n6osaiz9.png",
+            "link": "#"
+          },
+          {
+            "title": "Android App Development",
+            "description": "High-quality Android apps built using Kotlin and the latest Google technologies. Compatible with all screen sizes and devices.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/androidapp_no_bg_cn94efzd.png",
+            "link": "#"
+          },
+          {
+            "title": "Cross-Platform App Development",
+            "description": "Flutter and React Native apps that work seamlessly on both iOS and Android—cutting development time and cost without compromising quality.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/cross-platform_no_bg_yzuz5eei.png",
+            "link": "#"
+          },
+          {
+            "title": "UI/UX Design for Mobile",
+            "description": "Modern, intuitive, and conversion-focused app interfaces designed to maximize user retention and engagement.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/ui-uxapp_no_bg_3n54ci7v.png",
+            "link": "#"
+          },
+          {
+            "title": "MVP Development",
+            "description": "Launch fast with a Minimum Viable Product. Validate your idea, attract early users, and secure investment with a functional MVP.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/mvp-app_no_bg_03ix8z24.png",
+            "link": "#"
+          },
+          {
+            "title": "App Maintenance & Support",
+            "description": "Ongoing app updates, bug fixes, performance improvements, OS upgrades, and security enhancements for long-term success.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/app-main_no_bg_cr5l8lbo.png",
+            "link": "#"
+          }
+        ]
+      },
+      "categoryAdvantages": {
+        "mainTitle": "Advantages of Professional Mobile App Development",
+        "sections": {
+          "overview": {
+            "id": "overview",
+            "title": "Overview",
+            "heading": "Why Professional Mobile App Development Matters",
+            "content": [
+              {
+                "type": "text",
+                "value": "Mobile apps directly influence engagement, revenue, customer retention, and brand experience. A well-developed app helps you attract more users and increase long-term customer value."
+              },
+              {
+                "type": "text",
+                "value": "Here are the top benefits of professional mobile app development:"
+              },
+              {
+                "type": "list",
+                "items": [
+                  "1. Increase user retention and engagement",
+                  "2. Deliver a seamless user experience",
+                  "3. Gain an edge over competitors",
+                  "4. Improve brand credibility",
+                  "5. Boost conversions and customer lifetime value"
+                ]
+              }
+            ]
+          },
+          "conversionRate": {
+            "id": "conversion-rate",
+            "title": "1. Boost your conversions",
+            "heading": "1. Boost Your Conversions",
+            "content": [
+              {
+                "type": "text",
+                "value": "High-performing mobile apps lead to more signups, purchases, bookings, and repeat usage. We build apps that guide users smoothly through every action."
+              },
+              {
+                "type": "image",
+                "src": "https://miro.medium.com/v2/resize:fit:1358/1*QdqoNf4iAfDdc_1Ji4VluA.png",
+                "alt": "Mobile App Conversion Banner"
+              },
+              {
+                "type": "text",
+                "value": "A fast, intuitive mobile app encourages users to trust your brand and complete desired actions—boosting overall conversion rates."
+              }
+            ]
+          },
+          "userExperience": {
+            "id": "user-experience",
+            "title": "2. Optimize user experience",
+            "heading": "2. Deliver a Better User Experience (UX)",
+            "content": [
+              {
+                "type": "text",
+                "value": "User experience is the core of successful mobile apps. We optimize flow, navigation, gestures, and usability to improve engagement and reduce uninstall rates."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.dribbble.com/users/879147/screenshots/16942756/media/d6a915d554e3c8820a99faaeb2e17b2c.png",
+                "alt": "Mobile UX Banner"
+              },
+              {
+                "type": "text",
+                "value": "Our apps are designed to be smooth, intuitive, and delightful to use—ensuring users stay longer and return more often."
+              }
+            ]
+          },
+          "competitiveEdge": {
+            "id": "competitive-edge",
+            "title": "3. Maximize competitive edge",
+            "heading": "3. Gain a Competitive Advantage",
+            "content": [
+              {
+                "type": "text",
+                "value": "A custom mobile app helps you stand out in crowded markets. With superior design, speed, and functionality, your app becomes a strong differentiator."
+              },
+              {
+                "type": "image",
+                "src": "https://www.appkode.com/wp-content/uploads/2024/01/mobile-app-development-1.png",
+                "alt": "Mobile Competitive Edge Banner"
+              },
+              {
+                "type": "text",
+                "value": "Better performance, smoother user flows, and modern UI help you outperform competitors and increase your market share."
+              }
+            ]
+          },
+          "searchRankings": {
+            "id": "search-rankings",
+            "title": "4. Improve brand visibility",
+            "heading": "4. Improve Your Brand Visibility",
+            "content": [
+              {
+                "type": "text",
+                "value": "A professionally built mobile app increases your brand presence across app stores, search engines, and social platforms."
+              },
+              {
+                "type": "text",
+                "value": "We optimize your app for App Store Optimization (ASO), helping you get more downloads organically."
+              },
+              {
+                "type": "image",
+                "src": "https://miro.medium.com/v2/resize:fit:1100/1*eJc-jpNmpNy_2jdK5HwZjg.png",
+                "alt": "ASO Ranking Banner"
+              }
+            ]
+          },
+          "digitalMarketing": {
+            "id": "digital-marketing",
+            "title": "5. Enhance marketing performance",
+            "heading": "5. Strengthen Your Digital Marketing Strategy",
+            "content": [
+              {
+                "type": "text",
+                "value": "Mobile apps improve the performance of all marketing campaigns by offering personalized user experiences, push notifications, and in-app engagement."
+              },
+              {
+                "type": "image",
+                "src": "https://www.smarther.co/wp-content/uploads/2023/02/mobile-app-marketing-company.jpg",
+                "alt": "Mobile Marketing Banner"
+              },
+              {
+                "type": "text",
+                "value": "Apps increase customer lifetime value, improve retention, and create direct communication channels with users."
+              }
+            ]
+          }
+        }
+      },
+      "whyBuildWithBcpl": {
+        "title": "Why Build Your Mobile App with BCPL",
+        "subtitle": "A trusted mobile app development partner delivering performance, scalability, and high-quality user experiences.",
+        "reasons": [
+          {
+            "id": 1,
+            "reason": "100% in-house iOS, Android, and cross-platform development team — no outsourcing."
+          },
+          {
+            "id": 2,
+            "reason": "User-focused mobile UI/UX designs built for engagement and retention."
+          },
+          {
+            "id": 3,
+            "reason": "Scalable app architecture and modern tech stacks for long-term success."
+          },
+          {
+            "id": 4,
+            "reason": "You own the complete source code, intellectual property, and backend."
+          }
+        ]
+      },
+      "weCreate": {
+        "header": {
+          "titleOrange": "MOBILE APP",
+          "titleBlack": "DEVELOPMENT",
+          "description": "We create high-performance, user-friendly mobile applications designed to engage users and drive business growth."
+        },
+        "leftFeatured": {
+          "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1600&auto=format&fit=crop",
+          "title": "Premium Mobile App Development",
+          "subtitle": "From UI/UX design to app store deployment — we build fast, scalable, and engaging mobile apps for iOS and Android.",
+          "tags": [
+            {
+              "label": "NATIVE APPS",
+              "type": "primary"
+            },
+            {
+              "label": "CROSS-PLATFORM",
+              "type": "secondary"
+            },
+            {
+              "label": "FAST PERFORMANCE",
+              "type": "secondary"
+            }
+          ]
+        },
+        "rightColumnItems": [
+          {
+            "title": "iOS App Development",
+            "subtitle": "Built with Swift for optimal performance and Apple ecosystem integration",
+            "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "SWIFT",
+                "type": "primary"
+              },
+              {
+                "label": "iOS 17+",
+                "type": "secondary"
+              },
+              {
+                "label": "APP STORE",
+                "type": "secondary"
+              }
+            ]
+          },
+          {
+            "title": "Android App Development",
+            "subtitle": "High-quality Android apps built with Kotlin for all devices",
+            "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "KOTLIN",
+                "type": "primary"
+              },
+              {
+                "label": "ANDROID 13+",
+                "type": "secondary"
+              },
+              {
+                "label": "PLAY STORE",
+                "type": "secondary"
+              }
+            ]
+          }
+        ]
+      },
+      "pageMetadata": {
+        "title": "Mobile App Development Services in Mumbai | iOS, Android & Cross-Platform Apps",
+        "description": "Top mobile app development company in Mumbai. We build high-performance iOS apps, Android apps, and cross-platform mobile applications with modern UI/UX, scalable architecture, and end-to-end support.",
+        "keywords": [
+          "mobile app development",
+          "iOS app development",
+          "android app development",
+          "cross platform app development",
+          "best mobile app development company",
+          "app development Mumbai",
+          "mobile UI UX design",
+          "app development agency"
+        ]
+      },
+      "ctaData": {
+        "title": "Want to develop a high-performance mobile app? Get in touch",
+        "subheading": "Share your app idea or business challenge. We'll help you build a scalable, user-friendly mobile app that delivers real business results."
+      },
+      "faqData": [
+        {
+          "question": "What mobile app development services do you offer?",
+          "answer": "We build iOS apps, Android apps, cross-platform apps, UI/UX for mobile, MVPs, and provide maintenance, updates, and long-term support."
+        },
+        {
+          "question": "How long does it take to develop a mobile app?",
+          "answer": "Most apps take 4–12 weeks depending on features, UI/UX complexity, backend requirements, and platform selection."
+        },
+        {
+          "question": "Do you build both iOS and Android apps?",
+          "answer": "Yes, we develop native apps for iOS and Android as well as cross-platform apps using Flutter or React Native."
+        },
+        {
+          "question": "How much does mobile app development cost?",
+          "answer": "App development cost depends on features, tech stack, design complexity, API integrations, and platform choice. Pricing is provided after understanding your requirements."
+        },
+        {
+          "question": "Do you help with App Store and Play Store publishing?",
+          "answer": "Yes, we handle complete app store submission, optimization, screenshots, descriptions, and compliance."
+        },
+        {
+          "question": "Can you develop an MVP for my startup?",
+          "answer": "Yes, we build functional MVPs to help you validate your idea, attract users, and raise funding faster."
+        },
+        {
+          "question": "Will you maintain my app after launch?",
+          "answer": "Yes, we offer ongoing maintenance, bug fixes, OS updates, security patches, and performance enhancements."
+        },
+        {
+          "question": "Can you integrate APIs, payments, and third-party tools?",
+          "answer": "Yes, we integrate payment gateways, GPS, chat systems, analytics, authentication, CRMs, and any required third-party service."
+        },
+        {
+          "question": "Do I own the source code?",
+          "answer": "Yes. You get full ownership of the entire source code, design assets, and backend."
+        },
+        {
+          "question": "How do you ensure the security of the app?",
+          "answer": "We follow industry security standards including encryption, secure APIs, authentication layers, and regular code reviews."
+        }
+      ]
+    },
+    {
+      "category": "events-exhibition",
+      "hero": {
+        "title": "Event & Exhibition Management That Elevates Your Brand",
+        "subtitle": "From stall design to full event execution, we manage everything to make your event impactful, memorable, and professional.",
+        "highlightedText": ["elevates your brand"],
+        "description": "We design and manage events, exhibitions, and brand activations that attract visitors, communicate your brand message, and drive real business results.",
+        "imgUrl": "https://img.freepik.com/premium-photo/virtual-networking-events_839035-745104.jpg",
+        "cta": {
+          "primary": "Plan Your Event",
+          "secondary": "View Our Work"
+        }
+      },
+      "visionBanner": {
+        "heading": "Great events don't happen by chance — they happen with the right planning, design, and execution. We deliver seamless event experiences that leave lasting impressions.",
+        "imageUrl": "https://wallpapercave.com/wp/wp7488228.jpg"
+      },
+      "comparisonTable": {
+        "category": "Event & Exhibition Management",
+        "brand": {
+          "logoUrl": "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819",
+          "features": [
+            "Custom stall & exhibition booth design",
+            "End-to-end event planning & on-site coordination",
+            "Creative branding and design for maximum impact",
+            "Quick execution with experienced event managers",
+            "Transparent timelines, updates, and cost control"
+          ]
+        },
+        "others": [
+          {
+            "title": "Freelancers",
+            "points": [
+              "Limited design and event experience",
+              "No complete event management support",
+              "Unreliable timelines and execution",
+              "Quality varies greatly",
+              "Lack of professional setup and crew"
+            ]
+          },
+          {
+            "title": "Typical Event Vendors",
+            "points": [
+              "Focus only on physical setup, not branding",
+              "Little to no design expertise",
+              "No strategy or end-to-end management",
+              "Poor coordination and communication",
+              "Inconsistent execution during live events"
+            ]
+          }
+        ]
+      },
+      "categoryServices": {
+        "title": "Event & Exhibition Management Services",
+        "subtitle": "Everything You Need for a Successful Event",
+        "description": "We manage every part of your event or exhibition — from planning, design, and branding to on-site execution. Our process ensures smooth operations and impactful experiences.",
+        "services": [
+          {
+            "title": "Stall & Booth Design",
+            "description": "Custom-designed exhibition stalls and booths that reflect your brand and attract visitors. Built for functionality, visibility, and high engagement.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/stallDesign_no_bg_6wi3yd6c.png",
+            "link": "#"
+          },
+          {
+            "title": "Event Planning & Management",
+            "description": "Complete event planning including logistics, scheduling, vendor management, coordination, and execution for smooth and stress-free events.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/eventplanningev_no_bg_f0ferub6.png",
+            "link": "#"
+          },
+          {
+            "title": "Wedding Services",
+            "description": "From elegant venue styling and meticulous vendor coordination to seamless day-of orchestration, we handle every detail with creativity and precision, ensuring a uniquely personal and stress-free celebration.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/weddingplanners_no_bg_u5prb13o.png",
+            "link": "#"
+          },
+          {
+            "title": "Event Branding",
+            "description": "End-to-end branding for events including banners, signages, stage design, digital creatives, packaging, and promotional materials.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/eventbranding_no_bg_oljryr7h.png",
+            "link": "#"
+          },
+          {
+            "title": "On-site Event Coordination",
+            "description": "Dedicated on-ground event coordination team to ensure perfect setup, smooth flow, crowd management, and real-time support.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/on-site-EventCordition_no_bg_312remae.png",
+            "link": "#"
+          }
+        ]
+      },
+      "categoryAdvantages": {
+        "mainTitle": "Advantages of Professional Event & Exhibition Management",
+        "sections": {
+          "overview": {
+            "id": "overview",
+            "title": "Overview",
+            "heading": "Why Professional Event Management Matters",
+            "content": [
+              {
+                "type": "text",
+                "value": "Events and exhibitions are powerful opportunities to connect with your audience, showcase your brand, and generate business. Professional management ensures everything runs smoothly and leaves a lasting impression."
+              },
+              {
+                "type": "text",
+                "value": "Here are the top advantages of working with expert event managers:"
+              },
+              {
+                "type": "list",
+                "items": [
+                  "1. Stress-free planning and execution",
+                  "2. Strong brand visibility and high engagement",
+                  "3. Professional stall and stand designs",
+                  "4. Organized logistics and seamless coordination",
+                  "5. Higher ROI from events and exhibitions"
+                ]
+              }
+            ]
+          },
+          "conversionRate": {
+            "id": "professional-design",
+            "title": "1. Professional Stall & Stand Designs",
+            "heading": "1. Professional Stall & Stand Designs",
+            "content": [
+              {
+                "type": "text",
+                "value": "A professionally designed stall helps you attract more visitors, display your products effectively, and create a strong brand impression."
+              },
+              {
+                "type": "image",
+                "src": "https://www.vfairs.com/wp-content/uploads/2022/10/Exhibition-Booth_Ideas.png",
+                "alt": "Stall Design Banner"
+              }
+            ]
+          },
+          "userExperience": {
+            "id": "smooth-execution",
+            "title": "2. Smooth Execution & Planning",
+            "heading": "2. Smooth Execution & Planning",
+            "content": [
+              {
+                "type": "text",
+                "value": "Proper planning prevents delays, mistakes, and confusion. Our team manages logistics, vendors, timelines, and every detail before and during the event."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.create.vista.com/api/media/small/471618374/stock-photo-event-manager-coordinator-standing-stage",
+                "alt": "Event Planning Banner"
+              }
+            ]
+          },
+          "competitiveEdge": {
+            "id": "branding",
+            "title": "3. Strong Brand Visibility",
+            "heading": "3. Strong Brand Visibility",
+            "content": [
+              {
+                "type": "text",
+                "value": "With professional event branding, your business stands out and remains memorable. High-quality visuals and consistent messaging improve trust and engagement."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.prod.website-files.com/5fc77a6843ccf14a343be27e/65f7034ef3e3f2ef183513df_event-branding.jpg",
+                "alt": "Event Branding Banner"
+              }
+            ]
+          },
+          "searchRankings": {
+            "id": "visitor-engagement",
+            "title": "4. Better Visitor Engagement",
+            "heading": "4. Better Visitor Engagement",
+            "content": [
+              {
+                "type": "text",
+                "value": "Interactive stalls, strong visuals, and efficient coordination help engage visitors more effectively, resulting in better business outcomes."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.prod.website-files.com/64074d2f1b5a0ce39e2d1e46/6530c0b029cd2276620e8b7d_engagement.png",
+                "alt": "Exhibition Engagement Banner"
+              }
+            ]
+          },
+          "digitalMarketing": {
+            "id": "roi",
+            "title": "5. Higher ROI From Your Events",
+            "heading": "5. Higher ROI From Your Events",
+            "content": [
+              {
+                "type": "text",
+                "value": "Efficient management, strong branding, and well-designed stalls help you get better leads, more visibility, and better returns from exhibitions and events."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.prod.website-files.com/602ddfc86f17b4df5a978ca7/612ebbaec0e2a77f4a32b246_return-on-investment.webp",
+                "alt": "Event ROI Banner"
+              }
+            ]
+          }
+        }
+      },
+      "whyBuildWithBcpl": {
+        "title": "Why Host Your Event With BCPL",
+        "subtitle": "We design, plan, and execute events that deliver measurable impact and brand visibility.",
+        "reasons": [
+          {
+            "id": 1,
+            "reason": "Creative stall and booth designs that attract visitors."
+          },
+          {
+            "id": 2,
+            "reason": "Complete event planning, logistics, and on-ground coordination."
+          },
+          {
+            "id": 3,
+            "reason": "Strong branding for high visibility and recognition."
+          },
+          {
+            "id": 4,
+            "reason": "Experienced team for seamless and professional execution."
+          }
+        ]
+      },
+      "weCreate": {
+        "header": {
+          "titleOrange": "EVENT &",
+          "titleBlack": "EXHIBITION",
+          "description": "We create impactful, memorable events and exhibitions that strengthen your brand presence and deliver exceptional visitor experiences."
+        },
+        "leftFeatured": {
+          "image": "https://images.unsplash.com/photo-1492684223066-dd23140edf6d?q=80&w=1600&auto=format&fit=crop",
+          "title": "Premium Event Management",
+          "subtitle": "From concept to execution — we design and manage events that create lasting impressions and drive business results.",
+          "tags": [
+            {
+              "label": "STALL DESIGN",
+              "type": "primary"
+            },
+            {
+              "label": "EVENT PLANNING",
+              "type": "secondary"
+            },
+            {
+              "label": "BRANDING",
+              "type": "secondary"
+            }
+          ]
+        },
+        "rightColumnItems": [
+          {
+            "title": "Exhibition Stand Design",
+            "subtitle": "Custom-designed exhibition stands that maximize brand visibility and visitor engagement",
+            "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "CUSTOM DESIGN",
+                "type": "primary"
+              },
+              {
+                "label": "HIGH IMPACT",
+                "type": "secondary"
+              },
+              {
+                "label": "MODULAR",
+                "type": "secondary"
+              }
+            ]
+          },
+          {
+            "title": "Event Branding",
+            "subtitle": "Complete event branding solutions including signage, banners, and promotional materials",
+            "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "BRANDING",
+                "type": "primary"
+              },
+              {
+                "label": "SIGNAGE",
+                "type": "secondary"
+              },
+              {
+                "label": "PROMOTIONAL",
+                "type": "secondary"
+              }
+            ]
+          }
+        ]
+      },
+      "pageMetadata": {
+        "title": "Event & Exhibition Management in Mumbai | Stall Design, Branding & Event Planning",
+        "description": "Professional event and exhibition management services including stall design, event planning, exhibition stand design, event branding, and on-site coordination. Create impactful, memorable, and high-performing events.",
+        "keywords": [
+          "event management",
+          "exhibition management",
+          "stall design",
+          "booth design",
+          "event branding",
+          "exhibition stand design",
+          "event planners mumbai"
+        ]
+      },
+      "ctaData": {
+        "title": "Ready to make your event unforgettable?",
+        "subheading": "Share your event goals — we'll create a complete plan that brings your brand to life."
+      },
+      "faqData": [
+        {
+          "question": "What event and exhibition services do you offer?",
+          "answer": "We offer stall and booth design, event planning, exhibition stand design, event branding, and full on-site coordination for smooth execution."
+        },
+        {
+          "question": "Do you design custom exhibition stalls?",
+          "answer": "Yes, we create fully customized stalls and booths designed to attract visitors and match your brand identity."
+        },
+        {
+          "question": "Do you handle complete event management?",
+          "answer": "Yes, we manage everything from planning, logistics, vendor coordination, branding, and setup to on-ground execution."
+        },
+        {
+          "question": "Can you design branding materials for events?",
+          "answer": "Yes, we design banners, signages, stage elements, digital creatives, standees, and more for consistent event branding."
+        },
+        {
+          "question": "Do you provide on-site coordination during events?",
+          "answer": "Yes, our team handles on-site execution including setup, scheduling, crowd management, and problem-solving."
+        },
+        {
+          "question": "Do you work with both small and large events?",
+          "answer": "Yes, we manage events of all sizes, from small brand activations to large-scale exhibitions and corporate events."
+        },
+        {
+          "question": "Can you manage virtual events?",
+          "answer": "Yes, we offer virtual event management services including platform setup, technical support, and engagement management."
+        },
+        {
+          "question": "How far in advance should I book event services?",
+          "answer": "We recommend booking at least 4-6 weeks in advance for small events and 8-12 weeks for large exhibitions."
+        },
+        {
+          "question": "Do you provide event staffing?",
+          "answer": "Yes, we can provide trained staff for registration, crowd management, and on-site assistance during events."
+        },
+        {
+          "question": "Can you help with post-event follow-up?",
+          "answer": "Yes, we offer post-event services including lead management, feedback collection, and performance reporting."
+        }
+      ]
+    },
+    {
+      "category": "digital-marketing",
+      "hero": {
+        "title": "Digital Marketing Solutions That Grow Your Business",
+        "subtitle": "From SEO to paid ads, we help you attract the right audience, increase conversions, and scale your brand online.",
+        "highlightedText": ["grow your business"],
+        "description": "We build complete digital marketing systems that improve your visibility, generate high-quality leads, and deliver measurable business results.",
+        "imgUrl": "https://ik.imagekit.io/vinayak06/digi-removebg-preview.png",
+        "cta": {
+          "primary": "Start Your Campaign",
+          "secondary": "See Our Work"
+        }
+      },
+      "visionBanner": {
+        "heading": "Effective digital marketing is simple: reach the right people, at the right time, with the right message. We help you do exactly that with result-driven marketing strategies.",
+        "imageUrl": "https://img.freepik.com/premium-photo/digital-marketing_1268156-393.jpg"
+      },
+      "comparisonTable": {
+        "category": "Digital Marketing Solutions",
+        "brand": {
+          "logoUrl": "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819",
+          "features": [
+            "Performance-focused digital marketing strategies",
+            "SEO, ads, content, and social media managed in one place",
+            "Data-driven approach for consistent month-on-month growth",
+            "Dedicated marketing experts for every project",
+            "Transparent reporting and real-time performance tracking"
+          ]
+        },
+        "others": [
+          {
+            "title": "In-House Teams",
+            "points": [
+              "Limited expertise across all marketing channels",
+              "Small teams struggle to manage SEO + ads + content together",
+              "Slower execution and fewer creative resources",
+              "Higher cost with limited scalability",
+              "Inconsistent results due to skill limitations"
+            ]
+          },
+          {
+            "title": "Typical Agencies",
+            "points": [
+              "Focus mostly on vanity metrics, not new customers",
+              "High dependency on templates and automated ads",
+              "Weak SEO strategies and outdated content practices",
+              "No long-term marketing plan or strategy alignment",
+              "Limited transparency in reporting and spending"
+            ]
+          }
+        ]
+      },
+      "categoryServices": {
+        "title": "Digital Marketing Services",
+        "subtitle": "Our Core Marketing Solutions",
+        "description": "We help your business get found online, build trust, attract the right audience, and convert traffic into paying customers. Every service is backed by research, data, and long-term strategy.",
+        "services": [
+          {
+            "title": "SEO Optimization",
+            "description": "Improve your search rankings, increase visibility, and attract organic leads with on-page SEO, off-page SEO, technical SEO, and keyword-optimized content.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/SEOOptimize_no_bg_ta5un9b9.png",
+            "link": "#"
+          },
+          {
+            "title": "Online Ads Campaigns",
+            "description": "High-converting ad campaigns across Google, YouTube, Meta, and LinkedIn that bring instant traffic, more leads, and measurable ROI.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/onlineAds_no_bg_3tj3n4nc.png",
+            "link": "#"
+          },
+          {
+            "title": "Social Media Marketing",
+            "description": "Grow your brand presence and engage the right audience with strategic social media marketing across Instagram, Facebook, LinkedIn, and more.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/SMMarketing_no_bg_vk4ljl7g.png",
+            "link": "#"
+          },
+          {
+            "title": "Social Media Page Setup",
+            "description": "Complete setup of professional social media pages with optimized bios, branding, highlights, CTAs, and visuals for a strong digital presence.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/SocialMediaPageSetup_no_bg_1v8go6g5.png",
+            "link": "#"
+          },
+          {
+            "title": "Social Media Content Design",
+            "description": "High-quality, scroll-stopping content created for brand awareness, engagement, and conversions across all major platforms.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/socialMediaContentDesign_no_bg_7u5m7f9j.png",
+            "link": "#"
+          },
+          {
+            "title": "Professional Content Writing",
+            "description": "SEO-friendly content for blogs, websites, social media, ads, and landing pages that improves authority and drives conversions.",
+            "image": "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/professional-content-writing_no_bg_9bvdg3hq.png",
+            "link": "#"
+          }
+        ]
+      },
+      "categoryAdvantages": {
+        "mainTitle": "Advantages of Professional Digital Marketing",
+        "sections": {
+          "overview": {
+            "id": "overview",
+            "title": "Overview",
+            "heading": "Why Digital Marketing Matters",
+            "content": [
+              {
+                "type": "text",
+                "value": "Digital marketing helps your business reach the right audience, generate leads, and build long-term brand trust. It ensures consistent growth and predictable revenue."
+              },
+              {
+                "type": "text",
+                "value": "Here are the top advantages of professional digital marketing:"
+              },
+              {
+                "type": "list",
+                "items": [
+                  "1. Increase visibility and brand awareness",
+                  "2. Generate high-quality leads",
+                  "3. Improve website traffic and conversions",
+                  "4. Build strong online presence",
+                  "5. Achieve long-term business growth"
+                ]
+              }
+            ]
+          },
+          "conversionRate": {
+            "id": "conversion-rate",
+            "title": "1. Generate High-Quality Leads",
+            "heading": "1. Generate High-Quality Leads",
+            "content": [
+              {
+                "type": "text",
+                "value": "Targeted digital marketing campaigns help you reach users actively searching for your services. This increases lead quality and improves conversion rates."
+              },
+              {
+                "type": "image",
+                "src": "https://media.licdn.com/dms/image/D5612AQFSiHWm5deCGw/article-cover_image-shrink_600_2000/0/1698757134347?e=2147483647&v=beta&t=TfvTld7eQ0WhXGByq2RLNQrZ2wwgdLEYPyzws6Ck55c",
+                "alt": "Lead Generation Banner"
+              },
+              {
+                "type": "text",
+                "value": "With clear targeting, optimized landing pages, and strong messaging — you attract users who are ready to take action."
+              }
+            ]
+          },
+          "userExperience": {
+            "id": "user-experience",
+            "title": "2. Increase Your Online Visibility",
+            "heading": "2. Increase Your Online Visibility",
+            "content": [
+              {
+                "type": "text",
+                "value": "SEO, social media, and content marketing help you appear where your potential customers spend their time. This increases traffic, awareness, and brand recall."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.prod.website-files.com/6088f9454cf6a741d3c3062c/64fa0f738d17e09215c468ae_SEO.png",
+                "alt": "SEO Visibility Banner"
+              },
+              {
+                "type": "text",
+                "value": "Higher visibility leads to more trust, more engagement, and more conversions."
+              }
+            ]
+          },
+          "competitiveEdge": {
+            "id": "competitive-edge",
+            "title": "3. Strengthen Your Brand",
+            "heading": "3. Strengthen Your Brand",
+            "content": [
+              {
+                "type": "text",
+                "value": "Consistent branding across ads, social media, content, and SEO helps your business build a recognizable identity that customers trust."
+              },
+              {
+                "type": "image",
+                "src": "https://blog.hubspot.com/hubfs/how-to-build-a-brand.png",
+                "alt": "Brand Building Banner"
+              },
+              {
+                "type": "text",
+                "value": "Strong brands outperform competitors and win long-term customer loyalty."
+              }
+            ]
+          },
+          "searchRankings": {
+            "id": "search-rankings",
+            "title": "4. Improve Search Rankings",
+            "heading": "4. Improve Search Rankings",
+            "content": [
+              {
+                "type": "text",
+                "value": "SEO ensures your website ranks for the keywords your customers search. This brings recurring organic traffic without paying for ads."
+              },
+              {
+                "type": "image",
+                "src": "https://cdn.searchenginejournal.com/wp-content/uploads/2023/05/google-ranking-factors-64644c38d4255-sej.png",
+                "alt": "Search Ranking Banner"
+              }
+            ]
+          },
+          "digitalMarketing": {
+            "id": "digital-marketing",
+            "title": "5. Maximize Your Marketing ROI",
+            "heading": "5. Maximize Your Marketing ROI",
+            "content": [
+              {
+                "type": "text",
+                "value": "With proper tracking, analytics, and optimization — digital marketing provides transparent and measurable returns on ad spend, SEO efforts, and content marketing."
+              },
+              {
+                "type": "image",
+                "src": "https://www.meltwater.com/sites/meltwater.com/files/2022-08/marketing-roi-benefits.png",
+                "alt": "Marketing ROI Banner"
+              },
+              {
+                "type": "text",
+                "value": "Better insights lead to smarter decisions and consistent business growth."
+              }
+            ]
+          }
+        }
+      },
+      "whyBuildWithBcpl": {
+        "title": "Why Market With BCPL",
+        "subtitle": "A performance-driven digital marketing partner focused on growth, visibility, and measurable results.",
+        "reasons": [
+          {
+            "id": 1,
+            "reason": "End-to-end SEO, ads, content, and social media — all managed in-house."
+          },
+          {
+            "id": 2,
+            "reason": "Data-backed strategies designed to increase leads and conversions."
+          },
+          {
+            "id": 3,
+            "reason": "Full transparency with detailed analytics and reporting."
+          },
+          {
+            "id": 4,
+            "reason": "We focus on long-term brand growth, not temporary results."
+          }
+        ]
+      },
+      "weCreate": {
+        "header": {
+          "titleOrange": "DIGITAL",
+          "titleBlack": "MARKETING",
+          "description": "We create data-driven digital marketing strategies that increase visibility, generate leads, and drive sustainable business growth."
+        },
+        "leftFeatured": {
+          "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
+          "title": "Premium Digital Marketing",
+          "subtitle": "From SEO to social media — we build comprehensive marketing strategies that deliver measurable results and ROI.",
+          "tags": [
+            {
+              "label": "SEO",
+              "type": "primary"
+            },
+            {
+              "label": "SOCIAL MEDIA",
+              "type": "secondary"
+            },
+            {
+              "label": "CONTENT MARKETING",
+              "type": "secondary"
+            }
+          ]
+        },
+        "rightColumnItems": [
+          {
+            "title": "SEO Optimization",
+            "subtitle": "Improve search rankings and attract organic traffic with proven SEO strategies",
+            "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "ON-PAGE SEO",
+                "type": "primary"
+              },
+              {
+                "label": "OFF-PAGE SEO",
+                "type": "secondary"
+              },
+              {
+                "label": "TECHNICAL SEO",
+                "type": "secondary"
+              }
+            ]
+          },
+          {
+            "title": "Social Media Marketing",
+            "subtitle": "Engage your audience and build brand presence across all major platforms",
+            "image": "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1600&auto=format&fit=crop",
+            "tags": [
+              {
+                "label": "INSTAGRAM",
+                "type": "primary"
+              },
+              {
+                "label": "FACEBOOK",
+                "type": "secondary"
+              },
+              {
+                "label": "LINKEDIN",
+                "type": "secondary"
+              }
+            ]
+          }
+        ]
+      },
+      "pageMetadata": {
+        "title": "Digital Marketing Solutions in Mumbai | SEO, Ads, SMM & Content Services",
+        "description": "Result-driven digital marketing solutions including SEO, online ads, social media marketing, content writing, and content marketing. Improve visibility, get more leads, and grow your business online.",
+        "keywords": [
+          "digital marketing",
+          "seo optimization",
+          "social media marketing",
+          "online ads",
+          "content writing",
+          "content marketing agency",
+          "digital marketing agency mumbai"
+        ]
+      },
+      "ctaData": {
+        "title": "Want to grow your business digitally? Let's get started",
+        "subheading": "Bring your marketing goals — we'll create the perfect strategy to reach your audience and convert them into loyal customers."
+      },
+      "faqData": [
+        {
+          "question": "What digital marketing services do you offer?",
+          "answer": "We offer SEO, online ads, social media marketing, content creation, page setup, and content marketing to help businesses grow online."
+        },
+        {
+          "question": "How long does digital marketing take to show results?",
+          "answer": "SEO takes 2–3 months for consistent growth, while online ads and social media can show results within days or weeks depending on your goals."
+        },
+        {
+          "question": "Do you manage social media pages?",
+          "answer": "Yes, we manage your social media pages including content creation, posting, brand design, and growth strategies."
+        },
+        {
+          "question": "Can digital marketing increase my sales?",
+          "answer": "Yes. With the right SEO, ads, and content strategy, digital marketing can bring more leads, boost conversions, and increase revenue."
+        },
+        {
+          "question": "Do you run paid ad campaigns?",
+          "answer": "Yes, we run high-performance ad campaigns on Google, Facebook, Instagram, YouTube, and LinkedIn."
+        },
+        {
+          "question": "Will you provide performance reports?",
+          "answer": "Yes, we share detailed reports on traffic, leads, engagement, conversions, and ROI to track performance clearly."
+        },
+        {
+          "question": "Do you provide content creation services?",
+          "answer": "Yes, we create SEO-friendly website content, blogs, social media posts, and ad content that attracts and converts customers."
+        },
+        {
+          "question": "Can you help with local SEO?",
+          "answer": "Yes, we optimize your business for local search results including Google My Business, local citations, and location-based keywords."
+        },
+        {
+          "question": "Do you offer email marketing services?",
+          "answer": "Yes, we provide email marketing campaign setup, newsletter design, automation, and performance tracking."
+        },
+        {
+          "question": "How do you measure marketing success?",
+          "answer": "We track key metrics like website traffic, leads generated, conversion rates, cost per acquisition, and overall ROI."
+        }
+      ]
+    }
+  ]
+};
+
+const seedDatabase = async () => {
+  try {
+    console.log('Connecting to MongoDB...');
+    await mongoose.connect("mongodb+srv://vinayakandhere4:niUjtjP7piNusVwA@cluster0.vtovevf.mongodb.net/brandbase?retryWrites=true&w=majority&appName=Cluster0", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('✅ Connected to MongoDB');
+    
+    // Clear existing data (optional - comment out if you want to keep existing data)
+    console.log('Clearing existing categories...');
+    await ServiceCategory.deleteMany({});
+    console.log('✅ Cleared existing categories');
+    
+    // Insert new data
+    console.log(`Seeding ${categoriesData.categoryMaster.length} categories...`);
+    
+    const inserted = await ServiceCategory.insertMany(categoriesData.categoryMaster);
+    
+    console.log(`✅ Successfully seeded ${inserted.length} categories`);
+    console.log('\n📋 Seeded Categories:');
+    console.log('-------------------');
+    
+    inserted.forEach((cat, index) => {
+      console.log(`${index + 1}. ${cat.category} - "${cat.hero.title}"`);
+    });
+    
+    console.log('\n🎉 Seeding completed successfully!');
+    
+    // Close connection
+    await mongoose.connection.close();
+    console.log('🔌 MongoDB connection closed');
+    
+  } catch (error) {
+    console.error('❌ Error seeding database:', error.message);
+    console.error(error.stack);
+    process.exit(1);
+  }
+};
+
+// Alternative: Load from external JSON file
+const seedFromFile = async () => {
+  try {
+    console.log('📂 Loading data from categories.json...');
+    
+    // If your JSON is in a separate file
+    const fs = require('fs');
+    const path = require('path');
+    
+    const jsonPath = path.join(__dirname, 'categories.json');
+    const fileData = fs.readFileSync(jsonPath, 'utf8');
+    const categoriesData = JSON.parse(fileData);
+    
+    console.log('Connecting to MongoDB...');
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    
+    console.log('Clearing existing categories...');
+    await ServiceCategory.deleteMany({});
+    
+    console.log(`Seeding ${categoriesData.categoryMaster.length} categories...`);
+    const inserted = await ServiceCategory.insertMany(categoriesData.categoryMaster);
+    
+    console.log(`✅ Seeded ${inserted.length} categories`);
+    
+    await mongoose.connection.close();
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+    process.exit(1);
+  }
+};
+
+// Run if called directly
+if (require.main === module) {
+  // Check command line arguments
+  const args = process.argv.slice(2);
+  
+  if (args.includes('--file')) {
+    seedFromFile();
+  } else {
+    seedDatabase();
+  }
+}
+
+module.exports = { seedDatabase, seedFromFile };

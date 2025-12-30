@@ -91,6 +91,7 @@ const employeeRoutes = require("./routes/employees");
 const serviceRoutes = require('./routes/serviceRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const contactRoutes = require('./routes/contactRoutes'); // 1. Add this
+const eventRoutes = require('./routes/eventRoutes');
 
 const serviceCategoryRoutes = require('./routes/serviceCategoryRoutes');
 
@@ -103,7 +104,7 @@ app.use('/api/services', serviceRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/service-categories', serviceCategoryRoutes); // Add this
-
+app.use('/api/events', eventRoutes);
 
 // Health check route (public)
 app.get('/api/health', (req, res) => {
