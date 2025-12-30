@@ -3,7 +3,7 @@
 import { X, Calendar, MapPin, Users, Building, ExternalLink, Bookmark, Bell, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
 import { useState } from "react";
-//import { LeadForm } from "./LeadForm";
+import { LeadForm } from "./LeadForm";
 
 export function EventDetailModal({ event, isOpen, onClose, eventsData, industryLabel }) {
   const [showLeadForm, setShowLeadForm] = useState(false);
@@ -239,13 +239,13 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
         </div>
       )}
 
-      {/* Lead Form Modal         <LeadForm
+      {/* Lead Form Modal*/}
+      {showLeadForm && (
+        <LeadForm
           event={event}
           isOpen={showLeadForm}
           onClose={() => setShowLeadForm(false)}
-        />*/}
-      {showLeadForm && (
-        <h1>here will be lead form</h1>
+        />
       )}
     </>
   );
