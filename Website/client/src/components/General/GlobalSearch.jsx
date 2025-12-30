@@ -78,29 +78,11 @@ const GlobalSearch = () => {
         fetchData();
     }, []);
 
-const filteredServices = data.data.filter(item => {
-    const searchTerm = query.toLowerCase();
-    
-    // 1. Check for Slug Match (Highest Priority)
-    const slugMatch = item.slug?.toLowerCase().includes(searchTerm);
-    
-    // 2. Check for Other Fields
-    const categoryMatch = item.category?.toLowerCase().includes(searchTerm);
-    const headlineMatch = item.data?.hero?.headline?.toLowerCase().includes(searchTerm);
-
-    return slugMatch || categoryMatch || headlineMatch;
-}).sort((a, b) => {
-    const searchTerm = query.toLowerCase();
-    const aSlugMatch = a.slug?.toLowerCase().includes(searchTerm);
-    const bSlugMatch = b.slug?.toLowerCase().includes(searchTerm);
-
-    // If 'a' has a slug match and 'b' doesn't, 'a' comes first
-    if (aSlugMatch && !bSlugMatch) return -1;
-    // If 'b' has a slug match and 'a' doesn't, 'b' comes first
-    if (!aSlugMatch && bSlugMatch) return 1;
-    
-    return 0; // Keep original order if both match slugs or neither matches slugs
-});
+    const filteredServices = data.services.filter(item =>
+        item.data?.hero?.headline?.toLowerCase().includes(query.toLowerCase()) ||
+        item.category?.toLowerCase().includes(query.toLowerCase()) ||
+        item.slug?.toLowerCase().includes(query.toLowerCase())
+    );
 
     const filteredBlogs = data.blogs.filter(item =>
         item.metadata?.title?.toLowerCase().includes(query.toLowerCase()) ||

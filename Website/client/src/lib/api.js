@@ -291,7 +291,7 @@ deleteServiceCategory: (id) => apiCall(`/service-categories/${id}`, {
 }),
 
 // Continue with existing methods...
-  
+getEvents: () => apiCall('/events'),
   
   // Contact us page api
   createContact: submitContactForm,
