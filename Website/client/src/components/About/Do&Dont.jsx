@@ -31,7 +31,7 @@ const StickyCard = ({ i, item, progress, range, targetScale }) => {
         <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-gray-100 h-full border border-gray-200">
           <img src={item.do.src} className="absolute inset-0 w-full h-full object-cover" alt="do" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end text-center text-white pb-12 px-6">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white pb-12 px-6">
             <h4 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tighter">{item.do.title}</h4>
             <p className="text-sm md:text-lg opacity-90 max-w-md">{item.do.text}</p>
           </div>
