@@ -94,6 +94,8 @@ const contactRoutes = require('./routes/contactRoutes'); // 1. Add this
 const eventRoutes = require('./routes/eventRoutes');
 
 const serviceCategoryRoutes = require('./routes/serviceCategoryRoutes');
+const leadRoutes = require('./routes/leadRoutes');
+
 
 
 // Routes (all protected by API key except health check)
@@ -105,6 +107,7 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/service-categories', serviceCategoryRoutes); // Add this
 app.use('/api/events', eventRoutes);
+app.use('/api/leads', leadRoutes);
 
 // Health check route (public)
 app.get('/api/health', (req, res) => {
@@ -234,6 +237,50 @@ app.get('/api', (req, res) => {
         path: '/api/blogs',
         description: 'Manage blog posts',
         authRequired: true
+      },
+      leads: {
+        create: {
+          method: 'POST',
+          path: '/api/leads',
+          description: 'Create new lead (public)',
+          authRequired: false
+        },
+        getAll: {
+          method: 'GET',
+          path: '/api/leads',
+          description: 'Get all leads with filters',
+          authRequired: true
+        },
+        getById: {
+          method: 'GET',
+          path: '/api/leads/:id',
+          description: 'Get single lead by ID',
+          authRequired: true
+        },
+        update: {
+          method: 'PUT',
+          path: '/api/leads/:id',
+          description: 'Update lead',
+          authRequired: true
+        },
+        delete: {
+          method: 'DELETE',
+          path: '/api/leads/:id',
+          description: 'Delete lead',
+          authRequired: true
+        },
+        stats: {
+          method: 'GET',
+          path: '/api/leads/stats/overview',
+          description: 'Get leads statistics',
+          authRequired: true
+        },
+        export: {
+          method: 'GET',
+          path: '/api/leads/export/csv',
+          description: 'Export leads to CSV',
+          authRequired: true
+        }
       }
     },
     usage: {
