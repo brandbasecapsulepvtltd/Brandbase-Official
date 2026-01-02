@@ -70,6 +70,9 @@ const contrastItems = [
       src: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b"
     }
   },
+];
+
+{/*
   {
     id: 6,
     do: {
@@ -134,8 +137,8 @@ const contrastItems = [
       text: "We finish what we start",
       src: "https://images.unsplash.com/photo-1507209696997-3c532be9b2b5"
     }
-  }
-];
+  }  
+*/}
 
 const StickyCard = ({ i, item, progress, range, targetScale }) => {
   // Animating the scale: it starts at 1 and slowly scales to targetScale as we scroll past it
