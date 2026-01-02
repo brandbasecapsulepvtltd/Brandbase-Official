@@ -5,14 +5,137 @@ import { useRef } from "react"
 import ReactLenis from "lenis/react"
 
 const contrastItems = [
-  { id: 1, do: { title: "World-class digital", text: "We build long-term roadmaps.", src: "https://img.freepik.com/premium-photo/abstract-digital-world-map-global-network-connectivity-concept_774065-1116.jpg" }, dont: { title: "sacrifice quality for profit", text: "We don't believe in burnout culture.", src: "https://images.hindustantimes.com/img/2022/09/17/550x309/5d939434-36b7-11ed-8444-8bd3a43ea4de_1663439709640.jpg" } },
-  { id: 2, do: { title: "Celebrate Success", text: "We value milestones and rest.", src: "https://img.freepik.com/premium-photo/group-employees-celebrating-their-business-success_681354-2335.jpg" }, dont: { title: "Work on Weekends", text: "We don't believe in burnout culture.", src: "https://www.basharibrahim.com.au/wp-content/uploads/2020/07/Man-stressed-at-work.jpg" } },
-  { id: 3, do: { title: "Data-Driven Decisions", text: "We rely on market intelligence.", src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" }, dont: { title: "Blind Guesswork", text: "We don't gamble with your budget.", src: "https://www.psychologs.com/wp-content/uploads/2024/01/How-Does-Ego-Impact-Our-Mental-Health-960x520.jpg" } },
-  { id: 4, do: { title: "Transparent Process", text: "You always know where we stand.", src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" }, dont: { title: "EGOs", text: "We hate nasty surprises too.", src: "https://www.psychologs.com/wp-content/uploads/2024/01/How-Does-Ego-Impact-Our-Mental-Health-960x520.jpg" } },
-  { id: 5, do: { title: "Party", text: "You always know where we stand.", src: "https://plus.unsplash.com/premium_photo-1683129651802-1c7ba429a137?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHBhcnR5fGVufDB8fDB8fHww" }, dont: { title: "Lose at Mario Kart", text: "We hate nasty surprises too.", src: "https://wallpaperaccess.com/full/1402239.jpg" } },
-  { id: 6, do: { title: "Outstanding work", text: "Precision in every pixel.", src: "https://media.istockphoto.com/id/1364226181/vector/hand-holding-a-winning-trophy-while-people-clap-and-cheer.jpg?s=612x612&w=0&k=20&c=az6ck3Tjd-o5mX7zEnKjfUlz864q35ZZX7zSwrzmL6s=" }, dont: { title: "Over Promise", text: "Integrity over everything.", src: "https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/9c323e94-3eef-4568-90bb-3f72847376be_1456x1048.png" } },
-  // ... more items can be added here
-]
+  {
+    id: 1,
+    do: {
+      title: "Strategy First",
+      text: "Every move has a purpose",
+      src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+    },
+    dont: {
+      title: "Random Campaigns",
+      text: "No guesswork marketing",
+      src: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe"
+    }
+  },
+  {
+    id: 2,
+    do: {
+      title: "Brand-Led Growth",
+      text: "We build brands, not noise",
+      src: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6"
+    },
+    dont: {
+      title: "One-Size Solutions",
+      text: "Every brand is unique",
+      src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
+    }
+  },
+  {
+    id: 3,
+    do: {
+      title: "Data + Creativity",
+      text: "Ideas backed by insights",
+      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+    },
+    dont: {
+      title: "Vanity Metrics",
+      text: "Likes don’t equal growth",
+      src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+    }
+  },
+  {
+    id: 4,
+    do: {
+      title: "Long-Term Impact",
+      text: "Built to last, not fade",
+      src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+    },
+    dont: {
+      title: "Shortcuts",
+      text: "No quick wins or hacks",
+      src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+    }
+  },
+  {
+    id: 5,
+    do: {
+      title: "Clear Communication",
+      text: "Simple, honest updates",
+      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c"
+    },
+    dont: {
+      title: "Overcomplicate Work",
+      text: "No unnecessary jargon",
+      src: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b"
+    }
+  },
+  {
+    id: 6,
+    do: {
+      title: "Scalable Solutions",
+      text: "Built to grow with you",
+      src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
+    },
+    dont: {
+      title: "Copy Competitors",
+      text: "Originality over imitation",
+      src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+    }
+  },
+  {
+    id: 7,
+    do: {
+      title: "Honest Marketing",
+      text: "Clear, ethical, transparent",
+      src: "https://images.unsplash.com/photo-1523958203904-cdcb402031fd"
+    },
+    dont: {
+      title: "Empty Promises",
+      text: "No fake numbers or hype",
+      src: "https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+    }
+  },
+  {
+    id: 8,
+    do: {
+      title: "Client Partnership",
+      text: "We grow with our clients",
+      src: "https://images.unsplash.com/photo-1552664730-d307ca884978"
+    },
+    dont: {
+      title: "Vendor Mindset",
+      text: "We don’t just execute",
+      src: "https://images.unsplash.com/photo-1521791136064-7986c2920216"
+    }
+  },
+  {
+    id: 9,
+    do: {
+      title: "Brand Consistency",
+      text: "One voice everywhere",
+      src: "https://images.unsplash.com/photo-1523289333742-be1143f6b766"
+    },
+    dont: {
+      title: "Trend Chasing",
+      text: "Relevance over virality",
+      src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+    }
+  },
+  {
+    id: 10,
+    do: {
+      title: "Measurable Results",
+      text: "Track what matters",
+      src: "https://images.unsplash.com/photo-1556155092-8707de31f9c4"
+    },
+    dont: {
+      title: "Poor Follow-Through",
+      text: "We finish what we start",
+      src: "https://images.unsplash.com/photo-1507209696997-3c532be9b2b5"
+    }
+  }
+];
 
 const StickyCard = ({ i, item, progress, range, targetScale }) => {
   // Animating the scale: it starts at 1 and slowly scales to targetScale as we scroll past it
