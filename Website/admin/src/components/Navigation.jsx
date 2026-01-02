@@ -36,6 +36,14 @@ export function Navigation() {
         { label: "Blogs", path: "/admin/dashboard/blogs-management" },
         { label: "Service", path: "/admin/dashboard/service-management" }
       ]
+    },
+    { 
+      label: "Event Management", 
+      icon: Calendar, 
+      children: [
+        { label: "Manage Events", path: "/admin/dashboard/event-management" },
+        { label: "Events Leads", path: "/admin/dashboard/event-leads"}
+      ]
     }
   ];
 
