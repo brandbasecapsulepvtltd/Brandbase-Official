@@ -12,6 +12,7 @@ import ServiceSlider from '@/components/ServiceSlider';
 import HeroSlider from '@/components/homeComponents/HeroSlider';
 // Import the API client
 import { api } from '@/lib/api';
+import InteractiveImageBentoGalleryDemo from '@/components/homeComponents/BentoGallery/demo';
 
 const HomePage = () => {
   const [homePageData, setHomePageData] = useState(null);
@@ -178,12 +179,16 @@ const HomePage = () => {
       {/* Recent Work Section */}
       {recentWork && <RecentWork data={recentWork} />}
       
-      {/* Clients Section */}
-      {clients && <Clients data={clients} />}
-      
       {/* Service Slider Section */}
       <ServiceSlider />
       
+      {/* Clients Section */}
+      {clients && <Clients data={clients} />}
+      
+      
+      {/**/}
+      <InteractiveImageBentoGalleryDemo/>
+
       {/* Testimonials Section */}
       {testimonials && <TestimonialSlider data={testimonials} />}
       

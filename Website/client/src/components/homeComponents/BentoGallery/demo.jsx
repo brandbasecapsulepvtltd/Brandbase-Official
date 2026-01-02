@@ -1,0 +1,597 @@
+"use client"
+
+import React, { useRef, useState, useEffect } from "react"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+// --- UPDATED DATA STRUCTURE ---
+const imageItems = [
+  {
+    id: 1,
+    companyLogo: "https://logo.clearbit.com/technova.com",
+    companyName: "TechNova Solutions",
+    industry: "Software & Technology",
+    title: "Complete Digital Transformation & Brand Strategy",
+    desc: "Led a comprehensive digital transformation including website redesign, digital marketing strategy, and brand positioning that resulted in significant market growth.",
+    url: "https://images.unsplash.com/photo-1522071823991-b59fea12f45a?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1522071823991-b59fea12f45a?w=800&q=80",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80"
+    ],
+    services: ["Digital Marketing", "Website Development", "Brand Strategy", "Social Media Management"],
+    results: [
+      { value: "300%", label: "Lead Increase" },
+      { value: "65%", label: "Engagement Growth" },
+      { value: "2.8X", label: "ROI" },
+      { value: "40%", label: "Cost Reduction" },
+    ],
+    testimonial: {
+      quote: "Brandbase Capsule transformed our digital presence completely. Their strategic approach and execution excellence delivered results beyond our expectations.",
+      author: "Alex Johnson",
+      role: "CEO, TechNova Solutions",
+      avatar: "https://i.pravatar.cc/150?u=alex"
+    },
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    id: 2,
+    companyLogo: "https://logo.clearbit.com/stripe.com",
+    companyName: "SwiftPay FinTech",
+    industry: "Financial Services",
+    title: "Mobile Wallet UI/UX Overhaul",
+    desc: "Redesigning the payment experience for over 2 million users, focusing on security, speed, and intuitive navigation.",
+    url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+      "https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=800&q=80"
+    ],
+    services: ["UI/UX Design", "Mobile Development", "FinTech Strategy"],
+    results: [
+      { value: "92%", label: "User Satisfaction" },
+      { value: "15s", label: "Avg Transaction" },
+      { value: "4.9", label: "App Store Rating" },
+      { value: "22%", label: "Churn Reduction" },
+    ],
+    testimonial: {
+      quote: "The new interface is a game changer for our customers. Adoption rates skyrocketed within the first month of launch.",
+      author: "Sarah Chen",
+      role: "Product Lead, SwiftPay",
+      avatar: "https://i.pravatar.cc/150?u=sarah"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 3,
+    companyLogo: "https://logo.clearbit.com/nike.com",
+    companyName: "Velocity Sportswear",
+    industry: "E-commerce & Retail",
+    title: "Global Omnichannel Marketing",
+    desc: "A worldwide campaign integrating offline retail experiences with a seamless online purchasing journey.",
+    url: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&q=80",
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=800&q=80",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80"
+    ],
+    services: ["E-commerce Strategy", "Content Production", "SEO/SEM"],
+    results: [
+      { value: "140%", label: "Online Sales" },
+      { value: "3.5M", label: "Reach" },
+      { value: "25%", label: "Retention" },
+      { value: "18%", label: "CAC Reduction" },
+    ],
+    testimonial: {
+      quote: "Our brand voice has never been clearer. The omnichannel approach drove foot traffic and web sales simultaneously.",
+      author: "Marcus Thorne",
+      role: "Marketing Director",
+      avatar: "https://i.pravatar.cc/150?u=marcus"
+    },
+    span: "md:col-span-1 md:row-span-2",
+  },
+  {
+    id: 4,
+    companyLogo: "https://logo.clearbit.com/tesla.com",
+    companyName: "EcoCurrent Energy",
+    industry: "Renewable Energy",
+    title: "Renewable Energy Brand Identity",
+    desc: "Rebranding a traditional energy provider into a future-facing green energy leader through visual storytelling.",
+    url: "https://images.unsplash.com/photo-1466611653911-95282fc3656b?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1466611653911-95282fc3656b?w=800&q=80",
+      "https://images.unsplash.com/photo-1509391366360-fe5bb658582f?w=800&q=80",
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80"
+    ],
+    services: ["Brand Identity", "Motion Graphics", "Web Design"],
+    results: [
+      { value: "50k+", label: "New Subs" },
+      { value: "85%", label: "Brand Recall" },
+      { value: "12", label: "Design Awards" },
+      { value: "200%", label: "PR Coverage" },
+    ],
+    testimonial: {
+      quote: "The visual language developed for EcoCurrent perfectly captures our mission for a sustainable future.",
+      author: "Elena Rodriguez",
+      role: "Sustainability Officer",
+      avatar: "https://i.pravatar.cc/150?u=elena"
+    },
+    span: "md:col-span-2 md:row-span-1",
+  },
+  {
+    id: 5,
+    companyLogo: "https://logo.clearbit.com/coursera.org",
+    companyName: "EduPulse Learning",
+    industry: "EdTech",
+    title: "Interactive LMS Platform",
+    desc: "Developing a custom Learning Management System with gamified features to increase student engagement.",
+    url: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80"
+    ],
+    services: ["Full-stack Development", "UX Research", "Gamification"],
+    results: [
+      { value: "75%", label: "Completion Rate" },
+      { value: "3x", label: "User Session Time" },
+      { value: "1M+", label: "Active Learners" },
+      { value: "90%", label: "Teacher Approval" },
+    ],
+    testimonial: {
+      quote: "Learning has become an addiction for our students. The platform is intuitive and incredibly fun to use.",
+      author: "Dr. Julian Voss",
+      role: "Dean of Innovation",
+      avatar: "https://i.pravatar.cc/150?u=julian"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 6,
+    companyLogo: "https://logo.clearbit.com/airbnb.com",
+    companyName: "Wanderlust Travel",
+    industry: "Travel & Hospitality",
+    title: "AI-Powered Travel Itineraries",
+    desc: "Integrating machine learning to provide personalized travel recommendations based on user behavior.",
+    url: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
+      "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=800&q=80"
+    ],
+    services: ["AI/ML Integration", "Cloud Architecture", "Product Design"],
+    results: [
+      { value: "45%", label: "Booking Conv." },
+      { value: "120%", label: "User Growth" },
+      { value: "4.2m", label: "Queries/Day" },
+      { value: "15%", label: "Lower API Costs" },
+    ],
+    testimonial: {
+      quote: "The AI recommendations feel like they know our users better than they know themselves. Conversion is through the roof.",
+      author: "Emily Zhao",
+      role: "CTO, Wanderlust",
+      avatar: "https://i.pravatar.cc/150?u=emily"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 7,
+    companyLogo: "https://logo.clearbit.com/wholefoodsmarket.com",
+    companyName: "GustoBites",
+    industry: "Food & Beverage",
+    title: "DTC Subscription Model Launch",
+    desc: "Scaling a local organic food delivery service into a nationwide subscription-based powerhouse.",
+    url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+      "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80",
+      "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&q=80"
+    ],
+    services: ["Growth Marketing", "Web Development", "Logistics Strategy"],
+    results: [
+      { value: "$2M", label: "Monthly Rev" },
+      { value: "80%", label: "Repeat Customers" },
+      { value: "5/5", label: "Freshness Rating" },
+      { value: "35%", label: "Waste Reduction" },
+    ],
+    testimonial: {
+      quote: "Scaling from 100 to 10,000 customers was only possible with the robust backend and growth engine they built.",
+      author: "Chef Gordon L.",
+      role: "Founder, GustoBites",
+      avatar: "https://i.pravatar.cc/150?u=gordon"
+    },
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    id: 8,
+    companyLogo: "https://logo.clearbit.com/zillow.com",
+    companyName: "PrimeSpace Reality",
+    industry: "Real Estate",
+    title: "Virtual Property Tours 2.0",
+    desc: "An immersive WebGL-based property viewing platform that allows buyers to explore homes in 3D from anywhere.",
+    url: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80"
+    ],
+    services: ["3D Rendering", "Frontend Dev", "VR Strategy"],
+    results: [
+      { value: "400%", label: "Time on Site" },
+      { value: "50%", label: "Faster Closing" },
+      { value: "10k", label: "Monthly Tours" },
+      { value: "28%", label: "Intl. Sales" },
+    ],
+    testimonial: {
+      quote: "Our international buyers can now close deals with confidence without ever stepping foot on the property.",
+      author: "Robert Sterling",
+      role: "Sales Lead",
+      avatar: "https://i.pravatar.cc/150?u=robert"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 9,
+    companyLogo: "https://logo.clearbit.com/nvidia.com",
+    companyName: "NeuralCore AI",
+    industry: "Artificial Intelligence",
+    title: "SaaS Product Growth Engine",
+    desc: "Optimizing the conversion funnel for a B2B AI analytics tool through data-driven A/B testing and SEO.",
+    url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80"
+    ],
+    services: ["Performance Marketing", "Data Analytics", "Conversion Optimization"],
+    results: [
+      { value: "210%", label: "MQL Increase" },
+      { value: "12%", label: "LTV Increase" },
+      { value: "4.5X", label: "ROAS" },
+      { value: "30%", label: "Lower CPA" },
+    ],
+    testimonial: {
+      quote: "The technical precision of their marketing strategy is exactly what a deep-tech company like ours needed.",
+      author: "Dr. Aris Thorne",
+      role: "Head of Growth",
+      avatar: "https://i.pravatar.cc/150?u=aris"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 10,
+    companyLogo: "https://logo.clearbit.com/caterpillar.com",
+    companyName: "BuiltRight",
+    industry: "Construction",
+    title: "Field-to-Office CRM Sync",
+    desc: "A custom mobile-first CRM for construction workers to log progress and sync with project managers in real-time.",
+    url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?w=800&q=80",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
+    ],
+    services: ["Mobile App Dev", "Cloud Infrastructure", "Systems Integration"],
+    results: [
+      { value: "0", label: "Data Lag" },
+      { value: "20h", label: "Saved Weekly" },
+      { value: "100%", label: "Compliance" },
+      { value: "$150k", label: "Annual Savings" },
+    ],
+    testimonial: {
+      quote: "Communication between the job site and the office has never been this smooth. No more paperwork errors.",
+      author: "Frank Miller",
+      role: "Operations Manager",
+      avatar: "https://i.pravatar.cc/150?u=frank"
+    },
+    span: "md:col-span-1 md:row-span-2",
+  },
+  {
+    id: 11,
+    companyLogo: "https://logo.clearbit.com/crowdstrike.com",
+    companyName: "ShieldGuard",
+    industry: "Cybersecurity",
+    title: "Brand Authority & Content Strategy",
+    desc: "Establishing a new cybersecurity firm as a thought leader through high-impact technical whitepapers and PR.",
+    url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+      "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&q=80",
+      "https://images.unsplash.com/photo-1510511459019-5dee2c1a7eaa?w=800&q=80"
+    ],
+    services: ["Content Marketing", "Public Relations", "SEO"],
+    results: [
+      { value: "15", label: "Top-tier Press" },
+      { value: "200k", label: "Organic Visits" },
+      { value: "50+", label: "Fortune 500 Leads" },
+      { value: "88%", label: "Auth Score" },
+    ],
+    testimonial: {
+      quote: "We went from unknown to being quoted in the Wall Street Journal in under six months.",
+      author: "Kevin H.",
+      role: "VP of Sales",
+      avatar: "https://i.pravatar.cc/150?u=kevin"
+    },
+    span: "md:col-span-2 md:row-span-1",
+  },
+  {
+    id: 12,
+    companyLogo: "https://logo.clearbit.com/vogue.com",
+    companyName: "VelvetThread",
+    industry: "Fashion & Apparel",
+    title: "Influencer-Led Branding",
+    desc: "Creating a viral buzz for a luxury streetwear brand launch via social-first content and creator partnerships.",
+    url: "https://images.unsplash.com/photo-1445205170230-053b830c6050?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1445205170230-053b830c6050?w=800&q=80",
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80",
+      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80"
+    ],
+    services: ["Social Media", "Video Production", "Influencer Strategy"],
+    results: [
+      { value: "20M", label: "Impressions" },
+      { value: "Sold Out", label: "Launch Status" },
+      { value: "450k", label: "New Followers" },
+      { value: "12%", label: "Engagement" },
+    ],
+    testimonial: {
+      quote: "The hype they built was incredible. Our site crashed from traffic 5 minutes after the drop—in a good way!",
+      author: "Sasha Kim",
+      role: "Creative Director",
+      avatar: "https://i.pravatar.cc/150?u=sasha"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 13,
+    companyLogo: "https://logo.clearbit.com/bmw.com",
+    companyName: "Velocity Motors",
+    industry: "Automotive",
+    title: "Digital Showroom Experience",
+    desc: "A high-end web platform where customers can customize their dream car and book home test drives.",
+    url: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80",
+      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80"
+    ],
+    services: ["Custom Web App", "API Integration", "UX Strategy"],
+    results: [
+      { value: "60%", label: "Conversion" },
+      { value: "5k", label: "Monthly Leads" },
+      { value: "4.8/5", label: "User Rating" },
+      { value: "20%", label: "Ops Efficiency" },
+    ],
+    testimonial: {
+      quote: "They managed to replicate the premium feel of our physical showrooms in a digital browser.",
+      author: "Hans Weber",
+      role: "Digital Transformation Lead",
+      avatar: "https://i.pravatar.cc/150?u=hans"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    id: 14,
+    companyLogo: "https://logo.clearbit.com/sephora.com",
+    companyName: "GlowAura",
+    industry: "Cosmetics",
+    title: "Virtual Makeup Try-On",
+    desc: "Using Augmented Reality (AR) to let users try on lipstick and eyeshadow shades through their smartphone camera.",
+    url: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
+      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80",
+      "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?w=800&q=80"
+    ],
+    services: ["AR Development", "UI Design", "Mobile Web"],
+    results: [
+      { value: "3.5x", label: "Basket Size" },
+      { value: "40%", label: "Return Decr." },
+      { value: "1M+", label: "Try-ons" },
+      { value: "25%", label: "AOV Increase" },
+    ],
+    testimonial: {
+      quote: "Returns were our biggest cost. The AR tool has almost eliminated 'shade regret' for our customers.",
+      author: "Michelle Tan",
+      role: "E-comm Manager",
+      avatar: "https://i.pravatar.cc/150?u=michelle"
+    },
+    span: "md:col-span-2 md:row-span-1",
+  },
+  {
+    id: 15,
+    companyLogo: "https://logo.clearbit.com/charitywater.org",
+    companyName: "HeartFound",
+    industry: "Non-Profit",
+    title: "Global Donation Ecosystem",
+    desc: "Building a transparent, blockchain-based donation platform that tracks every dollar from donor to project.",
+    url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
+      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80"
+    ],
+    services: ["Web3 / Blockchain", "UX Design", "Global Scaling"],
+    results: [
+      { value: "$12M", label: "Raised" },
+      { value: "100%", label: "Transparency" },
+      { value: "50+", label: "Countries" },
+      { value: "0", label: "Fee Leakage" },
+    ],
+    testimonial: {
+      quote: "Trust is the currency of charity. This platform has made us the most trusted non-profit in our sector.",
+      author: "David G.",
+      role: "Executive Director",
+      avatar: "https://i.pravatar.cc/150?u=david"
+    },
+    span: "md:col-span-1 md:row-span-1",
+  }
+];
+
+// --- MODAL COMPONENT (Matching Screenshot) ---
+const ImageModal = ({ item, onClose }) => {
+  const [currentImg, setCurrentImg] = useState(0);
+
+  const nextImg = () => setCurrentImg((prev) => (prev + 1) % item.galleryImages.length);
+  const prevImg = () => setCurrentImg((prev) => (prev - 1 + item.galleryImages.length) % item.galleryImages.length);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* LEFT CONTENT AREA */}
+        <div className="flex-1 p-8 md:p-12 overflow-y-auto max-h-[90vh]">
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded bg-gray-100 flex items-center justify-center overflow-hidden">
+               <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 leading-tight">{item.companyName}</h4>
+              <p className="text-xs text-gray-500 uppercase tracking-wider">{item.industry}</p>
+            </div>
+          </div>
+
+          <h2 className="text-3xl font-extrabold text-[#0a192f] mb-4">{item.title}</h2>
+          <p className="text-gray-600 mb-8 leading-relaxed">{item.desc}</p>
+
+          {/* Services */}
+          <div className="mb-8">
+            <h5 className="text-sm font-bold mb-3">Services Provided:</h5>
+            <div className="flex flex-wrap gap-2">
+              {item.services.map((s, i) => (
+                <span key={i} className="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-xs font-medium border border-orange-100">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Results Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gray-50 rounded-xl border border-gray-100 mb-8">
+            {item.results.map((res, i) => (
+              <div key={i} className="text-center border-r last:border-0 border-gray-200">
+                <div className="text-2xl font-black text-orange-600">{res.value}</div>
+                <div className="text-[10px] uppercase font-bold text-gray-500">{res.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Testimonial */}
+          <div className="border-l-4 border-orange-500 pl-6 py-2 bg-orange-50/30 rounded-r-lg">
+            <div className="flex items-center gap-3 mb-3">
+              <img src={item.testimonial.avatar} className="w-10 h-10 rounded-full grayscale" alt="author" />
+              <div>
+                <p className="font-bold text-sm text-gray-900">{item.testimonial.author}</p>
+                <p className="text-xs text-gray-500">{item.testimonial.role}</p>
+              </div>
+            </div>
+            <p className="italic text-gray-700 text-sm leading-relaxed">
+              "{item.testimonial.quote}"
+            </p>
+          </div>
+        </div>
+
+        {/* RIGHT IMAGE SLIDER AREA */}
+        <div className="w-full md:w-[45%] bg-gray-900 relative group min-h-[400px]">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentImg}
+              src={item.galleryImages[currentImg]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </AnimatePresence>
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
+             <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest mb-1">Project Dashboard</span>
+             <h3 className="text-white font-bold text-lg">Digital Transformation Overview</h3>
+          </div>
+
+          {/* Navigation Controls */}
+          <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all">
+            <ChevronLeft size={20} />
+          </button>
+          <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all">
+            <ChevronRight size={20} />
+          </button>
+          
+          <div className="absolute bottom-4 right-4 bg-black/50 text-white text-[10px] px-2 py-1 rounded">
+            {currentImg + 1} / {item.galleryImages.length}
+          </div>
+        </div>
+
+        <button onClick={onClose} className="absolute right-4 top-4 text-gray-400 hover:text-gray-900 z-10 transition-colors">
+          <X size={24} />
+        </button>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+// --- MAIN GALLERY COMPONENT ---
+export default function InteractiveImageBentoGallery() {
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [dragConstraint, setDragConstraint] = useState(0)
+  const containerRef = useRef(null)
+  const gridRef = useRef(null)
+  const targetRef = useRef(null)
+
+  useEffect(() => {
+    const calculateConstraints = () => {
+      if (gridRef.current && containerRef.current) {
+        setDragConstraint(Math.min(0, containerRef.current.offsetWidth - gridRef.current.scrollWidth - 32))
+      }
+    }
+    calculateConstraints();
+    window.addEventListener("resize", calculateConstraints);
+    return () => window.removeEventListener("resize", calculateConstraints);
+  }, [])
+
+  return (
+    <section ref={targetRef} className="relative w-full overflow-hidden bg-background py-16">
+      <div className="container mx-auto px-4 text-center mb-12">
+        <h2 className="text-3xl font-bold tracking-tight">Case Studies</h2>
+        <p className="text-muted-foreground mt-2">Explore our digital transformation projects.</p>
+      </div>
+
+      <div ref={containerRef} className="relative w-full cursor-grab active:cursor-grabbing">
+        <motion.div drag="x" dragConstraints={{ left: dragConstraint, right: 0 }} className="w-max">
+          <div ref={gridRef} className="grid auto-cols-[22rem] grid-flow-col gap-6 px-8">
+            {imageItems.map((item) => (
+              <motion.div
+                key={item.id}
+                className={cn("relative h-[450px] overflow-hidden rounded-2xl border bg-card cursor-pointer group", item.span)}
+                onClick={() => setSelectedItem(item)}
+              >
+                <img src={item.url} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                   <p className="text-orange-400 text-xs font-bold uppercase mb-2">{item.companyName}</p>
+                   <h3 className="text-white text-xl font-bold leading-tight">{item.title}</h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      <AnimatePresence>
+        {selectedItem && <ImageModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      </AnimatePresence>
+    </section>
+  )
+}
