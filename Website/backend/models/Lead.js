@@ -74,10 +74,9 @@ const leadSchema = new mongoose.Schema({
     default: 'medium'
   },
   
-  // Metadata
+  // Metadata - REMOVED User references
   assignedTo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     default: null
   },
   followUpDate: {
@@ -86,10 +85,7 @@ const leadSchema = new mongoose.Schema({
   },
   notes: [{
     content: String,
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
+    createdBy: String, // Changed from ObjectId ref to String
     createdAt: {
       type: Date,
       default: Date.now
@@ -109,20 +105,21 @@ const leadSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes for better query performance
+// Remove User-related indexes
 leadSchema.index({ email: 1 });
 leadSchema.index({ status: 1 });
 leadSchema.index({ createdAt: -1 });
 leadSchema.index({ exhibitionName: 'text', companyName: 'text', fullName: 'text' });
-leadSchema.index({ assignedTo: 1 });
 
 // Virtual for formatted phone number
 leadSchema.virtual('formattedPhone').get(function() {
+  if (!this.phoneNumber) return '';
   return this.phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 });
 
 // Virtual for formatted date
 leadSchema.virtual('formattedExhibitionDate').get(function() {
+  if (!this.exhibitionDate) return '';
   return this.exhibitionDate.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',

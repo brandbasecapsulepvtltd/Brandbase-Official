@@ -1,5 +1,5 @@
 const Lead = require('../models/Lead');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
 // Helper function for pagination
 const getPagination = (page, limit) => {
