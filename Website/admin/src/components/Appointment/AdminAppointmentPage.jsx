@@ -107,6 +107,55 @@ const AdminAppointmentPage = () => {
     );
   };
 
+  const handleExportCSV = () => {
+    // 1. Define the headers
+    const headers = [
+      "First Name",
+      "Last Name",
+      "Email",
+      "Organization",
+      "Region",
+      "Date",
+      "Time",
+      "Category",
+      "Industry",
+      "Status"
+    ];
+
+    // 2. Map the data to rows
+    // Note: We use the current 'appointments' state. 
+    // To export ALL records, you'd typically fetch all from API first.
+    const csvRows = appointments.map(appt => [
+      `"${appt.firstName || ''}"`,
+      `"${appt.lastName || ''}"`,
+      `"${appt.email || ''}"`,
+      `"${appt.organization || 'Individual'}"`,
+      `"${appt.region || ''}"`,
+      `"${formatDate(appt.date)}"`,
+      `"${appt.time || ''}"`,
+      `"${appt.category || ''}"`,
+      `"${appt.industry || ''}"`,
+      `"${appt.status || ''}"`
+    ].join(","));
+
+    // 3. Combine headers and rows
+    const csvContent = [headers.join(","), ...csvRows].join("\n");
+
+    // 4. Create a Blob and trigger download
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    
+    const fileName = `appointments_export_${new Date().toISOString().split('T')[0]}.csv`;
+    
+    link.setAttribute("href", url);
+    link.setAttribute("download", fileName);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Loading spinner
   if (loading && appointments.length === 0) {
     return (
@@ -289,10 +338,13 @@ const AdminAppointmentPage = () => {
                       Page {pagination.current} of {pagination.total}
                     </p>
                   </div>
-                  <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                    <Download className="h-4 w-4 mr-2" />
-                    Export
-                  </button>
+<button 
+  onClick={handleExportCSV}
+  className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+>
+  <Download className="h-4 w-4 mr-2" />
+  Export CSV
+</button>
                 </div>
               </div>
 

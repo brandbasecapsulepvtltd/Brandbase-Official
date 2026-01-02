@@ -12,7 +12,8 @@ import {
   Users,
   Palette,
   LogOut,
-  User
+  User,
+  Mail
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext"; // Make sure to import your AuthContext
 
@@ -27,6 +28,7 @@ export function Navigation() {
 
   const navItems = [
     { label: "Appointments", icon: Calendar, path: "/admin/dashboard/admin-appointment" },
+    { label: "Contact Us", icon: Mail, path: "/admin/dashboard/contact-management" },
     { label: "Employees", icon: Users, path: "/admin/dashboard/employee-management" },
     { 
       label: "UI", 

@@ -12,7 +12,8 @@ import {
   ExternalLink,
   Clock,
   Eye,
-  Filter
+  Filter,
+  Download // Added Download icon
 } from 'lucide-react';
 
 const ContactManagement = () => {
@@ -127,6 +128,66 @@ const ContactManagement = () => {
     });
   };
 
+  // --- CSV EXPORT LOGIC ---
+  const handleExportCSV = () => {
+    if (filteredContacts.length === 0) {
+      alert("No data to export.");
+      return;
+    }
+
+    // 1. Define Headers
+    const headers = [
+      "First Name",
+      "Last Name",
+      "Email",
+      "Phone",
+      "Organization",
+      "Category",
+      "Industry",
+      "Status",
+      "Date Sent",
+      "Message"
+    ];
+
+    // 2. Map Data to Rows
+    const csvRows = filteredContacts.map(contact => {
+      // Helper to escape quotes and wrap content in quotes to handle commas
+      const escape = (text) => `"${(text || '').toString().replace(/"/g, '""')}"`;
+      
+      return [
+        escape(contact.firstName),
+        escape(contact.lastName),
+        escape(contact.email),
+        escape(contact.contactNumber),
+        escape(contact.organization),
+        escape(contact.category),
+        escape(contact.industry),
+        escape(contact.status),
+        escape(formatDate(contact.createdAt)), // Using formatted date
+        escape(contact.message) // Message often contains commas/newlines
+      ].join(",");
+    });
+
+    // 3. Combine Headers and Rows
+    const csvContent = [headers.join(","), ...csvRows].join("\n");
+
+    // 4. Create Blob and Trigger Download
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    
+    // Naming the file with the current date
+    const dateStr = new Date().toISOString().split('T')[0];
+    const fileName = `contact_inquiries_${statusFilter}_${dateStr}.csv`;
+    
+    link.setAttribute("href", url);
+    link.setAttribute("download", fileName);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const getStatusBadge = (status) => {
     const statusConfig = {
       pending: { color: 'bg-amber-100 text-amber-700', icon: '⏳' },
@@ -145,21 +206,33 @@ const ContactManagement = () => {
   return (
     <div className="p-6 bg-gray-50 min-h-screen font-sans">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Contact Inquiries</h1>
           <p className="text-slate-500 text-sm">Monitor and respond to client messages</p>
         </div>
-        <button 
-          onClick={() => {
-            fetchContacts();
-            fetchStats();
-          }}
-          className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg text-sm font-medium hover:bg-gray-50 transition-all shadow-sm"
-        >
-          <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
-          Refresh
-        </button>
+        
+        {/* Action Buttons Group */}
+        <div className="flex gap-3">
+          <button 
+            onClick={handleExportCSV}
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 text-gray-700 transition-all shadow-sm"
+          >
+            <Download size={16} />
+            Export CSV
+          </button>
+
+          <button 
+            onClick={() => {
+              fetchContacts();
+              fetchStats();
+            }}
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 text-gray-700 transition-all shadow-sm"
+          >
+            <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
+            Refresh
+          </button>
+        </div>
       </div>
 
       {/* Stats Cards */}
