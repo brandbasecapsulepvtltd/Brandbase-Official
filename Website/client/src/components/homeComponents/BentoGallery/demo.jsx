@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Maximize2, Minus, ArrowUpRight, BarChart3, Users, TrendingUp, Target } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // --- UPDATED DATA STRUCTURE ---
@@ -429,50 +429,135 @@ const imageItems = [
   }
 ];
 
-// --- MODAL COMPONENT (Matching Screenshot) ---
+// --- RESPONSIVE MODAL COMPONENT ---
 const ImageModal = ({ item, onClose }) => {
   const [currentImg, setCurrentImg] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const nextImg = () => setCurrentImg((prev) => (prev + 1) % item.galleryImages.length);
   const prevImg = () => setCurrentImg((prev) => (prev - 1 + item.galleryImages.length) % item.galleryImages.length);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isFullscreen) {
+          document.exitFullscreen?.();
+          setIsFullscreen(false);
+        } else {
+          onClose();
+        }
+      }
+      if (e.key === 'ArrowLeft') prevImg();
+      if (e.key === 'ArrowRight') nextImg();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isFullscreen, onClose]);
+
+  const handleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4 md:p-6 lg:p-8"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl"
+        initial={{ scale: 0.95, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 20 }}
+        transition={{ type: "spring", damping: 25 }}
+        className="relative w-full h-full max-w-7xl bg-white dark:bg-gray-900 rounded-xl md:rounded-2xl xl:rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* LEFT CONTENT AREA */}
-        <div className="flex-1 p-8 md:p-12 overflow-y-auto max-h-[90vh]">
-          {/* Header */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded bg-gray-100 flex items-center justify-center overflow-hidden">
-               <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
+        {/* MOBILE HEADER */}
+        <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+              <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h4 className="font-bold text-gray-900 leading-tight">{item.companyName}</h4>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">{item.industry}</p>
+              <h4 className="font-bold text-gray-900 dark:text-white text-sm leading-tight">{item.companyName}</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">{item.industry}</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* LEFT CONTENT AREA */}
+        <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 overflow-y-auto max-h-[calc(100vh-2rem)] lg:max-h-[90vh]">
+          {/* Desktop Header */}
+          <div className="hidden lg:flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden shadow-sm">
+                <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <h4 className="font-bold text-gray-900 dark:text-white text-lg">{item.companyName}</h4>
+                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium">{item.industry}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleFullscreen}
+                className="p-2 text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                {isFullscreen ? <Minus size={20} /> : <Maximize2 size={20} />}
+              </button>
+              <button
+                onClick={onClose}
+                className="p-2 text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                <X size={20} />
+              </button>
             </div>
           </div>
 
-          <h2 className="text-3xl font-extrabold text-[#0a192f] mb-4">{item.title}</h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">{item.desc}</p>
+          {/* Project Meta */}
+          <div className="flex flex-wrap gap-4 mb-6">
+            <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="text-sm font-medium text-blue-700 dark:text-blue-300">{item.timeline}</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+              <Users className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              <span className="text-sm font-medium text-purple-700 dark:text-purple-300">{item.teamSize}</span>
+            </div>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+            {item.title}
+          </h2>
+          
+          <p className="text-gray-600 dark:text-gray-300 mb-8 text-sm sm:text-base leading-relaxed">
+            {item.desc}
+          </p>
 
           {/* Services */}
           <div className="mb-8">
-            <h5 className="text-sm font-bold mb-3">Services Provided:</h5>
+            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+              <span className="w-1 h-4 bg-orange-500 rounded-full"></span>
+              Services Provided
+            </h5>
             <div className="flex flex-wrap gap-2">
               {item.services.map((s, i) => (
-                <span key={i} className="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-xs font-medium border border-orange-100">
+                <span
+                  key={i}
+                  className="px-3 py-1.5 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 text-orange-700 dark:text-orange-300 rounded-lg text-xs font-medium border border-orange-200 dark:border-orange-800 hover:scale-105 transition-transform cursor-default shadow-sm"
+                >
                   {s}
                 </span>
               ))}
@@ -480,118 +565,267 @@ const ImageModal = ({ item, onClose }) => {
           </div>
 
           {/* Results Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gray-50 rounded-xl border border-gray-100 mb-8">
-            {item.results.map((res, i) => (
-              <div key={i} className="text-center border-r last:border-0 border-gray-200">
-                <div className="text-2xl font-black text-orange-600">{res.value}</div>
-                <div className="text-[10px] uppercase font-bold text-gray-500">{res.label}</div>
-              </div>
-            ))}
+          <div className="mb-8">
+            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+              <span className="w-1 h-4 bg-green-500 rounded-full"></span>
+              Key Results
+            </h5>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+              {item.results.map((res, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-2 mb-2 text-gray-500 dark:text-gray-400">
+                    {res.icon}
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">{res.value}</div>
+                  <div className="text-[10px] sm:text-xs uppercase font-semibold text-gray-500 dark:text-gray-400 tracking-wider mt-1 text-center">
+                    {res.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Testimonial */}
-          <div className="border-l-4 border-orange-500 pl-6 py-2 bg-orange-50/30 rounded-r-lg">
-            <div className="flex items-center gap-3 mb-3">
-              <img src={item.testimonial.avatar} className="w-10 h-10 rounded-full grayscale" alt="author" />
-              <div>
-                <p className="font-bold text-sm text-gray-900">{item.testimonial.author}</p>
-                <p className="text-xs text-gray-500">{item.testimonial.role}</p>
+          <div className="mb-6">
+            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+              <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
+              Client Testimonial
+            </h5>
+            <div className="relative p-4 sm:p-6 bg-gradient-to-r from-orange-50/50 to-amber-50/50 dark:from-orange-900/10 dark:to-amber-900/10 rounded-xl border border-orange-100 dark:border-orange-900/30">
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs">"</span>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                <img
+                  src={item.testimonial.avatar}
+                  className="w-12 h-12 rounded-full border-2 border-white dark:border-gray-800 shadow-sm"
+                  alt="author"
+                />
+                <div className="flex-1">
+                  <p className="italic text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-3">
+                    "{item.testimonial.quote}"
+                  </p>
+                  <div>
+                    <p className="font-bold text-sm text-gray-900 dark:text-white">{item.testimonial.author}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.testimonial.role}</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <p className="italic text-gray-700 text-sm leading-relaxed">
-              "{item.testimonial.quote}"
-            </p>
           </div>
+
+          {/* CTA Button */}
+          <button className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium rounded-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+            View Full Case Study
+            <ArrowUpRight className="w-4 h-4" />
+          </button>
         </div>
 
         {/* RIGHT IMAGE SLIDER AREA */}
-        <div className="w-full md:w-[45%] bg-gray-900 relative group min-h-[400px]">
+        <div className="lg:w-[45%] xl:w-[40%] relative bg-gray-900 dark:bg-black min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] lg:h-auto group">
           <AnimatePresence mode="wait">
             <motion.img
               key={currentImg}
               src={item.galleryImages[currentImg]}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
               className="absolute inset-0 w-full h-full object-cover"
+              alt={`Project image ${currentImg + 1}`}
             />
           </AnimatePresence>
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
-             <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest mb-1">Project Dashboard</span>
-             <h3 className="text-white font-bold text-lg">Digital Transformation Overview</h3>
+
+          {/* Overlay Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent lg:bg-gradient-to-r lg:from-black/80 lg:via-black/40 lg:to-transparent flex flex-col justify-end p-4 sm:p-6 md:p-8">
+            <div className="mb-2">
+              <span className="text-white/70 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-1 block">
+                Project Gallery
+              </span>
+              <h3 className="text-white font-bold text-lg sm:text-xl lg:text-2xl leading-tight">
+                Digital Transformation Overview
+              </h3>
+            </div>
+            <p className="text-white/60 text-xs sm:text-sm">
+              {currentImg + 1} of {item.galleryImages.length} images
+            </p>
           </div>
 
           {/* Navigation Controls */}
-          <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all">
+          <button
+            onClick={prevImg}
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
+            aria-label="Previous image"
+          >
             <ChevronLeft size={20} />
           </button>
-          <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all">
+          <button
+            onClick={nextImg}
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
+            aria-label="Next image"
+          >
             <ChevronRight size={20} />
           </button>
-          
-          <div className="absolute bottom-4 right-4 bg-black/50 text-white text-[10px] px-2 py-1 rounded">
+
+          {/* Image Indicators */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            {item.galleryImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentImg(idx)}
+                className={`w-2 h-2 rounded-full transition-all ${idx === currentImg ? 'bg-white w-6' : 'bg-white/40'}`}
+                aria-label={`Go to image ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Image Counter */}
+          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white text-[10px] sm:text-xs px-3 py-1.5 rounded-full flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             {currentImg + 1} / {item.galleryImages.length}
           </div>
         </div>
 
-        <button onClick={onClose} className="absolute right-4 top-4 text-gray-400 hover:text-gray-900 z-10 transition-colors">
-          <X size={24} />
-        </button>
+        {/* Mobile Close Button (Bottom) */}
+        <div className="lg:hidden p-4 border-t border-gray-200 dark:border-gray-800">
+          <button
+            onClick={onClose}
+            className="w-full py-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          >
+            Close
+          </button>
+        </div>
       </motion.div>
     </motion.div>
-  )
-}
+  );
+};
 
 // --- MAIN GALLERY COMPONENT ---
 export default function InteractiveImageBentoGallery() {
-  const [selectedItem, setSelectedItem] = useState(null)
-  const [dragConstraint, setDragConstraint] = useState(0)
-  const containerRef = useRef(null)
-  const gridRef = useRef(null)
-  const targetRef = useRef(null)
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [dragConstraint, setDragConstraint] = useState(0);
+  const containerRef = useRef(null);
+  const gridRef = useRef(null);
+  const targetRef = useRef(null);
 
   useEffect(() => {
     const calculateConstraints = () => {
       if (gridRef.current && containerRef.current) {
-        setDragConstraint(Math.min(0, containerRef.current.offsetWidth - gridRef.current.scrollWidth - 32))
+        const containerWidth = containerRef.current.offsetWidth;
+        const gridWidth = gridRef.current.scrollWidth;
+        const constraint = Math.min(0, containerWidth - gridWidth - 32);
+        setDragConstraint(constraint);
       }
-    }
+    };
+
     calculateConstraints();
     window.addEventListener("resize", calculateConstraints);
     return () => window.removeEventListener("resize", calculateConstraints);
-  }, [])
+  }, []);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedItem) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedItem]);
 
   return (
-    <section ref={targetRef} className="relative w-full overflow-hidden bg-background py-16">
-      <div className="container mx-auto px-4 text-center mb-12">
-        <h2 className="text-3xl font-bold tracking-tight">Case Studies</h2>
-        <p className="text-muted-foreground mt-2">Explore our digital transformation projects.</p>
+    <section ref={targetRef} className="relative w-full overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-12 sm:py-16 md:py-20 lg:py-24">
+      <div className="container mx-auto px-4 text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+          Case Studies
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+          Explore our digital transformation projects across industries
+        </p>
       </div>
 
       <div ref={containerRef} className="relative w-full cursor-grab active:cursor-grabbing">
-        <motion.div drag="x" dragConstraints={{ left: dragConstraint, right: 0 }} className="w-max">
-          <div ref={gridRef} className="grid auto-cols-[22rem] grid-flow-col gap-6 px-8">
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: dragConstraint, right: 0 }}
+          dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+          className="w-max"
+        >
+          <div
+            ref={gridRef}
+            className="grid auto-cols-[280px] sm:auto-cols-[320px] md:auto-cols-[350px] lg:auto-cols-[380px] xl:auto-cols-[400px] grid-flow-col gap-4 sm:gap-6 px-4 sm:px-6 md:px-8"
+          >
             {imageItems.map((item) => (
               <motion.div
                 key={item.id}
-                className={cn("relative h-[450px] overflow-hidden rounded-2xl border bg-card cursor-pointer group", item.span)}
+                className={cn(
+                  "relative h-[320px] sm:h-[380px] md:h-[420px] overflow-hidden rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-800 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-500",
+                  item.span
+                )}
                 onClick={() => setSelectedItem(item)}
+                whileHover={{ scale: 1.02, y: -5 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <img src={item.url} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
-                   <p className="text-orange-400 text-xs font-bold uppercase mb-2">{item.companyName}</p>
-                   <h3 className="text-white text-xl font-bold leading-tight">{item.title}</h3>
+                <img
+                  src={item.url}
+                  alt={item.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 flex flex-col justify-end">
+                  <div className="mb-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded bg-white/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
+                        <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
+                      </div>
+                      <span className="text-orange-300 text-xs font-bold uppercase tracking-wider">
+                        {item.companyName}
+                      </span>
+                    </div>
+                    <h3 className="text-white text-lg sm:text-xl font-bold leading-tight mb-2 line-clamp-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm line-clamp-2">{item.desc}</p>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full">
+                      View Case Study
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 hidden lg:block">
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-1 h-12 bg-gradient-to-b from-orange-500 to-transparent rounded-full"></div>
+            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wider">DRAG</span>
+          </div>
+        </div>
       </div>
 
-      <AnimatePresence>
+      {/* Mobile Scroll Indicator */}
+      <div className="flex justify-center mt-8 lg:hidden">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="w-8 h-2 rounded-full bg-orange-500"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+        </div>
+      </div>
+
+      <AnimatePresence mode="wait">
         {selectedItem && <ImageModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
       </AnimatePresence>
     </section>
-  )
+  );
 }
