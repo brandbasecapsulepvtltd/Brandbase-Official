@@ -1,10 +1,17 @@
 import CategoryContent from '@/components/ServiceCategory/CategoryContent';
 import { apiCall } from '@/lib/api';
 
-// Helper function to fetch category data from API
+/** * FIX: This line tells Next.js to revalidate the data at most every 60 seconds.
+ * Even though the page is "static," it will check the DB for updates 
+ * in the background after this timer expires.
+ */
+export const revalidate = 10; 
+
+// Helper function to fetch category data
 async function getCategoryData(categorySlug) {
   try {
-    // Fetch from your API
+    // If your apiCall uses 'fetch' internally, Next.js caches it by default.
+    // Adding the revalidate constant above handles this globally for the page.
     const response = await apiCall(`/service-categories/${categorySlug}`);
     return response.data;
   } catch (error) {
@@ -13,7 +20,7 @@ async function getCategoryData(categorySlug) {
   }
 }
 
-// Helper function to fetch all category slugs from API
+// Helper function to fetch all category slugs
 async function getAllCategorySlugs() {
   try {
     const response = await apiCall('/service-categories/slugs');
@@ -28,24 +35,21 @@ async function getAllCategorySlugs() {
 export async function generateStaticParams() {
   try {
     const categorySlugs = await getAllCategorySlugs();
-    
     return categorySlugs.map((slug) => ({
       category: slug,
     }));
   } catch (error) {
     console.error('Error in generateStaticParams:', error);
-    // Fallback to empty array
     return [];
   }
 }
 
 // 2. Metadata Generation
 export async function generateMetadata({ params }) {
-  const { category } = await params;
+  const { category } = await params; // Awaiting params for Next.js 15 compatibility
   
   try {
     const pageData = await getCategoryData(category);
-    
     if (pageData) {
       return {
         title: pageData?.pageMetadata?.title || `${category?.replace('-', ' ')} Services`,
@@ -57,7 +61,6 @@ export async function generateMetadata({ params }) {
     console.error('Error generating metadata:', error);
   }
   
-  // Fallback metadata
   return {
     title: `${category?.replace('-', ' ')} Services`,
     description: `Professional ${category?.replace('-', ' ')} services`,
@@ -66,11 +69,8 @@ export async function generateMetadata({ params }) {
 
 // 3. Main Page Component
 export default async function CategoryPage({ params }) {
-  // In Next.js 15+, params is a Promise. We must await it.
-  const resolvedParams = await params;
-  const category = resolvedParams?.category;
+  const { category } = await params;
 
-  // Safety check
   if (!category) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -80,33 +80,19 @@ export default async function CategoryPage({ params }) {
     );
   }
 
-  let pageData;
-  let error = null;
-  
-  try {
-    pageData = await getCategoryData(category);
-  } catch (err) {
-    console.error('Error fetching category data:', err);
-    error = err.message;
-  }
+  const pageData = await getCategoryData(category);
 
-  // Data validation check
-  if (!pageData || error) {
+  if (!pageData) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Category Not Found</h1>
-        <p className="text-gray-600">
-          {error 
-            ? `Error loading category: ${error}` 
-            : 'The requested service category does not exist.'}
-        </p>
+        <p className="text-gray-600">The requested service category does not exist.</p>
       </div>
     );
   }
 
   return <CategoryContent pageData={pageData} />;
 }
-
 // Simple API call function (you can also use your existing apiCall from lib/api)
 {/*
 async function apiCall(endpoint) {
