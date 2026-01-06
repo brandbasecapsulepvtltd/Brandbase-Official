@@ -21,7 +21,7 @@ const previewData = {
 };
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
 
   .hover-preview-container {
     min-height: 100vh;
@@ -30,7 +30,7 @@ const styles = `
     align-items: center;
     justify-content: center;
     padding: 40px;
-    font-family: 'Space Grotesk', sans-serif;
+
     overflow-x: hidden;
     position: relative;
   }
@@ -104,7 +104,7 @@ const styles = `
   .hover-link {
     color: #1a1a1a;
     font-weight: 700;
-    font-family: 'Syne', sans-serif;
+
     cursor: pointer;
     position: relative;
     display: inline-block;
@@ -166,7 +166,7 @@ const styles = `
     font-size: 0.85rem;
     color: #1a1a1a;
     font-weight: 600;
-    font-family: 'Syne', sans-serif;
+
   }
 
   .preview-card-subtitle {
@@ -327,7 +327,7 @@ export function HoverPreview() {
             </p>
 
             <p>
-              From concept to final delivery, we craft visual stories that 
+              From concept to final delivery, we craft visual stories that
               engage audiences and achieve business objectives.
             </p>
           </div>

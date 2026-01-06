@@ -120,7 +120,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-serif ${navClasses}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-sans ${navClasses}`}>
       <div className="max-w-8xl mx-auto flex justify-between items-center px-6 sm:px-8 md:px-12 lg:px-16 py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center">

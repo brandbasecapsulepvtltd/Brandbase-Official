@@ -531,12 +531,12 @@ const AboutUsContent = () => {
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          <div className="mb-4 text-3xl font-extrabold uppercase tracking-wide text-[#FF6600]">
+          <div className="mb-4 text-3xl font-bold uppercase tracking-wide text-[#FF6600]">
             Your Growth. Our Mission.
           </div>
           <h2 className="text-6xl font-bold mb-6 text-gray-900">
             Let’s Create Something {' '}
-            <span className="text-[#FF6600] font-extrabold">That Stands Out.</span>
+            <span className="text-[#FF6600] font-bold">That Stands Out.</span>
           </h2>
           <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
             Whether it's a new build or an upgrade, we help brands scale with modern, efficient digital solutions.Your next big step starts with one conversation.

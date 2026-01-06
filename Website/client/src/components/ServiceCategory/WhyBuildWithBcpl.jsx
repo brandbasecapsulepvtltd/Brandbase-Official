@@ -32,7 +32,7 @@ const WhyBuildWithBcpl = ({ data }) => {
         >
           <h2
             id="why-mavenox-title"
-            className="text-4xl md:text-5xl font-extrabold text-black leading-tight"
+            className="text-4xl md:text-5xl font-bold text-black leading-tight"
           >
             <span id="why-bcpl-title" className="text-orange-600">{data.title}</span>
           </h2>

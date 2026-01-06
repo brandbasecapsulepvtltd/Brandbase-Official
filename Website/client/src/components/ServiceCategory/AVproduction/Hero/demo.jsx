@@ -38,7 +38,7 @@ export default function Demotwo() {
           </p>
 
           <StaggerText
-            className="text-4xl md:text-7xl font-extrabold tracking-tighter text-white max-w-4xl mx-auto leading-tight"
+            className="text-4xl md:text-7xl font-bold tracking-tighter text-white max-w-4xl mx-auto leading-tight"
             text="India's Leading Ad Film Production Agency for Bold Brands"
             direction="y"
           />

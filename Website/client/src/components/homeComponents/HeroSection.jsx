@@ -137,7 +137,7 @@ const HeroSection = ({ data }) => {
                     >
                       <div className="flex items-start space-x-2 md:space-x-3 w-full">
                         <span
-                          className={`text-base sm:text-lg md:text-xl font-extrabold transition-colors duration-300 flex-shrink-0 ${
+                          className={`text-base sm:text-lg md:text-xl font-bold transition-colors duration-300 flex-shrink-0 ${
                             isActive ? "text-orange-600" : "text-gray-400"
                           }`}
                           aria-hidden="true"

@@ -13,7 +13,7 @@ const WeCreate = ({ data }) => {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <h1 className="text-[3rem] leading-none font-black tracking-tighter mb-4">
+          <h1 className="text-[3rem] leading-none font-bold tracking-tighter mb-4">
             <span className="text-orange-600">{header.titleOrange}</span>{" "}
             <span className="text-[#1A1A1A]">{header.titleBlack}</span>
           </h1>

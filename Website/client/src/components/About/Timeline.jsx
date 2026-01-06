@@ -88,7 +88,7 @@ function Timeline() {
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <div className="mb-4 text-3xl font-extrabold uppercase tracking-wide text-[#FF6600]">
+        <div className="mb-4 text-3xl font-bold uppercase tracking-wide text-[#FF6600]">
           Our Journey
         </div>
         <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -142,7 +142,7 @@ function Timeline() {
             {/* TEXT CONTENT */}
             <div className="w-full lg:w-1/2 order-1 lg:order-2">
               <motion.h1 
-                className="text-6xl lg:text-[140px] font-black text-[#FF6600] leading-none mb-4 lg:mb-6"
+                className="text-6xl lg:text-[140px] font-bold text-[#FF6600] leading-none mb-4 lg:mb-6"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}

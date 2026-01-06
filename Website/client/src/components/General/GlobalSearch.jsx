@@ -188,7 +188,7 @@ const GlobalSearch = () => {
                                                     </div>
                                                     <div className="flex-1">
                                                         <div className="flex items-center gap-2 mb-0.5">
-                                                            <span className="text-[10px] font-black text-purple-500 uppercase tracking-widest">Service</span>
+                                                            <span className="text-[10px] font-bold text-purple-500 uppercase tracking-widest">Service</span>
                                                             <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                             <span className="text-xs text-gray-400 font-medium uppercase tracking-tighter">
                                                                 {service.category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -227,7 +227,7 @@ const GlobalSearch = () => {
                                                     </div>
                                                     <div className="flex-1">
                                                         <div className="flex items-center gap-2 mb-0.5">
-                                                            <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Article</span>
+                                                            <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Article</span>
                                                             <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                                             <span className="text-xs text-gray-400 font-medium uppercase tracking-tighter">
                                                                 {blog.metadata?.category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}

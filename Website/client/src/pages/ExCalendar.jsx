@@ -106,7 +106,7 @@ const ExCalendar = () => {
 
               </span>
 
-              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
 
                 Exhibition Calendar
 

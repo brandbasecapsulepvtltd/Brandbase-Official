@@ -20,7 +20,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
     return (
       <div className="mt-20 bg-white min-h-[600px] font-sans text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#303236] leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] leading-tight">
             The <span className="text-orange-600">Brandbase Capsule</span> Blog
           </h1>
         </div>
@@ -35,7 +35,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
     <div className="mt-20 bg-white min-h-[600px] font-sans text-white relative overflow-hidden">
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#303236] leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] leading-tight">
           The <span className="text-orange-600">Brandbase Capsule</span> Blog
         </h1>
       </div>
@@ -64,7 +64,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
                     ARTICLE – {blog.metadata.readTime}
                   </span>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-4 text-black">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 text-black">
                     {blog.metadata.title}
                   </h2>
 

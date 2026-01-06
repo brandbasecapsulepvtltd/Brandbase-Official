@@ -87,7 +87,7 @@ const ServicesShowcase = ({
             Our Services
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
             <span className="text-gray-900">Transformative </span>
             <span className="text-[#FF6600]">Digital Solutions</span>
           </h1>
@@ -143,7 +143,7 @@ const ServicesShowcase = ({
 
                     {/* Service Content */}
                     <div className="text-center z-10 mt-6">
-                      <h3 className="font-black text-xl lg:text-2xl text-gray-900 mb-2 tracking-tight">
+                      <h3 className="font-bold text-xl lg:text-2xl text-gray-900 mb-2 tracking-tight">
                         {service.name}
                       </h3>
                       <p className="text-[#FF6600] font-semibold text-sm md:text-base mb-3">

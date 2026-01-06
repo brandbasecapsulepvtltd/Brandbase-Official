@@ -490,7 +490,7 @@ const ContactPage = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl mx-auto">
-          <div className="mb-4 text-3xl font-extrabold uppercase tracking-wide text-[#FF6600]">
+          <div className="mb-4 text-3xl font-bold uppercase tracking-wide text-[#FF6600]">
             {heroSection.subtitle}
           </div>
           <h1 
@@ -498,7 +498,7 @@ const ContactPage = () => {
             dangerouslySetInnerHTML={{
               __html: heroSection.title.replace(
                 '<span>',
-                '<span class="text-[#FF6600] font-extrabold">'
+                '<span class="text-[#FF6600] font-bold">'
               )
             }}
           />

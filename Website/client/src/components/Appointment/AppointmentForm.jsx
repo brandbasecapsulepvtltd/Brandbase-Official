@@ -25,7 +25,7 @@ export default function AppointmentForm({
     <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
       {/* Date & Time Section */}
       <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center font-serif">Select Date & Time</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center font-sans">Select Date & Time</h2>
 
         <div className="flex justify-center">
           <DatePicker
@@ -78,7 +78,7 @@ export default function AppointmentForm({
 
       {/* Contact Form Section */}
       <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6 font-serif">Contact Information</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6 font-sans">Contact Information</h2>
 
         <div className="space-y-6">
           {/* Personal Information */}

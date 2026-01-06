@@ -20,7 +20,7 @@ const WebHeroSection = ({ data }) => {
     <div className="min-h-screen bg-white font-sans flex flex-col items-center justify-center mt-10">
       <main className="w-full max-w-6xl px-4 py-16 md:py-24 flex flex-col items-center text-center">
         {/* Headline */}
-        <h1 className="text-5xl lg:text-6xl leading-[0.95] font-black tracking-tight text-slate-900 uppercase mb-6 max-w-5xl">
+        <h1 className="text-5xl lg:text-6xl leading-[0.95] font-bold tracking-tight text-slate-900 uppercase mb-6 max-w-5xl">
           {data.headline}
         </h1>
 

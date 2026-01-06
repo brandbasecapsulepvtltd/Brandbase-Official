@@ -9,7 +9,7 @@ const PortfolioDetailBento = ({ bentoData }) => {
     <div className="bg-white min-h-screen p-8 flex flex-col items-center font-sans py-20">
       
       {/* Main Heading */}
-      <h2 className="text-4xl md:text-6xl font-extrabold text-[#303236] leading-tight mb-6 text-center">
+      <h2 className="text-4xl md:text-6xl font-bold text-[#303236] leading-tight mb-6 text-center">
         {mainHeading}
       </h2>
 

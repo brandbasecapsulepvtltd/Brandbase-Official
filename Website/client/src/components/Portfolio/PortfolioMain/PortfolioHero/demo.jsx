@@ -9,7 +9,7 @@ const PortfolioHero = () => {
       <ContainerStagger viewport={{ once: false }}>
         {/* Main Headline */}
         <ContainerAnimated animation="top">
-          <h1 className="text-4xl font-black leading-none tracking-tighter sm:text-5xl md:text-7xl">
+          <h1 className="text-4xl font-bold leading-none tracking-tighter sm:text-5xl md:text-7xl">
             Transformative Solutions for <span className="text-[#FF6600]">Digital Success</span>
           </h1>
         </ContainerAnimated>

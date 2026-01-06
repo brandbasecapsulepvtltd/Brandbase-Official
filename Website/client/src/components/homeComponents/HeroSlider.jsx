@@ -232,7 +232,7 @@ const HeroSlider = () => {
 
           {/* Mobile Content */}
           <div className="w-full px-6 py-8 flex flex-col gap-4">
-            <h1 className="text-3xl font-extrabold leading-snug text-black">
+            <h1 className="text-3xl font-bold leading-snug text-black">
               {currentSlide.title}
             </h1>
 
@@ -307,7 +307,7 @@ const HeroSlider = () => {
             style={{ opacity: 1 - scrollProgress }}
           >
             <div key={currentSlide.id || currentIndex} className="my-auto max-w-lg animate-fade-in">
-              <h1 className="text-[60px] font-extrabold text-black leading-tight mb-6 mt-8">
+              <h1 className="text-[60px] font-bold text-black leading-tight mb-6 mt-8">
                 {currentSlide.title}
               </h1>
 

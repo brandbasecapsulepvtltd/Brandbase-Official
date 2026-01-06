@@ -75,7 +75,7 @@ const AnimateImage = ({ data }) => {
     <div className="min-h-screen bg-white p-8 md:p-16 font-sans">
       {/* Header - already quite responsive */}
       <div className="text-center mb-12 md:mb-20">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 uppercase tracking-tightest leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 uppercase tracking-tightest leading-tight">
           {data.header.title}{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-500">
             {data.header.highlight}

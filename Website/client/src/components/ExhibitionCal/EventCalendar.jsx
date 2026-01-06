@@ -32,7 +32,7 @@ const styles = `
   }
 
   .calendar-wrapper {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+
     color: var(--cal-text-main);
     background: var(--cal-bg);
     border-radius: 24px;
@@ -265,7 +265,7 @@ const styles = `
   }
 `;
 
-export function EventCalendar({ eventsData = [], onEventClick = () => {} }) {
+export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 12, 26));
 
   const monthStart = startOfMonth(currentDate);
@@ -426,7 +426,7 @@ export function EventCalendar({ eventsData = [], onEventClick = () => {} }) {
               const daySlots = layoutData[dayKey] || [];
               const isTodayCell = isToday(day);
               // We pass the full weekday name to CSS for mobile display
-              const weekdayName = format(day, "EEEE"); 
+              const weekdayName = format(day, "EEEE");
 
               return (
                 <div

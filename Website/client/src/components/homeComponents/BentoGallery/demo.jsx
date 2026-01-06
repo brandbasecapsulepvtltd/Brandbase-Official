@@ -6,7 +6,7 @@ import { X, ChevronLeft, ChevronRight, Maximize2, Minus, ArrowUpRight, BarChart3
 import { cn } from "@/lib/utils"
 
 // --- UPDATED DATA STRUCTURE ---
-const imageItems = [
+{/*
   {
     id: 1,
     companyLogo: "https://logo.clearbit.com/technova.com",
@@ -35,6 +35,10 @@ const imageItems = [
     },
     span: "md:col-span-2 md:row-span-2",
   },
+*/}
+
+const imageItems = [
+
   {
     id: 2,
     companyLogo: "https://logo.clearbit.com/stripe.com",
@@ -89,7 +93,7 @@ const imageItems = [
       role: "Marketing Director",
       avatar: "https://i.pravatar.cc/150?u=marcus"
     },
-    span: "md:col-span-1 md:row-span-2",
+    span: "md:col-span-2 md:row-span-1",
   },
   {
     id: 4,
@@ -425,7 +429,7 @@ const imageItems = [
       role: "Executive Director",
       avatar: "https://i.pravatar.cc/150?u=david"
     },
-    span: "md:col-span-1 md:row-span-1",
+    span: "md:col-span-2 md:row-span-1",
   }
 ];
 
@@ -579,7 +583,7 @@ const ImageModal = ({ item, onClose }) => {
                   <div className="flex items-center gap-2 mb-2 text-gray-500">
                     {res.icon}
                   </div>
-                  <div className="text-xl sm:text-2xl font-black text-gray-900">{res.value}</div>
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900">{res.value}</div>
                   <div className="text-[10px] sm:text-xs uppercase font-semibold text-gray-500 tracking-wider mt-1 text-center">
                     {res.label}
                   </div>

@@ -7,7 +7,7 @@ export default function SuccessMessage({ onReset }) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-gray-900 font-serif mb-2">Appointment Booked!</h2>
+        <h2 className="text-2xl font-bold text-gray-900 font-sans mb-2">Appointment Booked!</h2>
         <p className="text-gray-600 mb-4">We will contact you soon to confirm your consultation.</p>
         <button
           onClick={onReset}

@@ -26,7 +26,7 @@ export default function AVHero() {
 
         {/* Main Headline */}
         <div className="text-center mb-12">
-          <h1 className="text-7xl font-black mb-8 tracking-tight">
+          <h1 className="text-7xl font-bold mb-8 tracking-tight">
             <span className="text-black">Unlimited</span>
             <span className="mx-6 inline-block relative">
               {/* Icon placeholders - replace with actual images */}
@@ -73,13 +73,7 @@ export default function AVHero() {
       </div>
 
       {/* Background Video Elements */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-        
-        body {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-      `}</style>
+
     </div>
   );
 }

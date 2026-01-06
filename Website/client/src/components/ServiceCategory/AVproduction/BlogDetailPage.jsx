@@ -335,7 +335,7 @@ export default function BlogDetailPage() {
       <div className="max-w-7xl mx-auto px-8 py-16">
         {/* Header Section */}
         <header className="mb-12 max-w-2xl mt-15">
-          <h1 className="text-5xl font-serif font-bold text-black mb-4 leading-tight">
+          <h1 className="text-5xl font-sans font-bold text-black mb-4 leading-tight">
             {metadata.title}
           </h1>
           <p className="text-gray-600 text-base mb-4">
@@ -371,7 +371,7 @@ export default function BlogDetailPage() {
             <article ref={articleRef} className="prose prose-lg max-w-none">
               {sections.map((section) => (
                 <section key={section.id} id={section.id} className="mb-12">
-                  <h2 className="text-2xl font-serif font-bold text-black mb-4">{section.title}</h2>
+                  <h2 className="text-2xl font-sans font-bold text-black mb-4">{section.title}</h2>
                   {section.content.map((paragraph, idx) => (
                     <p key={idx} className="text-gray-700 leading-relaxed mb-4">
                       {paragraph}
