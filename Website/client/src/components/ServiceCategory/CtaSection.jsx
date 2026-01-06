@@ -2,11 +2,11 @@ import React from 'react';
 
 const CtaSection = ({ data }) => {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-2">
+    <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-2">
       <div className="max-w-3xl mx-auto text-center">
         
         {/* Main Heading */}
-        <h1 className="text-3xl lg:text-5xl font-bold text-black leading-tight mb-8">
+        <h1 className="text-3xl lg:text-5xl font-bold text-black dark:text-white leading-tight mb-8">
           {data.title}
         </h1>
         
@@ -24,7 +24,7 @@ const CtaSection = ({ data }) => {
             px-8 py-4
             text-lg font-semibold
             border border-orange-500
-            text-gray-900
+            text-gray-900 dark:text-gray-100
             rounded-lg
             hover:bg-orange-500 hover:text-white
             transition-all duration-300

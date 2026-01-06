@@ -34,9 +34,9 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
           onClick={handleBackdropClick}
         >
           {/* Modal Content */}
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+          <div className="bg-white dark:bg-black rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
             {/* Header Banner */}
-            <div className={`industry-${event.industry} p-6 text-black`}>
+            <div className={`industry-${event.industry} p-6 text-black dark:text-white`}>
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-sm font-medium opacity-90">
@@ -48,7 +48,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                 </div>
                 <button
                   onClick={onClose}
-                  className="text-black hover:bg-black/20 p-2 rounded-full transition-colors"
+                  className="text-black dark:text-white hover:bg-black/20 p-2 rounded-full transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -63,7 +63,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                     <Calendar className="w-5 h-5 text-gray-500 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-500">Date</p>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-gray-900 dark:text-gray-100">
                         {format(event.startDate, 'MMMM d')} - {format(event.endDate, 'd, yyyy')}
                       </p>
                     </div>
@@ -73,7 +73,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                     <MapPin className="w-5 h-5 text-gray-500 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-500">Venue</p>
-                      <p className="font-medium text-gray-900">{event.venue}</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">{event.venue}</p>
                       <p className="text-sm text-gray-500">{event.city}</p>
                     </div>
                   </div>
@@ -82,7 +82,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                     <Building className="w-5 h-5 text-gray-500 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-500">Organizer</p>
-                      <p className="font-medium text-gray-900">{event.organizer}</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">{event.organizer}</p>
                       <a
                         href={event.organizerWebsite}
                         target="_blank"
@@ -100,7 +100,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                     <Users className="w-5 h-5 text-gray-500 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-500">Expected Footfall</p>
-                      <p className="font-medium text-gray-900">{event.expectedFootfall.toLocaleString()}+ visitors</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">{event.expectedFootfall.toLocaleString()}+ visitors</p>
                     </div>
                   </div>
 
@@ -133,13 +133,13 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
 
               {/* Description */}
               <div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-2">About This Exhibition</h3>
+                <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">About This Exhibition</h3>
                 <p className="text-gray-600">{event.description}</p>
               </div>
 
               {/* Why Participate */}
               <div className="p-4 rounded-xl bg-gray-50 border border-gray-200">
-                <h3 className="font-semibold text-lg text-gray-900 mb-2">Why Should You Participate?</h3>
+                <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">Why Should You Participate?</h3>
                 <p className="text-gray-600">{event.whyParticipate}</p>
               </div>
 
@@ -165,7 +165,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                 </p>
                 <button
                   onClick={() => setShowLeadForm(true)}
-                  className="px-6 py-3 bg-white text-blue-600 hover:bg-gray-100 font-medium rounded-lg flex items-center gap-2 transition-colors"
+                  className="px-6 py-3 bg-white dark:bg-black text-blue-600 hover:bg-gray-100 font-medium rounded-lg flex items-center gap-2 transition-colors"
                 >
                   Get Free Quote
                   <ArrowRight className="w-4 h-4" />
@@ -175,7 +175,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
               {/* Portfolio Section */}
               {portfolio.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-900 mb-4">
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-4">
                     Our Work for Similar Exhibitions
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -189,7 +189,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                           />
                         </div>
                         <div className="p-4">
-                          <p className="font-medium text-gray-900 text-sm">{item.eventName}</p>
+                          <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{item.eventName}</p>
                           <p className="text-xs text-gray-500">{item.stallSize} stall</p>
                           <p className="text-xs text-gray-600 mt-2 italic">
                             "{item.clientTestimonial.slice(0, 60)}..."
@@ -207,7 +207,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
               {/* Similar Events */}
               {similarEvents.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-900 mb-4">
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-4">
                     Similar Exhibitions You May Like
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -224,7 +224,7 @@ export function EventDetailModal({ event, isOpen, onClose, eventsData, industryL
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium industry-${e.industry} text-white`}>
                           {industryLabel(e.industry)}
                         </span>
-                        <h4 className="font-medium text-gray-900 mt-2">{e.name}</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-gray-100 mt-2">{e.name}</h4>
                         <p className="text-sm text-gray-500 mt-1">
                           {format(e.startDate, 'MMM d')} - {format(e.endDate, 'd, yyyy')}
                         </p>

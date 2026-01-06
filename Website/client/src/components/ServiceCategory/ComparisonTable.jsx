@@ -2,9 +2,9 @@ import React from 'react';
 
 const ComparisonTable = ({ data }) => {
   return (
-    <div className="bg-white min-h-screen p-8 mt-10">
+    <div className="bg-white dark:bg-black min-h-screen p-8 mt-10">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 text-center mb-12">
+        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 text-center mb-12">
           Choosing the Right {data.category} Partner: <span className="text-orange-600">BrandBase</span> vs. Others
         </h1>
 
@@ -45,7 +45,7 @@ const ComparisonTable = ({ data }) => {
 
           {data.others.map((column, colIndex) => (
             <div key={colIndex} className="p-4 md:p-8 md:pt-12">
-              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-8">
+              <h3 className="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-8">
                 {column.title}
               </h3>
               

@@ -168,12 +168,12 @@ export default function AppointmentContent() {
 
   if (showSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white p-6 mt-15">
-        <div className="bg-white rounded-3xl shadow-2xl p-12 text-center max-w-2xl w-full mx-auto border border-orange-100">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black p-6 mt-15">
+        <div className="bg-white dark:bg-black rounded-3xl shadow-2xl p-12 text-center max-w-2xl w-full mx-auto border border-orange-100">
           <div className="w-20 h-20 mx-auto bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center mb-6 shadow-lg">
             <CheckCircle2 className="w-10 h-10" />
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Appointment Confirmed!</h2>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Appointment Confirmed!</h2>
           <p className="text-xl text-gray-600 mb-6 leading-relaxed">
             Your consultation has been scheduled successfully. We're excited to help you achieve your goals!
           </p>
@@ -220,12 +220,12 @@ export default function AppointmentContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white dark:bg-black py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="text-center mt-15">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
               Schedule Your <span className="text-orange-600">Consultation</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -278,12 +278,12 @@ export default function AppointmentContent() {
 
         {/* Step 1: Date & Time Selection */}
         {currentStep === 1 && (
-          <div className="bg-white rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
+          <div className="bg-white dark:bg-black rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-8 h-8 text-orange-600" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Select Date & Time</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Select Date & Time</h2>
             </div>
 
             <div className="flex justify-center mb-8">
@@ -305,7 +305,7 @@ export default function AppointmentContent() {
 
             {selectedDate && (
               <div className="mt-8">
-                <h3 className="font-semibold text-center text-gray-900 mb-6 text-lg flex items-center justify-center gap-2">
+                <h3 className="font-semibold text-center text-gray-900 dark:text-gray-100 mb-6 text-lg flex items-center justify-center gap-2">
                   <Clock className="w-5 h-5 text-orange-600" />
                   Available Time Slots for {format(selectedDate, "EEEE, MMMM d, yyyy")}
                 </h3>
@@ -318,7 +318,7 @@ export default function AppointmentContent() {
                       className={`p-3 border-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
                         selectedTime === slot
                           ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-500 shadow-lg scale-105"
-                          : "bg-white text-gray-700 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                          : "bg-white dark:bg-black text-gray-700 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
                       } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {slot}
@@ -358,7 +358,7 @@ export default function AppointmentContent() {
 
         {/* Step 2: Contact Form */}
         {currentStep === 2 && (
-          <div className="bg-white rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
+          <div className="bg-white dark:bg-black rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <button
                 onClick={handleBackStep}
@@ -372,7 +372,7 @@ export default function AppointmentContent() {
                 <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
                   <User className="w-8 h-8 text-orange-600" />
                 </div>
-                <h2 className="text-3xl font-bold text-gray-900">Your Information</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Your Information</h2>
               </div>
               <div className="w-20"></div> {/* Spacer for alignment */}
             </div>

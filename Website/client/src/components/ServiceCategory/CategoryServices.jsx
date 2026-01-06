@@ -2,10 +2,10 @@ import React from 'react';
 
 const CategoryServices = ({ data }) => {
   return (
-    <section className="bg-white py-20 px-4 md:px-8 font-sans">
+    <section className="bg-white dark:bg-black py-20 px-4 md:px-8 font-sans">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 uppercase tracking-tighter leading-none mb-2">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-gray-200 uppercase tracking-tighter leading-none mb-2">
             {data.title}
           </h2>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tighter leading-none text-orange-600">
@@ -30,7 +30,7 @@ const CategoryServices = ({ data }) => {
                 />
               </div>
 
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 tracking-tight group-hover:text-[25px] transition-all duration-300">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4 tracking-tight group-hover:text-[25px] transition-all duration-300">
                 {service.title}
               </h3>
 

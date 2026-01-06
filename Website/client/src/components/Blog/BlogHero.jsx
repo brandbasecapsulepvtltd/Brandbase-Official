@@ -18,7 +18,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
   // If no slider blogs, show empty state
   if (sliderBlogs.length === 0) {
     return (
-      <div className="mt-20 bg-white min-h-[600px] font-sans text-white relative overflow-hidden">
+      <div className="mt-20 bg-white dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] leading-tight">
             The <span className="text-orange-600">Brandbase Capsule</span> Blog
@@ -32,7 +32,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
   }
 
   return (
-    <div className="mt-20 bg-white min-h-[600px] font-sans text-white relative overflow-hidden">
+    <div className="mt-20 bg-white dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] leading-tight">
@@ -60,11 +60,11 @@ const BlogHero = ({ sliderBlogs = [] }) => {
 
                 {/* Text Content */}
                 <div className="lg:pr-8 py-2 flex flex-col justify-center">
-                  <span className="text-xs sm:text-sm uppercase tracking-wide text-gray-900 mb-2">
+                  <span className="text-xs sm:text-sm uppercase tracking-wide text-gray-900 dark:text-gray-100 mb-2">
                     ARTICLE – {blog.metadata.readTime}
                   </span>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 text-black">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-4 text-black dark:text-white">
                     {blog.metadata.title}
                   </h2>
 
@@ -79,7 +79,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
                       className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-gray-400"
                     />
                     <div>
-                      <p className="font-semibold text-gray-900">{blog.metadata.author.name}</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">{blog.metadata.author.name}</p>
                       <p className="text-xs sm:text-sm text-gray-700">{blog.metadata.author.role}</p>
                     </div>
                   </div>

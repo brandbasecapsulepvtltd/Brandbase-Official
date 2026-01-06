@@ -36,7 +36,7 @@ const CustomAccordionTrigger = React.forwardRef(({ className, children, ...props
         </span>
       </div>
       <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-zinc-600/70 transition-transform group-hover:scale-105 group-data-[state=open]:rotate-180">
-        <ChevronDown className="h-4 w-4 text-gray-800 dark:text-white" />
+        <ChevronDown className="h-4 w-4 text-gray-800 dark:text-gray-200 dark:text-white" />
       </div>
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

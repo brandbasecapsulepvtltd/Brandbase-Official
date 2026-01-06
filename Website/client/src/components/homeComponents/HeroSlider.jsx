@@ -109,7 +109,7 @@ const HeroSlider = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-white">
+      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mx-auto mb-4"></div>
           <p className="text-gray-600">Loading hero section...</p>
@@ -124,7 +124,7 @@ const HeroSlider = () => {
       <div className="w-full h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Unable to Load Content</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">Unable to Load Content</h2>
           <p className="text-gray-600 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
@@ -143,7 +143,7 @@ const HeroSlider = () => {
       <div className="w-full h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">📷</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">No Hero Content</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">No Hero Content</h2>
           <p className="text-gray-600">Please add slides from the admin panel.</p>
         </div>
       </div>
@@ -199,7 +199,7 @@ const HeroSlider = () => {
   );
 
   return (
-    <div className={`relative w-full ${outerHeightClass} bg-white font-sans`}>
+    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-black font-sans`}>
       {/* Background Video */}
 
       {/*
@@ -232,7 +232,7 @@ const HeroSlider = () => {
 
           {/* Mobile Content */}
           <div className="w-full px-6 py-8 flex flex-col gap-4">
-            <h1 className="text-3xl font-bold leading-snug text-black">
+            <h1 className="text-3xl font-bold leading-snug text-black dark:text-white">
               {currentSlide.title}
             </h1>
 
@@ -307,13 +307,13 @@ const HeroSlider = () => {
             style={{ opacity: 1 - scrollProgress }}
           >
             <div key={currentSlide.id || currentIndex} className="my-auto max-w-lg animate-fade-in">
-              <h1 className="text-[60px] font-bold text-black leading-tight mb-6 mt-8">
+              <h1 className="text-[60px] font-bold text-black dark:text-white leading-tight mb-6 mt-8">
                 {currentSlide.title}
               </h1>
 
               <div className="w-25 h-1 bg-orange-600 mb-6"></div>
 
-              <p className="text-gray-800 text-lg leading-relaxed mb-10">
+              <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed mb-10">
                 {currentSlide.subtext}
               </p>
 
@@ -336,7 +336,7 @@ const HeroSlider = () => {
                   onPrev={goToPrev}
                   onNext={goToNext}
                   className=""
-                  iconColor="text-black"
+                  iconColor="text-black dark:text-white"
                 />
               </div>
               

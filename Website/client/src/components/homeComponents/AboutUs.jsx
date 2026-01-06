@@ -6,7 +6,7 @@ function AboutUs() {
   return (
     <section 
       aria-labelledby="about-bcpl-heading"
-      className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white"
+      className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
       itemScope
       itemType="https://schema.org/Organization"
     >
@@ -18,7 +18,7 @@ function AboutUs() {
           </div>
           <h1 
             id="about-bcpl-heading"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6 px-2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4 md:mb-6 px-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -51,7 +51,7 @@ function AboutUs() {
               transition={{ duration: 0.6 }}
               className="px-2 sm:px-0"
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 md:mb-4">
                 Your Trusted Partner in Event & Marketing Excellence
               </h2>
               <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-4 md:mb-6" itemProp="description">
@@ -144,7 +144,7 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Innovation Driven</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Innovation Driven</h3>
             <p className="text-gray-600 text-sm">Cutting-edge event technology and creative marketing solutions tailored to your business goals</p>
           </article>
 
@@ -161,7 +161,7 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Global Network</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Global Network</h3>
             <p className="text-gray-600 text-sm">International event execution across 50+ countries with local expertise</p>
           </article>
 
@@ -178,7 +178,7 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Proven Excellence</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Proven Excellence</h3>
             <p className="text-gray-600 text-sm">1000+ successful event and marketing projects with measurable ROI</p>
           </article>
         </div>

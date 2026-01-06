@@ -14,7 +14,7 @@ export default function Faq({ data }) {
         <p className="text-sm font-semibold text-gray-500 tracking-wide">
           FAQ
         </p>
-        <h2 className="text-4xl font-bold text-gray-900 mt-3">
+        <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3">
           Frequently Asked Questions
         </h2>
         <p className="text-gray-500 mt-3 text-lg">
@@ -37,7 +37,7 @@ export default function Faq({ data }) {
                 onClick={() => toggle(index)}
                 className="w-full flex justify-between items-center p-5 text-left"
               >
-                <span className="text-lg font-medium text-gray-800">
+                <span className="text-lg font-medium text-gray-800 dark:text-gray-200">
                   {item.question}
                 </span>
                 <svg
@@ -59,7 +59,7 @@ export default function Faq({ data }) {
                   isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="px-5 pb-5 text-gray-800 text-[17px] leading-relaxed">
+                <div className="px-5 pb-5 text-gray-800 dark:text-gray-200 text-[17px] leading-relaxed">
                   {item.answer}
                 </div>
               </div>

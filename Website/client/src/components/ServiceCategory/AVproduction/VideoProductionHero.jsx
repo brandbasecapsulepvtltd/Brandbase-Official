@@ -20,7 +20,7 @@ const VideoProductionHero = () => {
       </video>
 
       {/* Dark Overlay to match image depth */}
-      <div className="absolute inset-0 bg-white/10"></div>
+      <div className="absolute inset-0 bg-white dark:bg-black/10"></div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 mt-12">
@@ -40,7 +40,7 @@ const VideoProductionHero = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="bg-orange-200/50 text-black/90 text-base md:text-lg lg:text-xl max-w-2xl mb-10 leading-relaxed font-semibold py-3 px-4 rounded-lg">
+          <p className="bg-orange-200/50 text-black dark:text-white/90 text-base md:text-lg lg:text-xl max-w-2xl mb-10 leading-relaxed font-semibold py-3 px-4 rounded-lg">
             We’re an ad production agency helping businesses and brands turn their vision 
             into reality through dynamic video content.
           </p>

@@ -26,12 +26,12 @@ const highlightText = (text, highlights) => {
 
 const CategoryHero = ({ data }) => {
   return (
-    <section className="py-16 md:py-15 lg:py-15 px-4 sm:px-6 lg:px-10 bg-white overflow-hidden">
+    <section className="py-16 md:py-15 lg:py-15 px-4 sm:px-6 lg:px-10 bg-white dark:bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="space-y-6 md:space-y-8">
             <div className="space-y-4 md:space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
                 {data.title}
               </h1>
               <div className="space-y-3">

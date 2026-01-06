@@ -177,7 +177,7 @@ Submitted on: ${new Date().toLocaleString()}
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-black p-6 shadow-xl max-h-[90vh] overflow-y-auto">
         
         {/* Close Button */}
         <button
@@ -194,7 +194,7 @@ Submitted on: ${new Date().toLocaleString()}
             <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
-            <h3 className="font-bold text-xl text-gray-900 mb-2">
+            <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 mb-2">
               Thank You!
             </h3>
             <p className="text-gray-600 mb-6">
@@ -216,7 +216,7 @@ Submitted on: ${new Date().toLocaleString()}
           /* Form View */
           <div>
             <div className="mb-6">
-              <h2 className="text-xl font-bold text-gray-900">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
                 Get Stall Designed for {event.name}
               </h2>
               <p className="text-sm text-gray-600 mt-1">
@@ -245,7 +245,7 @@ Submitted on: ${new Date().toLocaleString()}
               {/* Pre-filled Event Info */}
               <div className="p-3 rounded-lg bg-gray-100 border border-gray-200">
                 <p className="text-xs font-semibold text-gray-500 uppercase">Exhibition</p>
-                <p className="font-medium text-gray-900">{event.name}</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">{event.name}</p>
                 <p className="text-sm text-gray-600">
                   {event.city} | {event.venue}
                 </p>
@@ -333,7 +333,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <div className="relative">
                     <select
                       id="stallSize"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                       value={formData.stallSize}
                       onChange={(e) => handleChange("stallSize", e.target.value)}
                       required
@@ -364,7 +364,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <div className="relative">
                     <select
                       id="budget"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                       value={formData.budget}
                       onChange={(e) => handleChange("budget", e.target.value)}
                       required

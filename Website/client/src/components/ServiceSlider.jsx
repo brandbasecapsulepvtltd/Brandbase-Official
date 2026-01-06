@@ -50,14 +50,14 @@ export default function ServiceSlider() {
       aria-label="Services marquee slider"
       role="region"
     >
-      <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600] bg-white">
+      <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600] bg-white dark:bg-black">
         <motion.div
           ref={scope}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onFocus={() => setIsHovered(true)}
           onBlur={() => setIsHovered(false)}
-          className="flex flex-none gap-16 pr-16 text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium group cursor-pointer text-black"
+          className="flex flex-none gap-16 pr-16 text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium group cursor-pointer text-black dark:text-white"
           animate={{
             x: ["0%", "-50%"]
           }}
@@ -81,7 +81,7 @@ export default function ServiceSlider() {
                 className="text-[#FF6600] text-4xl md:text-6xl lg:text-7xl"
                 aria-hidden="true"
               >&#10038;</span>
-              <span className="group-hover:text-[#FF6600] transition-colors duration-300 whitespace-nowrap text-black">
+              <span className="group-hover:text-[#FF6600] transition-colors duration-300 whitespace-nowrap text-black dark:text-white">
                 {services[i % services.length]}
               </span>
             </div>

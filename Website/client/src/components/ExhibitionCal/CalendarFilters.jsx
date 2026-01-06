@@ -23,7 +23,7 @@ export function CalendarFilters({
     venueType !== "all";
 
   return (
-    <div className="bg-white/80 backdrop-blur-md border border-slate-200 p-4 md:p-6 rounded-2xl shadow-sm mb-8 sticky top-20 z-30 transition-all duration-300">
+    <div className="bg-white dark:bg-black/80 backdrop-blur-md border border-slate-200 p-4 md:p-6 rounded-2xl shadow-sm mb-8 sticky top-20 z-30 transition-all duration-300">
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
           <Filter className="w-4 h-4 text-indigo-600" />
@@ -49,7 +49,7 @@ export function CalendarFilters({
             placeholder="Search event, venue or organizer..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-colors"
+            className="w-full pl-10 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:bg-black transition-colors"
           />
         </div>
 
@@ -101,7 +101,7 @@ export function CalendarFilters({
               onClick={() => onVenueTypeChange("all")}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 venueType === "all"
-                  ? "bg-white text-slate-900 shadow-sm"
+                  ? "bg-white dark:bg-black text-slate-900 shadow-sm"
                   : "text-slate-500 hover:text-slate-700"
               }`}
             >
@@ -111,7 +111,7 @@ export function CalendarFilters({
               onClick={() => onVenueTypeChange("indoor")}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 venueType === "indoor"
-                  ? "bg-white text-indigo-600 shadow-sm"
+                  ? "bg-white dark:bg-black text-indigo-600 shadow-sm"
                   : "text-slate-500 hover:text-slate-700"
               }`}
             >
@@ -121,7 +121,7 @@ export function CalendarFilters({
               onClick={() => onVenueTypeChange("outdoor")}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
                 venueType === "outdoor"
-                  ? "bg-white text-emerald-600 shadow-sm"
+                  ? "bg-white dark:bg-black text-emerald-600 shadow-sm"
                   : "text-slate-500 hover:text-slate-700"
               }`}
             >

@@ -104,7 +104,7 @@ const GlobalSearch = () => {
             {/* 1. NAVBAR TRIGGER */}
             <div 
                 onClick={() => setIsModalOpen(true)}
-                className="group flex items-center justify-between px-3 py-1.5 bg-white rounded-xl cursor-pointer transition-all duration-200"
+                className="group flex items-center justify-between px-3 py-1.5 bg-white dark:bg-black rounded-xl cursor-pointer transition-all duration-200"
             >
                 <div className="flex items-center gap-2.5">
                     <Search className="w-6 h-6 text-orange-500 group-hover:text-orange-600" />
@@ -120,7 +120,7 @@ const GlobalSearch = () => {
                     />
 
                     {/* Search Container */}
-                    <div className="relative w-full max-w-2xl bg-white rounded-[2rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300">
+                    <div className="relative w-full max-w-2xl bg-white dark:bg-black rounded-[2rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300">
                         
                         {/* Search Input Area */}
                         <div className="flex items-center px-6 py-5 border-b border-gray-50">
@@ -128,7 +128,7 @@ const GlobalSearch = () => {
                             <input
                                 autoFocus
                                 type="text"
-                                className="flex-1 ml-4 outline-none text-xl text-gray-800 placeholder-gray-400 font-medium"
+                                className="flex-1 ml-4 outline-none text-xl text-gray-800 dark:text-gray-200 placeholder-gray-400 font-medium"
                                 placeholder="What can we help you find?"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
@@ -194,7 +194,7 @@ const GlobalSearch = () => {
                                                                 {service.category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                                                             </span>
                                                         </div>
-                                                        <p className="text-[15px] font-bold text-gray-800">
+                                                        <p className="text-[15px] font-bold text-gray-800 dark:text-gray-200">
                                                             {highlightText(service.data?.hero?.headline || 'Service', query)}
                                                         </p>
                                                         {service.slug && (
@@ -203,7 +203,7 @@ const GlobalSearch = () => {
                                                             </p>
                                                         )}
                                                     </div>
-                                                    <div className="bg-white p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
+                                                    <div className="bg-white dark:bg-black p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
                                                         <ChevronRight className="w-4 h-4 text-blue-500" />
                                                     </div>
                                                 </div>
@@ -233,7 +233,7 @@ const GlobalSearch = () => {
                                                                 {blog.metadata?.category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                                                             </span>
                                                         </div>
-                                                        <p className="text-[15px] font-bold text-gray-800">
+                                                        <p className="text-[15px] font-bold text-gray-800 dark:text-gray-200">
                                                             {highlightText(blog.metadata?.title, query)}
                                                         </p>
                                                         {blog.metadata?.slug && (
@@ -242,7 +242,7 @@ const GlobalSearch = () => {
                                                             </p>
                                                         )}
                                                     </div>
-                                                    <div className="bg-white p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
+                                                    <div className="bg-white dark:bg-black p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
                                                         <ChevronRight className="w-4 h-4 text-blue-500" />
                                                     </div>
                                                 </div>
@@ -254,7 +254,7 @@ const GlobalSearch = () => {
                                     {filteredServices.length === 0 && filteredBlogs.length === 0 && (
                                         <div className="py-20 text-center">
                                             <div className="text-4xl mb-4">🔍</div>
-                                            <p className="text-gray-900 font-bold">No results found for "{query}"</p>
+                                            <p className="text-gray-900 dark:text-gray-100 font-bold">No results found for "{query}"</p>
                                             <p className="text-gray-400 text-sm mt-1">Try different keywords or check your spelling.</p>
                                         </div>
                                     )}
@@ -265,13 +265,13 @@ const GlobalSearch = () => {
                         {/* Navigation Hints */}
                         <div className="px-6 py-4 bg-gray-50/80 border-t border-gray-100 flex items-center gap-6 text-[11px] text-gray-400 font-bold tracking-tight">
                             <div className="flex items-center gap-1.5">
-                                <span className="bg-white px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">ESC</span> Close
+                                <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">ESC</span> Close
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <span className="bg-white px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">↵</span> Select
+                                <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">↵</span> Select
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <span className="bg-white px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">↑↓</span> Navigate
+                                <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">↑↓</span> Navigate
                             </div>
                         </div>
                     </div>

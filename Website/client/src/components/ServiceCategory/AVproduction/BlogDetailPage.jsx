@@ -247,7 +247,7 @@ export default function BlogDetailPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-black">
       {/* Floating top-center black box */}
       <div
         ref={boxRef}
@@ -258,7 +258,7 @@ export default function BlogDetailPage() {
         style={{ width: open ? 420 : 210 }}
       >
         <div
-          className={`mx-auto rounded-2xl shadow-2xl bg-orange-100 text-black overflow-hidden`}
+          className={`mx-auto rounded-2xl shadow-2xl bg-orange-100 text-black dark:text-white overflow-hidden`}
           style={{
             transition: "height 350ms cubic-bezier(.2,.9,.2,1), width 350ms cubic-bezier(.2,.9,.2,1)",
           }}
@@ -303,7 +303,7 @@ export default function BlogDetailPage() {
                       <button
                         onClick={() => goToSection(s.index)}
                         className={`w-full text-left text-sm block px-3 py-2 rounded-md transition-colors duration-150
-                          ${s.index === activeIndex ? "bg-white/10 text-white font-semibold" : "text-gray-300 hover:bg-white/5"}
+                          ${s.index === activeIndex ? "bg-white dark:bg-black/10 text-white font-semibold" : "text-gray-300 hover:bg-white dark:bg-black/5"}
                         `}
                       >
                         {s.title}
@@ -316,13 +316,13 @@ export default function BlogDetailPage() {
 
             {/* small footer: share icons */}
             <div className="pt-2 px-2 pb-3 border-t border-gray-800 flex items-center gap-2">
-              <button title="Share on Twitter" className="p-1 rounded hover:bg-white/5">
+              <button title="Share on Twitter" className="p-1 rounded hover:bg-white dark:bg-black/5">
                 <Twitter size={16} className="text-gray-300" />
               </button>
-              <button title="Share on LinkedIn" className="p-1 rounded hover:bg-white/5">
+              <button title="Share on LinkedIn" className="p-1 rounded hover:bg-white dark:bg-black/5">
                 <Linkedin size={16} className="text-gray-300" />
               </button>
-              <button title="Share via Email" className="p-1 rounded hover:bg-white/5">
+              <button title="Share via Email" className="p-1 rounded hover:bg-white dark:bg-black/5">
                 <Mail size={16} className="text-gray-300" />
               </button>
               <div className="ml-auto text-xs text-gray-400">Progress inside article</div>
@@ -335,7 +335,7 @@ export default function BlogDetailPage() {
       <div className="max-w-7xl mx-auto px-8 py-16">
         {/* Header Section */}
         <header className="mb-12 max-w-2xl mt-15">
-          <h1 className="text-5xl font-sans font-bold text-black mb-4 leading-tight">
+          <h1 className="text-5xl font-sans font-bold text-black dark:text-white mb-4 leading-tight">
             {metadata.title}
           </h1>
           <p className="text-gray-600 text-base mb-4">
@@ -371,7 +371,7 @@ export default function BlogDetailPage() {
             <article ref={articleRef} className="prose prose-lg max-w-none">
               {sections.map((section) => (
                 <section key={section.id} id={section.id} className="mb-12">
-                  <h2 className="text-2xl font-sans font-bold text-black mb-4">{section.title}</h2>
+                  <h2 className="text-2xl font-sans font-bold text-black dark:text-white mb-4">{section.title}</h2>
                   {section.content.map((paragraph, idx) => (
                     <p key={idx} className="text-gray-700 leading-relaxed mb-4">
                       {paragraph}
@@ -405,7 +405,7 @@ export default function BlogDetailPage() {
           <div className="col-span-1">
             {/* Share Post Section */}
             <div className="mb-12 border-b border-gray-300 pb-8">
-              <h3 className="text-lg font-bold text-black mb-6">Share post</h3>
+              <h3 className="text-lg font-bold text-black dark:text-white mb-6">Share post</h3>
               <div className="flex gap-4">
                 <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share on Twitter">
                   <Twitter size={18} className="text-gray-700" />
@@ -421,7 +421,7 @@ export default function BlogDetailPage() {
 
             {/* Author Info */}
             <div className="mb-12 border-b border-gray-300 pb-8">
-              <h3 className="text-lg font-bold text-black mb-4">Author info</h3>
+              <h3 className="text-lg font-bold text-black dark:text-white mb-4">Author info</h3>
               <div className="flex gap-4">
                 <img
                   src={metadata.author.image}
@@ -429,13 +429,13 @@ export default function BlogDetailPage() {
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div className="flex-1">
-                  <h4 className="font-bold text-black mb-1">{metadata.author.name}</h4>
+                  <h4 className="font-bold text-black dark:text-white mb-1">{metadata.author.name}</h4>
                   <p className="text-sm text-gray-600 mb-3">{metadata.author.role}</p>
                   <div className="flex gap-3">
-                    <a href={metadata.author.twitter} className="text-gray-500 hover:text-black transition">
+                    <a href={metadata.author.twitter} className="text-gray-500 hover:text-black dark:text-white transition">
                       <Twitter size={16} />
                     </a>
-                    <a href={metadata.author.linkedin} className="text-gray-500 hover:text-black transition">
+                    <a href={metadata.author.linkedin} className="text-gray-500 hover:text-black dark:text-white transition">
                       <Linkedin size={16} />
                     </a>
                   </div>
@@ -446,7 +446,7 @@ export default function BlogDetailPage() {
             {/* Editor's Choice */}
             {metadata.isEditorPick && (
               <div className="mb-12 border-b border-gray-300 pb-8">
-                <h3 className="text-lg font-bold text-black mb-6">Editor's choice</h3>
+                <h3 className="text-lg font-bold text-black dark:text-white mb-6">Editor's choice</h3>
                 <div className="space-y-6">
                   <article className="flex gap-4 cursor-pointer hover:opacity-75 transition">
                     <img
@@ -455,7 +455,7 @@ export default function BlogDetailPage() {
                       className="w-20 h-20 object-cover rounded"
                     />
                     <div className="flex-1">
-                      <h4 className="font-bold text-black text-sm mb-2 leading-tight">
+                      <h4 className="font-bold text-black dark:text-white text-sm mb-2 leading-tight">
                         How modern work is reshaping modern lifestyles
                       </h4>
                       <p className="text-xs text-gray-500">by Samantha Grant | 3 min read</p>
@@ -467,16 +467,16 @@ export default function BlogDetailPage() {
 
             {/* Recent Posts */}
             <div>
-              <h3 className="text-lg font-bold text-black mb-6">Recent posts</h3>
+              <h3 className="text-lg font-bold text-black dark:text-white mb-6">Recent posts</h3>
               <div className="space-y-6">
                 <article className="cursor-pointer hover:opacity-75 transition">
-                  <h4 className="font-bold text-black text-sm mb-2">
+                  <h4 className="font-bold text-black dark:text-white text-sm mb-2">
                     How e-commerce is reshaping global shopping trends
                   </h4>
                   <p className="text-xs text-gray-500">by Erica Johnson | 7 min read</p>
                 </article>
                 <article className="cursor-pointer hover:opacity-75 transition">
-                  <h4 className="font-bold text-black text-sm mb-2">
+                  <h4 className="font-bold text-black dark:text-white text-sm mb-2">
                     Exploring minimalist living: a beginner's perspective
                   </h4>
                   <p className="text-xs text-gray-500">by Sarah Winters | 4 min read</p>

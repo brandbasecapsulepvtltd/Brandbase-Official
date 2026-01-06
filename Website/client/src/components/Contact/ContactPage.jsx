@@ -474,9 +474,9 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen text-gray-900 mt-15 bg-white relative">
+    <div className="min-h-screen text-gray-900 dark:text-gray-100 mt-15 bg-white dark:bg-black relative">
       {/* Hero Section with Globe Background */}
-      <section className="relative text-black py-24 text-center px-4 overflow-hidden">
+      <section className="relative text-black dark:text-white py-24 text-center px-4 overflow-hidden">
         {/* Globe Canvas Background 
 
          <canvas
@@ -494,7 +494,7 @@ const ContactPage = () => {
             {heroSection.subtitle}
           </div>
           <h1 
-            className="text-6xl font-bold mb-6 text-black"
+            className="text-6xl font-bold mb-6 text-black dark:text-white"
             dangerouslySetInnerHTML={{
               __html: heroSection.title.replace(
                 '<span>',
@@ -502,11 +502,11 @@ const ContactPage = () => {
               )
             }}
           />
-          <p className="text-xl mb-8 text-gray-900">
+          <p className="text-xl mb-8 text-gray-900 dark:text-gray-100">
             {heroSection.description}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="relative overflow-hidden group px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-xl transition-all duration-300 text-black bg-transparent border-2 border-[#FF6600] hover:bg-[#FF6600] hover:text-white backdrop-blur-sm">
+            <button className="relative overflow-hidden group px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-xl transition-all duration-300 text-black dark:text-white bg-transparent border-2 border-[#FF6600] hover:bg-[#FF6600] hover:text-white backdrop-blur-sm">
               <a href="/appointment" className="relative z-10 text-2xl">
                 {heroSection.buttonText}
               </a>
@@ -516,7 +516,7 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Info & Form */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
           {/* Contact Info */}
           <div>
@@ -529,7 +529,7 @@ const ContactPage = () => {
                 <select
                   value={selectedLocation}
                   onChange={handleLocationChange}
-                  className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent appearance-none cursor-pointer transition-all duration-200 hover:border-gray-400"
+                  className="w-full bg-white dark:bg-black border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent appearance-none cursor-pointer transition-all duration-200 hover:border-gray-400"
                 >
                   <option value="india-mumbai">India (Mumbai) - Headquarters</option>
                   <option value="singapore">Singapore - Regional Hub</option>
@@ -547,7 +547,7 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-3xl shadow-lg p-8 space-y-6">
+          <div className="bg-white dark:bg-black rounded-3xl shadow-lg p-8 space-y-6">
             <div>
               <h3 className="text-2xl font-bold mb-2">Send us a Message</h3>
               <p className="text-gray-600">

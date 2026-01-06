@@ -78,7 +78,7 @@ function Timeline() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white text-black flex flex-col items-center py-10 lg:py-20 px-4">
+    <div className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white flex flex-col items-center py-10 lg:py-20 px-4">
       
       {/* Section Header */}
       <motion.div
@@ -91,7 +91,7 @@ function Timeline() {
         <div className="mb-4 text-3xl font-bold uppercase tracking-wide text-[#FF6600]">
           Our Journey
         </div>
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
           Timeline of Excellence
         </h2>
         <p className="text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
@@ -211,7 +211,7 @@ function Timeline() {
                   )}
                   
                   {/* Inner white dot for better visibility */}
-                  <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-white dark:bg-black rounded-full"></div>
                 </div>
 
                 {/* Year Label */}

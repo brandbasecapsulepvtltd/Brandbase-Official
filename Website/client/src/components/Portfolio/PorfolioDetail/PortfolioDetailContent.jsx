@@ -11,7 +11,7 @@ const PortfolioDetailContent = ({ portfolioItem }) => {
   const { hero, bento, clientPortfolio, testimonials, faqs } = portfolioItem
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-black">
       <AnimatedHeroDemo heroData={hero} />
       <PortfolioDetailBento bentoData={bento} />
       <ClientPortfolioSection clientsData={clientPortfolio} />

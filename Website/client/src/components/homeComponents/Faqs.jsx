@@ -15,7 +15,7 @@ export default function Faqs({ data }) {
   return (
     <section 
       aria-labelledby="faqs-heading"
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-white"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -25,7 +25,7 @@ export default function Faqs({ data }) {
           </div>
           <h1 
             id="faqs-heading"
-            className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
           >
             Frequently Asked Questions
           </h1>
@@ -52,7 +52,7 @@ export default function Faqs({ data }) {
             <article
               key={faqIndex}
               className={twMerge(
-                "bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-300 cursor-pointer hover:border-[#FF6600]/50 hover:shadow-lg",
+                "bg-white dark:bg-black rounded-2xl border border-gray-200 p-6 transition-all duration-300 cursor-pointer hover:border-[#FF6600]/50 hover:shadow-lg",
                 selectedIndex === faqIndex && "border-[#FF6600] shadow-xl"
               )}
               onClick={() => handleQuestionClick(faqIndex)}
@@ -64,7 +64,7 @@ export default function Faqs({ data }) {
             >
               {/* Question Header */}
               <div className="flex justify-between items-center">
-                <h2 className="font-semibold text-gray-900 text-lg lg:text-xl pr-8">
+                <h2 className="font-semibold text-gray-900 dark:text-gray-100 text-lg lg:text-xl pr-8">
                   {faq.question}
                 </h2>
                 <svg
@@ -193,7 +193,7 @@ export default function Faqs({ data }) {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-[#FF6600]/5 to-[#FF6600]/10 rounded-2xl border border-[#FF6600]/20 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
               Still have questions?
             </h2>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">

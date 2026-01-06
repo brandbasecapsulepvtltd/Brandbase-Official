@@ -11,11 +11,11 @@ const HelpfulResourcesSection = ({ helpfulResources = [] }) => {
   const resources = helpfulResources.slice(0, 4);
 
   const ResourceCard = ({ resource }) => (
-    <a href={`/blogs/${resource.metadata.category}/${resource.metadata.slug}`} className="group block w-full bg-white transition duration-300">
+    <a href={`/blogs/${resource.metadata.category}/${resource.metadata.slug}`} className="group block w-full bg-white dark:bg-black transition duration-300">
       <div className="p-0">
         {/* Category and Title */}
         <div className="mb-4">
-          <h3 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-indigo-600 transition">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-tight group-hover:text-indigo-600 transition">
             {resource.metadata.category.charAt(0).toUpperCase() + resource.metadata.category.slice(1)}
           </h3>
           <p className="text-sm text-gray-700 mt-1">
@@ -37,10 +37,10 @@ const HelpfulResourcesSection = ({ helpfulResources = [] }) => {
   );
 
   return (
-    <section className="bg-white py-12 md:py-16">
+    <section className="bg-white dark:bg-black py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="text-4xl font-semibold mb-10 text-gray-900">
+        <h2 className="text-4xl font-semibold mb-10 text-gray-900 dark:text-gray-100">
           Helpful resources
         </h2>
 

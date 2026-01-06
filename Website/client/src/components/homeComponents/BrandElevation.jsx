@@ -9,20 +9,20 @@ export default function BrandElevation({ data }) {
   return (
     <section 
       aria-labelledby="brand-elevation-heading"
-      className="py-24 bg-white overflow-hidden"
+      className="py-24 bg-white dark:bg-black overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-16">
           <h1 
             id="brand-elevation-heading"
-            className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
           >
             Beyond Websites – A Full{" "}
             <span className="text-[#FF6600]">360°</span>
             Approach to Brand Elevation
           </h1>
-          <p className="text-xl text-gray-800 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-800 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
             Your website is just one piece of the puzzle. We take a holistic approach to brand 
             elevation & convenience-focused growth. Our suite of creative services from Design 
             to branding and marketing, Video & more, ensure your brand connects with your 
@@ -121,7 +121,7 @@ function ServiceCard({ service, onHover, onLeave }) {
 
   return (
     <article 
-      className="flex-shrink-0 w-80 bg-white rounded-3xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer relative h-100"
+      className="flex-shrink-0 w-80 bg-white dark:bg-black rounded-3xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer relative h-100"
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
       onFocus={handleHoverStart}
@@ -181,7 +181,7 @@ function ServiceCard({ service, onHover, onLeave }) {
         aria-label={`${service.category} service details`}
       >
         <div className="flex-1 flex flex-col justify-center">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 text-center">
             Our Services
           </h3>
           

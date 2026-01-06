@@ -37,7 +37,7 @@ export default function CTASection() {
   return (
     <section 
       aria-labelledby="cta-section-heading"
-      className="py-8 sm:py-10 md:py-12 lg:py-13 px-4 xs:px-6 sm:px-8 lg:px-8 overflow-hidden bg-white"
+      className="py-8 sm:py-10 md:py-12 lg:py-13 px-4 xs:px-6 sm:px-8 lg:px-8 overflow-hidden bg-white dark:bg-black"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 items-center gap-8 sm:gap-12 lg:gap-16">
@@ -46,14 +46,14 @@ export default function CTASection() {
             {/* Heading */}
             <h1 
               id="cta-section-heading"
-              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mt-2 sm:mt-4 leading-tight sm:leading-snug text-black"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mt-2 sm:mt-4 leading-tight sm:leading-snug text-black dark:text-white"
             >
               Transform your{" "}
               <span className="text-[#FF6A00]">digital</span> presence
             </h1>
 
             {/* Description */}
-            <p className="text-black mt-4 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl">
+            <p className="text-black dark:text-white mt-4 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl">
               From stunning websites to powerful mobile apps and data-driven marketing strategies — 
               we provide complete digital solutions to elevate your business.
             </p>
@@ -63,16 +63,16 @@ export default function CTASection() {
               <article className="flex items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-[#FF6A00]/10 border border-[#FF6A00]">
                 <div className="text-xl sm:text-2xl" aria-hidden="true">🚀</div>
                 <div>
-                  <h2 className="text-black font-semibold text-sm sm:text-base">Fast Delivery</h2>
-                  <p className="text-black/60 text-xs sm:text-sm">2–4 weeks launch</p>
+                  <h2 className="text-black dark:text-white font-semibold text-sm sm:text-base">Fast Delivery</h2>
+                  <p className="text-black dark:text-white/60 text-xs sm:text-sm">2–4 weeks launch</p>
                 </div>
               </article>
 
               <article className="flex items-center gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-[#FF6A00]/10 border border-[#FF6A00]">
                 <div className="text-xl sm:text-2xl" aria-hidden="true">🛡️</div>
                 <div>
-                  <h2 className="text-black font-semibold text-sm sm:text-base">Support & Maintenance</h2>
-                  <p className="text-black/60 text-xs sm:text-sm">24/7 monitoring</p>
+                  <h2 className="text-black dark:text-white font-semibold text-sm sm:text-base">Support & Maintenance</h2>
+                  <p className="text-black dark:text-white/60 text-xs sm:text-sm">24/7 monitoring</p>
                 </div>
               </article>
             </div>
@@ -81,7 +81,7 @@ export default function CTASection() {
             <div className="mt-8 sm:mt-10 flex flex-col xs:flex-row gap-3 sm:gap-4">
               {/* Outline button */}
               <button 
-                className="relative overflow-hidden group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold transition-colors duration-300 text-[#FF6A00] bg-white border border-[#FF6A00] shadow-lg hover:text-white text-sm sm:text-base"
+                className="relative overflow-hidden group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold transition-colors duration-300 text-[#FF6A00] bg-white dark:bg-black border border-[#FF6A00] shadow-lg hover:text-white text-sm sm:text-base"
                 aria-label="Schedule a call to discuss your digital project"
               >
                 <a 
@@ -107,7 +107,7 @@ export default function CTASection() {
             </div>
 
             {/* Trust Section */}
-            <div className="mt-6 sm:mt-8 flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-black/70">
+            <div className="mt-6 sm:mt-8 flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-black dark:text-white/70">
               <div className="flex items-center gap-2">
                 <div 
                   className="flex -space-x-1 sm:-space-x-2"

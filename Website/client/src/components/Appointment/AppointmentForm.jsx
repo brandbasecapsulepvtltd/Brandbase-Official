@@ -24,8 +24,8 @@ export default function AppointmentForm({
   return (
     <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
       {/* Date & Time Section */}
-      <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center font-sans">Select Date & Time</h2>
+      <div className="bg-white dark:bg-black rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6 text-center font-sans">Select Date & Time</h2>
 
         <div className="flex justify-center">
           <DatePicker
@@ -47,7 +47,7 @@ export default function AppointmentForm({
 
         {selectedDate && (
           <div className="mt-8">
-            <h3 className="font-medium text-center text-gray-900 mb-4 font-semibold">
+            <h3 className="font-medium text-center text-gray-900 dark:text-gray-100 mb-4 font-semibold">
               Available Time Slots for {format(selectedDate, "MMMM d, yyyy")}
             </h3>
             {timeSlots.length > 0 ? (
@@ -59,7 +59,7 @@ export default function AppointmentForm({
                     className={`p-3 border rounded-lg text-sm font-medium transition-all duration-200 ${
                       selectedTime === slot
                         ? "bg-[#FF6600] text-white border-[#FF6600] shadow-lg"
-                        : "bg-white hover:bg-orange-50 hover:text-[#FF6600] hover:border-[#FF6600] border-gray-300"
+                        : "bg-white dark:bg-black hover:bg-orange-50 hover:text-[#FF6600] hover:border-[#FF6600] border-gray-300"
                     }`}
                   >
                     {slot}
@@ -77,13 +77,13 @@ export default function AppointmentForm({
       </div>
 
       {/* Contact Form Section */}
-      <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6 font-sans">Contact Information</h2>
+      <div className="bg-white dark:bg-black rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6 font-sans">Contact Information</h2>
 
         <div className="space-y-6">
           {/* Personal Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 border-b border-orange-100 pb-2">Personal Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Personal Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
@@ -129,7 +129,7 @@ export default function AppointmentForm({
 
           {/* Location Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 border-b border-orange-100 pb-2">Location Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Location Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Region *</label>
@@ -182,7 +182,7 @@ export default function AppointmentForm({
 
           {/* Business Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 border-b border-orange-100 pb-2">Business Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Business Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Industry *</label>
@@ -252,7 +252,7 @@ export default function AppointmentForm({
 
           {/* Project Details */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 border-b border-orange-100 pb-2">Project Details</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Project Details</h3>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">How can we help you? *</label>
               <textarea 
@@ -268,7 +268,7 @@ export default function AppointmentForm({
 
           {/* Consent Section */}
           <div className="space-y-4 pt-4">
-            <h3 className="text-lg font-semibold text-gray-900 border-b border-orange-100 pb-2">Consent & Preferences</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Consent & Preferences</h3>
             <div className="space-y-3">
               <label className="flex items-start gap-3">
                 <input 

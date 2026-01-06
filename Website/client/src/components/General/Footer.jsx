@@ -15,7 +15,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-white pt-20 pb-10">
+    <footer className="bg-white dark:bg-black pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
         {/* Main Grid Layout */}
@@ -46,7 +46,7 @@ const Footer = () => {
 
           {/* Column 2: Services */}
           <div>
-            <h3 className="text-gray-900 font-bold mb-6 text-xl">Services</h3>
+            <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Services</h3>
             <ul className="space-y-4 text-md">
               <FooterLink>Digital Marketing Solutions</FooterLink>
               <FooterLink>Website Development</FooterLink>
@@ -60,7 +60,7 @@ const Footer = () => {
 
           {/* Column 3: Company */}
           <div>
-            <h3 className="text-gray-900 font-bold mb-6 text-xl">Company</h3>
+            <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Company</h3>
             <ul className="space-y-4 text-md">
               <FooterLink>About Us</FooterLink>
               <FooterLink>Team</FooterLink>
@@ -73,7 +73,7 @@ const Footer = () => {
 
           {/* Column 4: Contact */}
           <div>
-            <h3 className="text-gray-900 font-bold mb-6 text-xl">Contact</h3>
+            <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Contact</h3>
             <ul className="space-y-5">
 
               {/* Address */}
@@ -162,7 +162,7 @@ const FooterLink = ({ children, href = "#" }) => {
     <li>
       <Link 
         href={href} 
-        className="text-gray-800 text-sm inline-block relative group"
+        className="text-gray-800 dark:text-gray-200 text-sm inline-block relative group"
       >
         <span className="group-hover:text-orange-400 transition-colors duration-300">
           {children}
@@ -178,7 +178,7 @@ const SocialIcon = ({ icon }) => {
   return (
     <a 
       href="#" 
-      className="bg-white border border-gray-100 p-2.5 rounded-xl text-gray-500 shadow-sm 
+      className="bg-white dark:bg-black border border-gray-100 p-2.5 rounded-xl text-gray-500 shadow-sm 
                  hover:text-orange-400 hover:shadow-md hover:-translate-y-1 
                  transition-all duration-300"
     >

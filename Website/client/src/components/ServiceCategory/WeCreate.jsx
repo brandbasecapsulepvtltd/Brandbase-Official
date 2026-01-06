@@ -8,7 +8,7 @@ const WeCreate = ({ data }) => {
      COMPONENT RETURN
   ----------------------------------------------------------*/
   return (
-    <div className="min-h-screen bg-white font-sans py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white dark:bg-black font-sans py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -26,7 +26,7 @@ const WeCreate = ({ data }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* Left Featured Section */}
-          <div className="bg-white rounded-3xl p-5 hover:shadow-lg transition-shadow duration-300 cursor-pointer flex flex-col h-full">
+          <div className="bg-white dark:bg-black rounded-3xl p-5 hover:shadow-lg transition-shadow duration-300 cursor-pointer flex flex-col h-full">
             <div className="w-full aspect-[4/3] lg:h-[400px] overflow-hidden rounded-2xl mb-6">
               <img
                 src={leftFeatured.image}
@@ -56,7 +56,7 @@ const WeCreate = ({ data }) => {
             {rightColumnItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-3xl p-4 flex flex-col sm:flex-row gap-5 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                className="bg-white dark:bg-black rounded-3xl p-4 flex flex-col sm:flex-row gap-5 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
               >
                 {/* Image */}
                 <div className="w-full sm:w-48 aspect-video sm:aspect-square flex-shrink-0">
@@ -99,7 +99,7 @@ const Tag = ({ label, type }) => {
 
   const typeStyles =
     type === "primary"
-      ? "bg-[#CCF368] text-black"
+      ? "bg-[#CCF368] text-black dark:text-white"
       : "bg-[#F4F4F5] text-gray-500";
 
   return <span className={`${baseStyles} ${typeStyles}`}>{label}</span>;

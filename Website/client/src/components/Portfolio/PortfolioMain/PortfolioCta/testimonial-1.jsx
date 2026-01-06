@@ -44,7 +44,7 @@ export default function PortfolioResults() {
   ];
   
   return (
-    <div className="bg-white min-h-screen w-full grid place-content-center py-16 px-4 md:px-8 lg:px-16 relative">
+    <div className="bg-white dark:bg-black min-h-screen w-full grid place-content-center py-16 px-4 md:px-8 lg:px-16 relative">
       <div className="max-w-6xl mx-auto">
         {/* Portfolio Results Badge */}
         <div className="flex justify-center mb-8">
@@ -68,19 +68,19 @@ export default function PortfolioResults() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white dark:bg-black px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       Marketing Director
                     </div>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent
                   side="bottom"
-                  className="max-w-xs bg-white text-black p-4 rounded-lg shadow-xl border border-gray-200"
+                  className="max-w-xs bg-white dark:bg-black text-black dark:text-white p-4 rounded-lg shadow-xl border border-gray-200"
                 >
                   <p className="mb-2 text-sm text-gray-600">
                     "Brandbase Capsule transformed our digital presence, delivering a 300% increase in qualified leads within 6 months."
                   </p>
-                  <p className="font-semibold text-sm text-gray-900">Sarah Chen</p>
+                  <p className="font-semibold text-sm text-gray-900 dark:text-gray-100">Sarah Chen</p>
                   <p className="text-xs text-gray-500">Marketing Director, TechCorp</p>
                 </TooltipContent>
               </Tooltip>
@@ -101,19 +101,19 @@ export default function PortfolioResults() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white dark:bg-black px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       Business Owner
                     </div>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent
                   side="bottom"
-                  className="max-w-xs bg-white text-black p-4 rounded-lg shadow-xl border border-gray-200"
+                  className="max-w-xs bg-white dark:bg-black text-black dark:text-white p-4 rounded-lg shadow-xl border border-gray-200"
                 >
                   <p className="mb-2 text-sm text-gray-600">
                     "From concept to execution, their event management team created an unforgettable experience that exceeded all expectations."
                   </p>
-                  <p className="font-semibold text-sm text-gray-900">Michael Rodriguez</p>
+                  <p className="font-semibold text-sm text-gray-900 dark:text-gray-100">Michael Rodriguez</p>
                   <p className="text-xs text-gray-500">CEO, Retail Innovations</p>
                 </TooltipContent>
               </Tooltip>
@@ -139,7 +139,7 @@ export default function PortfolioResults() {
                 
                 {/* Percentage with Arrow */}
                 <div className="flex items-center justify-center gap-2 mb-3">
-                  <span className="text-3xl md:text-4xl font-bold text-gray-900">
+                  <span className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
                     {result.percentage}
                   </span>
                   {result.isIncrease && (
@@ -148,7 +148,7 @@ export default function PortfolioResults() {
                 </div>
                 
                 {/* Label */}
-                <h3 className="text-lg font-semibold text-gray-800 text-center mb-2">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 text-center mb-2">
                   {result.label}
                 </h3>
                 
@@ -172,7 +172,7 @@ export default function PortfolioResults() {
         {/* Portfolio Case Studies Preview */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Featured Portfolio Success Stories
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -203,8 +203,8 @@ export default function PortfolioResults() {
             ].map((project, index) => (
               <div key={index} className={`${project.color} p-6 rounded-xl border`}>
                 <div className="text-sm font-medium text-gray-500 mb-2">{project.category}</div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">{project.title}</h4>
-                <div className="text-2xl font-bold text-gray-900">{project.result}</div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">{project.title}</h4>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{project.result}</div>
                 <button className="mt-4 text-sm font-medium text-gray-700 hover:text-[#FF6600] transition-colors flex items-center gap-1">
                   View Case Study →
                 </button>

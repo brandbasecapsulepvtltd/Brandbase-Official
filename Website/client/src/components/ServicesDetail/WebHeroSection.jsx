@@ -17,7 +17,7 @@ const WebHeroSection = ({ data }) => {
   const loopFeatures = [...data.features, ...data.features, ...data.features];
 
   return (
-    <div className="min-h-screen bg-white font-sans flex flex-col items-center justify-center mt-10">
+    <div className="min-h-screen bg-white dark:bg-black font-sans flex flex-col items-center justify-center mt-10">
       <main className="w-full max-w-6xl px-4 py-16 md:py-24 flex flex-col items-center text-center">
         {/* Headline */}
         <h1 className="text-5xl lg:text-6xl leading-[0.95] font-bold tracking-tight text-slate-900 uppercase mb-6 max-w-5xl">
@@ -54,7 +54,7 @@ const WebHeroSection = ({ data }) => {
               return (
                 <div
                   key={index}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm mx-2"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-black border border-slate-200 rounded-xl shadow-sm mx-2"
                 >
                   <div className="p-2 bg-slate-100 rounded-md">
                     {IconComponent && <IconComponent className="w-5 h-5 text-slate-700" />}

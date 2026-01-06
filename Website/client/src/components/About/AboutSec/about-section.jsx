@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function AboutSection3() {
   return (
-    <section className="py-15 px-4 bg-white">
+    <section className="py-15 px-4 bg-white dark:bg-black">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           {/* Header with social icons */}
@@ -20,7 +20,7 @@ export default function AboutSection3() {
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/facebook.svg"
@@ -33,7 +33,7 @@ export default function AboutSection3() {
                 href="https://www.instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/instagram.svg"
@@ -46,7 +46,7 @@ export default function AboutSection3() {
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/linkedin.svg"
@@ -59,7 +59,7 @@ export default function AboutSection3() {
                 href="https://www.youtube.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/youtube.svg"
@@ -128,7 +128,7 @@ export default function AboutSection3() {
         {/* Main Content */}
                 <div className="grid md:grid-cols-3 gap-8 mt-4">
           <div className="md:col-span-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 mb-6 md:mb-8">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-gray-100 mb-6 md:mb-8">
               <VerticalCutReveal
                 splitBy="words"
                 staggerDuration={0.1}
@@ -176,7 +176,7 @@ export default function AboutSection3() {
               </div>
 
               <div className="mb-6">
-                <p className="text-gray-900 font-medium text-sm md:text-base mb-4">
+                <p className="text-gray-900 dark:text-gray-100 font-medium text-sm md:text-base mb-4">
                   At BCPL, we are committed to delivering excellence in every
                   project. Whether it's event management, digital marketing,
                   website development, or international exhibitions, we ensure

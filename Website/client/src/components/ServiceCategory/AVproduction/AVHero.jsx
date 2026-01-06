@@ -16,10 +16,10 @@ export default function AVHero() {
       <div className="max-w-4xl w-full">
         {/* Booking Status Badge */}
         <div className="flex justify-center mb-12">
-          <div className="bg-white rounded-full px-6 py-3 shadow-sm">
+          <div className="bg-white dark:bg-black rounded-full px-6 py-3 shadow-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-gray-800 font-medium">Booking Open — 2 Spots Left</span>
+              <span className="text-gray-800 dark:text-gray-200 font-medium">Booking Open — 2 Spots Left</span>
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@ export default function AVHero() {
         {/* Main Headline */}
         <div className="text-center mb-12">
           <h1 className="text-7xl font-bold mb-8 tracking-tight">
-            <span className="text-black">Unlimited</span>
+            <span className="text-black dark:text-white">Unlimited</span>
             <span className="mx-6 inline-block relative">
               {/* Icon placeholders - replace with actual images */}
               <div className="inline-flex gap-3 items-center">
@@ -38,8 +38,8 @@ export default function AVHero() {
             <span className="text-gray-400">Design</span>
           </h1>
 
-          <h2 className="text-6xl font-bold text-gray-800 mb-8">
-            for <span className="text-black">Solid Startups</span>
+          <h2 className="text-6xl font-bold text-gray-800 dark:text-gray-200 mb-8">
+            for <span className="text-black dark:text-white">Solid Startups</span>
           </h2>
 
           {/* Description */}

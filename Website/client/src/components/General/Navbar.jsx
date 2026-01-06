@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from "react";
-import { User, Search, Menu, X, ChevronDown, Calendar } from "lucide-react";
+import { Search, Menu, X, ChevronDown, Calendar } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import GlobalSearch from "./GlobalSearch";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,8 +14,7 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
-  
-  // Ref to handle the closing timeout for a smooth "hover" experience
+
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -37,27 +37,25 @@ const Navbar = () => {
     };
   }, [pathname]);
 
-  // Smooth hover handlers
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setServicesOpen(true);
   };
 
   const handleMouseLeave = () => {
-    // Small delay before closing to allow mouse to travel over gaps
     timeoutRef.current = setTimeout(() => {
       setServicesOpen(false);
-    }, 150); 
+    }, 150);
   };
 
   const navClasses = isHome
     ? scrolled
-      ? "backdrop-blur-md bg-[#f8f8f0]/80 text-[#FF6600] shadow-sm border-b border-orange-100"
+      ? "backdrop-blur-md bg-[#f8f8f0]/80 dark:bg-black/80 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800"
       : "bg-gradient-to-b from-black/60 to-transparent text-white"
-    : "backdrop-blur-md bg-white text-[#FF6600] shadow-sm border-b border-orange-100";
+    : "backdrop-blur-md bg-white dark:bg-black/90 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800";
 
   const textColor = isHome && !scrolled ? "text-white" : "text-[#FF6600]";
-  const hoverColor = isHome && !scrolled ? "bg-white" : "bg-[#FF6600]";
+  const hoverColor = isHome && !scrolled ? "bg-white dark:bg-black" : "bg-[#FF6600]";
 
   const services = [
     {
@@ -124,9 +122,9 @@ const Navbar = () => {
       <div className="max-w-8xl mx-auto flex justify-between items-center px-6 sm:px-8 md:px-12 lg:px-16 py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img 
+          <img
             src={isHome && !scrolled ? "https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png" : "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"}
-            alt="Brandbase capsule Logo" 
+            alt="Brandbase capsule Logo"
             className="h-17 w-auto"
             width={180}
             height={60}
@@ -145,9 +143,9 @@ const Navbar = () => {
               <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
             </Link>
           ))}
-          
-          {/* Services Dropdown - WRAPPER */}
-          <div 
+
+          {/* Services Dropdown */}
+          <div
             className="relative"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -158,22 +156,18 @@ const Navbar = () => {
               <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
             </button>
 
-            {/* Dropdown Menu Container */}
             <div
-              className={`absolute top-full left-1/2 transform -translate-x-1/2 pt-4 transition-all duration-300 ease-in-out ${
-                servicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
-              }`}
+              className={`absolute top-full left-1/2 transform -translate-x-1/2 pt-4 transition-all duration-300 ease-in-out ${servicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
               style={{ minWidth: "1000px" }}
             >
-              {/* Inner content box */}
-              <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
                 <div className="overflow-y-auto p-8" style={{ maxHeight: "70vh" }}>
                   <div className="grid grid-cols-4 gap-8 mb-8">
                     {services.map((service, index) => (
                       <div key={index} className="space-y-4">
                         <Link
                           href={service.categoryLink}
-                          className="font-bold text-xl text-gray-900 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
+                          className="font-bold text-xl text-gray-900 dark:text-gray-100 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
                           onClick={handleLinkClick}
                         >
                           {service.category}
@@ -183,7 +177,7 @@ const Navbar = () => {
                             <li key={itemIndex}>
                               <Link
                                 href={item.link}
-                                className="text-gray-600 hover:text-orange-600 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
+                                className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
                                 onClick={handleLinkClick}
                               >
                                 {item.name}
@@ -195,16 +189,16 @@ const Navbar = () => {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-200 pt-8">
+                  <div className="border-t border-gray-200 dark:border-zinc-800 pt-8">
                     <div className="grid grid-cols-2 gap-8">
                       {directLinkServices.map((service, index) => (
                         <Link
                           key={index}
                           href={service.link}
-                          className="group flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-orange-50 transition-all duration-300 border border-transparent hover:border-orange-200"
+                          className="group flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg hover:bg-orange-50 dark:hover:bg-zinc-700 transition-all duration-300 border border-transparent hover:border-orange-200"
                           onClick={handleLinkClick}
                         >
-                          <h3 className="font-bold text-xl text-gray-900 group-hover:text-orange-600">
+                          <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 group-hover:text-orange-600">
                             {service.category}
                           </h3>
                           <div className="text-orange-500 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
@@ -215,8 +209,8 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="border-t border-gray-200 bg-gray-50 p-4">
+
+                <div className="border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800 p-4">
                   <Link
                     href="/services"
                     className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all"
@@ -228,7 +222,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-{/*"/careers" "Careers" */}
+
           {["/portfolio", "/blogs", "/contact"].map((path, i) => {
             const labels = ["Portfolio", "Blogs", "Contact Us"];
             return (
@@ -242,27 +236,23 @@ const Navbar = () => {
 
         {/* Icons + Mobile Toggle */}
         <div className={`flex items-center gap-6 sm:gap-7 ${textColor}`}>
+          <ThemeToggle />
           <a href="https://brandbase-nu.vercel.app/event-calendar" className="hover:opacity-70 transition">
             <Calendar size={24} />
           </a>
-          <GlobalSearch/>
+          <GlobalSearch />
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
-
-{/*          <button className="hover:opacity-70 transition"><Search size={24} /></button>*/}          
         </div>
       </div>
 
-      {/* Mobile Menu (unchanged logic, applied handleLinkClick) */}
-      {/* ... keeping your mobile logic for consistency ... */}
-     {/* Mobile Menu */}
+      {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 h-screen w-full md:hidden transform transition-transform duration-300 ease-in-out z-[60] ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        } text-black flex flex-col`}
+        className={`fixed inset-0 h-screen w-full md:hidden transform transition-transform duration-300 ease-in-out z-[60] ${isOpen ? "translate-x-0" : "translate-x-full"
+          } text-black dark:text-white flex flex-col`}
       >
-        <div className="relative flex justify-center items-center px-6 py-4 border-b border-gray-700 bg-[#f8f8f0]/90 mt-20 flex-shrink-0">
+        <div className="relative flex justify-center items-center px-6 py-4 border-b border-gray-700 bg-[#f8f8f0]/90 dark:bg-black/95 mt-20 flex-shrink-0">
           <h2 className="text-2xl font-bold text-[#FF6600]">Menu</h2>
           <button
             onClick={() => setIsOpen(false)}
@@ -273,48 +263,39 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto bg-[#f8f8f0]/90">
+        <div className="flex-1 overflow-y-auto bg-[#f8f8f0]/90 dark:bg-black/95">
           <div className="flex flex-col items-center px-6 py-6 gap-5 text-lg text-[#FF6600]">
-            {["/", "/about"].map((path, i) => {
-              const labels = ["Home", "About"];
-              return (
-                <Link
-                  key={path}
-                  href={path}
-                  onClick={handleLinkClick}
-                  className="w-full py-3 border-b border-gray-300 hover:text-orange-400 transition text-center font-medium"
-                >
-                  {labels[i]}
-                </Link>
-              );
-            })}
-            
+            {["/", "/about"].map((path, i) => (
+              <Link
+                key={path}
+                href={path}
+                onClick={handleLinkClick}
+                className="w-full py-3 border-b border-gray-300 dark:border-zinc-800 hover:text-orange-400 transition text-center font-medium"
+              >
+                {i === 0 ? "Home" : "About"}
+              </Link>
+            ))}
+
             {/* Mobile Services Accordion */}
-            <div className="w-full border-b border-gray-300">
+            <div className="w-full border-b border-gray-300 dark:border-zinc-800">
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                 className="w-full py-3 flex items-center justify-center gap-2 hover:text-orange-400 transition font-medium relative"
               >
                 <span>Services</span>
-                <ChevronDown 
-                  size={18} 
+                <ChevronDown
+                  size={18}
                   className={`transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''} absolute right-4`}
                 />
               </button>
-              
-              {/* Mobile Services Dropdown */}
-              <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  mobileServicesOpen ? "max-h-[3000px] opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
+
+              <div className={`overflow-hidden transition-all duration-500 ease-in-out ${mobileServicesOpen ? "max-h-[3000px] opacity-100" : "max-h-0 opacity-0"}`}>
                 <div className="py-4 space-y-6">
-                  {/* Main services */}
                   {services.map((service, index) => (
                     <div key={index} className="space-y-2">
                       <Link
                         href={service.categoryLink}
-                        className="font-bold text-gray-900 border-l-4 border-orange-500 pl-3 hover:text-orange-600 transition-colors block"
+                        className="font-bold text-gray-900 dark:text-gray-100 border-l-4 border-orange-500 pl-3 hover:text-orange-600 transition-colors block"
                         onClick={handleLinkClick}
                       >
                         {service.category}
@@ -324,7 +305,7 @@ const Navbar = () => {
                           <li key={itemIndex}>
                             <Link
                               href={item.link}
-                              className="text-gray-600 hover:text-orange-600 transition-colors duration-200 text-sm block py-1 hover:pl-2 transition-all"
+                              className="text-gray-600 dark:text-gray-400 hover:text-orange-600 transition-colors duration-200 text-sm block py-1 hover:pl-2 transition-all"
                               onClick={handleLinkClick}
                             >
                               {item.name}
@@ -335,13 +316,12 @@ const Navbar = () => {
                     </div>
                   ))}
 
-                  {/* Direct link services */}
-                  <div className="space-y-3 pt-4 border-t border-gray-100">
+                  <div className="space-y-3 pt-4 border-t border-gray-100 dark:border-zinc-800">
                     {directLinkServices.map((service, index) => (
                       <Link
                         key={index}
                         href={service.link}
-                        className="block font-bold text-gray-900 border-l-4 border-orange-500 pl-3 py-2 hover:text-orange-600 transition-colors bg-gray-50 rounded-r-lg"
+                        className="block font-bold text-gray-900 dark:text-gray-100 border-l-4 border-orange-500 pl-3 py-2 hover:text-orange-600 transition-colors bg-gray-50 dark:bg-zinc-800 rounded-r-lg"
                         onClick={handleLinkClick}
                       >
                         {service.category}
@@ -349,9 +329,8 @@ const Navbar = () => {
                     ))}
                   </div>
                 </div>
-                
-                {/* Mobile View All Button */}
-                <div className="pt-4 border-t border-gray-300 mt-4">
+
+                <div className="pt-4 border-t border-gray-300 dark:border-zinc-800 mt-4">
                   <Link
                     href="/services"
                     className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300"
@@ -363,7 +342,6 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Other Mobile Menu Items "/careers" "Careers" */}
             {["/portfolio", "/blogs", "/contact"].map((path, i) => {
               const labels = ["Portfolio", "Blogs", "Contact Us"];
               return (
@@ -371,7 +349,7 @@ const Navbar = () => {
                   key={path}
                   href={path}
                   onClick={handleLinkClick}
-                  className="w-full py-3 border-b border-gray-300 hover:text-orange-400 transition text-center font-medium"
+                  className="w-full py-3 border-b border-gray-300 dark:border-zinc-800 hover:text-orange-400 transition text-center font-medium"
                 >
                   {labels[i]}
                 </Link>
@@ -380,12 +358,10 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="mt-auto p-6 border-t border-gray-700 text-center text-sm text-gray-900 bg-[#f8f8f0]/90 flex-shrink-0">
+        <div className="mt-auto p-6 border-t border-gray-700 dark:border-zinc-800 text-center text-sm text-gray-900 dark:text-gray-400 bg-[#f8f8f0]/90 dark:bg-black/95 flex-shrink-0">
           © {new Date().getFullYear()} Brandbase Capsule
         </div>
       </div>
-
-
     </nav>
   );
 };

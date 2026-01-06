@@ -6,10 +6,10 @@ const VideoMakerSection = ({ data }) => {
   if (!data) return null;
 
   return (
-    <section className="bg-white py-16 md:py-24 px-4 md:px-8">
+    <section className="bg-white dark:bg-black py-16 md:py-24 px-4 md:px-8">
       <div className="max-w-7xl mx-auto font-sans">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-center text-gray-900 mb-12 md:mb-16 uppercase tracking-tight leading-tight">
+        <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-center text-gray-900 dark:text-gray-100 mb-12 md:mb-16 uppercase tracking-tight leading-tight">
           {data.heading}
         </h2>
 

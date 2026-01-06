@@ -9,7 +9,7 @@ const EventPopup = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       {/* Main Container */}
-      <div className="relative flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-2xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
+      <div className="relative flex flex-col md:flex-row w-full max-w-4xl bg-white dark:bg-black rounded-2xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
         
         {/* Close Button */}
         <button 
@@ -29,12 +29,12 @@ const EventPopup = () => {
         </div>
 
         {/* Right Side: Content */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
+        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white dark:bg-black">
           <span className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-2">
             Exhibition Season 2024-25
           </span>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 leading-tight mb-4">
             Transform Your <span className="text-orange-500">Stall</span> into a Masterpiece.
           </h2>
           

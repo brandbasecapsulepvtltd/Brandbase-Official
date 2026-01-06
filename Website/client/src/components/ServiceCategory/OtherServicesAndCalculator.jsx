@@ -57,9 +57,9 @@ const OtherServicesAndCalculator = () => {
   return (
     <div className="max-w-6xl mx-auto space-y-8 px-4 md:px-0 py-10">
       {/* Services Dropdown */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="bg-white dark:bg-black border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4 text-gray-800">
+          <div className="flex items-center gap-4 text-gray-800 dark:text-gray-200">
             <FiExternalLink className="h-10 w-10 text-orange-600" />
             <div>
               <h3 className="text-2xl font-bold mb-1">
@@ -99,7 +99,7 @@ const OtherServicesAndCalculator = () => {
                 >
                   <div className="flex items-center gap-4 mb-3 text-orange-600">
                     <service.icon className="text-3xl group-hover:text-orange-700 transition" />
-                    <h4 className="text-lg font-semibold text-gray-800 group-hover:text-orange-600 transition">
+                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 group-hover:text-orange-600 transition">
                       {service.title}
                     </h4>
                   </div>

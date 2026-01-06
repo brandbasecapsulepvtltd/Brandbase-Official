@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -15,14 +18,28 @@
 
 
 @keyframes slideUp {
-  0% { opacity: 0; transform: translateY(-50px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Animation: slide from bottom */
 @keyframes slideDown {
-  0% { opacity: 0; transform: translateY(50px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-slide-up {
@@ -33,36 +50,102 @@
   animation: slideDown 0.7s ease both;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #09090b;
+    /* Zinc 950 */
+    --card: #ffffff;
+    --card-foreground: #09090b;
+    --popover: #ffffff;
+    --popover-foreground: #09090b;
+    --primary: #f97316;
+    /* Orange 500 */
+    --primary-foreground: #fafafa;
+    --secondary: #f4f4f5;
+    /* Zinc 100 */
+    --secondary-foreground: #18181b;
+    /* Zinc 900 */
+    --muted: #f4f4f5;
+    --muted-foreground: #71717a;
+    /* Zinc 500 */
+    --accent: #f4f4f5;
+    --accent-foreground: #18181b;
+    --destructive: #ef4444;
+    /* Red 500 */
+    --destructive-foreground: #fafafa;
+    --border: #e4e4e7;
+    /* Zinc 200 */
+    --input: #e4e4e7;
+    --ring: #f97316;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #09090b;
+    /* Zinc 950 - Rich Dark */
+    --foreground: #fafafa;
+    /* Zinc 50 */
+    --card: #18181b;
+    /* Zinc 900 */
+    --card-foreground: #fafafa;
+    --popover: #09090b;
+    --popover-foreground: #fafafa;
+    /* Keeping Primary Orange same or slightly lighter if needed */
+    --primary: #fb923c;
+    /* Orange 400 */
+    --primary-foreground: #09090b;
+    --secondary: #27272a;
+    /* Zinc 800 */
+    --secondary-foreground: #fafafa;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    /* Zinc 400 */
+    --accent: #27272a;
+    --accent-foreground: #fafafa;
+    --destructive: #7f1d1d;
+    /* Red 900 */
+    --destructive-foreground: #fafafa;
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #fb923c;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
   --font-sans: var(--font-outfit);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  font-size: 16px;
-}
-
-@media (max-width: 640px) {
-  html {
-    font-size: 14px; /* Adjust base size for mobile */
-  }
-}
-
+/* Base Styles */
 body {
-  background: var(--background);
+  background-image: none;
+  /* Reset accidental bg images */
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -50,13 +50,13 @@ const ContactInfo = ({ contactData }) => {
         {contactData.contactInfo.items.map((item, index) => (
           <div
             key={index}
-            className="flex items-start gap-4 bg-white p-6 rounded-xl shadow hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]"
+            className="flex items-start gap-4 bg-white dark:bg-black p-6 rounded-xl shadow hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]"
           >
             <div className="bg-[#FFF0E6] p-3 rounded-xl flex-shrink-0">
               {getIcon(item.icon)}
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-1 text-gray-800">{item.title}</h3>
+              <h3 className="font-semibold text-lg mb-1 text-gray-800 dark:text-gray-200">{item.title}</h3>
               {item.href ? (
                 <a 
                   href={item.href} 

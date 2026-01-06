@@ -2,6 +2,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
+import { Providers } from "./Providers";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -11,12 +12,14 @@ const outfit = Outfit({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Google Analytics */}
       </head>
       <body className={`${outfit.variable} font-sans antialiased`}>
-        <ClientLayout>{children}</ClientLayout>
+        <Providers>
+          <ClientLayout>{children}</ClientLayout>
+        </Providers>
       </body>
     </html>
   );

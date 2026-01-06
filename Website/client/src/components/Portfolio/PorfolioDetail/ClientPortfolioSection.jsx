@@ -40,7 +40,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
   };
 
   return (
-    <div className="w-full bg-white overflow-hidden">
+    <div className="w-full bg-white dark:bg-black overflow-hidden">
       {clientsData.map((client, clientIndex) => {
         const currentMedia = client.mediaItems[currentIndex[clientIndex]];
         const isRightAligned = client.imagePosition === 'right';
@@ -54,7 +54,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
             variants={containerVariants}
             className={`flex flex-col ${
               isRightAligned ? 'lg:flex-row' : 'lg:flex-row-reverse'
-            } items-center gap-8 lg:gap-12 px-4 sm:px-6 lg:px-16 py-8 sm:py-12 lg:py-20 bg-white`}
+            } items-center gap-8 lg:gap-12 px-4 sm:px-6 lg:px-16 py-8 sm:py-12 lg:py-20 bg-white dark:bg-black`}
           >
             {/* Text Content */}
             <motion.div 
@@ -63,7 +63,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
             >
               {/* Client Logo and Name */}
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-xl shadow-md p-2 sm:p-3 flex items-center justify-center">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white dark:bg-black rounded-xl shadow-md p-2 sm:p-3 flex items-center justify-center">
                   <img
                     src={client.logo}
                     alt={client.companyName}
@@ -71,13 +71,13 @@ const ClientPortfolioSection = ({ clientsData }) => {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{client.companyName}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">{client.companyName}</h3>
                   <p className="text-sm sm:text-base text-gray-600">{client.industry}</p>
                 </div>
               </div>
 
               {/* Project Title */}
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                 {client.projectTitle}
               </h2>
 
@@ -88,7 +88,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
 
               {/* Services Provided */}
               <div className="mb-8">
-                <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">Services Provided:</h4>
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Services Provided:</h4>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
                   {client.servicesProvided.map((service, i) => (
                     <span
@@ -103,7 +103,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
 
               {/* Results Achieved */}
               <div className="bg-gradient-to-r from-gray-50 to-white p-4 sm:p-6 rounded-xl border border-gray-200">
-                <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">Results Achieved:</h4>
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Results Achieved:</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                   {client.results.map((result, i) => (
                     <div key={i} className="text-center">
@@ -115,7 +115,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
               </div>
               
               {/* Client Testimonial */}
-              <div className="mt-8 p-4 sm:p-6 bg-white rounded-xl border border-gray-200 shadow-sm relative overflow-hidden">
+              <div className="mt-8 p-4 sm:p-6 bg-white dark:bg-black rounded-xl border border-gray-200 shadow-sm relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-[#FF6600]"></div>
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0">
@@ -126,7 +126,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm sm:text-base truncate">
                       {client.testimonial.clientName}
                     </p>
                     <p className="text-xs sm:text-sm text-gray-600 truncate">
@@ -157,20 +157,20 @@ const ClientPortfolioSection = ({ clientsData }) => {
                 {/* Navigation Arrows */}
                 <button
                   onClick={() => prevMedia(clientIndex)}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-black/90 hover:bg-white dark:bg-black rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
                   aria-label="Previous media"
                 >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 dark:text-gray-200 group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
 
                 <button
                   onClick={() => nextMedia(clientIndex)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-black/90 hover:bg-white dark:bg-black rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
                   aria-label="Next media"
                 >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 dark:text-gray-200 group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>

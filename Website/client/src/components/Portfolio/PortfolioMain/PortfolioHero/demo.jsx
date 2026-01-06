@@ -5,7 +5,7 @@ import { ContainerAnimated,
 
 const PortfolioHero = () => {
   return (
-    <ContainerScroll className="mt-25 bg-white text-center text-black">
+    <ContainerScroll className="mt-25 bg-white dark:bg-black text-center text-black dark:text-white">
       <ContainerStagger viewport={{ once: false }}>
         {/* Main Headline */}
         <ContainerAnimated animation="top">
@@ -35,17 +35,17 @@ const PortfolioHero = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="flex flex-col items-center p-6 bg-gray-50 rounded-xl">
               <div className="text-3xl mb-3">🚀</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Performance Driven</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Performance Driven</h3>
               <p className="text-gray-600 text-sm">High-conversion digital experiences</p>
             </div>
             <div className="flex flex-col items-center p-6 bg-gray-50 rounded-xl">
               <div className="text-3xl mb-3">🎨</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Strategic Design</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Strategic Design</h3>
               <p className="text-gray-600 text-sm">User-centric design principles</p>
             </div>
             <div className="flex flex-col items-center p-6 bg-gray-50 rounded-xl">
               <div className="text-3xl mb-3">📈</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Measurable Results</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Measurable Results</h3>
               <p className="text-gray-600 text-sm">Data-backed marketing solutions</p>
             </div>
           </div>
@@ -86,9 +86,9 @@ const PortfolioHero = () => {
           
           {/* Video Caption */}
           <div className="absolute bottom-6 left-6 right-6 text-left">
-            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg">
+            <div className="inline-flex items-center gap-2 bg-white dark:bg-black/90 backdrop-blur-sm px-4 py-2 rounded-lg">
               <div className="w-2 h-2 bg-[#FF6600] rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-800">Portfolio Showcase: Recent Project Highlight</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Portfolio Showcase: Recent Project Highlight</span>
             </div>
           </div>
         </div>

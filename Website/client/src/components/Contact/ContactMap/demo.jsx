@@ -4,12 +4,12 @@ import { WorldMap } from "./map"; // Adjust this import if your path is differen
 
 export default function MapDemo() {
   return (
-    <div className="py-40 bg-white w-full">
+    <div className="py-40 bg-white dark:bg-black w-full">
      <div className="max-w-7xl mx-auto text-center">
   <p className="font-bold text-xl md:text-5xl text-orange-500">
     Worldwide Presence
   </p>
-  <p className="text-sm md:text-xl text-gray-900 max-w-3xl mx-auto py-4">
+  <p className="text-sm md:text-xl text-gray-900 dark:text-gray-100 max-w-3xl mx-auto py-4">
     Delivering our services across the globe with consistency, creativity, and
     precision. No matter where you are, we bring world-class solutions right to your doorstep.
   </p>

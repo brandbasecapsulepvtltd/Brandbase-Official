@@ -5,11 +5,11 @@ import { ContainerScroll } from "./ContainerScroll";
 
 export default function ConScroll() {
   return (
-    <div className="flex flex-col overflow-hidden bg-white text-black dark:bg-black dark:text-white">
+    <div className="flex flex-col overflow-hidden bg-white dark:bg-black text-black dark:text-white dark:bg-black dark:text-white">
       {/* Section 1 */}
       <ContainerScroll
         titleComponent={
-          <h1 className="text-4xl font-semibold text-black dark:text-white">
+          <h1 className="text-4xl font-semibold text-black dark:text-white dark:text-white">
             Dive into the Depths of Creativity
             <br />
             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
@@ -29,7 +29,7 @@ export default function ConScroll() {
       {/* Section 2 */}
       <ContainerScroll
         titleComponent={
-          <h1 className="text-4xl font-semibold text-black dark:text-white">
+          <h1 className="text-4xl font-semibold text-black dark:text-white dark:text-white">
             Build with the Power of Code
             <br />
             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
@@ -49,7 +49,7 @@ export default function ConScroll() {
       {/* Section 3 */}
       <ContainerScroll
         titleComponent={
-          <h1 className="text-4xl font-semibold text-black dark:text-white">
+          <h1 className="text-4xl font-semibold text-black dark:text-white dark:text-white">
             Collaborate and Create, Together
             <br />
             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">

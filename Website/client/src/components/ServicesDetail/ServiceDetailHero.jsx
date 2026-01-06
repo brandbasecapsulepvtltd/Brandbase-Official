@@ -7,13 +7,13 @@ const ServiceDetailHero = () => {
   const themeColor = "#566452"; 
 
   return (
-    <section className="w-full bg-white py-16 lg:py-24 font-sans">
+    <section className="w-full bg-white dark:bg-black py-16 lg:py-24 font-sans">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
           
           {/* Left Column: Text Content */}
           <div className="w-full lg:w-1/2 space-y-8">
-            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight text-gray-800">
+            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight text-gray-800 dark:text-gray-200">
               <span className="block font-normal">Treat your pet</span>
               <span className="block font-normal">to a luxurious</span>
               <span style={{ color: themeColor }} className="block font-medium">
