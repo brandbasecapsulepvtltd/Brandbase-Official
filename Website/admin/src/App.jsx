@@ -15,6 +15,7 @@ import EventManagement from './pages/EventManagement';
 import ContactDetail from './pages/ContactDetail';
 import LoginPage from './pages/loginPage';
 import LeadManagement from './pages/LeadManagement';
+import ServiceCategoryManagement from './pages/ServiceCategoryManagement';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -52,6 +53,7 @@ function AppRoutes() {
         <Route path="contact-management" element={<ContactManagement />} />
         <Route path="contact-management/:id" element={<ContactDetail />} />
         <Route path="service-management" element={<AdminServicesDashboard />} />
+        <Route path="service-category" element={<ServiceCategoryManagement />} />
         <Route path="blogs-management" element={<BlogManagement />} />
         <Route path="event-management" element={<EventManagement />} />
         <Route path="event-leads" element={<LeadManagement />} />
