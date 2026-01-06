@@ -35,7 +35,7 @@ export default function ServiceColumn(props) {
                 />
               </div>
               <h2 className="text-3xl text-center mt-6">{service.name}</h2>
-              <p className="text-gray-900 dark:text-gray-100 text-center mt-2">
+              <p className="text-gray-900 dark:text-gray-100 dark:text-gray-100 text-center mt-2">
                 {service.description}
               </p>
               <div className="flex justify-center mt-4">

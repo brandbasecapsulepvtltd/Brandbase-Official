@@ -5,7 +5,7 @@ import { ContainerScroll } from "./ContainerScroll";
 
 export default function ConScroll() {
   return (
-    <div className="flex flex-col overflow-hidden bg-white dark:bg-black text-black dark:text-white dark:bg-black dark:text-white">
+    <div className="flex flex-col overflow-hidden bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white dark:bg-black dark:text-white">
       {/* Section 1 */}
       <ContainerScroll
         titleComponent={

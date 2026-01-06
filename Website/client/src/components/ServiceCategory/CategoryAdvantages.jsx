@@ -11,7 +11,7 @@ const CategoryAdvantages = ({ data }) => {
         return (
           <p 
             key={index} 
-            className="text-gray-700 leading-relaxed mb-6"
+            className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6"
             dangerouslySetInnerHTML={{ __html: item.value }}
           />
         );
@@ -49,9 +49,9 @@ const CategoryAdvantages = ({ data }) => {
   // If no active data found, show error or fallback
   if (!activeData) {
     return (
-      <div className="bg-white dark:bg-black p-8 font-sans min-h-screen">
+      <div className="bg-white dark:bg-zinc-900 dark:bg-black p-8 font-sans min-h-screen">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 text-center mb-12">
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 text-center mb-12">
             {data.mainTitle}
           </h1>
           <p className="text-center text-red-500">Error: Section data not found</p>
@@ -61,9 +61,9 @@ const CategoryAdvantages = ({ data }) => {
   }
 
   return (
-    <div className="bg-white dark:bg-black p-8 font-sans min-h-screen">
+    <div className="bg-white dark:bg-zinc-900 dark:bg-black p-8 font-sans min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 text-center mb-12">
+        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 text-center mb-12">
           {data.mainTitle}
         </h1>
 
@@ -77,7 +77,7 @@ const CategoryAdvantages = ({ data }) => {
                     className={`block w-full text-left py-4 text-lg border-b border-gray-200 transition-colors duration-200 ${
                       activeTab === key
                         ? 'text-orange-600 font-bold'
-                        : 'text-gray-700 hover:text-orange-600'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-orange-600'
                     }`}
                   >
                     {section.title}

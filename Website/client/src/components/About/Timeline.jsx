@@ -78,7 +78,7 @@ function Timeline() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white flex flex-col items-center py-10 lg:py-20 px-4">
+    <div className="w-full min-h-screen bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white flex flex-col items-center py-10 lg:py-20 px-4">
       
       {/* Section Header */}
       <motion.div
@@ -91,10 +91,10 @@ function Timeline() {
         <div className="mb-4 text-3xl font-bold uppercase tracking-wide text-[#FF6600]">
           Our Journey
         </div>
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4">
           Timeline of Excellence
         </h2>
-        <p className="text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
+        <p className="text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
           From humble beginnings to industry leadership - follow our growth story year by year
         </p>
       </motion.div>
@@ -116,7 +116,7 @@ function Timeline() {
                 {/* Loading Skeleton */}
                 {!imageLoaded && (
                   <div className="w-full h-64 lg:h-80 bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse rounded-2xl flex items-center justify-center">
-                    <div className="text-gray-500">Loading...</div>
+                    <div className="text-gray-500 dark:text-gray-400">Loading...</div>
                   </div>
                 )}
                 
@@ -150,7 +150,7 @@ function Timeline() {
                 {data[activeYear].title}
               </motion.h1>
               <motion.p 
-                className="text-lg lg:text-xl text-gray-700 leading-relaxed"
+                className="text-lg lg:text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -211,13 +211,13 @@ function Timeline() {
                   )}
                   
                   {/* Inner white dot for better visibility */}
-                  <div className="w-1.5 h-1.5 bg-white dark:bg-black rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-white dark:bg-zinc-900 dark:bg-black rounded-full"></div>
                 </div>
 
                 {/* Year Label */}
                 <p className={`
                   mt-3 text-sm lg:text-base font-medium transition-all duration-300 whitespace-nowrap
-                  ${isCompleted ? "text-[#FF6600] font-bold" : "text-gray-600"}
+                  ${isCompleted ? "text-[#FF6600] font-bold" : "text-gray-600 dark:text-gray-300"}
                 `}>
                   {year}
                 </p>
@@ -235,7 +235,7 @@ function Timeline() {
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 dark:text-gray-400">
           {years.indexOf(activeYear) + 1} of {years.length} milestones
         </div>
       </motion.div>

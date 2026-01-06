@@ -6,7 +6,7 @@ const PortfolioDetailBento = ({ bentoData }) => {
   const { mainHeading, cards, services } = bentoData;
 
   return (
-    <div className="bg-white dark:bg-black min-h-screen p-8 flex flex-col items-center font-sans py-20">
+    <div className="bg-white dark:bg-zinc-900 dark:bg-black min-h-screen p-8 flex flex-col items-center font-sans py-20">
       
       {/* Main Heading */}
       <h2 className="text-4xl md:text-6xl font-bold text-[#303236] leading-tight mb-6 text-center">
@@ -19,8 +19,8 @@ const PortfolioDetailBento = ({ bentoData }) => {
         {/* --- Column 1 --- */}
         <div className="flex flex-col gap-6">
           {/* Card 1: Concept to Reality */}
-          <div className="bg-white dark:bg-black border border-gray-100 rounded-3xl p-6 flex flex-col justify-between h-64 shadow-sm hover:shadow-md transition-shadow relative group">
-            <h2 className="text-2xl font-medium text-gray-900 dark:text-gray-100 leading-tight w-3/4">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black border border-gray-100 rounded-3xl p-6 flex flex-col justify-between h-64 shadow-sm hover:shadow-md transition-shadow relative group">
+            <h2 className="text-2xl font-medium text-gray-900 dark:text-gray-100 dark:text-gray-100 leading-tight w-3/4">
               {cards.conceptToReality.title}
             </h2>
             <button className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white mt-auto group-hover:scale-110 transition-transform">
@@ -47,14 +47,14 @@ const PortfolioDetailBento = ({ bentoData }) => {
               <span className="text-white text-3xl font-bold block mb-1">{cards.projectsDelivered.count}</span>
               <span className="text-white text-xl font-medium">{cards.projectsDelivered.label}</span>
             </div>
-            <button className="w-10 h-10 bg-white dark:bg-black rounded-full flex items-center justify-center text-black dark:text-white mt-auto group-hover:scale-110 transition-transform">
+            <button className="w-10 h-10 bg-white dark:bg-zinc-900 dark:bg-black rounded-full flex items-center justify-center text-black dark:text-white mt-auto group-hover:scale-110 transition-transform">
               <Plus size={20} />
             </button>
           </div>
 
           {/* Card 4: Amazing Work (Experience) */}
-          <div className="bg-white dark:bg-black border border-gray-100 rounded-3xl p-6 flex flex-col justify-between h-64 shadow-sm relative overflow-hidden">
-            <h2 className="text-2xl font-medium text-gray-900 dark:text-gray-100 leading-tight z-10 w-3/4">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black border border-gray-100 rounded-3xl p-6 flex flex-col justify-between h-64 shadow-sm relative overflow-hidden">
+            <h2 className="text-2xl font-medium text-gray-900 dark:text-gray-100 dark:text-gray-100 leading-tight z-10 w-3/4">
               {cards.amazingWork.title}
             </h2>
             {/* Isometric Structure/Tool Image */}
@@ -94,11 +94,11 @@ const PortfolioDetailBento = ({ bentoData }) => {
           </div>
 
           {/* Card 7: Capabilities List */}
-          <div className="bg-white dark:bg-black border border-gray-100 rounded-3xl p-6 h-64 shadow-sm flex flex-col">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black border border-gray-100 rounded-3xl p-6 h-64 shadow-sm flex flex-col">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Our Expertise</h3>
             <ul className="overflow-y-auto pr-2 custom-scrollbar space-y-4 h-full">
                 {services.map((service, index) => (
-                    <li key={index} className="text-gray-800 dark:text-gray-200 font-medium text-sm pb-3 border-b border-gray-100 last:border-0 hover:text-[#222] cursor-pointer transition-colors flex items-center justify-between">
+                    <li key={index} className="text-gray-800 dark:text-gray-200 dark:text-gray-200 font-medium text-sm pb-3 border-b border-gray-100 last:border-0 hover:text-[#222] cursor-pointer transition-colors flex items-center justify-between">
                         {service}
                     </li>
                 ))}

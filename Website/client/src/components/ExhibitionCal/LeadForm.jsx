@@ -177,12 +177,12 @@ Submitted on: ${new Date().toLocaleString()}
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-black p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-zinc-900 dark:bg-black p-6 shadow-xl max-h-[90vh] overflow-y-auto">
         
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 dark:text-gray-300"
           disabled={isSubmitting}
         >
           <X className="w-5 h-5" />
@@ -194,14 +194,14 @@ Submitted on: ${new Date().toLocaleString()}
             <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
-            <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 mb-2">
+            <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">
               Thank You!
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Your quote request for <strong>{event.name}</strong> has been
               submitted. Our design team will contact you within 24 hours.
             </p>
-            <div className="text-sm text-gray-500 mb-6 p-3 bg-gray-50 rounded-lg">
+            <div className="text-sm text-gray-500 dark:text-gray-400 mb-6 p-3 bg-gray-50 dark:bg-zinc-900 rounded-lg">
               <p>We've sent a confirmation to your email.</p>
               <p className="mt-1">Reference ID: L-{Date.now().toString().slice(-6)}</p>
             </div>
@@ -216,10 +216,10 @@ Submitted on: ${new Date().toLocaleString()}
           /* Form View */
           <div>
             <div className="mb-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">
                 Get Stall Designed for {event.name}
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                 Fill out the form below and our team will get back to you with a custom quote.
               </p>
             </div>
@@ -244,12 +244,12 @@ Submitted on: ${new Date().toLocaleString()}
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Pre-filled Event Info */}
               <div className="p-3 rounded-lg bg-gray-100 border border-gray-200">
-                <p className="text-xs font-semibold text-gray-500 uppercase">Exhibition</p>
-                <p className="font-medium text-gray-900 dark:text-gray-100">{event.name}</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Exhibition</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100 dark:text-gray-100">{event.name}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   {event.city} | {event.venue}
                 </p>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   {new Date(event.startDate).toLocaleDateString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
@@ -261,7 +261,7 @@ Submitted on: ${new Date().toLocaleString()}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Full Name *
                   </label>
                   <input
@@ -276,7 +276,7 @@ Submitted on: ${new Date().toLocaleString()}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="company" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="company" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Company Name *
                   </label>
                   <input
@@ -294,7 +294,7 @@ Submitted on: ${new Date().toLocaleString()}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Email Address *
                   </label>
                   <input
@@ -309,7 +309,7 @@ Submitted on: ${new Date().toLocaleString()}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="phone" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Phone Number *
                   </label>
                   <input
@@ -327,13 +327,13 @@ Submitted on: ${new Date().toLocaleString()}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="stallSize" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="stallSize" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Preferred Stall Size *
                   </label>
                   <div className="relative">
                     <select
                       id="stallSize"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-zinc-900 dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                       value={formData.stallSize}
                       onChange={(e) => handleChange("stallSize", e.target.value)}
                       required
@@ -349,7 +349,7 @@ Submitted on: ${new Date().toLocaleString()}
                         <option value="custom">Custom Size (Please specify in message)</option>
                       )}
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                       </svg>
@@ -358,13 +358,13 @@ Submitted on: ${new Date().toLocaleString()}
                 </div>
                 
                 <div className="space-y-2">
-                  <label htmlFor="budget" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="budget" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Budget Range *
                   </label>
                   <div className="relative">
                     <select
                       id="budget"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-zinc-900 dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                       value={formData.budget}
                       onChange={(e) => handleChange("budget", e.target.value)}
                       required
@@ -377,7 +377,7 @@ Submitted on: ${new Date().toLocaleString()}
                       <option value="5l-10l">₹5 - 10 Lakhs</option>
                       <option value="above-10l">Above ₹10 Lakhs</option>
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                       </svg>
@@ -387,7 +387,7 @@ Submitted on: ${new Date().toLocaleString()}
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-gray-700">
+                <label htmlFor="message" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Additional Requirements
                 </label>
                 <textarea
@@ -419,7 +419,7 @@ Submitted on: ${new Date().toLocaleString()}
                 )}
               </button>
 
-              <p className="text-xs text-center text-gray-500">
+              <p className="text-xs text-center text-gray-500 dark:text-gray-400">
                 By submitting, you agree to receive communication from our team regarding your stall design inquiry.
               </p>
             </form>

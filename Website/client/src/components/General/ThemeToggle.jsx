@@ -15,7 +15,7 @@ const ThemeToggle = () => {
     if (!mounted) {
         return (
             <button
-                className="p-2 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-500 transition-all opacity-50 cursor-wait"
+                className="p-2 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400 transition-all opacity-50 cursor-wait"
                 aria-label="Toggle theme"
             >
                 <Sun size={20} />
@@ -26,7 +26,7 @@ const ThemeToggle = () => {
     return (
         <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all text-gray-700 dark:text-gray-300 border border-transparent hover:border-gray-200 dark:hover:border-zinc-700"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all text-gray-700 dark:text-gray-300 dark:text-gray-300 border border-transparent hover:border-gray-200 dark:hover:border-zinc-700"
             aria-label="Toggle theme"
         >
             {theme === "dark" ? (

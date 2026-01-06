@@ -20,7 +20,7 @@ const VideoProductionHero = () => {
       </video>
 
       {/* Dark Overlay to match image depth */}
-      <div className="absolute inset-0 bg-white dark:bg-black/10"></div>
+      <div className="absolute inset-0 bg-white dark:bg-zinc-900 dark:bg-black/10"></div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 mt-12">

@@ -4,14 +4,14 @@ import { ArrowRight } from "lucide-react";
 
 export default function AboutSection3() {
   return (
-    <section className="py-15 px-4 bg-white dark:bg-black">
+    <section className="py-15 px-4 bg-white dark:bg-zinc-900 dark:bg-black">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           {/* Header with social icons */}
           <div className="flex justify-between items-center mb-8 w-[85%] absolute lg:top-4 md:top-0 sm:-top-2 -top-3 z-10">
             <div className="flex items-center gap-2 text-xl">
               <span className="text-orange-500 animate-spin">✱</span>
-              <span className="text-sm font-medium text-gray-600">
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                 WHO WE ARE
               </span>
             </div>
@@ -20,7 +20,7 @@ export default function AboutSection3() {
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/facebook.svg"
@@ -33,7 +33,7 @@ export default function AboutSection3() {
                 href="https://www.instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/instagram.svg"
@@ -46,7 +46,7 @@ export default function AboutSection3() {
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/linkedin.svg"
@@ -59,7 +59,7 @@ export default function AboutSection3() {
                 href="https://www.youtube.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/youtube.svg"
@@ -104,22 +104,22 @@ export default function AboutSection3() {
             <div className="flex gap-4">
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
                 <span className="text-orange-500 font-bold">10+</span>
-                <span className="text-gray-600">years of excellence</span>
+                <span className="text-gray-600 dark:text-gray-300">years of excellence</span>
                 <span className="text-gray-300">|</span>
               </div>
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
                 <span className="text-orange-500 font-bold">1000+</span>
-                <span className="text-gray-600">projects delivered</span>
+                <span className="text-gray-600 dark:text-gray-300">projects delivered</span>
               </div>
             </div>
             <div className="lg:absolute right-0 bottom-16 flex lg:flex-col flex-row-reverse lg:gap-0 gap-4">
               <div className="flex lg:text-3xl sm:text-2xl text-xl items-center gap-2 mb-2">
                 <span className="text-orange-500 font-semibold">500+</span>
-                <span className="text-gray-600 uppercase">projects</span>
+                <span className="text-gray-600 dark:text-gray-300 uppercase">projects</span>
               </div>
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
                 <span className="text-orange-500 font-bold">98%</span>
-                <span className="text-gray-600">client satisfaction</span>
+                <span className="text-gray-600 dark:text-gray-300">client satisfaction</span>
                 <span className="text-gray-300 lg:hidden block">|</span>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function AboutSection3() {
         {/* Main Content */}
                 <div className="grid md:grid-cols-3 gap-8 mt-4">
           <div className="md:col-span-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-gray-100 mb-6 md:mb-8">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 md:mb-8">
               <VerticalCutReveal
                 splitBy="words"
                 staggerDuration={0.1}
@@ -145,7 +145,7 @@ export default function AboutSection3() {
               </VerticalCutReveal>
             </h1>
 
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8 text-gray-600">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8 text-gray-600 dark:text-gray-300">
               <div className="text-xs sm:text-base">
                 <p className="leading-relaxed text-justify">
                   At BCPL, we are dedicated to excellence and innovation,
@@ -171,12 +171,12 @@ export default function AboutSection3() {
               <div className="text-orange-500 text-xl md:text-2xl font-bold mb-1 md:mb-2">
                 BRANDBASE CAPSULE
               </div>
-              <div className="text-gray-600 text-xs md:text-sm mb-6 md:mb-8">
+              <div className="text-gray-600 dark:text-gray-300 text-xs md:text-sm mb-6 md:mb-8">
                 Your Trusted Partner in Marketing & Digital Excellence
               </div>
 
               <div className="mb-6">
-                <p className="text-gray-900 dark:text-gray-100 font-medium text-sm md:text-base mb-4">
+                <p className="text-gray-900 dark:text-gray-100 dark:text-gray-100 font-medium text-sm md:text-base mb-4">
                   At BCPL, we are committed to delivering excellence in every
                   project. Whether it's event management, digital marketing,
                   website development, or international exhibitions, we ensure

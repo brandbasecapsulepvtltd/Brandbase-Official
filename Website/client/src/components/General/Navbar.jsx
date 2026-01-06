@@ -52,10 +52,10 @@ const Navbar = () => {
     ? scrolled
       ? "backdrop-blur-md bg-[#f8f8f0]/80 dark:bg-black/80 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800"
       : "bg-gradient-to-b from-black/60 to-transparent text-white"
-    : "backdrop-blur-md bg-white dark:bg-black/90 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800";
+    : "backdrop-blur-md bg-white dark:bg-zinc-900 dark:bg-black/90 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800";
 
   const textColor = isHome && !scrolled ? "text-white" : "text-[#FF6600]";
-  const hoverColor = isHome && !scrolled ? "bg-white dark:bg-black" : "bg-[#FF6600]";
+  const hoverColor = isHome && !scrolled ? "bg-white dark:bg-zinc-900 dark:bg-black" : "bg-[#FF6600]";
 
   const services = [
     {
@@ -125,7 +125,14 @@ const Navbar = () => {
           <img
             src={isHome && !scrolled ? "https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png" : "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"}
             alt="Brandbase capsule Logo"
-            className="h-17 w-auto"
+            className="h-17 w-auto block dark:hidden"
+            width={180}
+            height={60}
+          />
+          <img
+            src="https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png"
+            alt="Brandbase capsule Logo Dark"
+            className="h-17 w-auto hidden dark:block"
             width={180}
             height={60}
           />
@@ -160,14 +167,14 @@ const Navbar = () => {
               className={`absolute top-full left-1/2 transform -translate-x-1/2 pt-4 transition-all duration-300 ease-in-out ${servicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
               style={{ minWidth: "1000px" }}
             >
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
+              <div className="bg-white dark:bg-zinc-900 dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
                 <div className="overflow-y-auto p-8" style={{ maxHeight: "70vh" }}>
                   <div className="grid grid-cols-4 gap-8 mb-8">
                     {services.map((service, index) => (
                       <div key={index} className="space-y-4">
                         <Link
                           href={service.categoryLink}
-                          className="font-bold text-xl text-gray-900 dark:text-gray-100 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
+                          className="font-bold text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
                           onClick={handleLinkClick}
                         >
                           {service.category}
@@ -177,7 +184,7 @@ const Navbar = () => {
                             <li key={itemIndex}>
                               <Link
                                 href={item.link}
-                                className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
+                                className="text-gray-600 dark:text-gray-300 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
                                 onClick={handleLinkClick}
                               >
                                 {item.name}
@@ -195,10 +202,10 @@ const Navbar = () => {
                         <Link
                           key={index}
                           href={service.link}
-                          className="group flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg hover:bg-orange-50 dark:hover:bg-zinc-700 transition-all duration-300 border border-transparent hover:border-orange-200"
+                          className="group flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-900 dark:bg-zinc-800 rounded-lg hover:bg-orange-50 dark:hover:bg-zinc-700 transition-all duration-300 border border-transparent hover:border-orange-200"
                           onClick={handleLinkClick}
                         >
-                          <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 group-hover:text-orange-600">
+                          <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 group-hover:text-orange-600">
                             {service.category}
                           </h3>
                           <div className="text-orange-500 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
@@ -210,7 +217,7 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800 p-4">
+                <div className="border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 dark:bg-zinc-800 p-4">
                   <Link
                     href="/services"
                     className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-all"
@@ -236,14 +243,19 @@ const Navbar = () => {
 
         {/* Icons + Mobile Toggle */}
         <div className={`flex items-center gap-6 sm:gap-7 ${textColor}`}>
-          <ThemeToggle />
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
           <a href="https://brandbase-nu.vercel.app/event-calendar" className="hover:opacity-70 transition">
             <Calendar size={24} />
           </a>
           <GlobalSearch />
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          <div className="flex items-center gap-4 md:hidden">
+            <ThemeToggle />
+            <button className="" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -295,7 +307,7 @@ const Navbar = () => {
                     <div key={index} className="space-y-2">
                       <Link
                         href={service.categoryLink}
-                        className="font-bold text-gray-900 dark:text-gray-100 border-l-4 border-orange-500 pl-3 hover:text-orange-600 transition-colors block"
+                        className="font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-l-4 border-orange-500 pl-3 hover:text-orange-600 transition-colors block"
                         onClick={handleLinkClick}
                       >
                         {service.category}
@@ -305,7 +317,7 @@ const Navbar = () => {
                           <li key={itemIndex}>
                             <Link
                               href={item.link}
-                              className="text-gray-600 dark:text-gray-400 hover:text-orange-600 transition-colors duration-200 text-sm block py-1 hover:pl-2 transition-all"
+                              className="text-gray-600 dark:text-gray-300 dark:text-gray-400 hover:text-orange-600 transition-colors duration-200 text-sm block py-1 hover:pl-2 transition-all"
                               onClick={handleLinkClick}
                             >
                               {item.name}
@@ -321,7 +333,7 @@ const Navbar = () => {
                       <Link
                         key={index}
                         href={service.link}
-                        className="block font-bold text-gray-900 dark:text-gray-100 border-l-4 border-orange-500 pl-3 py-2 hover:text-orange-600 transition-colors bg-gray-50 dark:bg-zinc-800 rounded-r-lg"
+                        className="block font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-l-4 border-orange-500 pl-3 py-2 hover:text-orange-600 transition-colors bg-gray-50 dark:bg-zinc-900 dark:bg-zinc-800 rounded-r-lg"
                         onClick={handleLinkClick}
                       >
                         {service.category}
@@ -358,7 +370,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="mt-auto p-6 border-t border-gray-700 dark:border-zinc-800 text-center text-sm text-gray-900 dark:text-gray-400 bg-[#f8f8f0]/90 dark:bg-black/95 flex-shrink-0">
+        <div className="mt-auto p-6 border-t border-gray-700 dark:border-zinc-800 text-center text-sm text-gray-900 dark:text-gray-100 dark:text-gray-400 bg-[#f8f8f0]/90 dark:bg-black/95 flex-shrink-0">
           © {new Date().getFullYear()} Brandbase Capsule
         </div>
       </div>

@@ -37,7 +37,7 @@ export default function CTASection() {
   return (
     <section 
       aria-labelledby="cta-section-heading"
-      className="py-8 sm:py-10 md:py-12 lg:py-13 px-4 xs:px-6 sm:px-8 lg:px-8 overflow-hidden bg-white dark:bg-black"
+      className="py-8 sm:py-10 md:py-12 lg:py-13 px-4 xs:px-6 sm:px-8 lg:px-8 overflow-hidden bg-white dark:bg-zinc-900 dark:bg-black"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 items-center gap-8 sm:gap-12 lg:gap-16">
@@ -81,7 +81,7 @@ export default function CTASection() {
             <div className="mt-8 sm:mt-10 flex flex-col xs:flex-row gap-3 sm:gap-4">
               {/* Outline button */}
               <button 
-                className="relative overflow-hidden group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold transition-colors duration-300 text-[#FF6A00] bg-white dark:bg-black border border-[#FF6A00] shadow-lg hover:text-white text-sm sm:text-base"
+                className="relative overflow-hidden group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold transition-colors duration-300 text-[#FF6A00] bg-white dark:bg-zinc-900 dark:bg-black border border-[#FF6A00] shadow-lg hover:text-white text-sm sm:text-base"
                 aria-label="Schedule a call to discuss your digital project"
               >
                 <a 

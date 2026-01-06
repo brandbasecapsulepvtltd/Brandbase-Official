@@ -48,14 +48,14 @@ const videoProductionFeatures = [
 
 const AVtypes = () => {
   return (
-    <div className="w-full bg-white dark:bg-black">
+    <div className="w-full bg-white dark:bg-zinc-900 dark:bg-black">
       {videoProductionFeatures.map((feature, index) => (
         <div
           key={feature.id}
           className={`flex flex-col ${
             feature.imagePosition === 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'
           } items-center gap-8 lg:gap-12 px-6 sm:px-8 lg:px-16 py-12 lg:py-20 ${
-            index % 2 === 0 ? 'bg-white dark:bg-black' : 'bg-white dark:bg-black'
+            index % 2 === 0 ? 'bg-white dark:bg-zinc-900 dark:bg-black' : 'bg-white dark:bg-zinc-900 dark:bg-black'
           }`}
         >
           {/* Text Content */}
@@ -64,10 +64,10 @@ const AVtypes = () => {
               <span className="text-orange-600 font-bold text-lg">0{feature.id}</span>
               <div className="h-0.5 w-8 bg-orange-600"></div>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4">
               {feature.title}
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-6">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
               {feature.description}
             </p>
             <button className="self-start px-6 py-3 bg-orange-600 text-white font-medium rounded-lg hover:bg-orange-700 transition-colors duration-300">

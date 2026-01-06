@@ -18,7 +18,7 @@ const fadeUp = {
 const WhyBuildWithBcpl = ({ data }) => {
   return (
     <section
-      className="py-20 px-6 lg:px-16 bg-white dark:bg-black"
+      className="py-20 px-6 lg:px-16 bg-white dark:bg-zinc-900 dark:bg-black"
       aria-labelledby="why-bcpl-title"
       role="region"
     >
@@ -36,7 +36,7 @@ const WhyBuildWithBcpl = ({ data }) => {
           >
             <span id="why-bcpl-title" className="text-orange-600">{data.title}</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 mt-4 max-w-2xl mx-auto">
             {data.subtitle}
           </p>
         </motion.div>
@@ -45,7 +45,7 @@ const WhyBuildWithBcpl = ({ data }) => {
           {data.reasons.map((item, index) => (
             <motion.div
               key={item.id}
-              className="relative bg-white dark:bg-black p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 group hover:scale-[1.02]"
+              className="relative bg-white dark:bg-zinc-900 dark:bg-black p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 group hover:scale-[1.02]"
               initial="hidden"
               whileInView="visible"
               custom={index}
@@ -56,7 +56,7 @@ const WhyBuildWithBcpl = ({ data }) => {
                 {index + 1}
               </div>
 
-              <p className="text-gray-800 dark:text-gray-200 text-xl leading-relaxed relative transition-colors group-hover:text-orange-600">
+              <p className="text-gray-800 dark:text-gray-200 dark:text-gray-200 text-xl leading-relaxed relative transition-colors group-hover:text-orange-600">
                 {item.reason}
               </p>
             </motion.div>

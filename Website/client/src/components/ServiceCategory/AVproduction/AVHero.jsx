@@ -16,10 +16,10 @@ export default function AVHero() {
       <div className="max-w-4xl w-full">
         {/* Booking Status Badge */}
         <div className="flex justify-center mb-12">
-          <div className="bg-white dark:bg-black rounded-full px-6 py-3 shadow-sm">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-full px-6 py-3 shadow-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-gray-800 dark:text-gray-200 font-medium">Booking Open — 2 Spots Left</span>
+              <span className="text-gray-800 dark:text-gray-200 dark:text-gray-200 font-medium">Booking Open — 2 Spots Left</span>
             </div>
           </div>
         </div>
@@ -38,12 +38,12 @@ export default function AVHero() {
             <span className="text-gray-400">Design</span>
           </h1>
 
-          <h2 className="text-6xl font-bold text-gray-800 dark:text-gray-200 mb-8">
+          <h2 className="text-6xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200 mb-8">
             for <span className="text-black dark:text-white">Solid Startups</span>
           </h2>
 
           {/* Description */}
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
             We help startups and brands create beautiful, functional products — fast and hassle-free.
           </p>
 
@@ -66,7 +66,7 @@ export default function AVHero() {
                   </div>
                 ))}
               </div>
-              <span className="text-gray-700 font-medium">Trusted by Leaders</span>
+              <span className="text-gray-700 dark:text-gray-300 font-medium">Trusted by Leaders</span>
             </div>
           </div>
         </div>

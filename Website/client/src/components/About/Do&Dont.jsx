@@ -186,18 +186,18 @@ const DoAndDont = () => {
 
   return (
     <ReactLenis root>
-      <section ref={container} className="relative bg-white dark:bg-black">
+      <section ref={container} className="relative bg-white dark:bg-zinc-900 dark:bg-black">
         
         {/* --- STICKY HEADER --- */}
-        <div className="sticky top-0 z-[60] bg-white dark:bg-black/90 backdrop-blur-md border-b border-gray-100">
+        <div className="sticky top-0 z-[60] bg-white dark:bg-zinc-900 dark:bg-black/90 backdrop-blur-md border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 py-8 text-center">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 dark:text-gray-100 mb-6">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6">
               OUR <span className="text-[#FF6600]">PRINCIPLES</span>
             </h2>
             
             <div className="grid grid-cols-2 gap-10 relative">
               <h3 className="text-sm md:text-2xl font-bold uppercase text-[#FF6600]">What We Do</h3>
-              <h3 className="text-sm md:text-2xl font-bold uppercase text-gray-900 dark:text-gray-100">What We Don't</h3>
+              <h3 className="text-sm md:text-2xl font-bold uppercase text-gray-900 dark:text-gray-100 dark:text-gray-100">What We Don't</h3>
               
               {/* Progress Bar Underneath Labels */}
               <div className="absolute -bottom-4 left-0 w-full h-[3px] bg-gray-100">

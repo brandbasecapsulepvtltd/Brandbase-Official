@@ -482,7 +482,7 @@ const ImageModal = ({ item, onClose }) => {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 20 }}
         transition={{ type: "spring", damping: 25 }}
-        className="relative w-full h-full max-w-7xl bg-white dark:bg-black rounded-xl md:rounded-2xl xl:rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-2xl"
+        className="relative w-full h-full max-w-7xl bg-white dark:bg-zinc-900 dark:bg-black rounded-xl md:rounded-2xl xl:rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* MOBILE HEADER */}
@@ -492,11 +492,11 @@ const ImageModal = ({ item, onClose }) => {
               <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight">{item.companyName}</h4>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">{item.industry}</p>
+              <h4 className="font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 text-sm leading-tight">{item.companyName}</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">{item.industry}</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-900 dark:text-gray-100 transition-colors">
+          <button onClick={onClose} className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-gray-100 dark:text-gray-100 transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -510,20 +510,20 @@ const ImageModal = ({ item, onClose }) => {
                 <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
               </div>
               <div>
-                <h4 className="font-bold text-gray-900 dark:text-gray-100 text-lg">{item.companyName}</h4>
-                <p className="text-xs text-gray-500 uppercase tracking-wider font-medium">{item.industry}</p>
+                <h4 className="font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 text-lg">{item.companyName}</h4>
+                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium">{item.industry}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleFullscreen}
-                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-100 transition-colors rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-gray-100 dark:text-gray-100 transition-colors rounded-lg hover:bg-gray-100"
               >
                 {isFullscreen ? <Minus size={20} /> : <Maximize2 size={20} />}
               </button>
               <button
                 onClick={onClose}
-                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-100 transition-colors rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-gray-100 dark:text-gray-100 transition-colors rounded-lg hover:bg-gray-100"
               >
                 <X size={20} />
               </button>
@@ -542,17 +542,17 @@ const ImageModal = ({ item, onClose }) => {
             </div>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4 leading-tight">
             {item.title}
           </h2>
           
-          <p className="text-gray-600 mb-8 text-sm sm:text-base leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 mb-8 text-sm sm:text-base leading-relaxed">
             {item.desc}
           </p>
 
           {/* Services */}
           <div className="mb-8">
-            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-gray-100 dark:text-gray-100 flex items-center gap-2">
               <span className="w-1 h-4 bg-orange-500 rounded-full"></span>
               Services Provided
             </h5>
@@ -570,7 +570,7 @@ const ImageModal = ({ item, onClose }) => {
 
           {/* Results Grid */}
           <div className="mb-8">
-            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-gray-100 dark:text-gray-100 flex items-center gap-2">
               <span className="w-1 h-4 bg-green-500 rounded-full"></span>
               Key Results
             </h5>
@@ -578,13 +578,13 @@ const ImageModal = ({ item, onClose }) => {
               {item.results.map((res, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white dark:bg-black rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+                  className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-center gap-2 mb-2 text-gray-500">
+                  <div className="flex items-center gap-2 mb-2 text-gray-500 dark:text-gray-400">
                     {res.icon}
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">{res.value}</div>
-                  <div className="text-[10px] sm:text-xs uppercase font-semibold text-gray-500 tracking-wider mt-1 text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">{res.value}</div>
+                  <div className="text-[10px] sm:text-xs uppercase font-semibold text-gray-500 dark:text-gray-400 tracking-wider mt-1 text-center">
                     {res.label}
                   </div>
                 </div>
@@ -594,7 +594,7 @@ const ImageModal = ({ item, onClose }) => {
 
           {/* Testimonial */}
           <div className="mb-6">
-            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-gray-100 dark:text-gray-100 flex items-center gap-2">
               <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
               Client Testimonial
             </h5>
@@ -609,12 +609,12 @@ const ImageModal = ({ item, onClose }) => {
                   alt="author"
                 />
                 <div className="flex-1">
-                  <p className="italic text-gray-700 text-sm sm:text-base leading-relaxed mb-3">
+                  <p className="italic text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-3">
                     "{item.testimonial.quote}"
                   </p>
                   <div>
-                    <p className="font-bold text-sm text-gray-900 dark:text-gray-100">{item.testimonial.author}</p>
-                    <p className="text-xs text-gray-500">{item.testimonial.role}</p>
+                    <p className="font-bold text-sm text-gray-900 dark:text-gray-100 dark:text-gray-100">{item.testimonial.author}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.testimonial.role}</p>
                   </div>
                 </div>
               </div>
@@ -661,14 +661,14 @@ const ImageModal = ({ item, onClose }) => {
           {/* Navigation Controls */}
           <button
             onClick={prevImg}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-black/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white dark:bg-black/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white dark:bg-zinc-900 dark:bg-black/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
             aria-label="Previous image"
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={nextImg}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-black/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white dark:bg-black/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white dark:bg-zinc-900 dark:bg-black/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
             aria-label="Next image"
           >
             <ChevronRight size={20} />
@@ -680,7 +680,7 @@ const ImageModal = ({ item, onClose }) => {
               <button
                 key={idx}
                 onClick={() => setCurrentImg(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${idx === currentImg ? 'bg-white dark:bg-black w-6' : 'bg-white dark:bg-black/40'}`}
+                className={`w-2 h-2 rounded-full transition-all ${idx === currentImg ? 'bg-white dark:bg-zinc-900 dark:bg-black w-6' : 'bg-white dark:bg-zinc-900 dark:bg-black/40'}`}
                 aria-label={`Go to image ${idx + 1}`}
               />
             ))}
@@ -697,7 +697,7 @@ const ImageModal = ({ item, onClose }) => {
         <div className="lg:hidden p-4 border-t border-gray-200">
           <button
             onClick={onClose}
-            className="w-full py-3 bg-gray-100 text-gray-900 dark:text-gray-100 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+            className="w-full py-3 bg-gray-100 text-gray-900 dark:text-gray-100 dark:text-gray-100 font-medium rounded-lg hover:bg-gray-200 transition-colors"
           >
             Close
           </button>
@@ -748,7 +748,7 @@ export default function InteractiveImageBentoGallery() {
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
           Case Studies
         </h2>
-        <p className="text-gray-600 mt-2 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
           Explore our digital transformation projects across industries
         </p>
       </div>
@@ -783,7 +783,7 @@ export default function InteractiveImageBentoGallery() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 flex flex-col justify-end">
                   <div className="mb-3">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-6 h-6 rounded bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
+                      <div className="w-6 h-6 rounded bg-white dark:bg-zinc-900 dark:bg-black/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
                         <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
                       </div>
                       <span className="text-orange-300 text-xs font-bold uppercase tracking-wider">
@@ -796,10 +796,10 @@ export default function InteractiveImageBentoGallery() {
                     <p className="text-gray-300 text-sm line-clamp-2">{item.desc}</p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white dark:bg-black/10 backdrop-blur-sm rounded-full">
+                    <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-sm rounded-full">
                       View Case Study
                     </span>
-                    <div className="w-8 h-8 rounded-full bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
+                    <div className="w-8 h-8 rounded-full bg-white dark:bg-zinc-900 dark:bg-black/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -813,7 +813,7 @@ export default function InteractiveImageBentoGallery() {
         <div className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 hidden lg:block">
           <div className="flex flex-col items-center gap-2">
             <div className="w-1 h-12 bg-gradient-to-b from-orange-500 to-transparent rounded-full"></div>
-            <span className="text-xs text-gray-500 font-medium tracking-wider">DRAG</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wider">DRAG</span>
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function Clients({ data }) {
   return (
     <section 
       aria-labelledby="clients-heading"
-      className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-20 mt-10 mx-auto bg-white dark:bg-black"
+      className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-20 mt-10 mx-auto bg-white dark:bg-zinc-900 dark:bg-black"
     >
       {/* Title */}
       <header className="mx-auto text-center mb-6">
@@ -79,7 +79,7 @@ export default function Clients({ data }) {
                   {/* Main logo with 3D effect */}
                   <img 
                     src={client.logo} 
-                    className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain grayscale group-hover:grayscale-0 transition-all duration-500 ease-out transform group-hover:shadow-2xl group-hover:shadow-[#FF6600]/20 rounded-2xl p-3 bg-white dark:bg-black/20 backdrop-blur-sm border border-white/10 group-hover:border-[#FF6600]/30"
+                    className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain grayscale group-hover:grayscale-0 transition-all duration-500 ease-out transform group-hover:shadow-2xl group-hover:shadow-[#FF6600]/20 rounded-2xl p-3 bg-white dark:bg-zinc-900 dark:bg-black/20 backdrop-blur-sm border border-white/10 group-hover:border-[#FF6600]/30"
                     alt={`${client.name} - Industry leader and client`}
                     title={`${client.name} Case Study`}
                     loading="lazy"
@@ -140,7 +140,7 @@ export default function Clients({ data }) {
     onClick={closeModal} // Close when clicking backdrop
   >
     <div
-      className="bg-white dark:bg-black relative rounded-2xl md:rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl transform transition-all duration-500 scale-95 opacity-0 animate-in fade-in-0 zoom-in-95"
+      className="bg-white dark:bg-zinc-900 dark:bg-black relative rounded-2xl md:rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl transform transition-all duration-500 scale-95 opacity-0 animate-in fade-in-0 zoom-in-95"
       style={{ animation: "modalEnter 0.5s ease-out forwards" }}
       onClick={(e) => e.stopPropagation()} // Prevent close when clicking inside modal
     >
@@ -164,7 +164,7 @@ export default function Clients({ data }) {
           {/* Close Button */}
           <button
             onClick={closeModal}
-            className="absolute top-3 right-3 md:top-4 md:right-4 bg-white dark:bg-black/90 hover:bg-white dark:bg-black rounded-full p-2 transition-all duration-300 hover:scale-110 shadow-sm z-10"
+            className="absolute top-3 right-3 md:top-4 md:right-4 bg-white dark:bg-zinc-900 dark:bg-black/90 hover:bg-white dark:bg-zinc-900 dark:bg-black rounded-full p-2 transition-all duration-300 hover:scale-110 shadow-sm z-10"
             aria-label="Close modal"
           >
             <svg
@@ -184,7 +184,7 @@ export default function Clients({ data }) {
           </button>
 
           {/* Logo Badge */}
-          <div className="absolute -bottom-6 left-5 md:bottom-4 md:left-4 bg-white dark:bg-black shadow-md rounded-xl p-2 md:p-4 border border-gray-100">
+          <div className="absolute -bottom-6 left-5 md:bottom-4 md:left-4 bg-white dark:bg-zinc-900 dark:bg-black shadow-md rounded-xl p-2 md:p-4 border border-gray-100">
             <img
               src={selectedClient.logo}
               alt={selectedClient.name}
@@ -201,7 +201,7 @@ export default function Clients({ data }) {
             <div>
               <h2
                 id="modal-heading"
-                className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3"
+                className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-3"
               >
                 {selectedClient.name} Case Study
               </h2>
@@ -209,10 +209,10 @@ export default function Clients({ data }) {
                 <span className="px-2.5 py-1 bg-[#FF6600] text-white rounded-full text-xs md:text-sm font-medium">
                   {selectedClient.service}
                 </span>
-                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs md:text-sm font-medium">
+                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 dark:text-gray-300 rounded-full text-xs md:text-sm font-medium">
                   {selectedClient.location}
                 </span>
-                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs md:text-sm font-medium">
+                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 dark:text-gray-300 rounded-full text-xs md:text-sm font-medium">
                   {selectedClient.date}
                 </span>
               </div>
@@ -230,7 +230,7 @@ export default function Clients({ data }) {
           </div>
 
           <div className="prose max-w-none">
-            <p className="text-gray-600 md:text-gray-700 text-base md:text-lg leading-relaxed text-justify md:text-left">
+            <p className="text-gray-600 dark:text-gray-300 md:text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed text-justify md:text-left">
               {selectedClient.description}
             </p>
           </div>

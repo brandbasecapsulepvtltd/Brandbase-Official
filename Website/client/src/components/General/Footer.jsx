@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
-  Facebook, 
-  Twitter, 
-  Linkedin, 
-  Github, 
-  Instagram, 
-  MapPin, 
-  Mail, 
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Github,
+  Instagram,
+  MapPin,
+  Mail,
   Phone,
   Shield,
   FileText
@@ -15,25 +15,32 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-black pt-20 pb-10">
+    <footer className="bg-white dark:bg-zinc-900 dark:bg-black pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
+
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
+
           {/* Column 1: Brand Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <img 
-                src="https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819" 
-                alt="Brandbase Capsule Logo" 
-                className="h-auto w-[40%] lg:w-[70%]"
-              />
+              <div className="flex items-center gap-3">
+                <img
+                  src="https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"
+                  alt="Brandbase Capsule Logo"
+                  className="h-auto w-[40%] lg:w-[70%] block dark:hidden"
+                />
+                <img
+                  src="https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png"
+                  alt="Brandbase Capsule Logo Dark"
+                  className="h-auto w-[40%] lg:w-[70%] hidden dark:block"
+                />
+              </div>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-xs">
               Helping startups transform ideas into reality with cutting-edge technology solutions.
             </p>
-            
+
             {/* Social Icons */}
             <div className="flex items-center gap-3">
               <SocialIcon icon={<Facebook size={18} />} />
@@ -77,10 +84,10 @@ const Footer = () => {
             <ul className="space-y-5">
 
               {/* Address */}
-              <li className="flex items-start gap-3 text-gray-500 text-md group cursor-pointer">
-                <MapPin 
-                  size={18} 
-                  className="mt-0.5 shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors" 
+              <li className="flex items-start gap-3 text-gray-500 dark:text-gray-400 text-md group cursor-pointer">
+                <MapPin
+                  size={18}
+                  className="mt-0.5 shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
                 <span className="relative leading-relaxed">
                   Brandbase Capsule Pvt. Ltd <br />
@@ -91,10 +98,10 @@ const Footer = () => {
               </li>
 
               {/* Email */}
-              <li className="flex items-center gap-3 text-gray-500 text-sm group cursor-pointer">
-                <Mail 
-                  size={18} 
-                  className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors" 
+              <li className="flex items-center gap-3 text-gray-500 dark:text-gray-400 text-sm group cursor-pointer">
+                <Mail
+                  size={18}
+                  className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
                 <span className="relative">
                   info@brandbasecapsule.com
@@ -102,10 +109,10 @@ const Footer = () => {
               </li>
 
               {/* Phone */}
-              <li className="flex items-center gap-3 text-gray-500 text-sm group cursor-pointer">
-                <Phone 
-                  size={18} 
-                  className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors" 
+              <li className="flex items-center gap-3 text-gray-500 dark:text-gray-400 text-sm group cursor-pointer">
+                <Phone
+                  size={18}
+                  className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
                 <span className="relative">
                   +91-9892211456
@@ -122,17 +129,17 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Legal Links */}
             <div className="flex items-center gap-6">
-              <Link 
-                href="/terms" 
-                className="flex items-center gap-2 text-gray-500 hover:text-orange-400 transition-colors text-sm group"
+              <Link
+                href="/terms"
+                className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-orange-400 transition-colors text-sm group"
               >
                 <FileText size={16} className="group-hover:text-orange-400 transition-colors" />
                 <span>Terms & Conditions</span>
               </Link>
               <div className="h-4 w-px bg-gray-300"></div>
-              <Link 
-                href="/privacy-policy" 
-                className="flex items-center gap-2 text-gray-500 hover:text-orange-400 transition-colors text-sm group"
+              <Link
+                href="/privacy-policy"
+                className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-orange-400 transition-colors text-sm group"
               >
                 <Shield size={16} className="group-hover:text-orange-400 transition-colors" />
                 <span>Privacy Policy</span>
@@ -141,7 +148,7 @@ const Footer = () => {
 
             {/* Copyright */}
             <div className="text-center md:text-right">
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 dark:text-gray-400 text-sm">
                 © 2025 Brandbase Capsule. All rights reserved.
               </p>
               <p className="text-gray-400 text-xs mt-1">
@@ -160,8 +167,8 @@ const Footer = () => {
 const FooterLink = ({ children, href = "#" }) => {
   return (
     <li>
-      <Link 
-        href={href} 
+      <Link
+        href={href}
         className="text-gray-800 dark:text-gray-200 text-sm inline-block relative group"
       >
         <span className="group-hover:text-orange-400 transition-colors duration-300">
@@ -176,9 +183,9 @@ const FooterLink = ({ children, href = "#" }) => {
 // Social Icon Component
 const SocialIcon = ({ icon }) => {
   return (
-    <a 
-      href="#" 
-      className="bg-white dark:bg-black border border-gray-100 p-2.5 rounded-xl text-gray-500 shadow-sm 
+    <a
+      href="#"
+      className="bg-white dark:bg-zinc-900 dark:bg-black border border-gray-100 p-2.5 rounded-xl text-gray-500 dark:text-gray-400 shadow-sm 
                  hover:text-orange-400 hover:shadow-md hover:-translate-y-1 
                  transition-all duration-300"
     >

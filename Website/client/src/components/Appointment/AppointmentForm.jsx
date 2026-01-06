@@ -24,8 +24,8 @@ export default function AppointmentForm({
   return (
     <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
       {/* Date & Time Section */}
-      <div className="bg-white dark:bg-black rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6 text-center font-sans">Select Date & Time</h2>
+      <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 text-center font-sans">Select Date & Time</h2>
 
         <div className="flex justify-center">
           <DatePicker
@@ -47,7 +47,7 @@ export default function AppointmentForm({
 
         {selectedDate && (
           <div className="mt-8">
-            <h3 className="font-medium text-center text-gray-900 dark:text-gray-100 mb-4 font-semibold">
+            <h3 className="font-medium text-center text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4 font-semibold">
               Available Time Slots for {format(selectedDate, "MMMM d, yyyy")}
             </h3>
             {timeSlots.length > 0 ? (
@@ -59,7 +59,7 @@ export default function AppointmentForm({
                     className={`p-3 border rounded-lg text-sm font-medium transition-all duration-200 ${
                       selectedTime === slot
                         ? "bg-[#FF6600] text-white border-[#FF6600] shadow-lg"
-                        : "bg-white dark:bg-black hover:bg-orange-50 hover:text-[#FF6600] hover:border-[#FF6600] border-gray-300"
+                        : "bg-white dark:bg-zinc-900 dark:bg-black hover:bg-orange-50 hover:text-[#FF6600] hover:border-[#FF6600] border-gray-300"
                     }`}
                   >
                     {slot}
@@ -68,7 +68,7 @@ export default function AppointmentForm({
               </div>
             ) : (
               <div className="text-center py-4">
-                <p className="text-gray-500">No time slots available for this date.</p>
+                <p className="text-gray-500 dark:text-gray-400">No time slots available for this date.</p>
                 <p className="text-sm text-gray-400 mt-1">Please select another date.</p>
               </div>
             )}
@@ -77,16 +77,16 @@ export default function AppointmentForm({
       </div>
 
       {/* Contact Form Section */}
-      <div className="bg-white dark:bg-black rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6 font-sans">Contact Information</h2>
+      <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-2xl shadow-lg p-6 sm:p-8 border border-orange-100">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 font-sans">Contact Information</h2>
 
         <div className="space-y-6">
           {/* Personal Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Personal Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b border-orange-100 pb-2">Personal Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name *</label>
                 <input 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.firstName}
@@ -95,7 +95,7 @@ export default function AppointmentForm({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name *</label>
                 <input 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.lastName}
@@ -106,7 +106,7 @@ export default function AppointmentForm({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address *</label>
               <input 
                 type="email"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
@@ -117,7 +117,7 @@ export default function AppointmentForm({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Organization *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Organization *</label>
               <input 
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                 value={formData.organization}
@@ -129,10 +129,10 @@ export default function AppointmentForm({
 
           {/* Location Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Location Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b border-orange-100 pb-2">Location Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Region *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Region *</label>
                 <select 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.region}
@@ -148,7 +148,7 @@ export default function AppointmentForm({
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Country *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Country *</label>
                 <input 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.country}
@@ -160,7 +160,7 @@ export default function AppointmentForm({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">State / Province *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">State / Province *</label>
                 <input 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.state}
@@ -169,7 +169,7 @@ export default function AppointmentForm({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">City *</label>
                 <input 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.city}
@@ -182,10 +182,10 @@ export default function AppointmentForm({
 
           {/* Business Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Business Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b border-orange-100 pb-2">Business Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Industry *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Industry *</label>
                 <select 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.industry}
@@ -203,7 +203,7 @@ export default function AppointmentForm({
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Service Category *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Service Category *</label>
                 <select 
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.category}
@@ -227,7 +227,7 @@ export default function AppointmentForm({
             {/* Conditional Other Inputs */}
             {formData.industry === "other" && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Specify Your Industry *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Specify Your Industry *</label>
                 <input
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.otherIndustry}
@@ -239,7 +239,7 @@ export default function AppointmentForm({
 
             {formData.category === "other" && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Specify Your Category *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Specify Your Category *</label>
                 <input
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                   value={formData.otherCategory}
@@ -252,9 +252,9 @@ export default function AppointmentForm({
 
           {/* Project Details */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Project Details</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b border-orange-100 pb-2">Project Details</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">How can we help you? *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">How can we help you? *</label>
               <textarea 
                 className="w-full p-3 border border-gray-300 rounded-lg min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent transition-all duration-300"
                 value={formData.message}
@@ -262,13 +262,13 @@ export default function AppointmentForm({
                 maxLength={1500}
                 disabled={loading}
               />
-              <p className="text-xs text-gray-500 mt-1">{formData.message.length}/1500 characters</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{formData.message.length}/1500 characters</p>
             </div>
           </div>
 
           {/* Consent Section */}
           <div className="space-y-4 pt-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 border-b border-orange-100 pb-2">Consent & Preferences</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b border-orange-100 pb-2">Consent & Preferences</h3>
             <div className="space-y-3">
               <label className="flex items-start gap-3">
                 <input 
@@ -278,7 +278,7 @@ export default function AppointmentForm({
                   onChange={(e) => handleChange("consent", e.target.checked)}
                   disabled={loading}
                 />
-                <span className="text-sm text-gray-700">I consent to data processing and agree to the terms *</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">I consent to data processing and agree to the terms *</span>
               </label>
               <label className="flex items-start gap-3">
                 <input 
@@ -288,7 +288,7 @@ export default function AppointmentForm({
                   onChange={(e) => handleChange("marketing", e.target.checked)}
                   disabled={loading}
                 />
-                <span className="text-sm text-gray-700">I want to receive updates about exhibition design trends</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">I want to receive updates about exhibition design trends</span>
               </label>
             </div>
           </div>
@@ -300,7 +300,7 @@ export default function AppointmentForm({
             className={`w-full py-4 mt-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center ${
               isFormValid() && !loading
                 ? "bg-[#FF6600] text-white hover:bg-orange-600 hover:shadow-lg transform hover:scale-105" 
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gray-300 text-gray-500 dark:text-gray-400 cursor-not-allowed"
             }`}
           >
             {loading ? (
@@ -316,7 +316,7 @@ export default function AppointmentForm({
             )}
           </button>
 
-          <p className="text-xs text-gray-500 text-center mt-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-4">
             By booking this appointment, you agree to our{" "}
             <a href="/privacy-policy" className="text-[#FF6600] hover:text-orange-600 underline">Privacy Policy</a>.
           </p>

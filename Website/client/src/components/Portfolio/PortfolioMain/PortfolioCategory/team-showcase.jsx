@@ -79,7 +79,7 @@ const ServicesShowcase = ({
   };
 
   return (
-    <section className="w-full bg-white dark:bg-black text-black dark:text-white py-16 md:py-24 lg:py-32 px-4 md:px-8 lg:px-16">
+    <section className="w-full bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white py-16 md:py-24 lg:py-32 px-4 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16 md:mb-20 lg:mb-24">
@@ -88,11 +88,11 @@ const ServicesShowcase = ({
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
-            <span className="text-gray-900 dark:text-gray-100">Transformative </span>
+            <span className="text-gray-900 dark:text-gray-100 dark:text-gray-100">Transformative </span>
             <span className="text-[#FF6600]">Digital Solutions</span>
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-10">
             {description}
           </p>
           
@@ -136,20 +136,20 @@ const ServicesShowcase = ({
                   )}>
                     {/* Service Badge */}
                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-white dark:bg-black text-gray-900 dark:text-gray-100 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                      <div className="bg-white dark:bg-zinc-900 dark:bg-black text-gray-900 dark:text-gray-100 dark:text-gray-100 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
                         Service {index + 1}
                       </div>
                     </div>
 
                     {/* Service Content */}
                     <div className="text-center z-10 mt-6">
-                      <h3 className="font-bold text-xl lg:text-2xl text-gray-900 dark:text-gray-100 mb-2 tracking-tight">
+                      <h3 className="font-bold text-xl lg:text-2xl text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2 tracking-tight">
                         {service.name}
                       </h3>
                       <p className="text-[#FF6600] font-semibold text-sm md:text-base mb-3">
                         {service.role}
                       </p>
-                      <p className="text-gray-600 text-sm md:text-base mb-6">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-6">
                         {service.description}
                       </p>
                     </div>
@@ -180,7 +180,7 @@ const ServicesShowcase = ({
 
         {/* CTA Section */}
         <div className="text-center mt-16 md:mt-20">
-          <p className="text-gray-700 text-lg md:text-xl mb-8">
+          <p className="text-gray-700 dark:text-gray-300 text-lg md:text-xl mb-8">
             Ready to transform your digital presence?
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
@@ -193,7 +193,7 @@ const ServicesShowcase = ({
             </Link>
             <Link href="/case-studies">
               <button
-                className="rounded-lg border-2 border-gray-300 text-gray-700 hover:border-[#FF6600] hover:text-[#FF6600] px-10 py-4 text-lg font-bold transition-all duration-300 bg-transparent hover:bg-white dark:bg-black"
+                className="rounded-lg border-2 border-gray-300 text-gray-700 dark:text-gray-300 hover:border-[#FF6600] hover:text-[#FF6600] px-10 py-4 text-lg font-bold transition-all duration-300 bg-transparent hover:bg-white dark:bg-zinc-900 dark:bg-black"
               >
                 View Case Studies
               </button>

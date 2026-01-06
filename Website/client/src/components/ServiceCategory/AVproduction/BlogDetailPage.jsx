@@ -247,7 +247,7 @@ export default function BlogDetailPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:bg-black">
       {/* Floating top-center black box */}
       <div
         ref={boxRef}
@@ -303,7 +303,7 @@ export default function BlogDetailPage() {
                       <button
                         onClick={() => goToSection(s.index)}
                         className={`w-full text-left text-sm block px-3 py-2 rounded-md transition-colors duration-150
-                          ${s.index === activeIndex ? "bg-white dark:bg-black/10 text-white font-semibold" : "text-gray-300 hover:bg-white dark:bg-black/5"}
+                          ${s.index === activeIndex ? "bg-white dark:bg-zinc-900 dark:bg-black/10 text-white font-semibold" : "text-gray-300 hover:bg-white dark:bg-zinc-900 dark:bg-black/5"}
                         `}
                       >
                         {s.title}
@@ -316,13 +316,13 @@ export default function BlogDetailPage() {
 
             {/* small footer: share icons */}
             <div className="pt-2 px-2 pb-3 border-t border-gray-800 flex items-center gap-2">
-              <button title="Share on Twitter" className="p-1 rounded hover:bg-white dark:bg-black/5">
+              <button title="Share on Twitter" className="p-1 rounded hover:bg-white dark:bg-zinc-900 dark:bg-black/5">
                 <Twitter size={16} className="text-gray-300" />
               </button>
-              <button title="Share on LinkedIn" className="p-1 rounded hover:bg-white dark:bg-black/5">
+              <button title="Share on LinkedIn" className="p-1 rounded hover:bg-white dark:bg-zinc-900 dark:bg-black/5">
                 <Linkedin size={16} className="text-gray-300" />
               </button>
-              <button title="Share via Email" className="p-1 rounded hover:bg-white dark:bg-black/5">
+              <button title="Share via Email" className="p-1 rounded hover:bg-white dark:bg-zinc-900 dark:bg-black/5">
                 <Mail size={16} className="text-gray-300" />
               </button>
               <div className="ml-auto text-xs text-gray-400">Progress inside article</div>
@@ -338,10 +338,10 @@ export default function BlogDetailPage() {
           <h1 className="text-5xl font-sans font-bold text-black dark:text-white mb-4 leading-tight">
             {metadata.title}
           </h1>
-          <p className="text-gray-600 text-base mb-4">
+          <p className="text-gray-600 dark:text-gray-300 text-base mb-4">
             {metadata.description}
           </p>
-          <div className="flex items-center gap-6 text-sm text-gray-500">
+          <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
             <span>by {metadata.author.name}</span>
             <span>•</span>
             <span>{metadata.readTime}</span>
@@ -373,12 +373,12 @@ export default function BlogDetailPage() {
                 <section key={section.id} id={section.id} className="mb-12">
                   <h2 className="text-2xl font-sans font-bold text-black dark:text-white mb-4">{section.title}</h2>
                   {section.content.map((paragraph, idx) => (
-                    <p key={idx} className="text-gray-700 leading-relaxed mb-4">
+                    <p key={idx} className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                       {paragraph}
                     </p>
                   ))}
                   {section.listItems && (
-                    <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4">
                       {section.listItems.map((item, idx) => (
                         <li key={idx}>{item}</li>
                       ))}
@@ -408,13 +408,13 @@ export default function BlogDetailPage() {
               <h3 className="text-lg font-bold text-black dark:text-white mb-6">Share post</h3>
               <div className="flex gap-4">
                 <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share on Twitter">
-                  <Twitter size={18} className="text-gray-700" />
+                  <Twitter size={18} className="text-gray-700 dark:text-gray-300" />
                 </button>
                 <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share on LinkedIn">
-                  <Linkedin size={18} className="text-gray-700" />
+                  <Linkedin size={18} className="text-gray-700 dark:text-gray-300" />
                 </button>
                 <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share via Email">
-                  <Mail size={18} className="text-gray-700" />
+                  <Mail size={18} className="text-gray-700 dark:text-gray-300" />
                 </button>
               </div>
             </div>
@@ -430,12 +430,12 @@ export default function BlogDetailPage() {
                 />
                 <div className="flex-1">
                   <h4 className="font-bold text-black dark:text-white mb-1">{metadata.author.name}</h4>
-                  <p className="text-sm text-gray-600 mb-3">{metadata.author.role}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{metadata.author.role}</p>
                   <div className="flex gap-3">
-                    <a href={metadata.author.twitter} className="text-gray-500 hover:text-black dark:text-white transition">
+                    <a href={metadata.author.twitter} className="text-gray-500 dark:text-gray-400 hover:text-black dark:text-white transition">
                       <Twitter size={16} />
                     </a>
-                    <a href={metadata.author.linkedin} className="text-gray-500 hover:text-black dark:text-white transition">
+                    <a href={metadata.author.linkedin} className="text-gray-500 dark:text-gray-400 hover:text-black dark:text-white transition">
                       <Linkedin size={16} />
                     </a>
                   </div>
@@ -458,7 +458,7 @@ export default function BlogDetailPage() {
                       <h4 className="font-bold text-black dark:text-white text-sm mb-2 leading-tight">
                         How modern work is reshaping modern lifestyles
                       </h4>
-                      <p className="text-xs text-gray-500">by Samantha Grant | 3 min read</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">by Samantha Grant | 3 min read</p>
                     </div>
                   </article>
                 </div>
@@ -473,13 +473,13 @@ export default function BlogDetailPage() {
                   <h4 className="font-bold text-black dark:text-white text-sm mb-2">
                     How e-commerce is reshaping global shopping trends
                   </h4>
-                  <p className="text-xs text-gray-500">by Erica Johnson | 7 min read</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">by Erica Johnson | 7 min read</p>
                 </article>
                 <article className="cursor-pointer hover:opacity-75 transition">
                   <h4 className="font-bold text-black dark:text-white text-sm mb-2">
                     Exploring minimalist living: a beginner's perspective
                   </h4>
-                  <p className="text-xs text-gray-500">by Sarah Winters | 4 min read</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">by Sarah Winters | 4 min read</p>
                 </article>
               </div>
             </div>

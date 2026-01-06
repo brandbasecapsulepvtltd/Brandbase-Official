@@ -40,7 +40,7 @@ const ContactInfo = ({ contactData }) => {
         <h2 className="text-3xl font-bold mb-2">
           Ready to <span className="text-[#FF6600]">Connect?</span>
         </h2>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-300">
           {contactData.contactInfo.description}
         </p>
       </div>
@@ -50,13 +50,13 @@ const ContactInfo = ({ contactData }) => {
         {contactData.contactInfo.items.map((item, index) => (
           <div
             key={index}
-            className="flex items-start gap-4 bg-white dark:bg-black p-6 rounded-xl shadow hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]"
+            className="flex items-start gap-4 bg-white dark:bg-zinc-900 dark:bg-black p-6 rounded-xl shadow hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]"
           >
             <div className="bg-[#FFF0E6] p-3 rounded-xl flex-shrink-0">
               {getIcon(item.icon)}
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-lg mb-1 text-gray-800 dark:text-gray-200">{item.title}</h3>
+              <h3 className="font-semibold text-lg mb-1 text-gray-800 dark:text-gray-200 dark:text-gray-200">{item.title}</h3>
               {item.href ? (
                 <a 
                   href={item.href} 
@@ -66,7 +66,7 @@ const ContactInfo = ({ contactData }) => {
                 </a>
               ) : (
                 <p 
-                  className="text-gray-600"
+                  className="text-gray-600 dark:text-gray-300"
                   dangerouslySetInnerHTML={{ __html: item.content }}
                 />
               )}

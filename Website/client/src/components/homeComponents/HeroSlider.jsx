@@ -109,10 +109,10 @@ const HeroSlider = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black">
+      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-zinc-900 dark:bg-black">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading hero section...</p>
+          <p className="text-gray-600 dark:text-gray-300">Loading hero section...</p>
         </div>
       </div>
     );
@@ -121,11 +121,11 @@ const HeroSlider = () => {
   // Show error state
   if (error && slides.length === 0) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">Unable to Load Content</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200 mb-2">Unable to Load Content</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
@@ -140,11 +140,11 @@ const HeroSlider = () => {
   // If no slides, show empty state
   if (slides.length === 0) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">📷</div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">No Hero Content</h2>
-          <p className="text-gray-600">Please add slides from the admin panel.</p>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200 mb-2">No Hero Content</h2>
+          <p className="text-gray-600 dark:text-gray-300">Please add slides from the admin panel.</p>
         </div>
       </div>
     );
@@ -199,7 +199,7 @@ const HeroSlider = () => {
   );
 
   return (
-    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-black font-sans`}>
+    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-zinc-900 dark:bg-black font-sans`}>
       {/* Background Video */}
 
       {/*
@@ -236,7 +236,7 @@ const HeroSlider = () => {
               {currentSlide.title}
             </h1>
 
-            <p className="text-gray-600 text-base leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
               {currentSlide.subtext}
             </p>
 
@@ -313,7 +313,7 @@ const HeroSlider = () => {
 
               <div className="w-25 h-1 bg-orange-600 mb-6"></div>
 
-              <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed mb-10">
+              <p className="text-gray-800 dark:text-gray-200 dark:text-gray-200 text-lg leading-relaxed mb-10">
                 {currentSlide.subtext}
               </p>
 

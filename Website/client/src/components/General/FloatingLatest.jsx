@@ -53,7 +53,7 @@ const positionStyles = [
 function CardContent({ contentType }) {
   const data = cardData[contentType];
   return (
-    <div className="flex h-full w-full flex-col gap-3 bg-white dark:bg-black">
+    <div className="flex h-full w-full flex-col gap-3 bg-white dark:bg-zinc-900 dark:bg-black">
       <div className="flex h-[140px] w-full items-center justify-center overflow-hidden rounded-xl outline outline-black/10 dark:outline-white/10">
         <img
           src={data.image || "/placeholder.svg"}
@@ -63,8 +63,8 @@ function CardContent({ contentType }) {
       </div>
       <div className="flex w-full items-center justify-between gap-2 px-2 pb-2">
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">{data.title}</span>
-          <span className="truncate text-xs text-gray-700">{data.description}</span>
+          <span className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100">{data.title}</span>
+          <span className="truncate text-xs text-gray-700 dark:text-gray-300">{data.description}</span>
         </div>
         <button
   onClick={() => window.location.href = data.link}
@@ -116,7 +116,7 @@ const FloatingLatest = () => {
                       exit={{ y: 200, scale: 1, opacity: 0, zIndex: 10 }}
                       transition={{ type: "spring", duration: 0.6, bounce: 0.2 }}
                       style={{ zIndex: 3 - index }}
-                      className="absolute bottom-0 left-0 right-0 flex h-[220px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-gray-200 bg-white dark:bg-black p-2 shadow-2xl dark:border-gray-800 dark:bg-zinc-900"
+                      className="absolute bottom-0 left-0 right-0 flex h-[220px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black p-2 shadow-2xl dark:border-gray-800 dark:bg-zinc-900"
                     >
                       <CardContent contentType={card.contentType} />
                     </motion.div>
@@ -129,7 +129,7 @@ const FloatingLatest = () => {
             <div className="z-20 -mt-4">
               <button
                 onClick={handleAnimate}
-                className="rounded-full border border-gray-200 bg-white dark:bg-black px-4 py-1.5 text-xs font-bold shadow-sm transition-transform hover:scale-105 active:scale-95 dark:border-gray-700 dark:bg-zinc-800 dark:text-white"
+                className="rounded-full border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black px-4 py-1.5 text-xs font-bold shadow-sm transition-transform hover:scale-105 active:scale-95 dark:border-gray-700 dark:bg-zinc-800 dark:text-white"
               >
                 Next Resource
               </button>
@@ -141,7 +141,7 @@ const FloatingLatest = () => {
       {/* Floating Globe Icon Button */}
       <button
         onClick={toggleOpen}
-        className={`group relative flex h-17 w-17 items-center justify-center rounded-full bg-white dark:bg-black shadow-xl transition-all duration-300 hover:scale-110 active:scale-90 ${
+        className={`group relative flex h-17 w-17 items-center justify-center rounded-full bg-white dark:bg-zinc-900 dark:bg-black shadow-xl transition-all duration-300 hover:scale-110 active:scale-90 ${
           isOpen ? 'ring-2 ring-orange-500' : ''
         }`}
         aria-label="Latest Resources"

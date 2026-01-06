@@ -7,13 +7,13 @@ const ServiceDetailHero = () => {
   const themeColor = "#566452"; 
 
   return (
-    <section className="w-full bg-white dark:bg-black py-16 lg:py-24 font-sans">
+    <section className="w-full bg-white dark:bg-zinc-900 dark:bg-black py-16 lg:py-24 font-sans">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
           
           {/* Left Column: Text Content */}
           <div className="w-full lg:w-1/2 space-y-8">
-            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight text-gray-800 dark:text-gray-200">
+            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] tracking-tight text-gray-800 dark:text-gray-200 dark:text-gray-200">
               <span className="block font-normal">Treat your pet</span>
               <span className="block font-normal">to a luxurious</span>
               <span style={{ color: themeColor }} className="block font-medium">
@@ -22,7 +22,7 @@ const ServiceDetailHero = () => {
               <span className="block font-normal">experience</span>
             </h1>
 
-            <p className="text-gray-500 text-lg md:text-xl max-w-md leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
               Luxury pet grooming tailored to pamper your furry companion with care, style, and comfort.
             </p>
 
@@ -64,7 +64,7 @@ const ServiceDetailHero = () => {
                     />
                   ))}
                 </div>
-                <span className="text-sm font-medium text-gray-700 ml-1">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-1">
                   +456 Happy Pets
                 </span>
               </div>

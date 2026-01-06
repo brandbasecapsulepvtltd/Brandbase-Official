@@ -50,7 +50,7 @@ export default function ServiceSlider() {
       aria-label="Services marquee slider"
       role="region"
     >
-      <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600] bg-white dark:bg-black">
+      <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600] bg-white dark:bg-zinc-900 dark:bg-black">
         <motion.div
           ref={scope}
           onMouseEnter={() => setIsHovered(true)}

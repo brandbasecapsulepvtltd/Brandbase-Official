@@ -57,9 +57,9 @@ const OtherServicesAndCalculator = () => {
   return (
     <div className="max-w-6xl mx-auto space-y-8 px-4 md:px-0 py-10">
       {/* Services Dropdown */}
-      <div className="bg-white dark:bg-black border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="bg-white dark:bg-zinc-900 dark:bg-black border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4 text-gray-800 dark:text-gray-200">
+          <div className="flex items-center gap-4 text-gray-800 dark:text-gray-200 dark:text-gray-200">
             <FiExternalLink className="h-10 w-10 text-orange-600" />
             <div>
               <h3 className="text-2xl font-bold mb-1">
@@ -93,17 +93,17 @@ const OtherServicesAndCalculator = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="cursor-pointer group border border-gray-100 hover:border-orange-600 bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition-all"
+                  className="cursor-pointer group border border-gray-100 hover:border-orange-600 bg-gray-50 dark:bg-zinc-900 rounded-lg p-6 shadow-sm hover:shadow-md transition-all"
                   // ❌ OLD: onClick={() => navigate(service.link)}
                   onClick={() => router.push(service.link)} // ✅ NEW: Use router.push()
                 >
                   <div className="flex items-center gap-4 mb-3 text-orange-600">
                     <service.icon className="text-3xl group-hover:text-orange-700 transition" />
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 group-hover:text-orange-600 transition">
+                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-200 group-hover:text-orange-600 transition">
                       {service.title}
                     </h4>
                   </div>
-                  <p className="text-sm text-gray-700">{service.description}</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">{service.description}</p>
                 </motion.div>
               ))}
             </motion.div>

@@ -43,7 +43,7 @@ export default function RecentWork() {
   return (
     <section 
       aria-labelledby="recent-work-heading"
-      className="py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white dark:bg-black"
+      className="py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white dark:bg-zinc-900 dark:bg-black"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}

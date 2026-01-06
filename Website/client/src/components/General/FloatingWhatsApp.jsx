@@ -52,8 +52,8 @@ const FloatingWhatsApp = () => {
 
       {/* QR Code Box */}
       {showQR && !isMobile && (
-        <div className="fixed bottom-30 right-6 z-50 w-64 p-4 bg-white dark:bg-black rounded-2xl shadow-2xl border border-gray-200">
-          <h4 className="text-lg font-semibold mb-3 text-center text-gray-800 dark:text-gray-200">
+        <div className="fixed bottom-30 right-6 z-50 w-64 p-4 bg-white dark:bg-zinc-900 dark:bg-black rounded-2xl shadow-2xl border border-gray-200">
+          <h4 className="text-lg font-semibold mb-3 text-center text-gray-800 dark:text-gray-200 dark:text-gray-200">
             Scan to Chat
           </h4>
           <div className="flex justify-center mb-4">

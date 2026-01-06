@@ -474,7 +474,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen text-gray-900 dark:text-gray-100 mt-15 bg-white dark:bg-black relative">
+    <div className="min-h-screen text-gray-900 dark:text-gray-100 dark:text-gray-100 mt-15 bg-white dark:bg-zinc-900 dark:bg-black relative">
       {/* Hero Section with Globe Background */}
       <section className="relative text-black dark:text-white py-24 text-center px-4 overflow-hidden">
         {/* Globe Canvas Background 
@@ -502,7 +502,7 @@ const ContactPage = () => {
               )
             }}
           />
-          <p className="text-xl mb-8 text-gray-900 dark:text-gray-100">
+          <p className="text-xl mb-8 text-gray-900 dark:text-gray-100 dark:text-gray-100">
             {heroSection.description}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -516,26 +516,26 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Info & Form */}
-      <section className="py-20 px-4 bg-white dark:bg-black">
+      <section className="py-20 px-4 bg-white dark:bg-zinc-900 dark:bg-black">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
           {/* Contact Info */}
           <div>
             {/* Location Selector */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                 Select Office Location
               </label>
               <div className="relative">
                 <select
                   value={selectedLocation}
                   onChange={handleLocationChange}
-                  className="w-full bg-white dark:bg-black border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent appearance-none cursor-pointer transition-all duration-200 hover:border-gray-400"
+                  className="w-full bg-white dark:bg-zinc-900 dark:bg-black border border-gray-300 rounded-xl px-4 py-3 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:border-transparent appearance-none cursor-pointer transition-all duration-200 hover:border-gray-400"
                 >
                   <option value="india-mumbai">India (Mumbai) - Headquarters</option>
                   <option value="singapore">Singapore - Regional Hub</option>
                   <option value="india-kolkata">India (Kolkata) - Eastern Office</option>
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 dark:text-gray-300">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -547,10 +547,10 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white dark:bg-black rounded-3xl shadow-lg p-8 space-y-6">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-3xl shadow-lg p-8 space-y-6">
             <div>
               <h3 className="text-2xl font-bold mb-2">Send us a Message</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 Fill out the form below and we'll get back to you within 24 hours.
               </p>
             </div>
@@ -665,7 +665,7 @@ const ContactPage = () => {
                   required
                   placeholder="Describe your project or inquiry..."
                 ></textarea>
-                <div className="text-xs text-right text-gray-500 mt-1">
+                <div className="text-xs text-right text-gray-500 dark:text-gray-400 mt-1">
                   {formData.message.length}/1500
                 </div>
               </div>
@@ -680,7 +680,7 @@ const ContactPage = () => {
                     className="mt-1 text-[#FF6600] focus:ring-[#FF6600]"
                     required
                   />
-                  <label className="text-sm text-gray-600">
+                  <label className="text-sm text-gray-600 dark:text-gray-300">
                     I consent to processing of my personal data entered above for Mavenox to contact me. *
                   </label>
                 </div>
@@ -692,7 +692,7 @@ const ContactPage = () => {
                     onChange={handleInputChange}
                     className="mt-1 text-[#FF6600] focus:ring-[#FF6600]"
                   />
-                  <label className="text-sm text-gray-600">
+                  <label className="text-sm text-gray-600 dark:text-gray-300">
                     I would like to receive details about products, services, and events from Mavenox.
                   </label>
                 </div>
@@ -718,7 +718,7 @@ const ContactPage = () => {
                 )}
               </button>
 
-              <div className="text-xs text-gray-500 border-t pt-4">
+              <div className="text-xs text-gray-500 dark:text-gray-400 border-t pt-4">
                 {/*
                                 <p className="mb-2">
                   <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>

@@ -11,7 +11,7 @@ const CallToAction1 = () => {
   return (
     <section 
       aria-labelledby="cta-heading"
-      className="bg-white dark:bg-black min-h-screen flex items-center justify-center text-black dark:text-white font-anton"
+      className="bg-white dark:bg-zinc-900 dark:bg-black min-h-screen flex items-center justify-center text-black dark:text-white font-anton"
     >
       <div className="text-center">
         {/* Headline */}
@@ -43,7 +43,7 @@ const CallToAction1 = () => {
 
           {/* (WE'RE READY!) */}
           <span 
-            className="text-gray-900 dark:text-gray-100 text-xs md:text-lg mt-12 md:mt-24"
+            className="text-gray-900 dark:text-gray-100 dark:text-gray-100 text-xs md:text-lg mt-12 md:mt-24"
             aria-label="We're ready to help with your project"
           >
             (WE'RE READY!)

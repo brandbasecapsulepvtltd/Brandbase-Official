@@ -53,7 +53,7 @@ export function WorldMap({
   const fullCycleDuration = totalAnimationTime + pauseTime;
 
   return (
-    <div className="w-full aspect-[2/1] md:aspect-[2.5/1] lg:aspect-[2/1] dark:bg-black bg-white dark:bg-black rounded-lg relative font-sans overflow-hidden">
+    <div className="w-full aspect-[2/1] md:aspect-[2.5/1] lg:aspect-[2/1] dark:bg-black bg-white dark:bg-zinc-900 dark:bg-black rounded-lg relative font-sans overflow-hidden">
       <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none object-cover"
@@ -225,7 +225,7 @@ export function WorldMap({
                       className="block"
                     >
                       <div className="flex items-center justify-center h-full">
-                        <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white dark:bg-black/95 dark:bg-black/95 text-black dark:text-white dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white dark:bg-zinc-900 dark:bg-black/95 dark:bg-black/95 text-black dark:text-white dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
                           {dot.start.label}
                         </span>
                       </div>
@@ -294,7 +294,7 @@ export function WorldMap({
                       className="block"
                     >
                       <div className="flex items-center justify-center h-full">
-                        <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white dark:bg-black/95 dark:bg-black/95 text-black dark:text-white dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <span className="text-sm font-medium px-2 py-0.5 rounded-md bg-white dark:bg-zinc-900 dark:bg-black/95 dark:bg-black/95 text-black dark:text-white dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
                           {dot.end.label}
                         </span>
                       </div>
@@ -314,7 +314,7 @@ export function WorldMap({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute bottom-4 left-4 bg-white dark:bg-black/90 dark:bg-black/90 text-black dark:text-white dark:text-white px-3 py-2 rounded-lg text-sm font-medium backdrop-blur-sm sm:hidden border border-gray-200 dark:border-gray-700"
+            className="absolute bottom-4 left-4 bg-white dark:bg-zinc-900 dark:bg-black/90 dark:bg-black/90 text-black dark:text-white dark:text-white px-3 py-2 rounded-lg text-sm font-medium backdrop-blur-sm sm:hidden border border-gray-200 dark:border-gray-700"
           >
             {hoveredLocation}
           </motion.div>

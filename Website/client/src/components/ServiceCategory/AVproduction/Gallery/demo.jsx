@@ -108,7 +108,7 @@ const corporateVideoData = [
 const CircularGalleryDemo = () => {
   return (
     // This outer container provides the scrollable height
-    <div className="w-full bg-white dark:bg-black text-foreground" style={{ height: '500vh' }}>
+    <div className="w-full bg-white dark:bg-zinc-900 dark:bg-black text-foreground" style={{ height: '500vh' }}>
       {/* This inner container sticks to the top while scrolling */}
       <div className="w-full h-screen sticky top-0 flex flex-col items-center justify-center overflow-hidden">
         <div className="w-full h-full">

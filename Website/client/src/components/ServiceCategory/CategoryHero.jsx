@@ -26,19 +26,19 @@ const highlightText = (text, highlights) => {
 
 const CategoryHero = ({ data }) => {
   return (
-    <section className="py-16 md:py-15 lg:py-15 px-4 sm:px-6 lg:px-10 bg-white dark:bg-black overflow-hidden">
+    <section className="py-16 md:py-15 lg:py-15 px-4 sm:px-6 lg:px-10 bg-white dark:bg-zinc-900 dark:bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="space-y-6 md:space-y-8">
             <div className="space-y-4 md:space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 leading-tight">
                 {data.title}
               </h1>
               <div className="space-y-3">
-                <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+                <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
                   {highlightText(data.subtitle, data.highlightedText)}
                 </p>
-                <p className="text-base sm:text-lg text-gray-600 max-w-lg leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed">
                   {data.description}
                 </p>
               </div>

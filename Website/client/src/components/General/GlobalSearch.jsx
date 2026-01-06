@@ -104,7 +104,7 @@ const GlobalSearch = () => {
             {/* 1. NAVBAR TRIGGER */}
             <div 
                 onClick={() => setIsModalOpen(true)}
-                className="group flex items-center justify-between px-3 py-1.5 bg-white dark:bg-black rounded-xl cursor-pointer transition-all duration-200"
+                className="group flex items-center justify-between px-3 py-1.5 bg-white dark:bg-zinc-900 dark:bg-black rounded-xl cursor-pointer transition-all duration-200"
             >
                 <div className="flex items-center gap-2.5">
                     <Search className="w-6 h-6 text-orange-500 group-hover:text-orange-600" />
@@ -120,7 +120,7 @@ const GlobalSearch = () => {
                     />
 
                     {/* Search Container */}
-                    <div className="relative w-full max-w-2xl bg-white dark:bg-black rounded-[2rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300">
+                    <div className="relative w-full max-w-2xl bg-white dark:bg-zinc-900 dark:bg-black rounded-[2rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300">
                         
                         {/* Search Input Area */}
                         <div className="flex items-center px-6 py-5 border-b border-gray-50">
@@ -128,14 +128,14 @@ const GlobalSearch = () => {
                             <input
                                 autoFocus
                                 type="text"
-                                className="flex-1 ml-4 outline-none text-xl text-gray-800 dark:text-gray-200 placeholder-gray-400 font-medium"
+                                className="flex-1 ml-4 outline-none text-xl text-gray-800 dark:text-gray-200 dark:text-gray-200 placeholder-gray-400 font-medium"
                                 placeholder="What can we help you find?"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                             />
                             <button 
                                 onClick={() => setIsModalOpen(false)}
-                                className="p-2 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-600"
+                                className="p-2 bg-gray-50 dark:bg-zinc-900 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-600 dark:text-gray-300"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -150,12 +150,12 @@ const GlobalSearch = () => {
                                     className={`mr-8 py-3 text-sm font-bold transition-all border-b-2 ${
                                         activeTab === tab 
                                         ? 'border-blue-600 text-blue-600' 
-                                        : 'border-transparent text-gray-400 hover:text-gray-600'
+                                        : 'border-transparent text-gray-400 hover:text-gray-600 dark:text-gray-300'
                                     }`}
                                 >
                                     {tab}
                                     {(tab === 'Services' || tab === 'Blogs') && (
-                                        <span className="ml-1.5 text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-full group-hover:bg-blue-50">
+                                        <span className="ml-1.5 text-[10px] bg-gray-100 text-gray-500 dark:text-gray-400 px-1.5 py-0.5 rounded-full group-hover:bg-blue-50">
                                             {tab === 'Services' ? filteredServices.length : filteredBlogs.length}
                                         </span>
                                     )}
@@ -167,7 +167,7 @@ const GlobalSearch = () => {
                         <div className="max-h-[60vh] overflow-y-auto p-4 custom-scrollbar">
                             {query.length === 0 ? (
                                 <div className="py-12 text-center">
-                                    <p className="text-gray-500 font-medium">Search for services, articles, or categories</p>
+                                    <p className="text-gray-500 dark:text-gray-400 font-medium">Search for services, articles, or categories</p>
                                     <p className="text-xs text-gray-400 mt-1 italic">Try searching "Marketing" or "UI Design"</p>
                                 </div>
                             ) : (
@@ -182,7 +182,7 @@ const GlobalSearch = () => {
                                                 onClick={() => handleResultClick(serviceUrl)}
                                                 className="block no-underline text-inherit hover:no-underline"
                                             >
-                                                <div className="flex items-center p-3.5 hover:bg-gray-50 rounded-2xl group cursor-pointer transition-all border border-transparent hover:border-gray-100">
+                                                <div className="flex items-center p-3.5 hover:bg-gray-50 dark:bg-zinc-900 rounded-2xl group cursor-pointer transition-all border border-transparent hover:border-gray-100">
                                                     <div className="w-11 h-11 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 mr-4 shadow-sm group-hover:scale-110 transition-transform">
                                                         <Briefcase className="w-5 h-5" />
                                                     </div>
@@ -194,7 +194,7 @@ const GlobalSearch = () => {
                                                                 {service.category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                                                             </span>
                                                         </div>
-                                                        <p className="text-[15px] font-bold text-gray-800 dark:text-gray-200">
+                                                        <p className="text-[15px] font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200">
                                                             {highlightText(service.data?.hero?.headline || 'Service', query)}
                                                         </p>
                                                         {service.slug && (
@@ -203,7 +203,7 @@ const GlobalSearch = () => {
                                                             </p>
                                                         )}
                                                     </div>
-                                                    <div className="bg-white dark:bg-black p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
+                                                    <div className="bg-white dark:bg-zinc-900 dark:bg-black p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
                                                         <ChevronRight className="w-4 h-4 text-blue-500" />
                                                     </div>
                                                 </div>
@@ -221,7 +221,7 @@ const GlobalSearch = () => {
                                                 onClick={() => handleResultClick(blogUrl)}
                                                 className="block no-underline text-inherit hover:no-underline"
                                             >
-                                                <div className="flex items-center p-3.5 hover:bg-gray-50 rounded-2xl group cursor-pointer transition-all border border-transparent hover:border-gray-100">
+                                                <div className="flex items-center p-3.5 hover:bg-gray-50 dark:bg-zinc-900 rounded-2xl group cursor-pointer transition-all border border-transparent hover:border-gray-100">
                                                     <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mr-4 shadow-sm group-hover:scale-110 transition-transform">
                                                         <FileText className="w-5 h-5" />
                                                     </div>
@@ -233,7 +233,7 @@ const GlobalSearch = () => {
                                                                 {blog.metadata?.category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                                                             </span>
                                                         </div>
-                                                        <p className="text-[15px] font-bold text-gray-800 dark:text-gray-200">
+                                                        <p className="text-[15px] font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200">
                                                             {highlightText(blog.metadata?.title, query)}
                                                         </p>
                                                         {blog.metadata?.slug && (
@@ -242,7 +242,7 @@ const GlobalSearch = () => {
                                                             </p>
                                                         )}
                                                     </div>
-                                                    <div className="bg-white dark:bg-black p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
+                                                    <div className="bg-white dark:bg-zinc-900 dark:bg-black p-2 rounded-lg opacity-0 group-hover:opacity-100 shadow-sm border border-gray-100 transition-all">
                                                         <ChevronRight className="w-4 h-4 text-blue-500" />
                                                     </div>
                                                 </div>
@@ -254,7 +254,7 @@ const GlobalSearch = () => {
                                     {filteredServices.length === 0 && filteredBlogs.length === 0 && (
                                         <div className="py-20 text-center">
                                             <div className="text-4xl mb-4">🔍</div>
-                                            <p className="text-gray-900 dark:text-gray-100 font-bold">No results found for "{query}"</p>
+                                            <p className="text-gray-900 dark:text-gray-100 dark:text-gray-100 font-bold">No results found for "{query}"</p>
                                             <p className="text-gray-400 text-sm mt-1">Try different keywords or check your spelling.</p>
                                         </div>
                                     )}
@@ -263,15 +263,15 @@ const GlobalSearch = () => {
                         </div>
 
                         {/* Navigation Hints */}
-                        <div className="px-6 py-4 bg-gray-50/80 border-t border-gray-100 flex items-center gap-6 text-[11px] text-gray-400 font-bold tracking-tight">
+                        <div className="px-6 py-4 bg-gray-50 dark:bg-zinc-900/80 border-t border-gray-100 flex items-center gap-6 text-[11px] text-gray-400 font-bold tracking-tight">
                             <div className="flex items-center gap-1.5">
-                                <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">ESC</span> Close
+                                <span className="bg-white dark:bg-zinc-900 dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 dark:text-gray-300 shadow-sm">ESC</span> Close
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">↵</span> Select
+                                <span className="bg-white dark:bg-zinc-900 dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 dark:text-gray-300 shadow-sm">↵</span> Select
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 shadow-sm">↑↓</span> Navigate
+                                <span className="bg-white dark:bg-zinc-900 dark:bg-black px-1.5 py-0.5 rounded border border-gray-200 text-gray-600 dark:text-gray-300 shadow-sm">↑↓</span> Navigate
                             </div>
                         </div>
                     </div>

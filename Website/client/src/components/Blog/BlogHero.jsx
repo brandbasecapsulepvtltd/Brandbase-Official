@@ -18,21 +18,21 @@ const BlogHero = ({ sliderBlogs = [] }) => {
   // If no slider blogs, show empty state
   if (sliderBlogs.length === 0) {
     return (
-      <div className="mt-20 bg-white dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
+      <div className="mt-20 bg-white dark:bg-zinc-900 dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] leading-tight">
             The <span className="text-orange-600">Brandbase Capsule</span> Blog
           </h1>
         </div>
         <div className="text-center py-20">
-          <p className="text-gray-600">No featured articles available</p>
+          <p className="text-gray-600 dark:text-gray-300">No featured articles available</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-20 bg-white dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
+    <div className="mt-20 bg-white dark:bg-zinc-900 dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] leading-tight">
@@ -60,7 +60,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
 
                 {/* Text Content */}
                 <div className="lg:pr-8 py-2 flex flex-col justify-center">
-                  <span className="text-xs sm:text-sm uppercase tracking-wide text-gray-900 dark:text-gray-100 mb-2">
+                  <span className="text-xs sm:text-sm uppercase tracking-wide text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">
                     ARTICLE – {blog.metadata.readTime}
                   </span>
 
@@ -68,7 +68,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
                     {blog.metadata.title}
                   </h2>
 
-                  <p className="text-gray-700 mb-6">
+                  <p className="text-gray-700 dark:text-gray-300 mb-6">
                     {blog.metadata.description}
                   </p>
 
@@ -79,8 +79,8 @@ const BlogHero = ({ sliderBlogs = [] }) => {
                       className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-gray-400"
                     />
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-gray-100">{blog.metadata.author.name}</p>
-                      <p className="text-xs sm:text-sm text-gray-700">{blog.metadata.author.role}</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100">{blog.metadata.author.name}</p>
+                      <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">{blog.metadata.author.role}</p>
                     </div>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
             <button
               key={index}
               className={`w-2.5 h-2.5 rounded-full transition duration-300 ${
-                currentSlide === index ? "bg-gray-900" : "bg-gray-500 hover:bg-gray-300"
+                currentSlide === index ? "bg-gray-900" : "bg-gray-50 dark:bg-zinc-9000 hover:bg-gray-300"
               }`}
               onClick={() => goToSlide(index)}
             />

@@ -168,21 +168,21 @@ export default function AppointmentContent() {
 
   if (showSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black p-6 mt-15">
-        <div className="bg-white dark:bg-black rounded-3xl shadow-2xl p-12 text-center max-w-2xl w-full mx-auto border border-orange-100">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-zinc-900 dark:bg-black p-6 mt-15">
+        <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-3xl shadow-2xl p-12 text-center max-w-2xl w-full mx-auto border border-orange-100">
           <div className="w-20 h-20 mx-auto bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center mb-6 shadow-lg">
             <CheckCircle2 className="w-10 h-10" />
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Appointment Confirmed!</h2>
-          <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4">Appointment Confirmed!</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
             Your consultation has been scheduled successfully. We're excited to help you achieve your goals!
           </p>
           <div className="bg-orange-50 rounded-2xl p-6 mb-8 border border-orange-200">
             <p className="text-lg font-semibold text-orange-800 mb-2">Appointment Details</p>
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-300">
               {selectedDate && format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
             </p>
-            <p className="text-sm text-gray-600 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
               Confirmation sent to {formData.email}
             </p>
           </div>
@@ -220,15 +220,15 @@ export default function AppointmentContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:bg-black py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="text-center mt-15">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 leading-tight">
               Schedule Your <span className="text-orange-600">Consultation</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Book a personalized consultation with our experts in two simple steps.
             </p>
           </div>
@@ -253,10 +253,10 @@ export default function AppointmentContent() {
 
         <div className="flex justify-center mb-8">
           <div className="text-center">
-            <p className="text-lg font-semibold text-gray-700">
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
               {currentStep === 1 ? "Select Date & Time" : "Your Information"}
             </p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
               {currentStep === 1 ? "Choose your preferred consultation slot" : "Tell us about yourself and your project"}
             </p>
           </div>
@@ -278,12 +278,12 @@ export default function AppointmentContent() {
 
         {/* Step 1: Date & Time Selection */}
         {currentStep === 1 && (
-          <div className="bg-white dark:bg-black rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-8 h-8 text-orange-600" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Select Date & Time</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Select Date & Time</h2>
             </div>
 
             <div className="flex justify-center mb-8">
@@ -305,7 +305,7 @@ export default function AppointmentContent() {
 
             {selectedDate && (
               <div className="mt-8">
-                <h3 className="font-semibold text-center text-gray-900 dark:text-gray-100 mb-6 text-lg flex items-center justify-center gap-2">
+                <h3 className="font-semibold text-center text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 text-lg flex items-center justify-center gap-2">
                   <Clock className="w-5 h-5 text-orange-600" />
                   Available Time Slots for {format(selectedDate, "EEEE, MMMM d, yyyy")}
                 </h3>
@@ -318,7 +318,7 @@ export default function AppointmentContent() {
                       className={`p-3 border-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
                         selectedTime === slot
                           ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-500 shadow-lg scale-105"
-                          : "bg-white dark:bg-black text-gray-700 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                          : "bg-white dark:bg-zinc-900 dark:bg-black text-gray-700 dark:text-gray-300 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
                       } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {slot}
@@ -358,7 +358,7 @@ export default function AppointmentContent() {
 
         {/* Step 2: Contact Form */}
         {currentStep === 2 && (
-          <div className="bg-white dark:bg-black rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
+          <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-3xl shadow-2xl p-8 border border-orange-100 max-w-2xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <button
                 onClick={handleBackStep}
@@ -372,7 +372,7 @@ export default function AppointmentContent() {
                 <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2">
                   <User className="w-8 h-8 text-orange-600" />
                 </div>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Your Information</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">Your Information</h2>
               </div>
               <div className="w-20"></div> {/* Spacer for alignment */}
             </div>
@@ -398,7 +398,7 @@ export default function AppointmentContent() {
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input 
                     placeholder="First Name *" 
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.firstName}
                     onChange={(e) => handleChange("firstName", e.target.value)}
                     disabled={isLoading}
@@ -408,7 +408,7 @@ export default function AppointmentContent() {
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input 
                     placeholder="Last Name *" 
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.lastName}
                     onChange={(e) => handleChange("lastName", e.target.value)}
                     disabled={isLoading}
@@ -421,7 +421,7 @@ export default function AppointmentContent() {
                 <input 
                   type="email" 
                   placeholder="Email Address *" 
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                   disabled={isLoading}
@@ -432,7 +432,7 @@ export default function AppointmentContent() {
                 <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input 
                   placeholder="Organization *" 
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                   value={formData.organization}
                   onChange={(e) => handleChange("organization", e.target.value)}
                   disabled={isLoading}
@@ -443,7 +443,7 @@ export default function AppointmentContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <select 
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 appearance-none"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 appearance-none"
                     value={formData.region}
                     onChange={(e) => handleChange("region", e.target.value)}
                     disabled={isLoading}
@@ -458,7 +458,7 @@ export default function AppointmentContent() {
                 </div>
                 <div>
                   <select 
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 appearance-none"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 appearance-none"
                     value={formData.industry}
                     onChange={(e) => handleChange("industry", e.target.value)}
                     disabled={isLoading}
@@ -479,7 +479,7 @@ export default function AppointmentContent() {
                 <div>
                   <input
                     placeholder="Please specify your industry *"
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.otherIndustry}
                     onChange={(e) => handleChange("otherIndustry", e.target.value)}
                     disabled={isLoading}
@@ -489,7 +489,7 @@ export default function AppointmentContent() {
 
               <div>
                 <select 
-                  className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 appearance-none"
+                  className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 appearance-none"
                   value={formData.category}
                   onChange={(e) => handleChange("category", e.target.value)}
                   disabled={isLoading}
@@ -510,7 +510,7 @@ export default function AppointmentContent() {
                 <div>
                   <input
                     placeholder="Please specify your category *"
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.otherCategory}
                     onChange={(e) => handleChange("otherCategory", e.target.value)}
                     disabled={isLoading}
@@ -522,14 +522,14 @@ export default function AppointmentContent() {
                 <MessageCircle className="absolute left-3 top-4 text-gray-400 w-5 h-5" />
                 <textarea 
                   placeholder="How can we help you? Tell us about your project... *" 
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 resize-none"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 resize-none"
                   rows="4"
                   value={formData.message}
                   onChange={(e) => handleChange("message", e.target.value)}
                   maxLength={1500}
                   disabled={isLoading}
                 />
-                <div className="text-right text-sm text-gray-500 mt-2">
+                <div className="text-right text-sm text-gray-500 dark:text-gray-400 mt-2">
                   {formData.message.length}/1500 characters
                 </div>
               </div>
@@ -539,7 +539,7 @@ export default function AppointmentContent() {
                   <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input 
                     placeholder="Country *" 
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.country}
                     onChange={(e) => handleChange("country", e.target.value)}
                     disabled={isLoading}
@@ -548,7 +548,7 @@ export default function AppointmentContent() {
                 <div>
                   <input 
                     placeholder="State *" 
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.state}
                     onChange={(e) => handleChange("state", e.target.value)}
                     disabled={isLoading}
@@ -557,7 +557,7 @@ export default function AppointmentContent() {
                 <div>
                   <input 
                     placeholder="City *" 
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.city}
                     onChange={(e) => handleChange("city", e.target.value)}
                     disabled={isLoading}
@@ -568,7 +568,7 @@ export default function AppointmentContent() {
 
             {/* Consent Section */}
             <div className="mt-8 space-y-4">
-              <label className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-orange-300 transition-colors">
+              <label className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl border border-gray-200 hover:border-orange-300 transition-colors">
                 <input 
                   type="checkbox"
                   checked={formData.consent}
@@ -576,11 +576,11 @@ export default function AppointmentContent() {
                   disabled={isLoading}
                   className="mt-1 w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                 />
-                <span className="text-sm text-gray-700">
+                <span className="text-sm text-gray-700 dark:text-gray-300">
                   I consent to the processing of my personal data according to the <a href="/privacy-policy" className="text-orange-600 hover:text-orange-700 underline font-medium">Privacy Policy</a> *
                 </span>
               </label>
-              <label className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-orange-300 transition-colors">
+              <label className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl border border-gray-200 hover:border-orange-300 transition-colors">
                 <input 
                   type="checkbox"
                   checked={formData.marketing}
@@ -588,7 +588,7 @@ export default function AppointmentContent() {
                   disabled={isLoading}
                   className="mt-1 w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                 />
-                <span className="text-sm text-gray-700">
+                <span className="text-sm text-gray-700 dark:text-gray-300">
                   I would like to receive marketing communications and updates about new services and offers
                 </span>
               </label>
@@ -613,7 +613,7 @@ export default function AppointmentContent() {
               )}
             </button>
 
-            <p className="text-xs text-gray-500 mt-6 text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-6 text-center">
               Your information is secure and encrypted. We respect your privacy.
             </p>
           </div>

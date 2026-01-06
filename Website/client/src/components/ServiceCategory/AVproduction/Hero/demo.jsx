@@ -47,7 +47,7 @@ export default function Demotwo() {
             We’re an ad production agency helping businesses and brands turn their vision into reality through dynamic video content.
           </p>
 
-          <button className="mt-8 bg-white dark:bg-black text-black dark:text-white hover:bg-blue-600 hover:text-white transition-colors px-8 py-3 rounded-full font-bold text-sm tracking-widest">
+          <button className="mt-8 bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white hover:bg-blue-600 hover:text-white transition-colors px-8 py-3 rounded-full font-bold text-sm tracking-widest">
             ENQUIRE NOW
           </button>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const CtaSection = ({ data }) => {
   return (
-    <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-2">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:bg-black flex items-center justify-center p-2">
       <div className="max-w-3xl mx-auto text-center">
         
         {/* Main Heading */}
@@ -11,7 +11,7 @@ const CtaSection = ({ data }) => {
         </h1>
         
         {/* Subheading */}
-        <p className="text-xl md:text-2xl text-gray-700 mb-12">
+        <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12">
           {data.subheading}
         </p>
         
@@ -24,7 +24,7 @@ const CtaSection = ({ data }) => {
             px-8 py-4
             text-lg font-semibold
             border border-orange-500
-            text-gray-900 dark:text-gray-100
+            text-gray-900 dark:text-gray-100 dark:text-gray-100
             rounded-lg
             hover:bg-orange-500 hover:text-white
             transition-all duration-300

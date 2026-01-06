@@ -89,7 +89,7 @@ export const DraggableContainer = ({
         <motion.div className="h-dvh overflow-hidden">
           <motion.div
             className={cn(
-              "grid h-fit w-fit cursor-grab grid-cols-[repeat(2,1fr)] bg-white dark:bg-black active:cursor-grabbing will-change-transform",
+              "grid h-fit w-fit cursor-grab grid-cols-[repeat(2,1fr)] bg-white dark:bg-zinc-900 dark:bg-black active:cursor-grabbing will-change-transform",
               className,
             )}
             drag

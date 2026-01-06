@@ -6,7 +6,7 @@ function AboutUs() {
   return (
     <section 
       aria-labelledby="about-bcpl-heading"
-      className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
+      className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-zinc-900 dark:bg-black"
       itemScope
       itemType="https://schema.org/Organization"
     >
@@ -18,7 +18,7 @@ function AboutUs() {
           </div>
           <h1 
             id="about-bcpl-heading"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4 md:mb-6 px-2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4 md:mb-6 px-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -29,7 +29,7 @@ function AboutUs() {
             <span className="text-[#FF6600]">Excellence</span>
           </h1>
           <p 
-            className="text-base sm:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6"
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -51,15 +51,15 @@ function AboutUs() {
               transition={{ duration: 0.6 }}
               className="px-2 sm:px-0"
             >
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 md:mb-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-3 md:mb-4">
                 Your Trusted Partner in Event & Marketing Excellence
               </h2>
-              <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-4 md:mb-6" itemProp="description">
+              <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed mb-4 md:mb-6" itemProp="description">
                 BCPL specializes in comprehensive event management, strategic marketing solutions, and 
                 exhibition services. We create memorable brand experiences and deliver measurable results 
                 for clients globally through data-driven approaches.
               </p>
-              <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed">
                 Our expertise spans corporate events, international exhibitions, product launches, and 
                 integrated marketing campaigns. Each project receives personalized attention to ensure 
                 your brand stands out and achieves its strategic objectives.
@@ -73,14 +73,14 @@ function AboutUs() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-100" itemProp="areaServed" itemScope itemType="https://schema.org/Country">
+              <div className="text-center p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl border border-gray-100" itemProp="areaServed" itemScope itemType="https://schema.org/Country">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#FF6600] mb-1 md:mb-2">50+</div>
-                <div className="text-sm sm:text-base text-gray-600 font-medium">Countries Served</div>
+                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300 font-medium">Countries Served</div>
                 <meta itemProp="name" content="Global" />
               </div>
-              <div className="text-center p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <div className="text-center p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl border border-gray-100">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#FF6600] mb-1 md:mb-2">1000+</div>
-                <div className="text-sm sm:text-base text-gray-600 font-medium">Projects Completed</div>
+                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300 font-medium">Projects Completed</div>
               </div>
             </div>
           </div>
@@ -144,8 +144,8 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Innovation Driven</h3>
-            <p className="text-gray-600 text-sm">Cutting-edge event technology and creative marketing solutions tailored to your business goals</p>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Innovation Driven</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Cutting-edge event technology and creative marketing solutions tailored to your business goals</p>
           </article>
 
           <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -161,8 +161,8 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Global Network</h3>
-            <p className="text-gray-600 text-sm">International event execution across 50+ countries with local expertise</p>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Global Network</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">International event execution across 50+ countries with local expertise</p>
           </article>
 
           <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -178,8 +178,8 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Proven Excellence</h3>
-            <p className="text-gray-600 text-sm">1000+ successful event and marketing projects with measurable ROI</p>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Proven Excellence</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">1000+ successful event and marketing projects with measurable ROI</p>
           </article>
         </div>
       </div>

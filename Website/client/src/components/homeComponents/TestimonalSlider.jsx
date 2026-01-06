@@ -18,7 +18,7 @@ const TestimonialSlider = ({ data }) => {
   return (
     <section 
       aria-labelledby="testimonials-heading"
-      className="bg-white dark:bg-black text-black dark:text-white min-h-screen px-15 py-20 font-sans"
+      className="bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white min-h-screen px-15 py-20 font-sans"
     >
       <div className="max-w-7xl space-y-5">
         <Tag>Testimonials</Tag>
@@ -57,7 +57,7 @@ const TestimonialSlider = ({ data }) => {
             />
             <div>
               <p className="font-bold uppercase text-sm text-[#FF6600]">{name}</p>
-              <p className="text-xs text-gray-700">{role}</p>
+              <p className="text-xs text-gray-700 dark:text-gray-300">{role}</p>
             </div>
           </div>
 
