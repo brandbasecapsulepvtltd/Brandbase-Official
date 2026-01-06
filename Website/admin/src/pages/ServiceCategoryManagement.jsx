@@ -23,153 +23,154 @@ const ServiceCategoryManagement = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('create'); // 'create' or 'edit'
   const [currentCategory, setCurrentCategory] = useState(null);
-  const [formData, setFormData] = useState({
+// Update your formData initial state to include all schema fields
+const [formData, setFormData] = useState({
+  category: '',
+  hero: {
+    title: '',
+    subtitle: '',
+    highlightedText: [''],
+    description: '',
+    imgUrl: '',
+    cta: {
+      primary: '',
+      secondary: ''
+    }
+  },
+  visionBanner: {
+    heading: '',
+    imageUrl: ''
+  },
+  comparisonTable: {
     category: '',
-    hero: {
+    brand: {
+      logoUrl: '',
+      features: ['']
+    },
+    others: [{
       title: '',
-      subtitle: '',
-      highlightedText: [],
+      points: ['']
+    }]
+  },
+  categoryServices: {
+    title: '',
+    subtitle: '',
+    description: '',
+    services: [{
+      title: '',
       description: '',
-      imgUrl: '',
-      cta: {
-        primary: '',
-        secondary: ''
-      }
-    },
-    visionBanner: {
-      heading: '',
-      imageUrl: ''
-    },
-    comparisonTable: {
-      category: '',
-      brand: {
-        logoUrl: '',
-        features: []
-      },
-      others: [{
+      image: '',
+      link: ''
+    }]
+  },
+  categoryAdvantages: {
+    mainTitle: '',
+    sections: {
+      overview: {
+        id: 'overview',
         title: '',
-        points: []
-      }]
-    },
-    categoryServices: {
-      title: '',
-      subtitle: '',
-      description: '',
-      services: [{
-        title: '',
-        description: '',
-        image: '',
-        link: ''
-      }]
-    },
-    categoryAdvantages: {
-      mainTitle: '',
-      sections: {
-        overview: {
-          id: 'overview',
-          title: '',
-          heading: '',
-          content: [{
-            type: 'text',
-            value: ''
-          }]
-        },
-        conversionRate: {
-          id: 'conversionRate',
-          title: '',
-          heading: '',
-          content: [{
-            type: 'text',
-            value: ''
-          }]
-        },
-        userExperience: {
-          id: 'userExperience',
-          title: '',
-          heading: '',
-          content: [{
-            type: 'text',
-            value: ''
-          }]
-        },
-        competitiveEdge: {
-          id: 'competitiveEdge',
-          title: '',
-          heading: '',
-          content: [{
-            type: 'text',
-            value: ''
-          }]
-        },
-        searchRankings: {
-          id: 'searchRankings',
-          title: '',
-          heading: '',
-          content: [{
-            type: 'text',
-            value: ''
-          }]
-        },
-        digitalMarketing: {
-          id: 'digitalMarketing',
-          title: '',
-          heading: '',
-          content: [{
-            type: 'text',
-            value: ''
-          }]
-        }
-      }
-    },
-    whyBuildWithBcpl: {
-      title: '',
-      subtitle: '',
-      reasons: [{
-        id: 1,
-        reason: ''
-      }]
-    },
-    weCreate: {
-      header: {
-        titleOrange: '',
-        titleBlack: '',
-        description: ''
-      },
-      leftFeatured: {
-        image: '',
-        title: '',
-        subtitle: '',
-        tags: [{
-          label: '',
-          type: 'primary'
+        heading: '',
+        content: [{
+          type: 'text',
+          value: ''
         }]
       },
-      rightColumnItems: [{
+      conversionRate: {
+        id: 'conversionRate',
         title: '',
-        subtitle: '',
-        image: '',
-        tags: [{
-          label: '',
-          type: 'primary'
+        heading: '',
+        content: [{
+          type: 'text',
+          value: ''
         }]
+      },
+      userExperience: {
+        id: 'userExperience',
+        title: '',
+        heading: '',
+        content: [{
+          type: 'text',
+          value: ''
+        }]
+      },
+      competitiveEdge: {
+        id: 'competitiveEdge',
+        title: '',
+        heading: '',
+        content: [{
+          type: 'text',
+          value: ''
+        }]
+      },
+      searchRankings: {
+        id: 'searchRankings',
+        title: '',
+        heading: '',
+        content: [{
+          type: 'text',
+          value: ''
+        }]
+      },
+      digitalMarketing: {
+        id: 'digitalMarketing',
+        title: '',
+        heading: '',
+        content: [{
+          type: 'text',
+          value: ''
+        }]
+      }
+    }
+  },
+  whyBuildWithBcpl: {
+    title: '',
+    subtitle: '',
+    reasons: [{
+      id: 1,
+      reason: ''
+    }]
+  },
+  weCreate: {
+    header: {
+      titleOrange: '',
+      titleBlack: '',
+      description: ''
+    },
+    leftFeatured: {
+      image: '',
+      title: '',
+      subtitle: '',
+      tags: [{
+        label: '',
+        type: 'primary'
       }]
     },
-    pageMetadata: {
+    rightColumnItems: [{
       title: '',
-      description: '',
-      keywords: []
-    },
-    ctaData: {
-      title: '',
-      subheading: ''
-    },
-    faqData: [{
-      question: '',
-      answer: ''
-    }],
-    isActive: true,
-    order: 0
-  });
+      subtitle: '',
+      image: '',
+      tags: [{
+        label: '',
+        type: 'primary'
+      }]
+    }]
+  },
+  pageMetadata: {
+    title: '',
+    description: '',
+    keywords: ['']
+  },
+  ctaData: {
+    title: '',
+    subheading: ''
+  },
+  faqData: [{
+    question: '',
+    answer: ''
+  }],
+  isActive: true,
+  order: 0
+});
   
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
@@ -1594,6 +1595,1025 @@ const ServiceCategoryManagement = () => {
                       </div>
                     </div>
                   </div>
+
+
+
+                {/* Vision Banner Section */}
+<div className="border border-gray-200 rounded-xl p-6">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">Vision Banner</h3>
+  <div className="space-y-4">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Heading *
+      </label>
+      <input
+        type="text"
+        name="heading"
+        value={formData.visionBanner.heading}
+        onChange={(e) => handleInputChange(e, 'visionBanner')}
+        required
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Our Vision"
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Image URL *
+      </label>
+      <input
+        type="url"
+        name="imageUrl"
+        value={formData.visionBanner.imageUrl}
+        onChange={(e) => handleInputChange(e, 'visionBanner')}
+        required
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="https://example.com/vision-banner.jpg"
+      />
+    </div>
+  </div>
+</div>
+
+{/* Comparison Table Section */}
+<div className="border border-gray-200 rounded-xl p-6">
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-lg font-semibold text-gray-900">Comparison Table</h3>
+    <button
+      type="button"
+      onClick={() => toggleSection('comparison')}
+      className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+    >
+      {expandedSections.comparison ? 'Collapse' : 'Expand'}
+    </button>
+  </div>
+  
+  {expandedSections.comparison && (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Table Category *
+        </label>
+        <input
+          type="text"
+          name="category"
+          value={formData.comparisonTable.category}
+          onChange={(e) => handleInputChange(e, 'comparisonTable')}
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Technology Comparison"
+        />
+      </div>
+      
+      <div className="border border-gray-200 rounded-lg p-4">
+        <h4 className="font-medium text-gray-900 mb-3">Brand Column</h4>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Brand Logo URL *
+            </label>
+            <input
+              type="url"
+              value={formData.comparisonTable.brand.logoUrl}
+              onChange={(e) => setFormData(prev => ({
+                ...prev,
+                comparisonTable: {
+                  ...prev.comparisonTable,
+                  brand: { ...prev.comparisonTable.brand, logoUrl: e.target.value }
+                }
+              }))}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="https://example.com/brand-logo.png"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Brand Features
+            </label>
+            <div className="space-y-2">
+              {formData.comparisonTable.brand.features.map((feature, index) => (
+                <div key={index} className="flex gap-2">
+                  <input
+                    type="text"
+                    value={feature}
+                    onChange={(e) => {
+                      const newFeatures = [...formData.comparisonTable.brand.features];
+                      newFeatures[index] = e.target.value;
+                      setFormData(prev => ({
+                        ...prev,
+                        comparisonTable: {
+                          ...prev.comparisonTable,
+                          brand: { ...prev.comparisonTable.brand, features: newFeatures }
+                        }
+                      }));
+                    }}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Feature description"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newFeatures = formData.comparisonTable.brand.features.filter((_, i) => i !== index);
+                      setFormData(prev => ({
+                        ...prev,
+                        comparisonTable: {
+                          ...prev.comparisonTable,
+                          brand: { ...prev.comparisonTable.brand, features: newFeatures }
+                        }
+                      }));
+                    }}
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData(prev => ({
+                    ...prev,
+                    comparisonTable: {
+                      ...prev.comparisonTable,
+                      brand: {
+                        ...prev.comparisonTable.brand,
+                        features: [...prev.comparisonTable.brand.features, '']
+                      }
+                    }
+                  }));
+                }}
+                className="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
+              >
+                + Add Feature
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="border border-gray-200 rounded-lg p-4">
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="font-medium text-gray-900">Competitors/Others</h4>
+          <button
+            type="button"
+            onClick={() => addArrayItem('comparisonTable.others', {
+              title: '',
+              points: ['']
+            })}
+            className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            + Add Competitor
+          </button>
+        </div>
+        
+        <div className="space-y-4">
+          {formData.comparisonTable.others.map((other, otherIndex) => (
+            <div key={otherIndex} className="border border-gray-300 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h5 className="font-medium text-gray-900">Competitor {otherIndex + 1}</h5>
+                {formData.comparisonTable.others.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeArrayItem('comparisonTable.others', otherIndex)}
+                    className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Competitor Title *
+                  </label>
+                  <input
+                    type="text"
+                    value={other.title}
+                    onChange={(e) => handleArrayUpdate('comparisonTable.others', otherIndex, 'title', e.target.value)}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Competitor Name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Points
+                  </label>
+                  <div className="space-y-2">
+                    {other.points.map((point, pointIndex) => (
+                      <div key={pointIndex} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={point}
+                          onChange={(e) => {
+                            const newOthers = [...formData.comparisonTable.others];
+                            const newPoints = [...newOthers[otherIndex].points];
+                            newPoints[pointIndex] = e.target.value;
+                            newOthers[otherIndex].points = newPoints;
+                            setFormData(prev => ({
+                              ...prev,
+                              comparisonTable: {
+                                ...prev.comparisonTable,
+                                others: newOthers
+                              }
+                            }));
+                          }}
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Point description"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newOthers = [...formData.comparisonTable.others];
+                            const newPoints = newOthers[otherIndex].points.filter((_, i) => i !== pointIndex);
+                            newOthers[otherIndex].points = newPoints;
+                            setFormData(prev => ({
+                              ...prev,
+                              comparisonTable: {
+                                ...prev.comparisonTable,
+                                others: newOthers
+                              }
+                            }));
+                          }}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newOthers = [...formData.comparisonTable.others];
+                        newOthers[otherIndex].points.push('');
+                        setFormData(prev => ({
+                          ...prev,
+                          comparisonTable: {
+                            ...prev.comparisonTable,
+                            others: newOthers
+                          }
+                        }));
+                      }}
+                      className="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
+                    >
+                      + Add Point
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+{/* Category Advantages Section */}
+<div className="border border-gray-200 rounded-xl p-6">
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-lg font-semibold text-gray-900">Category Advantages</h3>
+    <button
+      type="button"
+      onClick={() => toggleSection('advantages')}
+      className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+    >
+      {expandedSections.advantages ? 'Collapse' : 'Expand'}
+    </button>
+  </div>
+  
+  {expandedSections.advantages && (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Main Title *
+        </label>
+        <input
+          type="text"
+          name="mainTitle"
+          value={formData.categoryAdvantages.mainTitle}
+          onChange={(e) => handleInputChange(e, 'categoryAdvantages')}
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Advantages of Our Service"
+        />
+      </div>
+      
+      {Object.entries(formData.categoryAdvantages.sections).map(([key, section]) => (
+        <div key={key} className="border border-gray-200 rounded-lg p-4">
+          <h4 className="font-medium text-gray-900 mb-3 capitalize">
+            {key.replace(/([A-Z])/g, ' $1').trim()}
+          </h4>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  value={section.title}
+                  onChange={(e) => {
+                    const newSections = { ...formData.categoryAdvantages.sections };
+                    newSections[key].title = e.target.value;
+                    setFormData(prev => ({
+                      ...prev,
+                      categoryAdvantages: {
+                        ...prev.categoryAdvantages,
+                        sections: newSections
+                      }
+                    }));
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder={`${key.replace(/([A-Z])/g, ' $1').trim()} Title`}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Heading
+                </label>
+                <input
+                  type="text"
+                  value={section.heading}
+                  onChange={(e) => {
+                    const newSections = { ...formData.categoryAdvantages.sections };
+                    newSections[key].heading = e.target.value;
+                    setFormData(prev => ({
+                      ...prev,
+                      categoryAdvantages: {
+                        ...prev.categoryAdvantages,
+                        sections: newSections
+                      }
+                    }));
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder={`${key.replace(/([A-Z])/g, ' $1').trim()} Heading`}
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Content
+              </label>
+              <div className="space-y-2">
+                {section.content.map((content, contentIndex) => (
+                  <div key={contentIndex} className="space-y-2">
+                    <select
+                      value={content.type}
+                      onChange={(e) => {
+                        const newSections = { ...formData.categoryAdvantages.sections };
+                        newSections[key].content[contentIndex].type = e.target.value;
+                        setFormData(prev => ({
+                          ...prev,
+                          categoryAdvantages: {
+                            ...prev.categoryAdvantages,
+                            sections: newSections
+                          }
+                        }));
+                      }}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      <option value="text">Text</option>
+                      <option value="list">List</option>
+                      <option value="image">Image</option>
+                    </select>
+                    
+                    {content.type === 'text' && (
+                      <textarea
+                        value={content.value}
+                        onChange={(e) => {
+                          const newSections = { ...formData.categoryAdvantages.sections };
+                          newSections[key].content[contentIndex].value = e.target.value;
+                          setFormData(prev => ({
+                            ...prev,
+                            categoryAdvantages: {
+                              ...prev.categoryAdvantages,
+                              sections: newSections
+                            }
+                          }));
+                        }}
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Text content..."
+                      />
+                    )}
+                    
+                    {content.type === 'list' && (
+                      <div className="space-y-2">
+                        {content.items && content.items.map((item, itemIndex) => (
+                          <div key={itemIndex} className="flex gap-2">
+                            <input
+                              type="text"
+                              value={item}
+                              onChange={(e) => {
+                                const newSections = { ...formData.categoryAdvantages.sections };
+                                const newItems = [...(newSections[key].content[contentIndex].items || [])];
+                                newItems[itemIndex] = e.target.value;
+                                newSections[key].content[contentIndex].items = newItems;
+                                setFormData(prev => ({
+                                  ...prev,
+                                  categoryAdvantages: {
+                                    ...prev.categoryAdvantages,
+                                    sections: newSections
+                                  }
+                                }));
+                              }}
+                              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              placeholder="List item"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newSections = { ...formData.categoryAdvantages.sections };
+                                const newItems = newSections[key].content[contentIndex].items.filter((_, i) => i !== itemIndex);
+                                newSections[key].content[contentIndex].items = newItems;
+                                setFormData(prev => ({
+                                  ...prev,
+                                  categoryAdvantages: {
+                                    ...prev.categoryAdvantages,
+                                    sections: newSections
+                                  }
+                                }));
+                              }}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newSections = { ...formData.categoryAdvantages.sections };
+                            if (!newSections[key].content[contentIndex].items) {
+                              newSections[key].content[contentIndex].items = [];
+                            }
+                            newSections[key].content[contentIndex].items.push('');
+                            setFormData(prev => ({
+                              ...prev,
+                              categoryAdvantages: {
+                                ...prev.categoryAdvantages,
+                                sections: newSections
+                              }
+                            }));
+                          }}
+                          className="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
+                        >
+                          + Add List Item
+                        </button>
+                      </div>
+                    )}
+                    
+                    {content.type === 'image' && (
+                      <div className="space-y-2">
+                        <input
+                          type="text"
+                          placeholder="Image Source URL"
+                          value={content.src || ''}
+                          onChange={(e) => {
+                            const newSections = { ...formData.categoryAdvantages.sections };
+                            newSections[key].content[contentIndex].src = e.target.value;
+                            setFormData(prev => ({
+                              ...prev,
+                              categoryAdvantages: {
+                                ...prev.categoryAdvantages,
+                                sections: newSections
+                              }
+                            }));
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Alt Text"
+                          value={content.alt || ''}
+                          onChange={(e) => {
+                            const newSections = { ...formData.categoryAdvantages.sections };
+                            newSections[key].content[contentIndex].alt = e.target.value;
+                            setFormData(prev => ({
+                              ...prev,
+                              categoryAdvantages: {
+                                ...prev.categoryAdvantages,
+                                sections: newSections
+                              }
+                            }));
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+{/* Why Build With BCPL Section */}
+<div className="border border-gray-200 rounded-xl p-6">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">Why Build With BCPL</h3>
+  <div className="space-y-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Title *
+        </label>
+        <input
+          type="text"
+          name="title"
+          value={formData.whyBuildWithBcpl.title}
+          onChange={(e) => handleInputChange(e, 'whyBuildWithBcpl')}
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Why Choose Us"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Subtitle *
+        </label>
+        <input
+          type="text"
+          name="subtitle"
+          value={formData.whyBuildWithBcpl.subtitle}
+          onChange={(e) => handleInputChange(e, 'whyBuildWithBcpl')}
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="The benefits of working with us"
+        />
+      </div>
+    </div>
+    
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Reasons
+      </label>
+      <div className="space-y-2">
+        {formData.whyBuildWithBcpl.reasons.map((reason, index) => (
+          <div key={index} className="flex gap-2 items-start">
+            <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm font-medium text-gray-700 mt-2">
+              {index + 1}
+            </div>
+            <div className="flex-1">
+              <textarea
+                value={reason.reason}
+                onChange={(e) => {
+                  const newReasons = [...formData.whyBuildWithBcpl.reasons];
+                  newReasons[index].reason = e.target.value;
+                  setFormData(prev => ({
+                    ...prev,
+                    whyBuildWithBcpl: {
+                      ...prev.whyBuildWithBcpl,
+                      reasons: newReasons
+                    }
+                  }));
+                }}
+                rows={2}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Reason description..."
+              />
+            </div>
+            {formData.whyBuildWithBcpl.reasons.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removeArrayItem('whyBuildWithBcpl.reasons', index)}
+                className="p-2 text-red-600 hover:bg-red-50 rounded-lg mt-2"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={() => addArrayItem('whyBuildWithBcpl.reasons', {
+            id: formData.whyBuildWithBcpl.reasons.length + 1,
+            reason: ''
+          })}
+          className="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
+        >
+          + Add Reason
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{/* We Create Section */}
+<div className="border border-gray-200 rounded-xl p-6">
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-lg font-semibold text-gray-900">We Create</h3>
+    <button
+      type="button"
+      onClick={() => toggleSection('weCreate')}
+      className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+    >
+      {expandedSections.weCreate ? 'Collapse' : 'Expand'}
+    </button>
+  </div>
+  
+  {expandedSections.weCreate && (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="border border-gray-200 rounded-lg p-4">
+        <h4 className="font-medium text-gray-900 mb-3">Header</h4>
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Title (Orange Part)
+              </label>
+              <input
+                type="text"
+                name="titleOrange"
+                value={formData.weCreate.header.titleOrange}
+                onChange={(e) => handleInputChange(e, 'weCreate.header')}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="We Create"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Title (Black Part)
+              </label>
+              <input
+                type="text"
+                name="titleBlack"
+                value={formData.weCreate.header.titleBlack}
+                onChange={(e) => handleInputChange(e, 'weCreate.header')}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Amazing Solutions"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.weCreate.header.description}
+              onChange={(e) => handleInputChange(e, 'weCreate.header')}
+              rows={2}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Description of what we create..."
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* Left Featured */}
+      <div className="border border-gray-200 rounded-lg p-4">
+        <h4 className="font-medium text-gray-900 mb-3">Left Featured Item</h4>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Image URL *
+            </label>
+            <input
+              type="url"
+              name="image"
+              value={formData.weCreate.leftFeatured.image}
+              onChange={(e) => handleInputChange(e, 'weCreate.leftFeatured')}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="https://example.com/featured-image.jpg"
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Title *
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.weCreate.leftFeatured.title}
+                onChange={(e) => handleInputChange(e, 'weCreate.leftFeatured')}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Featured Solution"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Subtitle *
+              </label>
+              <input
+                type="text"
+                name="subtitle"
+                value={formData.weCreate.leftFeatured.subtitle}
+                onChange={(e) => handleInputChange(e, 'weCreate.leftFeatured')}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Brief description"
+              />
+            </div>
+          </div>
+          
+          {/* Tags for Left Featured */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Tags
+            </label>
+            <div className="space-y-2">
+              {formData.weCreate.leftFeatured.tags.map((tag, index) => (
+                <div key={index} className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Tag label"
+                    value={tag.label}
+                    onChange={(e) => {
+                      const newTags = [...formData.weCreate.leftFeatured.tags];
+                      newTags[index].label = e.target.value;
+                      setFormData(prev => ({
+                        ...prev,
+                        weCreate: {
+                          ...prev.weCreate,
+                          leftFeatured: {
+                            ...prev.weCreate.leftFeatured,
+                            tags: newTags
+                          }
+                        }
+                      }));
+                    }}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <select
+                    value={tag.type}
+                    onChange={(e) => {
+                      const newTags = [...formData.weCreate.leftFeatured.tags];
+                      newTags[index].type = e.target.value;
+                      setFormData(prev => ({
+                        ...prev,
+                        weCreate: {
+                          ...prev.weCreate,
+                          leftFeatured: {
+                            ...prev.weCreate.leftFeatured,
+                            tags: newTags
+                          }
+                        }
+                      }));
+                    }}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="primary">Primary</option>
+                    <option value="secondary">Secondary</option>
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newTags = formData.weCreate.leftFeatured.tags.filter((_, i) => i !== index);
+                      setFormData(prev => ({
+                        ...prev,
+                        weCreate: {
+                          ...prev.weCreate,
+                          leftFeatured: {
+                            ...prev.weCreate.leftFeatured,
+                            tags: newTags
+                          }
+                        }
+                      }));
+                    }}
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData(prev => ({
+                    ...prev,
+                    weCreate: {
+                      ...prev.weCreate,
+                      leftFeatured: {
+                        ...prev.weCreate.leftFeatured,
+                        tags: [...prev.weCreate.leftFeatured.tags, { label: '', type: 'primary' }]
+                      }
+                    }
+                  }));
+                }}
+                className="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
+              >
+                + Add Tag
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Right Column Items */}
+      <div className="border border-gray-200 rounded-lg p-4">
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="font-medium text-gray-900">Right Column Items</h4>
+          <button
+            type="button"
+            onClick={() => addArrayItem('weCreate.rightColumnItems', {
+              title: '',
+              subtitle: '',
+              image: '',
+              tags: [{ label: '', type: 'primary' }]
+            })}
+            className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            + Add Item
+          </button>
+        </div>
+        
+        <div className="space-y-4">
+          {formData.weCreate.rightColumnItems.map((item, itemIndex) => (
+            <div key={itemIndex} className="border border-gray-300 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h5 className="font-medium text-gray-900">Item {itemIndex + 1}</h5>
+                {formData.weCreate.rightColumnItems.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeArrayItem('weCreate.rightColumnItems', itemIndex)}
+                    className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Image URL *
+                  </label>
+                  <input
+                    type="url"
+                    value={item.image}
+                    onChange={(e) => handleArrayUpdate('weCreate.rightColumnItems', itemIndex, 'image', e.target.value)}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="https://example.com/item-image.jpg"
+                  />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Title *
+                    </label>
+                    <input
+                      type="text"
+                      value={item.title}
+                      onChange={(e) => handleArrayUpdate('weCreate.rightColumnItems', itemIndex, 'title', e.target.value)}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Item Title"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Subtitle *
+                    </label>
+                    <input
+                      type="text"
+                      value={item.subtitle}
+                      onChange={(e) => handleArrayUpdate('weCreate.rightColumnItems', itemIndex, 'subtitle', e.target.value)}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Brief description"
+                    />
+                  </div>
+                </div>
+                
+                {/* Tags for Right Column Item */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Tags
+                  </label>
+                  <div className="space-y-2">
+                    {item.tags.map((tag, tagIndex) => (
+                      <div key={tagIndex} className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="Tag label"
+                          value={tag.label}
+                          onChange={(e) => {
+                            const newItems = [...formData.weCreate.rightColumnItems];
+                            newItems[itemIndex].tags[tagIndex].label = e.target.value;
+                            setFormData(prev => ({
+                              ...prev,
+                              weCreate: {
+                                ...prev.weCreate,
+                                rightColumnItems: newItems
+                              }
+                            }));
+                          }}
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                        <select
+                          value={tag.type}
+                          onChange={(e) => {
+                            const newItems = [...formData.weCreate.rightColumnItems];
+                            newItems[itemIndex].tags[tagIndex].type = e.target.value;
+                            setFormData(prev => ({
+                              ...prev,
+                              weCreate: {
+                                ...prev.weCreate,
+                                rightColumnItems: newItems
+                              }
+                            }));
+                          }}
+                          className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                          <option value="primary">Primary</option>
+                          <option value="secondary">Secondary</option>
+                        </select>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newItems = [...formData.weCreate.rightColumnItems];
+                            newItems[itemIndex].tags = newItems[itemIndex].tags.filter((_, i) => i !== tagIndex);
+                            setFormData(prev => ({
+                              ...prev,
+                              weCreate: {
+                                ...prev.weCreate,
+                                rightColumnItems: newItems
+                              }
+                            }));
+                          }}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newItems = [...formData.weCreate.rightColumnItems];
+                        newItems[itemIndex].tags.push({ label: '', type: 'primary' });
+                        setFormData(prev => ({
+                          ...prev,
+                          weCreate: {
+                            ...prev.weCreate,
+                            rightColumnItems: newItems
+                          }
+                        }));
+                      }}
+                      className="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
+                    >
+                      + Add Tag
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+{/* CTA Data Section */}
+<div className="border border-gray-200 rounded-xl p-6">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">Call to Action</h3>
+  <div className="space-y-4">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        CTA Title *
+      </label>
+      <input
+        type="text"
+        name="title"
+        value={formData.ctaData.title}
+        onChange={(e) => handleInputChange(e, 'ctaData')}
+        required
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Ready to Get Started?"
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        CTA Subheading *
+      </label>
+      <input
+        type="text"
+        name="subheading"
+        value={formData.ctaData.subheading}
+        onChange={(e) => handleInputChange(e, 'ctaData')}
+        required
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Contact us today for a free consultation"
+      />
+    </div>
+  </div>
+</div>
+
 
                   {/* Services Section */}
                   <div className="border border-gray-200 rounded-xl p-6">
