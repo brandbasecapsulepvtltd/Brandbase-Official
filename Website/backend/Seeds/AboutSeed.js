@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
-const Section = require('../models/AboutSection');
-const data = {
+const AboutContent = require('../models/AboutSection');
+
+const aboutData = {
+    identifier: 'about-content',
     hero: {
         title: "Brandbase Capsule",
         heading: "Pioneering Digital Excellence",
@@ -74,7 +76,7 @@ const data = {
             2018: {
                 title: "2018",
                 text: "Brandbase was born with a vision to deliver end-to-end 360° marketing solutions. We kicked off with our first major stall design project at OTM, complemented by complete digital branding for the client.",
-                img: "https://images.pexels.com/photos/6774432/pexels-photo-6774432.jpeg",
+                img: "https://images.pexels.com/photos/6774432/pexels-photo-6774432.jpeg"
             },
             2019: {
                 title: "2019",
@@ -150,7 +152,7 @@ const data = {
                 },
                 dont: {
                     title: "Vanity Metrics",
-                    text: "Likes don’t equal growth",
+                    text: "Likes don't equal growth",
                     src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
                 }
             },
@@ -179,11 +181,10 @@ const data = {
                     text: "No unnecessary jargon",
                     src: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b"
                 }
-            },
+            }
         ]
     }
 };
-// Your provided data in a JSON file
 
 const seedDatabase = async () => {
     try {
@@ -193,45 +194,20 @@ const seedDatabase = async () => {
             useUnifiedTopology: true
         });
 
-        // Clear existing data
-        await Section.deleteMany({});
-        console.log('Cleared existing sections');
+        console.log('Connected to MongoDB');
 
-        // Create sections from your data
-        const sections = [
-            {
-                sectionName: 'hero',
-                hero: data.hero
-            },
-            {
-                sectionName: 'aboutSection',
-                aboutSection: data.aboutSection
-            },
-            {
-                sectionName: 'mission',
-                mission: data.mission
-            },
-            {
-                sectionName: 'vision',
-                vision: data.vision
-            },
-            {
-                sectionName: 'timeline',
-                timeline: data.timeline
-            },
-            {
-                sectionName: 'impact',
-                impact: data.impact
-            },
-            {
-                sectionName: 'principles',
-                principles: data.principles
-            }
-        ];
+        // Clear existing data (both old Section model and new AboutContent)
+        await mongoose.connection.db.collection('sections').drop().catch(() => {
+            console.log('No existing sections collection to drop');
+        });
 
-        // Insert all sections
-        await Section.insertMany(sections);
-        console.log('Database seeded successfully');
+        await AboutContent.deleteMany({});
+        console.log('Cleared existing about content');
+
+        // Create single document with all content
+        const content = await AboutContent.create(aboutData);
+        console.log('About content seeded successfully');
+        console.log('Document ID:', content._id);
 
         // Close connection
         await mongoose.connection.close();

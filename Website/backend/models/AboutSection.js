@@ -1,40 +1,42 @@
 const mongoose = require('mongoose');
 
+// Sub-schemas for nested objects
 const socialsSchema = new mongoose.Schema({
     facebook: String,
     instagram: String,
     linkedin: String,
     youtube: String
-});
+}, { _id: false });
 
 const imageSchema = new mongoose.Schema({
     url: String,
     alt: String,
     captionTitle: String,
     captionText: String
-});
+}, { _id: false });
 
 const ctaSchema = new mongoose.Schema({
     title: String,
     subtitle: String,
     text: String,
     buttonText: String
-});
+}, { _id: false });
 
 const statsSchema = new mongoose.Schema({
     years: String,
     projectsDelivered: String,
     projects: String,
     satisfaction: String
-});
+}, { _id: false });
 
 const milestoneSchema = new mongoose.Schema({
     title: String,
     text: String,
     img: String
-});
+}, { _id: false });
 
 const principleItemSchema = new mongoose.Schema({
+    id: Number,
     do: {
         title: String,
         text: String,
@@ -45,13 +47,16 @@ const principleItemSchema = new mongoose.Schema({
         text: String,
         src: String
     }
-});
+}, { _id: false });
 
-const sectionSchema = new mongoose.Schema({
-    sectionName: {
+// Main AboutContent schema - single document containing all sections
+const aboutContentSchema = new mongoose.Schema({
+    // Identifier to ensure only one document exists
+    identifier: {
         type: String,
-        required: true,
-        enum: ['hero', 'aboutSection', 'mission', 'vision', 'timeline', 'impact', 'principles']
+        default: 'about-content',
+        unique: true,
+        immutable: true
     },
     hero: {
         title: String,
@@ -116,9 +121,15 @@ const sectionSchema = new mongoose.Schema({
 });
 
 // Update the updatedAt field before saving
-sectionSchema.pre('save', function (next) {
+aboutContentSchema.pre('save', function (next) {
     this.updatedAt = Date.now();
     next();
 });
 
-module.exports = mongoose.model('Section', sectionSchema);
+// Also update on findOneAndUpdate
+aboutContentSchema.pre('findOneAndUpdate', function (next) {
+    this.set({ updatedAt: Date.now() });
+    next();
+});
+
+module.exports = mongoose.model('AboutContent', aboutContentSchema);

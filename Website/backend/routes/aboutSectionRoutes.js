@@ -1,51 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getAllSections,
-    getSectionById,
-    getSectionByName,
-    createSection,
+    getAboutContent,
+    updateAboutContent,
     updateSection,
-    updateSectionByName,
-    deleteSection,
-    deleteSectionByName,
-    getAllSectionNames
+    getSection,
+    initializeContent
 } = require('../controllers/aboutSectionController');
 
-// @route   GET /api/sections
-// @desc    Get all sections
-router.get('/', getAllSections);
+// @route   GET /api/about-section
+// @desc    Get all about content (single document)
+router.get('/', getAboutContent);
 
-// @route   GET /api/sections/names
-// @desc    Get all section names
-router.get('/names', getAllSectionNames);
+// @route   GET /api/about-section/:section
+// @desc    Get a specific section (hero, aboutSection, mission, etc.)
+router.get('/:section', getSection);
 
-// @route   GET /api/sections/id/:id
-// @desc    Get single section by ID
-router.get('/id/:id', getSectionById);
+// @route   PUT /api/about-section
+// @desc    Update the entire about content
+router.put('/', updateAboutContent);
 
-// @route   GET /api/sections/name/:name
-// @desc    Get single section by name
-router.get('/name/:name', getSectionByName);
+// @route   PUT /api/about-section/:section
+// @desc    Update a specific section only
+router.put('/:section', updateSection);
 
-// @route   POST /api/sections
-// @desc    Create a new section
-router.post('/', createSection);
-
-// @route   PUT /api/sections/id/:id
-// @desc    Update section by ID
-router.put('/id/:id', updateSection);
-
-// @route   PUT /api/sections/name/:name
-// @desc    Update section by name
-router.put('/name/:name', updateSectionByName);
-
-// @route   DELETE /api/sections/id/:id
-// @desc    Delete section by ID
-router.delete('/id/:id', deleteSection);
-
-// @route   DELETE /api/sections/name/:name
-// @desc    Delete section by name
-router.delete('/name/:name', deleteSectionByName);
+// @route   POST /api/about-section/initialize
+// @desc    Initialize/Reset content to defaults
+router.post('/initialize', initializeContent);
 
 module.exports = router;
