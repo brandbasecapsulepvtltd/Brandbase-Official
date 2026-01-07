@@ -27,7 +27,7 @@ function initializeEmailJS() {
 // Simple function to make API calls
 export async function apiCall(endpoint, options = {}) {
   const url = `${API_URL}${endpoint}`;
-  
+
   const headers = {
     'Content-Type': 'application/json',
     'X-API-Key': API_KEY,
@@ -45,14 +45,14 @@ export async function apiCall(endpoint, options = {}) {
 
   try {
     const response = await fetch(url, config);
-    
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.message || `API Error: ${response.status} ${response.statusText}`
       );
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('API Call Failed:', error.message);
@@ -65,7 +65,7 @@ export async function sendEmailViaEmailJS(data) {
   try {
     // Initialize EmailJS if not already initialized
     initializeEmailJS();
-    
+
     // Prepare email data
     const emailData = {
       to_name: `${data.firstName} ${data.lastName}`,
@@ -82,16 +82,16 @@ export async function sendEmailViaEmailJS(data) {
     };
 
     console.log('Sending email with data:', emailData);
-    
+
     // Send email via EmailJS using the imported module
     const result = await emailjs.send(
       EMAILJS_CONFIG.SERVICE_ID,
       EMAILJS_CONFIG.TEMPLATE_ID,
       emailData
     );
-    
+
     console.log('✅ EmailJS Result:', result);
-    
+
     return {
       success: true,
       emailId: result.messageId || result.text,
@@ -99,7 +99,7 @@ export async function sendEmailViaEmailJS(data) {
     };
   } catch (error) {
     console.error('❌ EmailJS Error Details:', error);
-    
+
     // Better error message handling
     let errorMessage = 'Failed to send email';
     if (error.text) {
@@ -109,7 +109,7 @@ export async function sendEmailViaEmailJS(data) {
     } else if (error.status) {
       errorMessage += ` (Status: ${error.status})`;
     }
-    
+
     throw new Error(errorMessage);
   }
 }
@@ -128,7 +128,7 @@ function generateReferenceId() {
 export async function sendContactConfirmationEmail(data) {
   try {
     initializeEmailJS();
-    
+
     const referenceId = generateReferenceId();
     const submissionDate = new Date().toLocaleDateString('en-US', {
       weekday: 'long',
@@ -138,7 +138,7 @@ export async function sendContactConfirmationEmail(data) {
       hour: '2-digit',
       minute: '2-digit'
     });
-    
+
     const emailData = {
       first_name: data.firstName,
       last_name: data.lastName,
@@ -152,17 +152,17 @@ export async function sendContactConfirmationEmail(data) {
       reference_id: referenceId,
       submission_date: submissionDate
     };
-    
+
     console.log('Sending confirmation email with data:', emailData);
-    
+
     const result = await emailjs.send(
       EMAILJS_CONFIG.SERVICE_ID,
       EMAILJS_CONFIG.TEMPLATE_ID,
       emailData
     );
-    
+
     console.log('✅ Confirmation email sent successfully');
-    
+
     return {
       success: true,
       emailId: result.messageId || result.text,
@@ -171,14 +171,14 @@ export async function sendContactConfirmationEmail(data) {
     };
   } catch (error) {
     console.error('❌ Confirmation email error:', error);
-    
+
     let errorMessage = 'Failed to send confirmation email';
     if (error.text) {
       errorMessage += ': ' + error.text;
     } else if (error.message) {
       errorMessage += ': ' + error.message;
     }
-    
+
     throw new Error(errorMessage);
   }
 }
@@ -187,14 +187,14 @@ export async function sendContactConfirmationEmail(data) {
 export async function submitContactForm(data) {
   try {
     console.log('Starting contact form submission...', data);
-    
+
     // Step 1: First send to your backend (save to database)
     console.log('Sending to backend API...');
     const backendResponse = await apiCall('/contacts', {
       method: 'POST',
       body: data
     });
-    
+
     console.log('✅ Backend response:', backendResponse);
 
     // Step 2: Try to send confirmation email via EmailJS
@@ -214,11 +214,11 @@ export async function submitContactForm(data) {
       data: backendResponse.data,
       referenceId: emailResult?.referenceId || generateReferenceId(),
       emailSent: !!emailResult?.success,
-      message: emailResult 
-        ? 'Thank you! We\'ve received your message and sent a confirmation email.' 
+      message: emailResult
+        ? 'Thank you! We\'ve received your message and sent a confirmation email.'
         : 'Thank you! We\'ve received your message. (Confirmation email failed)'
     };
-    
+
   } catch (error) {
     console.error('❌ Contact submission failed:', error);
     throw error;
@@ -229,7 +229,10 @@ export async function submitContactForm(data) {
 export const api = {
   // Homepage
   getHomepage: () => apiCall('/homepage'),
-  
+
+  // About Section
+  getAboutSection: () => apiCall('/about-section'),
+
   // Appointments
   getAppointments: () => apiCall('/appointments'),
   createAppointment: (data) => apiCall('/appointments', {
@@ -239,66 +242,66 @@ export const api = {
 
   // Services
   getServices: () => apiCall('/services'),
-  getServiceByCategorySlug: (category, slug) => 
+  getServiceByCategorySlug: (category, slug) =>
     apiCall(`/services/${category}/${slug}`),
   getService: async (identifier) => {
     const isObjectId = /^[0-9a-fA-F]{24}$/.test(identifier);
-    
+
     if (isObjectId) {
       return apiCall(`/services/${identifier}`);
     } else {
       return apiCall(`/services/${identifier}`);
     }
   },
-  
+
   // Employees
   getEmployees: () => apiCall('/employees'),
-  
+
   // Blogs
   getBlogs: () => apiCall('/blogs'),
-  
+
   getBlogBySlug: (slug) => apiCall(`/blogs/slug/${slug}`),
 
 
   // Add these to your existing api object:
 
-// Service Categories
-getServiceCategoryBySlug: (slug) => 
-  apiCall(`/service-categories/${slug}`),
-  
-getServiceCategoryById: (id) => 
-  apiCall(`/service-categories/id/${id}`),
-  
-getServiceCategories: (params = {}) => {
-  const queryString = new URLSearchParams(params).toString();
-  return apiCall(`/service-categories${queryString ? `?${queryString}` : ''}`);
-},
+  // Service Categories
+  getServiceCategoryBySlug: (slug) =>
+    apiCall(`/service-categories/${slug}`),
 
-getCategorySlugs: () => apiCall('/service-categories/slugs'),
+  getServiceCategoryById: (id) =>
+    apiCall(`/service-categories/id/${id}`),
 
-createServiceCategory: (data) => apiCall('/service-categories', {
-  method: 'POST',
-  body: data
-}),
+  getServiceCategories: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiCall(`/service-categories${queryString ? `?${queryString}` : ''}`);
+  },
 
-updateServiceCategory: (id, data) => apiCall(`/service-categories/${id}`, {
-  method: 'PUT',
-  body: data
-}),
+  getCategorySlugs: () => apiCall('/service-categories/slugs'),
 
-deleteServiceCategory: (id) => apiCall(`/service-categories/${id}`, {
-  method: 'DELETE'
-}),
+  createServiceCategory: (data) => apiCall('/service-categories', {
+    method: 'POST',
+    body: data
+  }),
 
-// Continue with existing methods...
-getEvents: () => apiCall('/events'),
-  
+  updateServiceCategory: (id, data) => apiCall(`/service-categories/${id}`, {
+    method: 'PUT',
+    body: data
+  }),
+
+  deleteServiceCategory: (id) => apiCall(`/service-categories/${id}`, {
+    method: 'DELETE'
+  }),
+
+  // Continue with existing methods...
+  getEvents: () => apiCall('/events'),
+
   // Contact us page api
   createContact: submitContactForm,
-  
+
   // Direct EmailJS email sending (for testing)
   sendEmailViaEmailJS,
-  
+
   // Health check
   checkHealth: async () => {
     const response = await fetch(`${API_URL}/health`);
@@ -311,7 +314,7 @@ export async function testEmailJS() {
   try {
     console.log('Testing EmailJS connection...');
     initializeEmailJS();
-    
+
     const testData = {
       firstName: 'Test',
       lastName: 'User',
@@ -323,7 +326,7 @@ export async function testEmailJS() {
       region: 'Test Region',
       industry: 'Test Industry'
     };
-    
+
     const result = await sendContactConfirmationEmail(testData);
     console.log('✅ Test email sent successfully:', result);
     return result;

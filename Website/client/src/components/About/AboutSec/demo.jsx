@@ -1,6 +1,6 @@
-import  AboutSection3  from "./about-section";
+import AboutSection3 from "./about-section";
 
 
-export default function DemoOne() {
-  return <AboutSection3 />;
+export default function DemoOne({ content }) {
+  return <AboutSection3 content={content} />;
 }

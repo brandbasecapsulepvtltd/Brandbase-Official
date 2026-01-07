@@ -2,9 +2,10 @@
 import { VerticalCutReveal } from "./vertical-cut-reveal";
 import { ArrowRight } from "lucide-react";
 
-export default function AboutSection3() {
+export default function AboutSection3({ content }) {
+  const { socials, image, stats, title, description1, description2, cta } = content || {};
   return (
-    <section className="py-15 px-4 bg-white dark:bg-zinc-900 dark:bg-black">
+    <section className="py-15 px-4 bg-white dark:bg-zinc-950">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           {/* Header with social icons */}
@@ -17,10 +18,10 @@ export default function AboutSection3() {
             </div>
             <div className="flex gap-4">
               <a
-                href="https://www.facebook.com/"
+                href={socials?.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/facebook.svg"
@@ -30,10 +31,10 @@ export default function AboutSection3() {
                 />
               </a>
               <a
-                href="https://www.instagram.com/"
+                href={socials?.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/instagram.svg"
@@ -43,10 +44,10 @@ export default function AboutSection3() {
                 />
               </a>
               <a
-                href="https://www.linkedin.com/"
+                href={socials?.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/linkedin.svg"
@@ -56,10 +57,10 @@ export default function AboutSection3() {
                 />
               </a>
               <a
-                href="https://www.youtube.com/"
+                href={socials?.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-center cursor-pointer"
+                className="md:w-8 md:h-8 sm:w-6 w-5 sm:h-6 h-5 border border-gray-200 bg-white dark:bg-zinc-900 rounded-lg flex items-center justify-center cursor-pointer"
               >
                 <img
                   src="https://pro-section.ui-layouts.com/youtube.svg"
@@ -94,7 +95,7 @@ export default function AboutSection3() {
                 preserveAspectRatio="xMidYMid slice"
                 width={"100%"}
                 height={"100%"}
-                xlinkHref="https://img.freepik.com/premium-photo/interior-modern-office-with-glass-walls-tiled-floor-rows-orange-armchairs-3d-rendering_979520-62343.jpg"
+                xlinkHref={image}
               ></image>
             </svg>
           </figure>
@@ -103,22 +104,22 @@ export default function AboutSection3() {
           <div className="flex flex-wrap lg:justify-start justify-between items-center py-3 text-sm">
             <div className="flex gap-4">
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-orange-500 font-bold">10+</span>
+                <span className="text-orange-500 font-bold">{stats?.years}</span>
                 <span className="text-gray-600 dark:text-gray-300">years of excellence</span>
                 <span className="text-gray-300">|</span>
               </div>
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-orange-500 font-bold">1000+</span>
+                <span className="text-orange-500 font-bold">{stats?.projectsDelivered}</span>
                 <span className="text-gray-600 dark:text-gray-300">projects delivered</span>
               </div>
             </div>
             <div className="lg:absolute right-0 bottom-16 flex lg:flex-col flex-row-reverse lg:gap-0 gap-4">
               <div className="flex lg:text-3xl sm:text-2xl text-xl items-center gap-2 mb-2">
-                <span className="text-orange-500 font-semibold">500+</span>
+                <span className="text-orange-500 font-semibold">{stats?.projects}</span>
                 <span className="text-gray-600 dark:text-gray-300 uppercase">projects</span>
               </div>
               <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-orange-500 font-bold">98%</span>
+                <span className="text-orange-500 font-bold">{stats?.satisfaction}</span>
                 <span className="text-gray-600 dark:text-gray-300">client satisfaction</span>
                 <span className="text-gray-300 lg:hidden block">|</span>
               </div>
@@ -126,9 +127,9 @@ export default function AboutSection3() {
           </div>
         </div>
         {/* Main Content */}
-                <div className="grid md:grid-cols-3 gap-8 mt-4">
+        <div className="grid md:grid-cols-3 gap-8 mt-4">
           <div className="md:col-span-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 md:mb-8">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-white mb-6 md:mb-8">
               <VerticalCutReveal
                 splitBy="words"
                 staggerDuration={0.1}
@@ -141,26 +142,19 @@ export default function AboutSection3() {
                   delay: 1,
                 }}
               >
-                Elevating Brands Through Innovation & Excellence
+                {title}
               </VerticalCutReveal>
             </h1>
 
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 text-gray-600 dark:text-gray-300">
               <div className="text-xs sm:text-base">
                 <p className="leading-relaxed text-justify">
-                  At BCPL, we are dedicated to excellence and innovation,
-                  offering customized solutions to meet each client's specific
-                  needs. With our worldwide reach, BCPL stands prepared to
-                  assist your event and marketing objectives with unparalleled
-                  professionalism and creativity.
+                  {description1}
                 </p>
               </div>
               <div className="text-xs sm:text-base">
                 <p className="leading-relaxed text-justify">
-                  As a top provider of event management, digital marketing,
-                  website development, and exhibition services, we excel in
-                  crafting memorable experiences and achieving outstanding
-                  outcomes for clients globally.
+                  {description2}
                 </p>
               </div>
             </div>
@@ -169,24 +163,21 @@ export default function AboutSection3() {
           <div className="md:col-span-1 mt-4 md:mt-0">
             <div className="text-left md:text-right">
               <div className="text-orange-500 text-xl md:text-2xl font-bold mb-1 md:mb-2">
-                BRANDBASE CAPSULE
+                {cta?.title}
               </div>
               <div className="text-gray-600 dark:text-gray-300 text-xs md:text-sm mb-6 md:mb-8">
-                Your Trusted Partner in Marketing & Digital Excellence
+                {cta?.subtitle}
               </div>
 
               <div className="mb-6">
-                <p className="text-gray-900 dark:text-gray-100 dark:text-gray-100 font-medium text-sm md:text-base mb-4">
-                  At BCPL, we are committed to delivering excellence in every
-                  project. Whether it's event management, digital marketing,
-                  website development, or international exhibitions, we ensure
-                  your brand stands out and achieves its objectives.
+                <p className="text-gray-900 dark:text-white font-medium text-sm md:text-base mb-4">
+                  {cta?.text}
                 </p>
               </div>
 
               {/* Button: w-full on mobile, then w-fit ml-auto on md and up */}
-              <button className="bg-neutral-900 hover:bg-neutral-950 shadow-lg shadow-neutral-900 border border-neutral-700 flex w-full md:w-fit md:ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold justify-center md:justify-start">
-                LET'S COLLABORATE <ArrowRight className="" />
+              <button className="bg-neutral-900 hover:bg-neutral-950 dark:bg-orange-600 dark:hover:bg-orange-700 shadow-lg shadow-neutral-900 border border-neutral-700 dark:border-orange-500 flex w-full md:w-fit md:ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold justify-center md:justify-start">
+                {cta?.buttonText} <ArrowRight className="" />
               </button>
             </div>
           </div>
