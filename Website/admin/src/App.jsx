@@ -16,21 +16,22 @@ import ContactDetail from './pages/ContactDetail';
 import LoginPage from './pages/loginPage';
 import LeadManagement from './pages/LeadManagement';
 import ServiceCategoryManagement from './pages/ServiceCategoryManagement';
+import AboutSectionManagement from './pages/AboutSectionManagement';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
-  
+
   if (loading) {
     return <div className="flex justify-center items-center h-screen">
       <div className="text-white">Loading...</div>
     </div>;
   }
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/admin/login" replace />;
   }
-  
+
   return children;
 };
 
@@ -38,7 +39,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/admin/login" element={<LoginPage />} />
-      
+
       {/* Protected Routes */}
       <Route path="/admin/dashboard" element={
         <ProtectedRoute>
@@ -46,7 +47,8 @@ function AppRoutes() {
         </ProtectedRoute>
       }>
         <Route index element={<Navigate to="ui/home" replace />} />
-        <Route path="ui/home" element={<AdminHome/>} />
+        <Route path="ui/home" element={<AdminHome />} />
+        <Route path="ui/about-section" element={<AboutSectionManagement />} />
         <Route path="admin-appointment" element={<AdminAppointmentPage />} />
         <Route path="admin-appointment/:id" element={<AppointmentDetailPage />} />
         <Route path="employee-management" element={<EmployeeManagementPage />} />
@@ -58,7 +60,7 @@ function AppRoutes() {
         <Route path="event-management" element={<EventManagement />} />
         <Route path="event-leads" element={<LeadManagement />} />
       </Route>
-      
+
       {/* Redirect root to login */}
       <Route path="/" element={<Navigate to="/admin/login" replace />} />
       <Route path="/admin" element={<Navigate to="/admin/login" replace />} />

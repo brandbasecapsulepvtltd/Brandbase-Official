@@ -30,21 +30,23 @@ export function Navigation() {
     { label: "Appointments", icon: Calendar, path: "/admin/dashboard/admin-appointment" },
     { label: "Contact Us", icon: Mail, path: "/admin/dashboard/contact-management" },
     { label: "Employees", icon: Users, path: "/admin/dashboard/employee-management" },
-    { 
-      label: "UI", 
-      icon: Palette, 
+    {
+      label: "UI",
+      icon: Palette,
       children: [
         { label: "Home", path: "/admin/dashboard/ui/home" },
+        { label: "About Section", path: "/admin/dashboard/ui/about-section" },
         { label: "Blogs", path: "/admin/dashboard/blogs-management" },
-        { label: "Service", path: "/admin/dashboard/service-management" }
+        { label: "Service Category", path: "/admin/dashboard/service-category" },
+        { label: "Service", path: "/admin/dashboard/service-management" },
       ]
     },
-    { 
-      label: "Event Management", 
-      icon: Calendar, 
+    {
+      label: "Event Management",
+      icon: Calendar,
       children: [
         { label: "Manage Events", path: "/admin/dashboard/event-management" },
-        { label: "Events Leads", path: "/admin/dashboard/event-leads"}
+        { label: "Events Leads", path: "/admin/dashboard/event-leads" }
       ]
     }
   ];
@@ -117,7 +119,7 @@ export function Navigation() {
         <nav className="flex flex-col p-4 space-y-2 flex-grow relative">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = item.children 
+            const isActive = item.children
               ? item.children.some(child => location.pathname.startsWith(child.path))
               : location.pathname.startsWith(item.path);
 
@@ -130,10 +132,9 @@ export function Navigation() {
                     <Link
                       to={item.path}
                       className={`flex items-center w-full rounded-lg px-3 py-2 transition-all duration-200
-                        ${
-                          isActive
-                            ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                            : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                        ${isActive
+                          ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                          : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                         }`}
                     >
                       <Icon className="h-5 w-5" />
@@ -146,10 +147,9 @@ export function Navigation() {
                     <button
                       onClick={() => toggleDropdown(item.label)}
                       className={`flex items-center justify-between w-full rounded-lg px-3 py-2 transition-all duration-200
-                        ${
-                          isActive
-                            ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                            : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                        ${isActive
+                          ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                          : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                         }`}
                     >
                       <div className="flex items-center">
@@ -174,10 +174,9 @@ export function Navigation() {
                               key={child.path}
                               to={child.path}
                               className={`block px-3 py-2 rounded-lg text-sm transition-all font-medium
-                                ${
-                                  childActive
-                                    ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                                    : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                                ${childActive
+                                  ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                                  : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                                 }`}
                             >
                               {child.label}
@@ -214,7 +213,7 @@ export function Navigation() {
                   <p className="text-xs text-gray-500">Administrator</p>
                 </div>
               </div>
-              
+
               {/* Logout Button */}
               <button
                 onClick={() => setShowLogoutConfirm(true)}
@@ -223,7 +222,7 @@ export function Navigation() {
                 <LogOut className="h-4 w-4 mr-2" />
                 <span>Logout</span>
               </button>
-              
+
               {/* Footer Text */}
               <div className="text-xs text-gray-500 text-center mt-3">
                 Brandbase Capsule Admin
@@ -256,14 +255,14 @@ export function Navigation() {
         </div>
         <div className="flex items-center space-x-3">
           {/* Mobile Logout Button */}
-          <button 
+          <button
             onClick={() => setShowLogoutConfirm(true)}
             className="p-2 text-gray-600 hover:text-red-600 transition-colors"
           >
             <LogOut className="h-5 w-5" />
           </button>
-          <button 
-            className="text-gray-600 hover:text-[#FF6600] transition-colors" 
+          <button
+            className="text-gray-600 hover:text-[#FF6600] transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
@@ -289,7 +288,7 @@ export function Navigation() {
           <div className="space-y-2 flex-grow">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = item.children 
+              const isActive = item.children
                 ? item.children.some(child => location.pathname.startsWith(child.path))
                 : location.pathname.startsWith(item.path);
 
@@ -299,10 +298,9 @@ export function Navigation() {
                   to={item.path}
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center w-full rounded-lg px-4 py-3 text-base transition-all font-medium
-                    ${
-                      isActive
-                        ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                        : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                    ${isActive
+                      ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                      : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                     }`}
                 >
                   <Icon className="h-5 w-5 mr-3" />
@@ -313,10 +311,9 @@ export function Navigation() {
                   <button
                     onClick={() => toggleDropdown(item.label)}
                     className={`flex items-center justify-between w-full rounded-lg px-4 py-3 text-base transition-all font-medium
-                      ${
-                        isActive
-                          ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                          : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                      ${isActive
+                        ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                        : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                       }`}
                   >
                     <div className="flex items-center">
@@ -336,10 +333,9 @@ export function Navigation() {
                             to={child.path}
                             onClick={() => setMenuOpen(false)}
                             className={`block px-3 py-2 rounded-lg text-sm transition-all font-medium
-                              ${
-                                childActive
-                                  ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
-                                  : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
+                              ${childActive
+                                ? "bg-[#FF6600] text-white shadow-md hover:bg-orange-600"
+                                : "bg-orange-50 text-gray-700 hover:bg-orange-100 hover:text-[#FF6600]"
                               }`}
                           >
                             {child.label}
@@ -372,9 +368,8 @@ export function Navigation() {
       )}
 
       {/* Main Content Area */}
-      <main className={`min-h-screen bg-gray-50 transition-all duration-300 ${
-        collapsed ? "md:ml-20" : "md:ml-64"
-      } ${menuOpen ? 'mt-16' : ''}`}>
+      <main className={`min-h-screen bg-gray-50 transition-all duration-300 ${collapsed ? "md:ml-20" : "md:ml-64"
+        } ${menuOpen ? 'mt-16' : ''}`}>
         <div className="p-6">
           <Outlet /> {/* This is where your page content will render */}
         </div>
