@@ -15,11 +15,11 @@ const app = express();
 // CORS configuration
 const corsOptions = {
   origin: [
-    'http://localhost:5173', 
-    'http://127.0.0.1:5173', 
-    'http://localhost:5174', 
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'http://localhost:5174',
     'http://localhost:3000',
-    'https://brandbase-nu.vercel.app', 
+    'https://brandbase-nu.vercel.app',
     'https://brandbase1.netlify.app',
     'https://bcpl-admin.netlify.app'
   ],
@@ -41,15 +41,15 @@ const apiKeyAuth = (req, res, next) => {
     '/api/health',
     '/api/generate-key' // Keep this for initial setup, remove later
   ];
-  
+
   // Check if current path is public
   if (publicEndpoints.includes(req.path)) {
     return next();
   }
-  
+
   // Get API key from headers
   const apiKey = req.headers['x-api-key'] || req.headers['authorization'];
-  
+
   if (!apiKey) {
     return res.status(401).json({
       success: false,
@@ -61,14 +61,14 @@ const apiKeyAuth = (req, res, next) => {
   // Remove 'Bearer ' prefix if present
   const providedKey = apiKey.replace('Bearer ', '').trim();
   const validApiKey = process.env.API_KEY;
-  
+
   if (!validApiKey) {
     return res.status(500).json({
       success: false,
       message: 'Server configuration error: API key not set'
     });
   }
-  
+
   // Compare keys
   if (providedKey === validApiKey) {
     next();
@@ -96,6 +96,7 @@ const eventRoutes = require('./routes/eventRoutes');
 const serviceCategoryRoutes = require('./routes/serviceCategoryRoutes');
 const leadRoutes = require('./routes/leadRoutes');
 
+const aboutSectionRoutes = require('./routes/aboutSectionRoutes');
 
 
 // Routes (all protected by API key except health check)
@@ -108,6 +109,7 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/service-categories', serviceCategoryRoutes); // Add this
 app.use('/api/events', eventRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/about-section', aboutSectionRoutes);
 
 // Health check route (public)
 app.get('/api/health', (req, res) => {
@@ -127,7 +129,7 @@ app.get('/api/health', (req, res) => {
 app.get('/api/generate-key', (req, res) => {
   const crypto = require('crypto');
   const apiKey = crypto.randomBytes(32).toString('hex');
-  
+
   res.json({
     success: true,
     message: 'API Key Generated',
@@ -397,7 +399,7 @@ app.listen(PORT, () => {
   
   ⚡ Server ready at: http://localhost:${PORT}
   `);
-  
+
   // Warning if API key is not set
   if (!process.env.API_KEY) {
     console.warn('\n⚠️  WARNING: API_KEY is not set in environment variables!');
