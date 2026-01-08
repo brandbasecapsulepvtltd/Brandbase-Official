@@ -17,6 +17,7 @@ import LoginPage from './pages/loginPage';
 import LeadManagement from './pages/LeadManagement';
 import ServiceCategoryManagement from './pages/ServiceCategoryManagement';
 import AboutSectionManagement from './pages/AboutSectionManagement';
+import PortfolioManagement from './pages/PortfolioManagement';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -59,6 +60,7 @@ function AppRoutes() {
         <Route path="blogs-management" element={<BlogManagement />} />
         <Route path="event-management" element={<EventManagement />} />
         <Route path="event-leads" element={<LeadManagement />} />
+        <Route path="portfolio" element={<PortfolioManagement />} />
       </Route>
 
       {/* Redirect root to login */}

@@ -39,6 +39,7 @@ export function Navigation() {
         { label: "Blogs", path: "/admin/dashboard/blogs-management" },
         { label: "Service Category", path: "/admin/dashboard/service-category" },
         { label: "Service", path: "/admin/dashboard/service-management" },
+        { label: "Portfolio", path: "/admin/dashboard/portfolio" },
       ]
     },
     {
