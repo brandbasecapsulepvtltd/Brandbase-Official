@@ -3,15 +3,16 @@
 import React from 'react'
 import { PortfolioHero } from './PortfolioHero/demo'
 
-import { ServicesShowcase } from './PortfolioCategory/team-showcase'
-import DemoOne from './PortfolioCta/demo'
+import PortfolioList from '../PortfolioList'
+
+import PortfolioResults from './PortfolioCta/testimonial-1'
 
 const PortfolioContent = () => {
   return (
     <>
-    <PortfolioHero/>
-    <ServicesShowcase/>
-    <DemoOne/>
+      <PortfolioHero />
+      <PortfolioList />
+      <PortfolioResults />
     </>
   )
 }
