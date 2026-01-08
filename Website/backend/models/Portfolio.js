@@ -1,88 +1,105 @@
 const mongoose = require('mongoose');
 
 const portfolioSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: [true, 'Please add a title'],
-        trim: true,
-        maxlength: [100, 'Title cannot be more than 100 characters']
-    },
     slug: {
         type: String,
         required: true,
         unique: true
     },
-    description: {
-        type: String,
-        required: [true, 'Please add a description'],
-        maxlength: [500, 'Description cannot be more than 500 characters']
-    },
     category: {
         type: String,
-        required: [true, 'Please select a category'],
-        enum: [
-            'web-development',
-            'app-development',
-            'branding',
-            'digital-marketing',
-            'ui-ux-design',
-            'ecommerce',
-            'other'
-        ]
+        required: true
     },
-    client: {
-        type: String,
-        trim: true
+    hero: {
+        tagline: String,
+        title: String,
+        description: String,
+        ctaText: String,
+        videoUrl: String,
+        images: [String]
     },
-    image: {
-        type: String,
-        required: [true, 'Please add a featured image']
+    bento: {
+        mainHeading: String,
+        cards: {
+            conceptToReality: {
+                title: String,
+                imageAlt: String,
+                imageUrl: String
+            },
+            projectsDelivered: {
+                count: String,
+                label: String
+            },
+            amazingWork: {
+                title: String,
+                structureImage: String,
+                structureAlt: String
+            },
+            showcaseStall: {
+                imageUrl: String,
+                alt: String,
+                location: String
+            },
+            citiesReach: {
+                count: String,
+                label: String
+            }
+        },
+        services: [String]
     },
-    images: [{
-        type: String
+    clientPortfolio: [{
+        // id: Number (we can use _id)
+        imagePosition: { type: String, default: 'right' }, // 'left' or 'right'
+        logo: String,
+        companyName: String,
+        industry: String,
+        projectTitle: String,
+        projectDescription: String,
+        servicesProvided: [String],
+        results: [{
+            value: String,
+            label: String
+        }],
+        mediaItems: [{
+            type: { type: String, enum: ['image', 'video'] },
+            url: String,
+            alt: String,
+            title: String,
+            thumbnail: String
+        }],
+        testimonial: {
+            clientImage: String,
+            clientName: String,
+            position: String,
+            quote: String
+        }
     }],
-    challenge: {
-        type: String
+    testimonials: {
+        sectionTitle: String,
+        sectionDescription: String,
+        testimonials: [{
+            text: String,
+            image: String,
+            name: String,
+            role: String
+        }]
     },
-    solution: {
-        type: String
+    faqs: {
+        sectionTitle: String,
+        faqs: [{
+            question: String,
+            answer: String
+        }]
     },
-    result: {
-        type: String
-    },
-    technologies: [{
-        type: String
-    }],
-    liveLink: {
-        type: String,
-        match: [
-            /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
-            'Please use a valid URL with HTTP or HTTPS'
-        ]
-    },
-    isFeatured: {
-        type: Boolean,
-        default: false
-    },
-    order: {
-        type: Number,
-        default: 0
+    metadata: {
+        title: String,
+        description: String,
+        keywords: [String]
     },
     createdAt: {
         type: Date,
         default: Date.now
     }
-});
-
-// Create slug from title
-portfolioSchema.pre('validate', function (next) {
-    if (this.title && !this.slug) {
-        this.slug = this.title
-            .toLowerCase()
-            .replace(/[^\w ]+/g, '')
-            .replace(/ +/g, '-');
-    }
-    next();
 });
 
 module.exports = mongoose.model('Portfolio', portfolioSchema);
