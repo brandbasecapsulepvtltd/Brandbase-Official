@@ -6,6 +6,8 @@ export const metadata = {
   description: 'Explore our services',
 }
 
+export const revalidate = 10;
+
 // Page component must be the default export
 export default function BlogCategoryPage() {
   return (
@@ -15,7 +17,7 @@ export default function BlogCategoryPage() {
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </Head>
-      
+
       <h1>All blogs of specific category</h1>
       {/* Page content */}
     </div>

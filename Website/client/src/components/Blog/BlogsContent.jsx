@@ -30,7 +30,7 @@ const BlogSearchFilter = ({ onSearch, onFilter, activeCategory }) => {
   };
 
   return (
-    <div className="mb-12 px-5 bg-white dark:bg-zinc-900 dark:bg-black">
+    <div className="mb-12 px-5 bg-white dark:bg-black">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -39,10 +39,10 @@ const BlogSearchFilter = ({ onSearch, onFilter, activeCategory }) => {
             placeholder="Search articles..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-zinc-800 text-gray-900 dark:text-white"
           />
         </div>
-        
+
         <div
           className="flex items-center gap-3 overflow-x-auto pb-2 w-full md:w-auto flex-grow"
           style={{ WebkitOverflowScrolling: 'touch' }}
@@ -55,7 +55,7 @@ const BlogSearchFilter = ({ onSearch, onFilter, activeCategory }) => {
                 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200
                 ${activeCategory === category || (category === 'All' && !activeCategory)
                   ? 'bg-orange-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 dark:text-gray-300 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700'
                 }
               `}
             >
@@ -83,8 +83,8 @@ const TrendingTopics = () => {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-zinc-900 dark:bg-black rounded-2xl p-8 border border-gray-200 mb-12">
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6 flex items-center gap-2">
+    <div className="bg-white dark:bg-black rounded-2xl p-8 border border-gray-200 dark:border-zinc-800 mb-12">
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
         <TrendingUp className="w-6 h-6 text-orange-600" />
         Trending Topics
       </h3>
@@ -93,9 +93,9 @@ const TrendingTopics = () => {
           <motion.div
             key={index}
             whileHover={{ scale: 1.05 }}
-            className="bg-gray-50 dark:bg-zinc-900 rounded-xl p-4 text-center cursor-pointer hover:bg-orange-50 hover:border-orange-200 border border-transparent transition-all group"
+            className="bg-gray-50 dark:bg-zinc-800/50 rounded-xl p-4 text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-orange-500/10 hover:border-orange-200 dark:hover:border-orange-500/20 border border-transparent transition-all group"
           >
-            <div className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 group-hover:text-orange-600 mb-1">
+            <div className="font-semibold text-gray-900 dark:text-white group-hover:text-orange-600 mb-1">
               {topic.name.charAt(0).toUpperCase() + topic.name.slice(1)}
             </div>
             <div className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-orange-500">
@@ -126,16 +126,16 @@ const BlogsContent = () => {
 
   const filterBlogs = (search, category) => {
     const filtered = BlogsData.filter(blog => {
-      const matchesSearch = !search || 
+      const matchesSearch = !search ||
         blog.metadata.title.toLowerCase().includes(search.toLowerCase()) ||
         blog.metadata.description.toLowerCase().includes(search.toLowerCase()) ||
         blog.metadata.category.toLowerCase().includes(search.toLowerCase());
-      
+
       const matchesCategory = category === 'All' || blog.metadata.category === category;
-      
+
       return matchesSearch && matchesCategory;
     });
-    
+
     setFilteredBlogs(filtered);
   };
 
@@ -145,12 +145,12 @@ const BlogsContent = () => {
   const helpfulResources = BlogsData.filter(blog => blog.metadata.isHelpfulResources);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:bg-black">
+    <div className="min-h-screen bg-white dark:bg-black">
       <BlogHero sliderBlogs={sliderBlogs} />
       <EditorPicksSection editorPicks={editorPicks} />
       <HelpfulResourcesSection helpfulResources={helpfulResources} />
       <TrendingTopics />
-      <BlogSearchFilter 
+      <BlogSearchFilter
         onSearch={handleSearch}
         onFilter={handleFilter}
         activeCategory={activeCategory}

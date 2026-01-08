@@ -6,11 +6,13 @@ export const metadata = {
   description: 'Explore our Blogs',
 }
 
+export const revalidate = 10;
+
 // Page component must be the default export
 export default function BlogsPage() {
   return (
     <>
-    <BlogsContent/>
+      <BlogsContent />
     </>
   )
 }

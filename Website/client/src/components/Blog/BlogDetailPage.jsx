@@ -12,9 +12,9 @@ export default function BlogDetailPage({ blogData }) {
   if (!blogData) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
-  
+
   const { metadata, sections } = blogData;
-  
+
   const articleRef = useRef(null);
   const boxRef = useRef(null);
   const [visible, setVisible] = useState(false); // whether black box is shown
@@ -99,26 +99,26 @@ export default function BlogDetailPage({ blogData }) {
     const section = sections[idx];
     if (!section) return;
     setOpen(false);
-    
+
     // Calculate dynamic offset - 20% of viewport height
     const VIEWPORT_OFFSET_PERCENT = 0.2;
     const offset = window.innerHeight * VIEWPORT_OFFSET_PERCENT;
-    
+
     // Find the element by id
     const element = document.getElementById(section.id);
     if (!element) return;
-    
+
     // Get element position
     const elementTop = element.getBoundingClientRect().top + window.scrollY;
-    
+
     // Scroll to element with offset
     const targetPosition = elementTop - offset;
-    
+
     window.scrollTo({
       top: targetPosition,
       behavior: "smooth"
     });
-    
+
     setActiveIndex(idx);
   };
 
@@ -142,7 +142,7 @@ export default function BlogDetailPage({ blogData }) {
   }));
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:bg-black">
+    <div className="min-h-screen bg-white dark:bg-black">
       {/* Floating top Menu Box */}
       {/* Responsive positioning: Centered on mobile, Offset to right on desktop */}
       <div
@@ -157,7 +157,7 @@ export default function BlogDetailPage({ blogData }) {
         style={{ width: open ? 420 : 210 }}
       >
         <div
-          className={`mx-auto rounded-2xl shadow-2xl bg-orange-100 text-black dark:text-white overflow-hidden`}
+          className={`mx-auto rounded-2xl shadow-2xl bg-orange-100 dark:bg-zinc-800 text-black dark:text-white overflow-hidden border dark:border-zinc-700`}
           style={{
             transition: "height 350ms cubic-bezier(.2,.9,.2,1), width 350ms cubic-bezier(.2,.9,.2,1)",
           }}
@@ -174,16 +174,15 @@ export default function BlogDetailPage({ blogData }) {
               </div>
             </div>
 
-            <div className="ml-auto px-2 py-1 rounded-md bg-orange-400 text-sm font-semibold tracking-wide">
+            <div className="ml-auto px-2 py-1 rounded-md bg-orange-400 dark:bg-orange-600 text-sm font-semibold tracking-wide text-white">
               {percent}%
             </div>
           </button>
 
           {/* Expandable content */}
           <div
-            className={`overflow-hidden bg-black/90 transition-[max-height,opacity,padding] duration-300 ease-out ${
-              open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
-            }`}
+            className={`overflow-hidden bg-black/90 transition-[max-height,opacity,padding] duration-300 ease-out ${open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
+              }`}
             style={{ padding: open ? "12px" : "0px 12px" }}
           >
             <div className="px-2 pb-3 text-gray-300 text-[13px]">Sections</div>
@@ -198,7 +197,7 @@ export default function BlogDetailPage({ blogData }) {
                       <button
                         onClick={() => goToSection(s.index)}
                         className={`w-full text-left text-sm block px-3 py-2 rounded-md transition-colors duration-150
-                          ${s.index === activeIndex ? "bg-white dark:bg-zinc-900 dark:bg-black/10 text-white font-semibold" : "text-gray-300 hover:bg-white dark:bg-zinc-900 dark:bg-black/5"}
+                          ${s.index === activeIndex ? "bg-orange-500 text-white font-semibold" : "text-gray-300 hover:bg-white/10"}
                         `}
                       >
                         {s.title}
@@ -209,14 +208,14 @@ export default function BlogDetailPage({ blogData }) {
               )}
             </div>
 
-            <div className="pt-2 px-2 pb-3 border-t border-gray-800 flex items-center gap-2">
-              <button title="Share on Twitter" className="p-1 rounded hover:bg-white dark:bg-zinc-900 dark:bg-black/5">
+            <div className="pt-2 px-2 pb-3 border-t border-gray-800 dark:border-zinc-700 flex items-center gap-2">
+              <button title="Share on Twitter" className="p-1 rounded hover:bg-white/10">
                 <Twitter size={16} className="text-gray-300" />
               </button>
-              <button title="Share on LinkedIn" className="p-1 rounded hover:bg-white dark:bg-zinc-900 dark:bg-black/5">
+              <button title="Share on LinkedIn" className="p-1 rounded hover:bg-white/10">
                 <Linkedin size={16} className="text-gray-300" />
               </button>
-              <button title="Share via Email" className="p-1 rounded hover:bg-white dark:bg-zinc-900 dark:bg-black/5">
+              <button title="Share via Email" className="p-1 rounded hover:bg-white/10">
                 <Mail size={16} className="text-gray-300" />
               </button>
               <div className="ml-auto text-xs text-gray-400">Progress</div>
@@ -250,7 +249,7 @@ export default function BlogDetailPage({ blogData }) {
 
         {/* Main Content Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          
+
           {/* Left Column - Article Content */}
           <div className="col-span-1 lg:col-span-2">
             {/* Featured Image */}
@@ -284,12 +283,12 @@ export default function BlogDetailPage({ blogData }) {
             </article>
 
             {/* Navigation Footer */}
-            <div className="border-t border-b border-gray-300 py-6 md:py-8 mt-12 md:mt-16 mb-12 flex flex-col sm:flex-row gap-4 sm:gap-8">
-              <button className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 rounded hover:bg-gray-100 transition w-full sm:w-auto">
+            <div className="border-t border-b border-gray-300 dark:border-zinc-800 py-6 md:py-8 mt-12 md:mt-16 mb-12 flex flex-col sm:flex-row gap-4 sm:gap-8">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 rounded hover:bg-gray-100 dark:hover:bg-zinc-800 transition w-full sm:w-auto text-gray-900 dark:text-white">
                 <span>←</span>
                 <span>Previous Post</span>
               </button>
-              <button className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 rounded hover:bg-gray-100 transition w-full sm:w-auto sm:ml-auto">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 rounded hover:bg-gray-100 dark:hover:bg-zinc-800 transition w-full sm:w-auto sm:ml-auto text-gray-900 dark:text-white">
                 <span>Next Post</span>
                 <span>→</span>
               </button>
@@ -299,24 +298,23 @@ export default function BlogDetailPage({ blogData }) {
           {/* Right Sidebar */}
           <div className="col-span-1">
             <div className="sticky top-8">
-              {/* Share Post Section */}
-              <div className="mb-8 md:mb-12 border-b border-gray-300 pb-8">
+              <div className="mb-8 md:mb-12 border-b border-gray-300 dark:border-zinc-800 pb-8">
                 <h3 className="text-lg font-bold text-black dark:text-white mb-6">Share post</h3>
                 <div className="flex gap-4">
-                  <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share on Twitter">
+                  <button className="p-2 border border-gray-300 dark:border-zinc-700 rounded hover:bg-gray-100 dark:hover:bg-zinc-800 transition" title="Share on Twitter">
                     <Twitter size={18} className="text-gray-700 dark:text-gray-300" />
                   </button>
-                  <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share on LinkedIn">
+                  <button className="p-2 border border-gray-300 dark:border-zinc-700 rounded hover:bg-gray-100 dark:hover:bg-zinc-800 transition" title="Share on LinkedIn">
                     <Linkedin size={18} className="text-gray-700 dark:text-gray-300" />
                   </button>
-                  <button className="p-2 border border-gray-300 rounded hover:bg-gray-100 transition" title="Share via Email">
+                  <button className="p-2 border border-gray-300 dark:border-zinc-700 rounded hover:bg-gray-100 dark:hover:bg-zinc-800 transition" title="Share via Email">
                     <Mail size={18} className="text-gray-700 dark:text-gray-300" />
                   </button>
                 </div>
               </div>
 
               {/* Author Info */}
-              <div className="mb-8 md:mb-12 border-b border-gray-300 pb-8">
+              <div className="mb-8 md:mb-12 border-b border-gray-300 dark:border-zinc-800 pb-8">
                 <h3 className="text-lg font-bold text-black dark:text-white mb-4">Author info</h3>
                 <div className="flex gap-4">
                   <img
@@ -341,7 +339,7 @@ export default function BlogDetailPage({ blogData }) {
 
               {/* Editor's Choice */}
               {metadata.isEditorPick && (
-                <div className="mb-8 md:mb-12 border-b border-gray-300 pb-8">
+                <div className="mb-8 md:mb-12 border-b border-gray-300 dark:border-zinc-800 pb-8">
                   <h3 className="text-lg font-bold text-black dark:text-white mb-6">Editor's choice</h3>
                   <div className="space-y-6">
                     <article className="flex gap-4 cursor-pointer hover:opacity-75 transition">
