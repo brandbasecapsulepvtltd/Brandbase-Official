@@ -27,12 +27,34 @@ const styles = `
     --cal-text-muted: #64748b;
     --cal-border: #e2e8f0;
     --cal-grid-line: #f1f5f9;
+    --cal-header-bg: #f8fafc;
+    --cal-cell-bg: #ffffff;
+    --cal-cell-hover: #fafafa;
+    --cal-empty-bg: #fcfcfc;
+    --cal-btn-bg: #fff;
+    --cal-btn-hover: #f8fafc;
     --event-height: 26px;
     --event-gap: 4px;
   }
 
-  .calendar-wrapper {
+  /* Dark Mode Variables */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cal-bg: #09090b;
+      --cal-text-main: #f4f4f5;
+      --cal-text-muted: #a1a1aa;
+      --cal-border: #27272a;
+      --cal-grid-line: #18181b;
+      --cal-header-bg: #18181b;
+      --cal-cell-bg: #09090b;
+      --cal-cell-hover: #18181b;
+      --cal-empty-bg: #0a0a0a;
+      --cal-btn-bg: #18181b;
+      --cal-btn-hover: #27272a;
+    }
+  }
 
+  .calendar-wrapper {
     color: var(--cal-text-main);
     background: var(--cal-bg);
     border-radius: 24px;
@@ -42,6 +64,12 @@ const styles = `
     max-width: 1200px;
     margin: 0 auto;
     transition: all 0.3s ease;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .calendar-wrapper {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
   }
 
   /* --- HEADER --- */
@@ -55,13 +83,13 @@ const styles = `
   .cal-title-section h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--cal-text-main);
     margin: 0;
   }
   
   .cal-title-section p {
     font-size: 14px;
-    color: #64748b;
+    color: var(--cal-text-muted);
     margin-top: 4px;
   }
 
@@ -69,14 +97,14 @@ const styles = `
 
   .cal-btn {
     display: flex; align-items: center; justify-content: center;
-    padding: 8px 16px; background: #fff;
+    padding: 8px 16px; background: var(--cal-btn-bg);
     border: 1px solid var(--cal-border); border-radius: 8px;
     cursor: pointer; font-weight: 600; font-size: 14px;
-    color: #475569;
+    color: var(--cal-text-muted);
     transition: all 0.2s;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
-  .cal-btn:hover { background: #f8fafc; border-color: #cbd5e1; color: #1e293b; }
+  .cal-btn:hover { background: var(--cal-btn-hover); border-color: var(--cal-border); color: var(--cal-text-main); }
   .cal-btn:active { transform: translateY(1px); }
   .cal-btn.icon-only { padding: 8px; border-radius: 8px; width: 36px; height: 36px; }
 
@@ -85,20 +113,20 @@ const styles = `
     border: 1px solid var(--cal-border);
     border-radius: 16px;
     overflow: hidden;
-    background: white;
+    background: var(--cal-cell-bg);
     box-shadow: 0 0 0 1px rgba(0,0,0,0.02);
   }
 
   .cal-weekday-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background: #f8fafc;
+    background: var(--cal-header-bg);
     border-bottom: 1px solid var(--cal-border);
   }
 
   .cal-weekday {
     padding: 14px; text-align: center; font-size: 12px;
-    font-weight: 600; color: #64748b;
+    font-weight: 600; color: var(--cal-text-muted);
     text-transform: uppercase; letter-spacing: 0.05em;
   }
 
@@ -111,15 +139,15 @@ const styles = `
   }
 
   .cal-day-cell {
-    background: white;
+    background: var(--cal-cell-bg);
     padding: 8px 0;
     min-height: 150px;
     display: flex;
     flex-direction: column;
   }
   
-  .cal-day-cell:hover { background: #fafafa; }
-  .cal-empty { background: #fcfcfc; }
+  .cal-day-cell:hover { background: var(--cal-cell-hover); }
+  .cal-empty { background: var(--cal-empty-bg); }
 
   .cal-day-header {
     display: flex; justify-content: flex-end;
@@ -128,7 +156,7 @@ const styles = `
   }
 
   .cal-day-number {
-    font-size: 14px; font-weight: 500; color: #64748b;
+    font-size: 14px; font-weight: 500; color: var(--cal-text-muted);
     width: 28px; height: 28px;
     display: flex; align-items: center; justify-content: center;
     border-radius: 50%;
@@ -491,8 +519,8 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
           </div>
 
           {eventsData.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-16 text-slate-400 bg-slate-50">
-              <CalendarX size={48} className="mb-4 text-slate-300" />
+            <div className="flex flex-col items-center justify-center py-16 text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-zinc-900">
+              <CalendarX size={48} className="mb-4 text-slate-300 dark:text-slate-600" />
               <p className="text-lg font-medium">No events found</p>
               <p className="text-sm">
                 Try adjusting your filters to see more results.

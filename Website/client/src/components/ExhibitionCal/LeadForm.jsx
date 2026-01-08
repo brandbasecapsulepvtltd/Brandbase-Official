@@ -74,7 +74,7 @@ export function LeadForm({ event, isOpen, onClose }) {
 
       if (data.success) {
         setIsSubmitted(true);
-        
+
         // Optionally send email notification via EmailJS
         try {
           await sendEmailNotification(leadData);
@@ -109,7 +109,7 @@ export function LeadForm({ event, isOpen, onClose }) {
       // Initialize EmailJS
       const emailjs = await import('@emailjs/browser');
       emailjs.init('maLQ-G7P2BQOoOVoY');
-      
+
       const templateParams = {
         to_name: 'Admin Team',
         to_email: 'admin@brandbase.com', // Change to your admin email
@@ -144,7 +144,7 @@ Submitted on: ${new Date().toLocaleString()}
         'template_2ysu787',
         templateParams
       );
-      
+
       console.log('Lead notification email sent successfully');
     } catch (error) {
       console.error('Failed to send lead notification email:', error);
@@ -177,8 +177,8 @@ Submitted on: ${new Date().toLocaleString()}
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-zinc-900 dark:bg-black p-6 shadow-xl max-h-[90vh] overflow-y-auto">
-        
+      <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-zinc-900 p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+
         {/* Close Button */}
         <button
           onClick={handleClose}
@@ -191,23 +191,23 @@ Submitted on: ${new Date().toLocaleString()}
         {isSubmitted ? (
           /* Success View */
           <div className="text-center py-8">
-            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-8 h-8 text-green-600" />
+            <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
             </div>
-            <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">
+            <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 mb-2">
               Thank You!
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Your quote request for <strong>{event.name}</strong> has been
               submitted. Our design team will contact you within 24 hours.
             </p>
-            <div className="text-sm text-gray-500 dark:text-gray-400 mb-6 p-3 bg-gray-50 dark:bg-zinc-900 rounded-lg">
+            <div className="text-sm text-gray-500 dark:text-gray-400 mb-6 p-3 bg-gray-50 dark:bg-zinc-800 rounded-lg">
               <p>We've sent a confirmation to your email.</p>
               <p className="mt-1">Reference ID: L-{Date.now().toString().slice(-6)}</p>
             </div>
             <button
               onClick={handleClose}
-              className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors"
+              className="px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white rounded-md hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors"
             >
               Close
             </button>
@@ -216,7 +216,7 @@ Submitted on: ${new Date().toLocaleString()}
           /* Form View */
           <div>
             <div className="mb-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
                 Get Stall Designed for {event.name}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
@@ -243,9 +243,9 @@ Submitted on: ${new Date().toLocaleString()}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Pre-filled Event Info */}
-              <div className="p-3 rounded-lg bg-gray-100 border border-gray-200">
+              <div className="p-3 rounded-lg bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700">
                 <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Exhibition</p>
-                <p className="font-medium text-gray-900 dark:text-gray-100 dark:text-gray-100">{event.name}</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">{event.name}</p>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
                   {event.city} | {event.venue}
                 </p>
@@ -267,7 +267,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <input
                     id="name"
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
                     placeholder="John Doe"
@@ -282,7 +282,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <input
                     id="company"
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                     value={formData.company}
                     onChange={(e) => handleChange("company", e.target.value)}
                     placeholder="Your Company"
@@ -300,7 +300,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <input
                     id="email"
                     type="email"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                     placeholder="john@company.com"
@@ -315,7 +315,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <input
                     id="phone"
                     type="tel"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                     value={formData.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
                     placeholder="+91 98765 43210"
@@ -333,7 +333,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <div className="relative">
                     <select
                       id="stallSize"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-zinc-900 dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-md appearance-none bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                       value={formData.stallSize}
                       onChange={(e) => handleChange("stallSize", e.target.value)}
                       required
@@ -351,12 +351,12 @@ Submitted on: ${new Date().toLocaleString()}
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                       </svg>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <label htmlFor="budget" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Budget Range *
@@ -364,7 +364,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <div className="relative">
                     <select
                       id="budget"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none bg-white dark:bg-zinc-900 dark:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-600 rounded-md appearance-none bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                       value={formData.budget}
                       onChange={(e) => handleChange("budget", e.target.value)}
                       required
@@ -379,7 +379,7 @@ Submitted on: ${new Date().toLocaleString()}
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                       </svg>
                     </div>
                   </div>
@@ -392,7 +392,7 @@ Submitted on: ${new Date().toLocaleString()}
                 </label>
                 <textarea
                   id="message"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-gray-100 disabled:bg-gray-100 dark:disabled:bg-zinc-900 disabled:cursor-not-allowed"
                   value={formData.message}
                   onChange={(e) => handleChange("message", e.target.value)}
                   placeholder="Tell us about your specific requirements, branding needs, or any special features you want..."

@@ -23,10 +23,10 @@ export function CalendarFilters({
     venueType !== "all";
 
   return (
-    <div className="bg-white dark:bg-zinc-900 dark:bg-black/80 backdrop-blur-md border border-slate-200 p-4 md:p-6 rounded-2xl shadow-sm mb-8 sticky top-20 z-30 transition-all duration-300">
+    <div className="bg-white dark:bg-zinc-900 backdrop-blur-md border border-slate-200 dark:border-zinc-700 p-4 md:p-6 rounded-2xl shadow-sm mb-8 sticky top-20 z-30 transition-all duration-300">
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-          <Filter className="w-4 h-4 text-indigo-600" />
+        <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+          <Filter className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
           Filter Events
         </h3>
         {hasActiveFilters && (
@@ -43,13 +43,13 @@ export function CalendarFilters({
       <div className="flex flex-col md:flex-row gap-3">
         {/* Search Bar */}
         <div className="relative flex-grow md:max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 w-4 h-4" />
           <input
             type="text"
             placeholder="Search event, venue or organizer..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:bg-zinc-900 dark:bg-black transition-colors"
+            className="w-full pl-10 pr-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-zinc-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors"
           />
         </div>
 
@@ -60,7 +60,7 @@ export function CalendarFilters({
             <select
               value={selectedCity}
               onChange={(e) => onCityChange(e.target.value)}
-              className="w-[160px] px-3 py-2 bg-slate-50 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none"
+              className="w-[160px] px-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-slate-100 appearance-none"
             >
               {cities.map((city) => (
                 <option key={city} value={city}>
@@ -69,7 +69,7 @@ export function CalendarFilters({
               ))}
             </select>
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -80,7 +80,7 @@ export function CalendarFilters({
             <select
               value={selectedIndustry}
               onChange={(e) => onIndustryChange(e.target.value)}
-              className="w-[180px] px-3 py-2 bg-slate-50 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none"
+              className="w-[180px] px-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-slate-100 appearance-none"
             >
               {industries.map((industry) => (
                 <option key={industry} value={industry}>
@@ -89,41 +89,38 @@ export function CalendarFilters({
               ))}
             </select>
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
           </div>
 
           {/* Venue Type Buttons */}
-          <div className="bg-slate-100 p-1 rounded-lg flex items-center">
+          <div className="bg-slate-100 dark:bg-zinc-800 p-1 rounded-lg flex items-center">
             <button
               onClick={() => onVenueTypeChange("all")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                venueType === "all"
-                  ? "bg-white dark:bg-zinc-900 dark:bg-black text-slate-900 shadow-sm"
-                  : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${venueType === "all"
+                  ? "bg-white dark:bg-zinc-700 text-slate-900 dark:text-slate-100 shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                }`}
             >
               All
             </button>
             <button
               onClick={() => onVenueTypeChange("indoor")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                venueType === "indoor"
-                  ? "bg-white dark:bg-zinc-900 dark:bg-black text-indigo-600 shadow-sm"
-                  : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${venueType === "indoor"
+                  ? "bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                }`}
             >
               Indoor
             </button>
             <button
               onClick={() => onVenueTypeChange("outdoor")}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                venueType === "outdoor"
-                  ? "bg-white dark:bg-zinc-900 dark:bg-black text-emerald-600 shadow-sm"
-                  : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${venueType === "outdoor"
+                  ? "bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                }`}
             >
               Outdoor
             </button>

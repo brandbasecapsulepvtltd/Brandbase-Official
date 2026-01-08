@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet";
 // Import your api object
-import { api } from "@/lib/api"; 
+import { api } from "@/lib/api";
 import { CalendarFilters } from "@/components/ExhibitionCal/CalendarFilters";
 import { EventCalendar } from "@/components/ExhibitionCal/EventCalendar";
 import { EventDetailModal } from "@/components/ExhibitionCal/EventDetailModal";
@@ -94,25 +94,25 @@ const ExCalendar = () => {
         <title>Exhibition Calendar 2025 | India</title>
       </Helmet>
 
-      <div className="min-h-screen bg-slate-50/50">
+      <div className="min-h-screen bg-slate-50/50 dark:bg-zinc-950">
         <main className="py-12 md:py-16">
           <div className="container mx-auto px-4 max-w-7xl mt-5">
             {/* Header omitted for brevity */}
-              <div className="text-center mb-12">
+            <div className="text-center mb-12">
 
-              <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-semibold uppercase tracking-wide mb-4 mt-10">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-sm font-semibold uppercase tracking-wide mb-4 mt-10">
 
                 2026 Schedule
 
               </span>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-4">
 
                 Exhibition Calendar
 
               </h1>
 
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
 
                 Explore the top trade shows and conferences happening across India.
 
@@ -140,7 +140,7 @@ const ExCalendar = () => {
 
             {isLoading ? (
               <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
               </div>
             ) : (
               <EventCalendar
