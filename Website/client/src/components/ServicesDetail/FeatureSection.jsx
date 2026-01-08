@@ -6,17 +6,16 @@ const FeatureSection = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="w-full bg-white dark:bg-zinc-900 dark:bg-black">
+    <div className="w-full bg-white dark:bg-black">
       {data.map((feature, index) => (
         <div
           key={feature.id}
-          className={`flex flex-col ${
-            feature.imagePosition === 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'
-          } items-center gap-8 lg:gap-12 px-6 sm:px-8 lg:px-16 py-12 lg:py-20`}
+          className={`flex flex-col ${feature.imagePosition === 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'
+            } items-center gap-8 lg:gap-12 px-6 sm:px-8 lg:px-16 py-12 lg:py-20`}
         >
           {/* Text Content */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               {feature.title}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">

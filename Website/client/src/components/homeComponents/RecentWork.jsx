@@ -41,9 +41,9 @@ const recentWorks = [
 
 export default function RecentWork() {
   return (
-    <section 
+    <section
       aria-labelledby="recent-work-heading"
-      className="py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white dark:bg-zinc-900 dark:bg-black"
+      className="py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-white dark:bg-black"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
@@ -51,7 +51,7 @@ export default function RecentWork() {
           <div className="flex justify-center lg:justify-start">
             <Tag>Our Recent Work</Tag>
           </div>
-          <h1 
+          <h1
             id="recent-work-heading"
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium mt-3 sm:mt-4 leading-tight text-black dark:text-white"
           >
@@ -60,7 +60,7 @@ export default function RecentWork() {
         </header>
 
         {/* Bento Grid */}
-        <div 
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 auto-rows-[150px] sm:auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[220px]"
           role="list"
           aria-label="Recent projects portfolio"
@@ -94,7 +94,7 @@ export default function RecentWork() {
 
         {/* CTA Button */}
         <div className="mt-8 sm:mt-10 md:mt-12 flex justify-center">
-          <button 
+          <button
             className="bg-[#FF6A00] hover:bg-[#E65D00] text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6A00]/25 text-sm sm:text-base"
             aria-label="View all our recent projects portfolio"
           >

@@ -312,7 +312,7 @@ const AboutUsContent = () => {
       <DemoOne content={aboutSection} />
 
 
-      {/* Mission Section       <DemoOne/>*/}
+      {/* Mission Section */}
       <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -320,53 +320,50 @@ const AboutUsContent = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-3 h-8 bg-[#FF6600] rounded-full"></div>
-                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Our Mission</span>
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{mission?.title || 'Our Mission'}</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                  Delivering <span className="text-[#FF6600]">Exceptional Value</span> Through Strategic Solutions
+                  {mission?.subheading || 'Delivering Exceptional Value Through Strategic Solutions'}
                 </h2>
                 <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                  We are committed to providing innovative marketing, event management, and digital solutions that drive measurable results and foster sustainable growth for our clients.
+                  {mission?.description || 'We are committed to providing innovative marketing, event management, and digital solutions that drive measurable results and foster sustainable growth for our clients.'}
                 </p>
+                {mission?.highlight && (
+                  <div className="flex items-center gap-3 pt-2">
+                    <div className="w-1 h-8 bg-gradient-to-b from-[#FF6600] to-orange-400 rounded-full"></div>
+                    <p className="text-gray-600 dark:text-gray-400 italic font-medium">
+                      {mission.highlight}
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-4 md:space-y-6">
-                <div className="p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#FF6600]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#FF6600] font-bold">01</span>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Strategic Brand Development</h4>
-                      <p className="text-gray-600 dark:text-gray-400">Crafting compelling brand narratives that resonate with target audiences across multiple platforms.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#FF6600]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#FF6600] font-bold">02</span>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Integrated Digital Solutions</h4>
-                      <p className="text-gray-600 dark:text-gray-400">Comprehensive digital marketing, website development, and online presence management.</p>
+                {mission?.points?.map((point, index) => (
+                  <div key={index} className="p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-[#FF6600]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-[#FF6600] font-bold">{String(index + 1).padStart(2, '0')}</span>
+                      </div>
+                      <div>
+                        <p className="text-gray-700 dark:text-gray-300">{point}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
 
             <div className="relative mt-8 lg:mt-0">
               <div className="overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                  alt="Team collaboration in modern office"
+                  src={mission?.image?.url || 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
+                  alt={mission?.image?.alt || 'Team collaboration in modern office'}
                   className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8">
-                  <h3 className="text-white text-xl md:text-2xl font-bold mb-2">Innovation in Action</h3>
-                  <p className="text-white/90 text-sm md:text-base">Our team delivers cutting-edge solutions that transform business objectives into tangible results.</p>
+                  <h3 className="text-white text-xl md:text-2xl font-bold mb-2">{mission?.image?.captionTitle || 'Innovation in Action'}</h3>
+                  <p className="text-white/90 text-sm md:text-base">{mission?.image?.captionText || 'Our team delivers cutting-edge solutions that transform business objectives into tangible results.'}</p>
                 </div>
               </div>
 
@@ -385,13 +382,13 @@ const AboutUsContent = () => {
             <div className="relative order-2 lg:order-1 mt-8 lg:mt-0">
               <div className="overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                  alt="Strategic planning and vision"
+                  src={vision?.image?.url || 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}
+                  alt={vision?.image?.alt || 'Strategic planning and vision'}
                   className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8">
-                  <h3 className="text-white text-xl md:text-2xl font-bold mb-2">Future-Forward Thinking</h3>
-                  <p className="text-white/90 text-sm md:text-base">Shaping tomorrow's marketing landscape through innovation and strategic foresight.</p>
+                  <h3 className="text-white text-xl md:text-2xl font-bold mb-2">{vision?.image?.captionTitle || 'Future-Forward Thinking'}</h3>
+                  <p className="text-white/90 text-sm md:text-base">{vision?.image?.captionText || "Shaping tomorrow's marketing landscape through innovation and strategic foresight."}</p>
                 </div>
               </div>
 
@@ -404,52 +401,39 @@ const AboutUsContent = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-3 h-8 bg-[#FF6600] rounded-full"></div>
-                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Our Vision</span>
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{vision?.title || 'Our Vision'}</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                  Leading the <span className="text-[#FF6600]">Future</span> of Marketing Excellence
+                  {vision?.subheading || 'Leading the Future of Marketing Excellence'}
                 </h2>
                 <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                  To become the premier global partner for brands seeking transformative marketing, event, and digital solutions that drive sustainable growth.
+                  {vision?.description || 'To become the premier global partner for brands seeking transformative marketing, event, and digital solutions that drive sustainable growth.'}
                 </p>
               </div>
 
               <div className="space-y-4 md:space-y-6">
-                <div className="flex items-start gap-4 p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800">
-                  <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Global Market Leadership</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Expanding our presence across international markets while maintaining exceptional service quality.</p>
-                  </div>
-                </div>
+                {vision?.points?.map((point, index) => {
+                  // Icon options for vision points
+                  const icons = [
+                    <path key="globe" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />,
+                    <path key="lightning" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />,
+                    <path key="users" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />,
+                    <path key="star" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                  ];
 
-                <div className="flex items-start gap-4 p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800">
-                  <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Technology Innovation</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Leveraging cutting-edge technologies to deliver superior digital solutions and analytics.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800">
-                  <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Sustainable Partnerships</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Building long-term relationships based on trust, transparency, and mutual success.</p>
-                  </div>
-                </div>
+                  return (
+                    <div key={index} className="flex items-start gap-4 p-4 md:p-6 bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800">
+                      <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg className="w-6 h-6 text-[#FF6600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          {icons[index % icons.length]}
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-lg text-gray-700 dark:text-gray-300">{point}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@ const fadeUp = {
 const WhyBuildWithBcpl = ({ data }) => {
   return (
     <section
-      className="py-20 px-6 lg:px-16 bg-white dark:bg-zinc-900 dark:bg-black"
+      className="py-20 px-6 lg:px-16 bg-white dark:bg-black"
       aria-labelledby="why-bcpl-title"
       role="region"
     >
@@ -36,7 +36,7 @@ const WhyBuildWithBcpl = ({ data }) => {
           >
             <span id="why-bcpl-title" className="text-orange-600">{data.title}</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 mt-4 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-900 dark:text-gray-100 mt-4 max-w-2xl mx-auto">
             {data.subtitle}
           </p>
         </motion.div>
@@ -45,18 +45,18 @@ const WhyBuildWithBcpl = ({ data }) => {
           {data.reasons.map((item, index) => (
             <motion.div
               key={item.id}
-              className="relative bg-white dark:bg-zinc-900 dark:bg-black p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 group hover:scale-[1.02]"
+              className="relative bg-white dark:bg-zinc-800/50 p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-zinc-700 shadow-md hover:shadow-xl transition-all duration-300 group hover:scale-[1.02]"
               initial="hidden"
               whileInView="visible"
               custom={index}
               viewport={{ once: true }}
               variants={fadeUp}
             >
-              <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-orange-500 shadow-lg flex items-center justify-center text-white font-semibold text-sm ring-2 ring-white group-hover:scale-110 transition-transform duration-300">
+              <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-orange-500 shadow-lg flex items-center justify-center text-white font-semibold text-sm ring-2 ring-white dark:ring-zinc-800 group-hover:scale-110 transition-transform duration-300">
                 {index + 1}
               </div>
 
-              <p className="text-gray-800 dark:text-gray-200 dark:text-gray-200 text-xl leading-relaxed relative transition-colors group-hover:text-orange-600">
+              <p className="text-gray-800 dark:text-gray-200 text-xl leading-relaxed relative transition-colors group-hover:text-orange-600">
                 {item.reason}
               </p>
             </motion.div>

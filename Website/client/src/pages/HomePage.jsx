@@ -27,7 +27,7 @@ const HomePage = () => {
       left: 0,
       behavior: 'instant'
     });
-    
+
     // Disable browser's automatic scroll restoration
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -43,10 +43,10 @@ const HomePage = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Use the API client to fetch all home page data
       const response = await api.getHomepage();
-      
+
       // Check the response structure
       if (response.success && response.data) {
         setHomePageData(response.data);
@@ -58,7 +58,7 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error('Error fetching home page data:', err);
-      
+
       // Handle different types of errors
       if (err.name === 'TypeError' && err.message.includes('fetch')) {
         setError('Unable to connect to server. Please make sure the backend is running.');
@@ -79,12 +79,12 @@ const HomePage = () => {
   // Render loading state
   if (loading) {
     return (
-      <main 
+      <main
         className="min-h-screen flex items-center justify-center bg-gray-50"
         aria-label="Loading page content"
       >
         <div className="text-center">
-          <div 
+          <div
             className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent mx-auto mb-4"
             aria-label="Loading indicator"
             role="status"
@@ -99,12 +99,12 @@ const HomePage = () => {
   // Render error state
   if (error) {
     return (
-      <main 
+      <main
         className="min-h-screen flex items-center justify-center bg-gray-50"
         aria-label="Error page"
       >
         <article className="max-w-md mx-auto text-center p-8 bg-white rounded-lg shadow-lg">
-          <div 
+          <div
             className="text-6xl mb-6"
             aria-hidden="true"
           >🚧</div>
@@ -135,12 +135,12 @@ const HomePage = () => {
   // Check if we have the minimum required data
   if (!homePageData) {
     return (
-      <main 
+      <main
         className="min-h-screen flex items-center justify-center bg-gray-50"
         aria-label="No data available"
       >
         <div className="text-center">
-          <div 
+          <div
             className="text-6xl mb-4"
             aria-hidden="true"
           >❓</div>
@@ -166,35 +166,35 @@ const HomePage = () => {
 
   // Render the complete page with fetched data
   return (
-    <main className="home-page bg-white">
+    <main className="home-page bg-white dark:bg-black">
       {/* Hero Section - Now fetches its own data */}
       <HeroSlider />
-      
+
       {/* About Us Section */}
       <AboutUs />
-      
+
       {/* Brand Elevation Section */}
       {brandElevation && <BrandElevation data={brandElevation} />}
-      
+
       {/* Recent Work Section */}
       {recentWork && <RecentWork data={recentWork} />}
-      
+
       {/* Service Slider Section */}
       <ServiceSlider />
-      
+
       {/* Clients Section */}
       {clients && <Clients data={clients} />}
-      
-      
+
+
       {/**/}
-      <InteractiveImageBentoGalleryDemo/>
+      <InteractiveImageBentoGalleryDemo />
 
       {/* Testimonials Section */}
       {testimonials && <TestimonialSlider data={testimonials} />}
-      
+
       {/* FAQs Section */}
-      {faqs && <Faqs data={faqs} />}      
-      
+      {faqs && <Faqs data={faqs} />}
+
       {/* CTA Section */}
       <CTASection />
     </main>

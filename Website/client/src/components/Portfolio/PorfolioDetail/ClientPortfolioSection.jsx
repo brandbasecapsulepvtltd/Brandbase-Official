@@ -16,8 +16,8 @@ const ClientPortfolioSection = ({ clientsData }) => {
   const prevMedia = (clientIndex) => {
     setCurrentIndex(prev => {
       const newIndices = [...prev];
-      newIndices[clientIndex] = newIndices[clientIndex] === 0 
-        ? clientsData[clientIndex].mediaItems.length - 1 
+      newIndices[clientIndex] = newIndices[clientIndex] === 0
+        ? clientsData[clientIndex].mediaItems.length - 1
         : newIndices[clientIndex] - 1;
       return newIndices;
     });
@@ -40,11 +40,11 @@ const ClientPortfolioSection = ({ clientsData }) => {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-zinc-900 dark:bg-black overflow-hidden">
+    <div className="w-full bg-white dark:bg-black overflow-hidden">
       {clientsData.map((client, clientIndex) => {
         const currentMedia = client.mediaItems[currentIndex[clientIndex]];
         const isRightAligned = client.imagePosition === 'right';
-        
+
         return (
           <motion.div
             key={client.id}
@@ -52,18 +52,17 @@ const ClientPortfolioSection = ({ clientsData }) => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
-            className={`flex flex-col ${
-              isRightAligned ? 'lg:flex-row' : 'lg:flex-row-reverse'
-            } items-center gap-8 lg:gap-12 px-4 sm:px-6 lg:px-16 py-8 sm:py-12 lg:py-20 bg-white dark:bg-zinc-900 dark:bg-black`}
+            className={`flex flex-col ${isRightAligned ? 'lg:flex-row' : 'lg:flex-row-reverse'
+              } items-center gap-8 lg:gap-12 px-4 sm:px-6 lg:px-16 py-8 sm:py-12 lg:py-20 bg-white dark:bg-black`}
           >
             {/* Text Content */}
-            <motion.div 
+            <motion.div
               variants={isRightAligned ? textVariants : mediaVariants}
               className="w-full lg:w-1/2 flex flex-col justify-center"
             >
               {/* Client Logo and Name */}
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white dark:bg-zinc-900 dark:bg-black rounded-xl shadow-md p-2 sm:p-3 flex items-center justify-center">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white dark:bg-zinc-800 rounded-xl shadow-md p-2 sm:p-3 flex items-center justify-center border border-gray-100 dark:border-zinc-700">
                   <img
                     src={client.logo}
                     alt={client.companyName}
@@ -71,13 +70,13 @@ const ClientPortfolioSection = ({ clientsData }) => {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">{client.companyName}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{client.companyName}</h3>
                   <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{client.industry}</p>
                 </div>
               </div>
 
               {/* Project Title */}
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 {client.projectTitle}
               </h2>
 
@@ -88,7 +87,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
 
               {/* Services Provided */}
               <div className="mb-8">
-                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-3">Services Provided:</h4>
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3">Services Provided:</h4>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
                   {client.servicesProvided.map((service, i) => (
                     <span
@@ -102,8 +101,8 @@ const ClientPortfolioSection = ({ clientsData }) => {
               </div>
 
               {/* Results Achieved */}
-              <div className="bg-gradient-to-r from-gray-50 to-white p-4 sm:p-6 rounded-xl border border-gray-200">
-                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-3">Results Achieved:</h4>
+              <div className="bg-gradient-to-r from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 p-4 sm:p-6 rounded-xl border border-gray-200 dark:border-zinc-800">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3">Results Achieved:</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                   {client.results.map((result, i) => (
                     <div key={i} className="text-center">
@@ -113,9 +112,9 @@ const ClientPortfolioSection = ({ clientsData }) => {
                   ))}
                 </div>
               </div>
-              
+
               {/* Client Testimonial */}
-              <div className="mt-8 p-4 sm:p-6 bg-white dark:bg-zinc-900 dark:bg-black rounded-xl border border-gray-200 shadow-sm relative overflow-hidden">
+              <div className="mt-8 p-4 sm:p-6 bg-white dark:bg-zinc-800/50 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-[#FF6600]"></div>
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0">
@@ -126,7 +125,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 text-sm sm:text-base truncate">
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base truncate">
                       {client.testimonial.clientName}
                     </p>
                     <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 truncate">
@@ -141,7 +140,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
             </motion.div>
 
             {/* Media Carousel */}
-            <motion.div 
+            <motion.div
               variants={isRightAligned ? mediaVariants : textVariants}
               className="w-full lg:w-1/2"
             >
@@ -157,54 +156,54 @@ const ClientPortfolioSection = ({ clientsData }) => {
                 {/* Navigation Arrows */}
                 <button
                   onClick={() => prevMedia(clientIndex)}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-zinc-900 dark:bg-black/90 hover:bg-white dark:bg-zinc-900 dark:bg-black rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-zinc-800/90 hover:bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100 dark:border-zinc-700"
                   aria-label="Previous media"
                 >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 dark:text-gray-200 dark:text-gray-200 group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 dark:text-white group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
 
                 <button
                   onClick={() => nextMedia(clientIndex)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-zinc-900 dark:bg-black/90 hover:bg-white dark:bg-zinc-900 dark:bg-black rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-zinc-800/90 hover:bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100 dark:border-zinc-700"
                   aria-label="Next media"
                 >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 dark:text-gray-200 dark:text-gray-200 group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 dark:text-white group-hover:text-[#FF6600] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
 
                 {/* Media Display */}
                 <div className="w-full h-full relative">
-                    {currentMedia.type === 'image' ? (
+                  {currentMedia.type === 'image' ? (
                     <motion.img
-                        key={`img-${currentIndex[clientIndex]}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                        src={currentMedia.url}
-                        alt={currentMedia.alt}
-                        className="object-cover w-full h-full"
+                      key={`img-${currentIndex[clientIndex]}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      src={currentMedia.url}
+                      alt={currentMedia.alt}
+                      className="object-cover w-full h-full"
                     />
-                    ) : (
+                  ) : (
                     <motion.video
-                        key={currentMedia.url}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                        src={currentMedia.url}
-                        className="object-cover w-full h-full"
-                        controls
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        poster={currentMedia.thumbnail}
+                      key={currentMedia.url}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      src={currentMedia.url}
+                      className="object-cover w-full h-full"
+                      controls
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      poster={currentMedia.thumbnail}
                     >
-                        Your browser does not support the video tag.
+                      Your browser does not support the video tag.
                     </motion.video>
-                    )}
+                  )}
                 </div>
 
                 {/* Media Title Overlay */}
@@ -233,11 +232,10 @@ const ClientPortfolioSection = ({ clientsData }) => {
                       newIndices[clientIndex] = index;
                       setCurrentIndex(newIndices);
                     }}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      currentIndex[clientIndex] === index 
-                        ? 'bg-[#FF6600] w-8' 
-                        : 'bg-gray-300 w-2 hover:bg-gray-400'
-                    }`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${currentIndex[clientIndex] === index
+                      ? 'bg-[#FF6600] w-8'
+                      : 'bg-gray-300 w-2 hover:bg-gray-400'
+                      }`}
                     aria-label={`Go to media ${index + 1}`}
                   />
                 ))}

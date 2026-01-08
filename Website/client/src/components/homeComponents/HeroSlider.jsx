@@ -19,14 +19,14 @@ const HeroSlider = () => {
       try {
         setLoading(true);
         const response = await api.getHomepage();
-        
+
         // Extract hero section data from the response
         const heroData = response.data?.heroSection || response.heroSection;
-        
+
         if (heroData) {
           // Set slides (with fallback to empty array)
           setSlides(heroData.slides || []);
-          
+
           // Set video URL (with fallback to empty string)
           setVideoUrl(heroData.video?.url || '');
         } else {
@@ -43,7 +43,7 @@ const HeroSlider = () => {
       } catch (err) {
         console.error('Error fetching hero section data:', err);
         setError('Failed to load hero content');
-        
+
         // Fallback data
         setSlides([{
           id: 1,
@@ -74,7 +74,7 @@ const HeroSlider = () => {
   // Auto Slide (only if we have slides)
   useEffect(() => {
     if (slides.length <= 1) return; // Don't auto-slide if only one slide
-    
+
     const interval = setInterval(() => {
       goToNext();
     }, 5000);
@@ -109,7 +109,7 @@ const HeroSlider = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-zinc-900 dark:bg-black">
+      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-300">Loading hero section...</p>
@@ -124,7 +124,7 @@ const HeroSlider = () => {
       <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200 mb-2">Unable to Load Content</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Unable to Load Content</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
@@ -143,7 +143,7 @@ const HeroSlider = () => {
       <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
         <div className="text-center p-8">
           <div className="text-6xl mb-4">📷</div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-200 mb-2">No Hero Content</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">No Hero Content</h2>
           <p className="text-gray-600 dark:text-gray-300">Please add slides from the admin panel.</p>
         </div>
       </div>
@@ -161,7 +161,7 @@ const HeroSlider = () => {
   // Background video if available
   const renderBackgroundVideo = () => {
     if (!videoUrl) return null;
-    
+
     return (
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
         <video
@@ -181,15 +181,15 @@ const HeroSlider = () => {
   // Component for Navigation Arrows
   const NavArrows = ({ onPrev, onNext, className, iconColor = 'text-white' }) => (
     <div className={`flex items-center space-x-4 ${className}`}>
-      <button 
-        onClick={onPrev} 
+      <button
+        onClick={onPrev}
         aria-label="Previous slide"
         className={`p-3 rounded-full bg-black/30 hover:bg-black/50 transition-colors ${iconColor}`}
       >
         <ArrowLeft className="w-5 h-5" />
       </button>
-      <button 
-        onClick={onNext} 
+      <button
+        onClick={onNext}
         aria-label="Next slide"
         className={`p-3 rounded-full bg-black/30 hover:bg-black/50 transition-colors ${iconColor}`}
       >
@@ -199,7 +199,7 @@ const HeroSlider = () => {
   );
 
   return (
-    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-zinc-900 dark:bg-black font-sans`}>
+    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-black font-sans`}>
       {/* Background Video */}
 
       {/*
@@ -257,11 +257,10 @@ const HeroSlider = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex 
-                      ? 'bg-orange-500 w-6' 
+                  className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
+                      ? 'bg-orange-500 w-6'
                       : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
+                    }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
@@ -313,7 +312,7 @@ const HeroSlider = () => {
 
               <div className="w-25 h-1 bg-orange-600 mb-6"></div>
 
-              <p className="text-gray-800 dark:text-gray-200 dark:text-gray-200 text-lg leading-relaxed mb-10">
+              <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed mb-10">
                 {currentSlide.subtext}
               </p>
 
@@ -339,18 +338,17 @@ const HeroSlider = () => {
                   iconColor="text-black dark:text-white"
                 />
               </div>
-              
+
               {/* Slide Indicators for Desktop */}
               <div className="absolute bottom-10 right-16 z-20 flex space-x-2">
                 {slides.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex 
-                        ? 'bg-orange-500 w-6' 
+                    className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
+                        ? 'bg-orange-500 w-6'
                         : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
+                      }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}

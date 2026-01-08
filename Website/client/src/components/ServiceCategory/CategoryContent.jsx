@@ -19,7 +19,7 @@ const CategoryContent = ({ pageData }) => {
   const [activeSection, setActiveSection] = useState('');
   const subNavRef = useRef(null);
   const sectionRefs = useRef({});
-  
+
   // const router = useRouter(); // <-- Initialize useRouter if you need to perform client-side redirects
 
   // IMPORTANT: The issue you had with 'useNavigate()' is likely inside
@@ -27,7 +27,7 @@ const CategoryContent = ({ pageData }) => {
   // You must replace 'useNavigate()' with 'useRouter()' in those files.
 
   return (
-    <div className="bg-white dark:bg-zinc-900 dark:bg-black text-gray-800 dark:text-gray-200 dark:text-gray-200 mt-[70px]">
+    <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-200 mt-[70px]">
       <CategoryHero data={pageData.hero} />
       <VisionBanner data={pageData.visionBanner} />
       <ComparisonTable data={pageData.comparisonTable} />

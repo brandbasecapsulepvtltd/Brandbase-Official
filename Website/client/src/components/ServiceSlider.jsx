@@ -8,7 +8,7 @@ export default function ServiceSlider() {
 
   const services = [
     "Digital Marketing",
-    "Branding & Creative Design", 
+    "Branding & Creative Design",
     "Audio & Video Production",
     "Website Development",
     "Mobile App Development"
@@ -18,10 +18,10 @@ export default function ServiceSlider() {
     if (scope.current) {
       animation.current = {
         speed: 1,
-        pause: () => {},
-        play: () => {}
+        pause: () => { },
+        play: () => { }
       };
-      
+
       // Simple animation implementation
       const animateSlider = () => {
         if (scope.current && !isHovered) {
@@ -29,7 +29,7 @@ export default function ServiceSlider() {
           scope.current.style.transform = `translateX(${currentX - 1}px)`;
         }
       };
-      
+
       const interval = setInterval(animateSlider, 16); // ~60fps
       return () => clearInterval(interval);
     }
@@ -46,11 +46,11 @@ export default function ServiceSlider() {
   }, [isHovered]);
 
   return (
-    <section 
+    <section
       aria-label="Services marquee slider"
       role="region"
     >
-      <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600] bg-white dark:bg-zinc-900 dark:bg-black">
+      <div className="overflow-x-clip p-4 flex border-t-2 border-b-2 border-[#FF6600] bg-white dark:bg-black">
         <motion.div
           ref={scope}
           onMouseEnter={() => setIsHovered(true)}
@@ -71,13 +71,13 @@ export default function ServiceSlider() {
           tabIndex={0}
         >
           {Array.from({ length: 10 }).map((_, i) => (
-            <div 
-              className="flex items-center gap-8 md:gap-12 lg:gap-16" 
+            <div
+              className="flex items-center gap-8 md:gap-12 lg:gap-16"
               key={i}
               role="listitem"
               aria-label={services[i % services.length]}
             >
-              <span 
+              <span
                 className="text-[#FF6600] text-4xl md:text-6xl lg:text-7xl"
                 aria-hidden="true"
               >&#10038;</span>

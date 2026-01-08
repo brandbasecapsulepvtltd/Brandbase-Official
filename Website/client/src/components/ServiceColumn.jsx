@@ -19,14 +19,14 @@ export default function ServiceColumn(props) {
         <Fragment key={i}>
           {services.map((service) => (
             <article
-              className={`bg-gradient-to-b from-orange-100 via-orange-200 to-orange-400 border border-white/20 rounded-3xl p-6 ${className || ""}`}
+              className={`bg-gradient-to-b from-orange-100 via-orange-200 to-orange-400 dark:from-orange-400 dark:via-orange-500 dark:to-orange-700 border border-white/20 rounded-3xl p-6 ${className || ""}`}
               key={service.name}
               aria-label={`${service.name} service card`}
             >
               <div className="flex justify-center">
                 <img
                   src={service.icon}
-                  className="w-24 h-24"
+                  className="w-24 h-24 brightness-0 invert"
                   alt={`${service.name} service icon`}
                   title={`${service.name} Service`}
                   loading="lazy"
@@ -34,12 +34,12 @@ export default function ServiceColumn(props) {
                   height={96}
                 />
               </div>
-              <h2 className="text-3xl text-center mt-6">{service.name}</h2>
-              <p className="text-gray-900 dark:text-gray-100 dark:text-gray-100 text-center mt-2">
+              <h2 className="text-3xl text-center mt-6 text-black dark:text-white">{service.name}</h2>
+              <p className="text-gray-900 dark:text-gray-100 text-center mt-2">
                 {service.description}
               </p>
               <div className="flex justify-center mt-4">
-                <button 
+                <button
                   className="text-white hover:text-gray-200 font-semibold text-sm flex items-center gap-1 transition-all duration-300"
                   aria-label={`Learn more about ${service.name}`}
                 >

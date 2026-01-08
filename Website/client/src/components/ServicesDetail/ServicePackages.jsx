@@ -42,12 +42,12 @@ const ServicePackages = ({ data }) => {
   };
 
   return (
-    <section className="w-full bg-white dark:bg-zinc-900 dark:bg-black py-20 px-4 sm:px-6 md:px-12 font-sans">
+    <section className="w-full bg-white dark:bg-black py-20 px-4 sm:px-6 md:px-12 font-sans">
       <div className="max-w-7xl mx-auto overflow-hidden">
 
         {/* HEADER */}
         <div className="text-center mb-12 md:mb-16 space-y-4">
-          <h2 className="text-3xl sm:text-4xl md:text-6xl text-gray-800 dark:text-gray-200 dark:text-gray-200 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl text-gray-800 dark:text-gray-200 leading-tight">
             <span className="block font-bold">{data.header.titleLine1}</span>
             <span className="block font-normal">
               <span className="italic font-medium text-orange-600">
@@ -63,20 +63,19 @@ const ServicePackages = ({ data }) => {
 
         {/* TABS */}
         <div className="flex justify-center mb-10 md:mb-12">
-          <div className="bg-gray-50 dark:bg-zinc-900/80 p-1.5 rounded-full inline-flex w-full max-w-full sm:max-w-4xl overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <div className="bg-gray-50 dark:bg-zinc-800/50 p-1.5 rounded-full inline-flex w-full max-w-full sm:max-w-4xl overflow-x-auto whitespace-nowrap scrollbar-hide">
             {Object.values(packages).map((pkg) => {
               const active = activeTab === pkg.id;
               return (
                 <button
                   key={pkg.id}
                   onClick={() => handleTabChange(pkg.id)}
-                  className={`flex-1 min-w-max sm:min-w-0 flex items-center justify-center gap-2 px-4 py-3 rounded-full text-sm sm:text-base transition-all duration-300 ${
-                    active
-                      ? "bg-white dark:bg-zinc-900 dark:bg-black shadow-sm text-gray-800 dark:text-gray-200 dark:text-gray-200 font-medium"
+                  className={`flex-1 min-w-max sm:min-w-0 flex items-center justify-center gap-2 px-4 py-3 rounded-full text-sm sm:text-base transition-all duration-300 ${active
+                      ? "bg-white dark:bg-zinc-900 shadow-sm text-gray-800 dark:text-gray-200 font-medium"
                       : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-300"
-                  }`}
+                    }`}
                 >
-                  <span className={active ? "text-gray-800 dark:text-gray-200 dark:text-gray-200" : "text-gray-400"}>
+                  <span className={active ? "text-gray-800 dark:text-gray-200" : "text-gray-400"}>
                     {iconMap[pkg.icon]}
                   </span>
                   {pkg.title}
@@ -105,7 +104,7 @@ const ServicePackages = ({ data }) => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-start h-full">
 
                 {/* IMAGE */}
-                <div className="relative h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full rounded-[2rem] overflow-hidden bg-gray-100 shadow-sm">
+                <div className="relative h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-zinc-800 shadow-sm">
                   <img
                     src={activePackage.image}
                     alt={activePackage.title}
@@ -115,13 +114,13 @@ const ServicePackages = ({ data }) => {
 
                 {/* TEXT CONTENT */}
                 <div className="pt-2 sm:pt-4 space-y-6 sm:space-y-8">
-                  <div className="inline-block px-4 py-2 bg-gray-50 dark:bg-zinc-900 rounded-xl">
+                  <div className="inline-block px-4 py-2 bg-gray-50 dark:bg-zinc-800 rounded-xl">
                     <span className="font-semibold text-lg text-orange-600">
                       {activePackage.price}
                     </span>
                   </div>
 
-                  <h3 className="text-3xl sm:text-4xl font-normal text-gray-900 dark:text-gray-100 dark:text-gray-100">
+                  <h3 className="text-3xl sm:text-4xl font-normal text-gray-900 dark:text-gray-100">
                     {activePackage.title}
                   </h3>
 

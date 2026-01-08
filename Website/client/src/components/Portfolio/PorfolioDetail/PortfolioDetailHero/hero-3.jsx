@@ -36,7 +36,7 @@ export const AnimatedMarqueeHero = ({
   return (
     <section
       className={cn(
-        "relative w-full h-screen overflow-hidden bg-background flex flex-col items-center justify-center text-center px-4",
+        "relative w-full h-screen overflow-hidden bg-white dark:bg-black flex flex-col items-center justify-center text-center px-4",
         className
       )}
     >
@@ -46,7 +46,7 @@ export const AnimatedMarqueeHero = ({
           initial="hidden"
           animate="show"
           variants={FADE_IN_ANIMATION_VARIANTS}
-          className="mb-4 inline-block rounded-full border border-border bg-card/50 px-4 py-1.5 text-sm font-medium text-muted-foreground backdrop-blur-sm"
+          className="mb-4 inline-block rounded-full border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800/50 px-4 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 backdrop-blur-sm"
         >
           {tagline}
         </motion.div>
@@ -63,7 +63,7 @@ export const AnimatedMarqueeHero = ({
               },
             },
           }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground"
+          className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 dark:text-white"
         >
           {typeof title === 'string' ? (
             title.split(" ").map((word, i) => (

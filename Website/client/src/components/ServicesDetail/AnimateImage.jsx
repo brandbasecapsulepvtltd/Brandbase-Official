@@ -12,10 +12,10 @@ const MediaCard = ({ data, isSelected, onClick }) => {
   // Since the parent 'AnimateImage' has `flex` and `gap-6`, the cards will be side-by-side
   if (!isSelected) {
     // Unselected card: starts small on md screens, then uses your original small width on lg
-    widthClass = 'w-1/4 md:w-1/4 lg:w-[26%]'; 
+    widthClass = 'w-1/4 md:w-1/4 lg:w-[26%]';
   } else {
     // Selected card: takes up remaining space on md screens, then uses your original large width on lg
-    widthClass = 'w-3/4 md:w-3/4 lg:w-[70%]'; 
+    widthClass = 'w-3/4 md:w-3/4 lg:w-[70%]';
   }
   // This logic is simplified for demonstration. The original logic was:
   // const widthClass = isSelected ? 'w-[70%] lg:w-[70%]' : 'w-[27.5%] lg:w-[26%]';
@@ -29,7 +29,7 @@ const MediaCard = ({ data, isSelected, onClick }) => {
   // Base (small screens) is w-full and vertical.
   // Medium/Tablet screens (md) switch to a side-by-side layout.
   // Large/Laptop screens (lg) use the exact original percentages.
-  
+
   // NOTE: To get the *exact* original large-screen look, the parent `gap-6` and total width
   // must sum up correctly. 70% + 26% + 26% + 26% = 148% (for 4 cards).
   // This layout implies the widths are percentages of the *remaining space* OR the layout
@@ -40,9 +40,9 @@ const MediaCard = ({ data, isSelected, onClick }) => {
   const finalWidthClass = isSelected
     ? `w-full ${laptopWidth} md:w-[68%]` // w-[70%] on lg
     : `w-full ${laptopWidth} md:w-[26%]`; // w-[26%] on lg 
-  
+
   // The 'w-full' base width is crucial for the vertical stack on mobile.
-  
+
   // The height should also be responsive on mobile (e.g., shorter) if vertical stacking is intended.
   const heightClass = 'h-[250px] sm:h-[350px] lg:h-[450px]';
 
@@ -72,10 +72,10 @@ const AnimateImage = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 dark:bg-black p-8 md:p-16 font-sans">
+    <div className="min-h-screen bg-white dark:bg-black p-8 md:p-16 font-sans">
       {/* Header - already quite responsive */}
       <div className="text-center mb-12 md:mb-20">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 uppercase tracking-tightest leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white uppercase tracking-tightest leading-tight">
           {data.header.title}{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-500">
             {data.header.highlight}

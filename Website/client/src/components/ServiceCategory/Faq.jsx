@@ -30,20 +30,19 @@ export default function Faq({ data }) {
           return (
             <div
               key={index}
-              className="bg-orange-100 rounded-xl border border-gray-200 shadow-sm"
+              className="bg-orange-100 dark:bg-zinc-800/50 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm"
             >
               {/* Header */}
               <button
                 onClick={() => toggle(index)}
                 className="w-full flex justify-between items-center p-5 text-left"
               >
-                <span className="text-lg font-medium text-gray-800 dark:text-gray-200 dark:text-gray-200">
+                <span className="text-lg font-medium text-gray-800 dark:text-gray-200">
                   {item.question}
                 </span>
                 <svg
-                  className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-300 ${
-                    isOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                    }`}
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -55,11 +54,10 @@ export default function Faq({ data }) {
 
               {/* Smooth Animated Content */}
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                  }`}
               >
-                <div className="px-5 pb-5 text-gray-800 dark:text-gray-200 dark:text-gray-200 text-[17px] leading-relaxed">
+                <div className="px-5 pb-5 text-gray-800 dark:text-gray-200 text-[17px] leading-relaxed">
                   {item.answer}
                 </div>
               </div>

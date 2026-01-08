@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function PortfolioResults() {
   const [hoveredImage, setHoveredImage] = useState(null);
-  
+
   const results = [
     {
       percentage: "45%",
@@ -42,19 +42,19 @@ export default function PortfolioResults() {
       description: "Average across all campaigns",
     },
   ];
-  
+
   return (
-    <div className="bg-white dark:bg-zinc-900 dark:bg-black min-h-screen w-full grid place-content-center py-16 px-4 md:px-8 lg:px-16 relative">
+    <div className="bg-white dark:bg-black min-h-screen w-full grid place-content-center py-16 px-4 md:px-8 lg:px-16 relative">
       <div className="max-w-6xl mx-auto">
         {/* Portfolio Results Badge */}
         <div className="flex justify-center mb-8">
-          <div className="bg-[#FF6600]/10 text-[#FF6600] px-6 py-2 rounded-full text-sm uppercase tracking-wider font-semibold">
+          <div className="bg-[#FF6600]/10 dark:bg-orange-500/10 text-[#FF6600] px-6 py-2 rounded-full text-sm uppercase tracking-wider font-semibold border border-orange-500/20">
             Proven Results
           </div>
         </div>
 
         {/* Main Heading with Images */}
-        <div className="text-center max-w-screen-xl mx-auto relative text-neutral-900 mb-12">
+        <div className="text-center max-w-screen-xl mx-auto relative text-neutral-900 dark:text-white mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
             Driving Tangible Results for
             <TooltipProvider>
@@ -68,7 +68,7 @@ export default function PortfolioResults() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white dark:bg-zinc-900 dark:bg-black px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white dark:bg-zinc-800 px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-gray-100 dark:border-zinc-700">
                       Marketing Director
                     </div>
                   </div>
@@ -80,7 +80,7 @@ export default function PortfolioResults() {
                   <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
                     "Brandbase Capsule transformed our digital presence, delivering a 300% increase in qualified leads within 6 months."
                   </p>
-                  <p className="font-semibold text-sm text-gray-900 dark:text-gray-100 dark:text-gray-100">Sarah Chen</p>
+                  <p className="font-semibold text-sm text-gray-900 dark:text-white">Sarah Chen</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">Marketing Director, TechCorp</p>
                 </TooltipContent>
               </Tooltip>
@@ -101,7 +101,7 @@ export default function PortfolioResults() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white dark:bg-zinc-900 dark:bg-black px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white dark:bg-zinc-800 px-3 py-1 rounded-full shadow-md text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-gray-100 dark:border-zinc-700">
                       Business Owner
                     </div>
                   </div>
@@ -113,7 +113,7 @@ export default function PortfolioResults() {
                   <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
                     "From concept to execution, their event management team created an unforgettable experience that exceeded all expectations."
                   </p>
-                  <p className="font-semibold text-sm text-gray-900 dark:text-gray-100 dark:text-gray-100">Michael Rodriguez</p>
+                  <p className="font-semibold text-sm text-gray-900 dark:text-white">Michael Rodriguez</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">CEO, Retail Innovations</p>
                 </TooltipContent>
               </Tooltip>
@@ -129,38 +129,38 @@ export default function PortfolioResults() {
               key={result.label}
               className="relative group"
             >
-              <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl border border-gray-200 hover:border-[#FF6600] hover:shadow-lg transition-all duration-300 h-full">
+              <div className="bg-gradient-to-br from-white to-gray-50 dark:from-zinc-800/50 dark:to-zinc-900/50 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 hover:border-[#FF6600] dark:hover:border-[#FF6600] hover:shadow-lg transition-all duration-300 h-full">
                 {/* Icon */}
                 <div className="mb-4 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-[#FF6600]/10 transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-zinc-700/50 flex items-center justify-center group-hover:bg-[#FF6600]/10 transition-colors duration-300">
                     {result.icon}
                   </div>
                 </div>
-                
+
                 {/* Percentage with Arrow */}
                 <div className="flex items-center justify-center gap-2 mb-3">
-                  <span className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">
+                  <span className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
                     {result.percentage}
                   </span>
                   {result.isIncrease && (
                     <ArrowUp className="w-6 h-6 text-green-500" />
                   )}
                 </div>
-                
+
                 {/* Label */}
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-200 text-center mb-2">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 text-center mb-2">
                   {result.label}
                 </h3>
-                
+
                 {/* Description */}
                 <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
                   {result.description}
                 </p>
-                
+
                 {/* Hover Effect Line */}
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 group-hover:w-16 h-0.5 bg-[#FF6600] transition-all duration-300"></div>
               </div>
-              
+
               {/* Decorative Number */}
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 0{index + 1}
@@ -170,41 +170,41 @@ export default function PortfolioResults() {
         </div>
 
         {/* Portfolio Case Studies Preview */}
-        <div className="mt-16 pt-8 border-t border-gray-200">
+        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-zinc-800">
           <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Featured Portfolio Success Stories
             </h3>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Explore how we've helped businesses achieve their marketing and digital goals
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 category: "Digital Marketing",
                 title: "E-commerce Growth Strategy",
                 result: "450% Revenue Increase",
-                color: "bg-blue-50 border-blue-100"
+                color: "bg-blue-50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-900/30"
               },
               {
                 category: "Event Management",
                 title: "International Product Launch",
                 result: "2,500+ Attendees",
-                color: "bg-green-50 border-green-100"
+                color: "bg-green-50 dark:bg-green-900/20 border-green-100 dark:border-green-900/30"
               },
               {
                 category: "Web Development",
                 title: "Corporate Website Redesign",
                 result: "75% Faster Load Times",
-                color: "bg-orange-50 border-orange-100"
+                color: "bg-orange-50 dark:bg-orange-900/20 border-orange-100 dark:border-orange-900/30"
               }
             ].map((project, index) => (
               <div key={index} className={`${project.color} p-6 rounded-xl border`}>
                 <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">{project.category}</div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-3">{project.title}</h4>
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100">{project.result}</div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{project.title}</h4>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">{project.result}</div>
                 <button className="mt-4 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#FF6600] transition-colors flex items-center gap-1">
                   View Case Study →
                 </button>

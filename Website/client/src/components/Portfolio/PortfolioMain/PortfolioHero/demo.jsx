@@ -1,11 +1,13 @@
-import { ContainerAnimated,
+import {
+  ContainerAnimated,
   ContainerInset,
   ContainerScroll,
-  ContainerStagger, } from "./hero-video"
+  ContainerStagger,
+} from "./hero-video"
 
 const PortfolioHero = () => {
   return (
-    <ContainerScroll className="mt-25 bg-white dark:bg-zinc-900 dark:bg-black text-center text-black dark:text-white">
+    <ContainerScroll className="mt-25 bg-white dark:bg-black text-center text-black dark:text-white">
       <ContainerStagger viewport={{ once: false }}>
         {/* Main Headline */}
         <ContainerAnimated animation="top">
@@ -24,35 +26,35 @@ const PortfolioHero = () => {
         {/* Portfolio Value Proposition */}
         <ContainerAnimated animation="blur" className="my-8 md:my-10">
           <p className="text-lg md:text-xl leading-relaxed tracking-normal max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
-            Explore our portfolio of innovative projects where we've delivered exceptional results 
-            through strategic digital solutions. From comprehensive marketing campaigns to 
-            cutting-edge web development, our work demonstrates our commitment to excellence 
+            Explore our portfolio of innovative projects where we've delivered exceptional results
+            through strategic digital solutions. From comprehensive marketing campaigns to
+            cutting-edge web development, our work demonstrates our commitment to excellence
             and measurable business impact.
           </p>
         </ContainerAnimated>
 
         {/* Portfolio Highlights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-900 rounded-xl">
-              <div className="text-3xl mb-3">🚀</div>
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Performance Driven</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">High-conversion digital experiences</p>
-            </div>
-            <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-900 rounded-xl">
-              <div className="text-3xl mb-3">🎨</div>
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Strategic Design</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">User-centric design principles</p>
-            </div>
-            <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-900 rounded-xl">
-              <div className="text-3xl mb-3">📈</div>
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-2">Measurable Results</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Data-backed marketing solutions</p>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
+            <div className="text-3xl mb-3">🚀</div>
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Performance Driven</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">High-conversion digital experiences</p>
           </div>
+          <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
+            <div className="text-3xl mb-3">🎨</div>
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Strategic Design</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">User-centric design principles</p>
+          </div>
+          <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
+            <div className="text-3xl mb-3">📈</div>
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Measurable Results</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Data-backed marketing solutions</p>
+          </div>
+        </div>
 
         {/* CTAs */}
         <div className="py-5 mt-5 flex flex-col sm:flex-row justify-center items-center gap-6">
-                    <button
+          <button
             className="rounded-lg bg-[#FF6600] text-white hover:bg-[#E55A00] px-8 py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg"
           >
             Explore Our Portfolio
@@ -83,12 +85,12 @@ const PortfolioHero = () => {
             />
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-          
+
           {/* Video Caption */}
           <div className="absolute bottom-6 left-6 right-6 text-left">
-            <div className="inline-flex items-center gap-2 bg-white dark:bg-zinc-900 dark:bg-black/90 backdrop-blur-sm px-4 py-2 rounded-lg">
+            <div className="inline-flex items-center gap-2 bg-white dark:bg-zinc-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
               <div className="w-2 h-2 bg-[#FF6600] rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-800 dark:text-gray-200 dark:text-gray-200">Portfolio Showcase: Recent Project Highlight</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Portfolio Showcase: Recent Project Highlight</span>
             </div>
           </div>
         </div>

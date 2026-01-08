@@ -22,7 +22,7 @@ const ComparisonSection = ({ data }) => {
   if (!data) return null;
 
   return (
-    <section className="py-10 md:py-15 w-full bg-white dark:bg-zinc-900 dark:bg-black">
+    <section className="py-10 md:py-15 w-full bg-white dark:bg-black">
       <div className="w-full px-0">
         {/* HEADER */}
         <div className="text-center mb-10 md:mb-16 px-4 mt-10">
@@ -37,7 +37,7 @@ const ComparisonSection = ({ data }) => {
           </motion.h2>
 
           <motion.p
-            className="text-lg sm:text-xl md:text-2xl text-gray-900 dark:text-gray-100 dark:text-gray-100 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl text-gray-900 dark:text-gray-100 max-w-3xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -53,15 +53,15 @@ const ComparisonSection = ({ data }) => {
           <div className="inline-block min-w-full align-middle bg-gray-50 dark:bg-zinc-900 rounded-xl shadow-lg">
             {/* Table Container with horizontal scroll on very small screens */}
             <div className="overflow-x-auto rounded-xl">
-              <table className="min-w-full divide-y divide-gray-200">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-zinc-800">
                 {/* Table Header */}
                 <thead>
-                  <tr className="bg-orange-100 text-black dark:text-white">
+                  <tr className="bg-orange-100 dark:bg-orange-900/30 text-black dark:text-white">
                     {data.columns.map((col, i) => (
                       <th
                         key={i}
                         scope="col"
-                        className={`px-4 py-3.5 text-left text-sm font-semibold ${i === 0 ? "sticky left-0 z-10 bg-orange-100" : ""}`}
+                        className={`px-4 py-3.5 text-left text-sm font-semibold ${i === 0 ? "sticky left-0 z-10 bg-orange-100 dark:bg-orange-950/50" : ""}`}
                       >
                         <div className={`${i === 0 ? "" : "flex justify-center"}`}>
                           {col}
@@ -72,18 +72,17 @@ const ComparisonSection = ({ data }) => {
                 </thead>
 
                 {/* Table Body */}
-                <tbody className="divide-y divide-gray-200 bg-white dark:bg-zinc-900 dark:bg-black">
+                <tbody className="divide-y divide-gray-200 dark:divide-zinc-800 bg-white dark:bg-black">
                   {data.rows.map((row, index) => (
                     <tr
                       key={index}
-                      className={`transition-colors duration-200 ${
-                        hoveredRow === index ? "bg-orange-50" : ""
-                      }`}
+                      className={`transition-colors duration-200 ${hoveredRow === index ? "bg-orange-50 dark:bg-orange-950/20" : ""
+                        }`}
                       onMouseEnter={() => setHoveredRow(index)}
                       onMouseLeave={() => setHoveredRow(null)}
                     >
                       {/* Feature Column */}
-                      <td className="whitespace-nowrap px-4 py-4 text-sm sticky left-0 z-10 bg-white dark:bg-zinc-900 dark:bg-black">
+                      <td className="whitespace-nowrap px-4 py-4 text-sm sticky left-0 z-10 bg-white dark:bg-zinc-900">
                         <div className="font-medium text-orange-600">
                           {row.feature}
                         </div>
@@ -92,7 +91,7 @@ const ComparisonSection = ({ data }) => {
                       {/* Value Columns */}
                       {row.values.map((value, i) => (
                         <td key={i} className="whitespace-nowrap px-4 py-4 text-sm">
-                          <div className="text-gray-800 dark:text-gray-200 dark:text-gray-200 flex justify-center">
+                          <div className="text-gray-800 dark:text-gray-200 flex justify-center">
                             {value}
                           </div>
                         </td>

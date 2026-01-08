@@ -13,9 +13,9 @@ export default function Faqs({ data }) {
   };
 
   return (
-    <section 
+    <section
       aria-labelledby="faqs-heading"
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-zinc-900 dark:bg-black"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -23,17 +23,17 @@ export default function Faqs({ data }) {
           <div className="flex justify-center mb-6">
             <Tag>FAQ</Tag>
           </div>
-          <h1 
+          <h1
             id="faqs-heading"
-            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-6"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
             Frequently Asked Questions
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Everything you need to know about our services and process. 
+            Everything you need to know about our services and process.
             Can't find what you're looking for?{" "}
-            <a 
-              href="/contact" 
+            <a
+              href="/contact"
               className="text-[#FF6600] font-semibold hover:underline"
               aria-label="Contact us directly for more information"
             >
@@ -43,7 +43,7 @@ export default function Faqs({ data }) {
         </header>
 
         {/* FAQ Items - Centered */}
-        <div 
+        <div
           className="space-y-4"
           role="list"
           aria-label="Frequently asked questions list"
@@ -52,7 +52,7 @@ export default function Faqs({ data }) {
             <article
               key={faqIndex}
               className={twMerge(
-                "bg-white dark:bg-zinc-900 dark:bg-black rounded-2xl border border-gray-200 p-6 transition-all duration-300 cursor-pointer hover:border-[#FF6600]/50 hover:shadow-lg",
+                "bg-white dark:bg-zinc-800/50 rounded-2xl border border-gray-200 dark:border-zinc-700 p-6 transition-all duration-300 cursor-pointer hover:border-[#FF6600]/50 hover:shadow-lg",
                 selectedIndex === faqIndex && "border-[#FF6600] shadow-xl"
               )}
               onClick={() => handleQuestionClick(faqIndex)}
@@ -64,7 +64,7 @@ export default function Faqs({ data }) {
             >
               {/* Question Header */}
               <div className="flex justify-between items-center">
-                <h2 className="font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 text-lg lg:text-xl pr-8">
+                <h2 className="font-semibold text-gray-900 dark:text-white text-lg lg:text-xl pr-8">
                   {faq.question}
                 </h2>
                 <svg
@@ -87,7 +87,7 @@ export default function Faqs({ data }) {
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
               </div>
-              
+
               {/* Answer with Image */}
               <AnimatePresence>
                 {selectedIndex === faqIndex && (
@@ -114,7 +114,7 @@ export default function Faqs({ data }) {
                           <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-base lg:text-lg">
                             {faq.answer}
                           </p>
-                          
+
                           {/* Quick Tip for specific FAQs */}
                           {(faqIndex === 0 || faqIndex === 2 || faqIndex === 4) && (
                             <aside className="mt-4 p-4 bg-[#FF6600]/5 rounded-xl border border-[#FF6600]/20">
@@ -128,7 +128,7 @@ export default function Faqs({ data }) {
                               </p>
                             </aside>
                           )}
-                          
+
                           {/* CTA Links */}
                           <div className="mt-6 flex flex-wrap gap-3">
                             {faqIndex === 0 && (
@@ -160,7 +160,7 @@ export default function Faqs({ data }) {
                             )}
                           </div>
                         </div>
-                        
+
                         {/* Image - Only for specific FAQs */}
                         {faq.hasImage && selectedIndex === faqIndex && (
                           <figure className="flex-1">
@@ -193,7 +193,7 @@ export default function Faqs({ data }) {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-[#FF6600]/5 to-[#FF6600]/10 rounded-2xl border border-[#FF6600]/20 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-3">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
               Still have questions?
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md mx-auto">
