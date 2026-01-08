@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import GlobalSearch from "./GlobalSearch";
 import ThemeToggle from "./ThemeToggle";
+import TopBar from "./TopBar";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +15,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [showTopBar, setShowTopBar] = useState(true);
   const pathname = usePathname();
 
   const timeoutRef = useRef(null);
@@ -22,14 +25,34 @@ const Navbar = () => {
     const onHome = locationArr.includes(pathname);
     setIsHome(onHome);
 
-    const handleScroll = () => setScrolled(window.scrollY > 300);
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (onHome) {
+        setScrolled(currentScrollY > 300);
+      }
+
+      // TopBar Logic
+      if (currentScrollY < 50) {
+        setShowTopBar(true);
+      } else if (currentScrollY > lastScrollY) {
+        setShowTopBar(false); // Scrolling down
+      } else {
+        setShowTopBar(true); // Scrolling up
+      }
+
+      lastScrollY = currentScrollY;
+    };
 
     if (onHome) {
       setScrolled(window.scrollY > 300);
-      window.addEventListener("scroll", handleScroll);
     } else {
       setScrolled(true);
     }
+
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -118,8 +141,20 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-sans ${navClasses}`}>
-      <div className="max-w-8xl mx-auto flex justify-between items-center px-6 sm:px-8 md:px-12 lg:px-16 py-4">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 font-sans flex flex-col ${navClasses}`}>
+      <AnimatePresence>
+        {showTopBar && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <TopBar />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="max-w-8xl mx-auto flex justify-between items-center px-6 sm:px-8 md:px-12 lg:px-16 py-4 w-full">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <img
