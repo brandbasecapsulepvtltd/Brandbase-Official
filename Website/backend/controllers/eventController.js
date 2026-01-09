@@ -119,7 +119,7 @@ exports.getAllEvents = async (req, res) => {
 exports.getEventById = async (req, res) => {
   try {
     const event = await Event.findOne({ id: req.params.id });
-    
+
     if (!event) {
       return res.status(404).json({
         success: false,
@@ -146,8 +146,20 @@ exports.createEvent = async (req, res) => {
   try {
     // Generate unique ID if not provided
     if (!req.body.id) {
-      const lastEvent = await Event.findOne().sort({ id: -1 });
-      const lastId = lastEvent ? parseInt(lastEvent.id) : 0;
+      const aggregation = await Event.aggregate([
+        {
+          $project: {
+            idNumber: { $toInt: "$id" }
+          }
+        },
+        {
+          $sort: { idNumber: -1 }
+        },
+        {
+          $limit: 1
+        }
+      ]);
+      const lastId = aggregation.length > 0 ? aggregation[0].idNumber : 0;
       req.body.id = (lastId + 1).toString();
     }
 
@@ -261,11 +273,11 @@ exports.deleteEvent = async (req, res) => {
 exports.getEventsForMonth = async (req, res) => {
   try {
     const { year, month } = req.params;
-    
+
     // Validate year and month
     const yearNum = parseInt(year);
     const monthNum = parseInt(month);
-    
+
     if (isNaN(yearNum) || isNaN(monthNum) || monthNum < 0 || monthNum > 11) {
       return res.status(400).json({
         success: false,
@@ -311,7 +323,7 @@ exports.getEventsForDate = async (req, res) => {
 
     const startOfDay = new Date(checkDate);
     startOfDay.setHours(0, 0, 0, 0);
-    
+
     const endOfDay = new Date(checkDate);
     endOfDay.setHours(23, 59, 59, 999);
 
@@ -343,7 +355,7 @@ exports.getEventsForDate = async (req, res) => {
 exports.getSimilarEvents = async (req, res) => {
   try {
     const event = await Event.findOne({ id: req.params.id });
-    
+
     if (!event) {
       return res.status(404).json({
         success: false,
