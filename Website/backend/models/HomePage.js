@@ -22,7 +22,8 @@ const serviceItemSchema = new mongoose.Schema({
   category: String,
   items: [String],
   icon: String,
-  image: String
+  image: String,
+  link: String
 });
 
 const brandElevationSchema = new mongoose.Schema({
