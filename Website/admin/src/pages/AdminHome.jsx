@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import adminAxios from '../utils/axios';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Save, 
-  X, 
-  Image, 
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Save,
+  X,
+  Image,
   Video,
   Layout,
   Users,
@@ -36,9 +36,9 @@ const AdminHome = () => {
     try {
       setLoading(true);
       const response = await adminAxios.get('/api/homepage');
-      
+
       const data = response.data.data || response.data;
-      
+
       // Ensure all sections have proper structure
       const initializedData = {
         heroSection: data.heroSection || { slides: [], video: { url: '' } },
@@ -49,11 +49,11 @@ const AdminHome = () => {
         faqs: data.faqs || { faqs: [] },
         ...data
       };
-      
+
       setHomePageData(initializedData);
     } catch (error) {
       console.error('Error fetching data:', error);
-      
+
       // Set default structure if fetch fails
       setHomePageData({
         heroSection: { slides: [], video: { url: '' } },
@@ -72,7 +72,7 @@ const AdminHome = () => {
     setSaving(true);
     try {
       const response = await adminAxios.put('/api/homepage', homePageData);
-      
+
       if (response.data.success) {
         alert('Data saved successfully!');
         // Refresh data after save to ensure we have the latest
@@ -124,7 +124,7 @@ const AdminHome = () => {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600">Failed to load data</p>
-          <button 
+          <button
             onClick={fetchHomePageData}
             className="mt-4 px-6 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-[#E55A00]"
           >
@@ -145,7 +145,7 @@ const AdminHome = () => {
             <div className="flex items-center space-x-4">
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Home Page Admin</h1>
             </div>
-            
+
             {/* Right side - Hamburger and Save button */}
             <div className="flex items-center space-x-4">
               {/* Hamburger menu for both desktop and mobile */}
@@ -188,11 +188,10 @@ const AdminHome = () => {
                       setActiveSection(section.id);
                       setMobileMenuOpen(false);
                     }}
-                    className={`flex items-center w-full px-4 py-3 text-left border-b border-gray-100 last:border-b-0 transition-colors ${
-                      activeSection === section.id
-                        ? 'bg-[#FF6600] text-white'
-                        : 'text-gray-700 hover:bg-gray-50'
-                    }`}
+                    className={`flex items-center w-full px-4 py-3 text-left border-b border-gray-100 last:border-b-0 transition-colors ${activeSection === section.id
+                      ? 'bg-[#FF6600] text-white'
+                      : 'text-gray-700 hover:bg-gray-50'
+                      }`}
                   >
                     <Icon className="w-4 h-4 mr-2" />
                     {section.name}
@@ -219,39 +218,39 @@ const AdminHome = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-xl shadow-sm border p-4 sm:p-6">
           {activeSection === 'hero' && (
-            <HeroSectionManager 
-              data={homePageData.heroSection} 
-              onChange={(data) => updateSectionData('heroSection', data)} 
+            <HeroSectionManager
+              data={homePageData.heroSection}
+              onChange={(data) => updateSectionData('heroSection', data)}
             />
           )}
           {activeSection === 'brandElevation' && (
-            <BrandElevationManager 
-              data={homePageData.brandElevation} 
-              onChange={(data) => updateSectionData('brandElevation', data)} 
+            <BrandElevationManager
+              data={homePageData.brandElevation}
+              onChange={(data) => updateSectionData('brandElevation', data)}
             />
           )}
           {activeSection === 'recentWork' && (
-            <RecentWorkManager 
-              data={homePageData.recentWork} 
-              onChange={(data) => updateSectionData('recentWork', data)} 
+            <RecentWorkManager
+              data={homePageData.recentWork}
+              onChange={(data) => updateSectionData('recentWork', data)}
             />
           )}
           {activeSection === 'clients' && (
-            <ClientsManager 
-              data={homePageData.clients} 
-              onChange={(data) => updateSectionData('clients', data)} 
+            <ClientsManager
+              data={homePageData.clients}
+              onChange={(data) => updateSectionData('clients', data)}
             />
           )}
           {activeSection === 'testimonials' && (
-            <TestimonialsManager 
-              data={homePageData.testimonials} 
-              onChange={(data) => updateSectionData('testimonials', data)} 
+            <TestimonialsManager
+              data={homePageData.testimonials}
+              onChange={(data) => updateSectionData('testimonials', data)}
             />
           )}
           {activeSection === 'faqs' && (
-            <FaqsManager 
-              data={homePageData.faqs} 
-              onChange={(data) => updateSectionData('faqs', data)} 
+            <FaqsManager
+              data={homePageData.faqs}
+              onChange={(data) => updateSectionData('faqs', data)}
             />
           )}
         </div>
@@ -296,7 +295,7 @@ const HeroSectionManager = ({ data, onChange }) => {
 
     if (editingSlide.id && safeData.slides.some(slide => slide.id === editingSlide.id)) {
       // Update existing slide
-      const updatedSlides = safeData.slides.map(slide => 
+      const updatedSlides = safeData.slides.map(slide =>
         slide.id === editingSlide.id ? editingSlide : slide
       );
       onChange({ ...safeData, slides: updatedSlides });
@@ -306,9 +305,9 @@ const HeroSectionManager = ({ data, onChange }) => {
         ...editingSlide,
         id: editingSlide.id || Date.now().toString()
       };
-      onChange({ 
-        ...safeData, 
-        slides: [...safeData.slides, newSlideWithId] 
+      onChange({
+        ...safeData,
+        slides: [...safeData.slides, newSlideWithId]
       });
     }
     setShowSlideForm(false);
@@ -375,9 +374,9 @@ const HeroSectionManager = ({ data, onChange }) => {
                     <h3 className="font-medium text-gray-900">{slide.title || 'Untitled Slide'}</h3>
                   </div>
                   {slide.image && (
-                    <img 
-                      src={slide.image} 
-                      alt="Slide preview" 
+                    <img
+                      src={slide.image}
+                      alt="Slide preview"
                       className="h-20 w-32 object-cover rounded-lg mb-3"
                       onError={(e) => {
                         e.target.style.display = 'none';
@@ -385,7 +384,7 @@ const HeroSectionManager = ({ data, onChange }) => {
                     />
                   )}
                   <p className="text-gray-600 text-sm mb-2">{slide.subtext}</p>
-                  
+
                   {/* Display link if exists */}
                   {slide.link && (
                     <div className="mt-2">
@@ -487,9 +486,9 @@ const HeroSectionManager = ({ data, onChange }) => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Image Preview
                   </label>
-                  <img 
-                    src={editingSlide.image} 
-                    alt="Preview" 
+                  <img
+                    src={editingSlide.image}
+                    alt="Preview"
                     className="h-40 w-full object-cover rounded-lg border"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -501,7 +500,7 @@ const HeroSectionManager = ({ data, onChange }) => {
               {/* Link Fields */}
               <div className="border-t pt-4">
                 <h4 className="text-sm font-medium text-gray-700 mb-3">Call-to-Action Link</h4>
-                
+
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -597,9 +596,9 @@ const BrandElevationManager = ({ data, onChange }) => {
       onChange({ ...safeData, services: updatedServices });
     } else {
       // Add new service
-      onChange({ 
-        ...safeData, 
-        services: [...safeData.services, editingService] 
+      onChange({
+        ...safeData,
+        services: [...safeData.services, editingService]
       });
     }
     setShowServiceForm(false);
@@ -664,8 +663,8 @@ const BrandElevationManager = ({ data, onChange }) => {
                     <h3 className="font-semibold text-gray-900">{service.category}</h3>
                   </div>
                   {service.image && (
-                    <img 
-                      src={service.image} 
+                    <img
+                      src={service.image}
                       alt={service.category}
                       className="h-20 w-32 object-cover rounded-lg mb-3"
                       onError={(e) => {
@@ -796,6 +795,22 @@ const BrandElevationManager = ({ data, onChange }) => {
                 </div>
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Link URL
+                </label>
+                <input
+                  type="url"
+                  value={editingService?.link || ''}
+                  onChange={(e) => setEditingService({ ...editingService, link: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600]"
+                  placeholder="Enter link URL (e.g., /services/web-development)"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  URL where users go when they click "Learn More" button
+                </p>
+              </div>
+
               <div className="flex flex-col sm:flex-row sm:justify-end space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
                 <button
                   onClick={() => {
@@ -859,9 +874,9 @@ const RecentWorkManager = ({ data, onChange }) => {
       onChange({ ...safeData, works: updatedWorks });
     } else {
       // Add new work
-      onChange({ 
-        ...safeData, 
-        works: [...safeData.works, editingWork] 
+      onChange({
+        ...safeData,
+        works: [...safeData.works, editingWork]
       });
     }
     setShowWorkForm(false);
@@ -900,8 +915,8 @@ const RecentWorkManager = ({ data, onChange }) => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between space-y-3 sm:space-y-0">
                 <div className="flex items-center space-x-4 flex-1">
                   {work.image && (
-                    <img 
-                      src={work.image} 
+                    <img
+                      src={work.image}
                       alt={work.name}
                       className="h-16 w-16 object-cover rounded-lg flex-shrink-0"
                       onError={(e) => {
@@ -1001,9 +1016,9 @@ const RecentWorkManager = ({ data, onChange }) => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Image Preview
                   </label>
-                  <img 
-                    src={editingWork.image} 
-                    alt="Preview" 
+                  <img
+                    src={editingWork.image}
+                    alt="Preview"
                     className="h-32 w-full object-cover rounded-lg border"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -1075,7 +1090,7 @@ const ClientsManager = ({ data, onChange }) => {
 
     if (editingClient.id && safeData.clientData.some(client => client.id === editingClient.id)) {
       // Update existing client
-      const updatedClients = safeData.clientData.map(client => 
+      const updatedClients = safeData.clientData.map(client =>
         client.id === editingClient.id ? editingClient : client
       );
       onChange({ ...safeData, clientData: updatedClients });
@@ -1085,9 +1100,9 @@ const ClientsManager = ({ data, onChange }) => {
         ...editingClient,
         id: editingClient.id || Date.now().toString()
       };
-      onChange({ 
-        ...safeData, 
-        clientData: [...safeData.clientData, newClientWithId] 
+      onChange({
+        ...safeData,
+        clientData: [...safeData.clientData, newClientWithId]
       });
     }
     setShowClientForm(false);
@@ -1126,8 +1141,8 @@ const ClientsManager = ({ data, onChange }) => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between space-y-3 sm:space-y-0">
                 <div className="flex items-center space-x-4 flex-1 min-w-0">
                   {client.logo && (
-                    <img 
-                      src={client.logo} 
+                    <img
+                      src={client.logo}
                       alt={client.name}
                       className="h-12 w-12 object-contain bg-white p-1 rounded-lg flex-shrink-0"
                       onError={(e) => {
@@ -1351,9 +1366,9 @@ const TestimonialsManager = ({ data, onChange }) => {
       onChange({ ...safeData, testimonials: updatedTestimonials });
     } else {
       // Add new testimonial
-      onChange({ 
-        ...safeData, 
-        testimonials: [...safeData.testimonials, editingTestimonial] 
+      onChange({
+        ...safeData,
+        testimonials: [...safeData.testimonials, editingTestimonial]
       });
     }
     setShowTestimonialForm(false);
@@ -1393,8 +1408,8 @@ const TestimonialsManager = ({ data, onChange }) => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-3">
                     {testimonial.avatar && (
-                      <img 
-                        src={testimonial.avatar} 
+                      <img
+                        src={testimonial.avatar}
                         alt={testimonial.name}
                         className="h-10 w-10 rounded-full object-cover flex-shrink-0"
                         onError={(e) => {
@@ -1410,8 +1425,8 @@ const TestimonialsManager = ({ data, onChange }) => {
                   <p className="text-gray-600 text-sm line-clamp-3">"{testimonial.text}"</p>
                   {testimonial.logo && (
                     <div className="mt-3">
-                      <img 
-                        src={testimonial.logo} 
+                      <img
+                        src={testimonial.logo}
                         alt="Client logo"
                         className="h-8 object-contain"
                         onError={(e) => {
@@ -1588,9 +1603,9 @@ const FaqsManager = ({ data, onChange }) => {
       onChange({ ...safeData, faqs: updatedFaqs });
     } else {
       // Add new FAQ
-      onChange({ 
-        ...safeData, 
-        faqs: [...safeData.faqs, editingFaq] 
+      onChange({
+        ...safeData,
+        faqs: [...safeData.faqs, editingFaq]
       });
     }
     setShowFaqForm(false);
@@ -1728,9 +1743,9 @@ const FaqsManager = ({ data, onChange }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600]"
                   />
                   {editingFaq.image && (
-                    <img 
-                      src={editingFaq.image} 
-                      alt="Preview" 
+                    <img
+                      src={editingFaq.image}
+                      alt="Preview"
                       className="h-32 w-full object-cover rounded-lg border mt-2"
                       onError={(e) => {
                         e.target.style.display = 'none';
