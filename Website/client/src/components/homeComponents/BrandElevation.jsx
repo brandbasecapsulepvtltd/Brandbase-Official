@@ -207,6 +207,11 @@ function ServiceCard({ service, onHover, onLeave }) {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           aria-label={`Learn more about our ${service.category} services`}
+          onClick={() => {
+            if (service.link) {
+              window.location.href = service.link;
+            }
+          }}
         >
           Learn More
         </motion.button>

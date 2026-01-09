@@ -5,6 +5,11 @@ import Tag from "../Tag";
 const TestimonialSlider = ({ data }) => {
   const [index, setIndex] = useState(0);
 
+  // Safety check: Ensure data and testimonials exist
+  if (!data || !data.testimonials || data.testimonials.length === 0) {
+    return null; // or return a fallback UI
+  }
+
   const prev = () => {
     setIndex((prevIndex) => (prevIndex === 0 ? data.testimonials.length - 1 : prevIndex - 1));
   };
@@ -13,17 +18,23 @@ const TestimonialSlider = ({ data }) => {
     setIndex((prevIndex) => (prevIndex + 1) % data.testimonials.length);
   };
 
-  const { logo, text, name, role, avatar } = data.testimonials[index];
+  // Safety check: Ensure current index is valid
+  const currentTestimonial = data.testimonials[index];
+  if (!currentTestimonial) {
+    return null;
+  }
+
+  const { logo, text, name, role, avatar } = currentTestimonial;
 
   return (
-    <section 
+    <section
       aria-labelledby="testimonials-heading"
       className="bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white min-h-screen px-15 py-20 font-sans"
     >
       <div className="max-w-7xl space-y-5">
         <Tag>Testimonials</Tag>
         {/* Heading */}
-        <h1 
+        <h1
           id="testimonials-heading"
           className="text-4xl lg:text-6xl font-medium leading-none"
         >
@@ -32,8 +43,8 @@ const TestimonialSlider = ({ data }) => {
 
         {/* Testimonial */}
         <article className="mt-16">
-          <img 
-            src={logo} 
+          <img
+            src={logo}
             alt={`${name} company logo`}
             className="h-17 w-auto mb-6"
             loading="lazy"
@@ -47,9 +58,9 @@ const TestimonialSlider = ({ data }) => {
 
           {/* Avatar and Info */}
           <div className="flex items-center gap-4 mt-8">
-            <img 
-              src={avatar} 
-              alt={`${name}, ${role}`} 
+            <img
+              src={avatar}
+              alt={`${name}, ${role}`}
               className="w-12 h-12 rounded-full object-cover"
               loading="lazy"
               width={48}
@@ -62,7 +73,7 @@ const TestimonialSlider = ({ data }) => {
           </div>
 
           {/* Navigation */}
-          <nav 
+          <nav
             className="flex justify-end gap-4 mt-8"
             aria-label="Testimonial navigation"
           >
