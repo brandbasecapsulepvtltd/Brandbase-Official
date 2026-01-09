@@ -147,7 +147,8 @@ const homePageData = {
           "Shopify Development"
         ],
         icon: "💻",
-        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        link: "/services/web-development"
       },
       {
         category: "Graphic Design",
@@ -159,7 +160,8 @@ const homePageData = {
           "Print & Digital Assets"
         ],
         icon: "🎨",
-        image: "https://cdn.wallpapersafari.com/42/65/YlVLzy.jpg"
+        image: "https://cdn.wallpapersafari.com/42/65/YlVLzy.jpg",
+        link: "/services/graphic-design"
       },
       {
         category: "Digital Marketing",
@@ -171,7 +173,8 @@ const homePageData = {
           "Email Marketing"
         ],
         icon: "📱",
-        image: "https://tse2.mm.bing.net/th/id/OIP.4haPry3S_usS7LZ_KdjIhgHaE8?pid=ImgDet&w=474&h=316&rs=1&o=7&rm=3"
+        image: "https://tse2.mm.bing.net/th/id/OIP.4haPry3S_usS7LZ_KdjIhgHaE8?pid=ImgDet&w=474&h=316&rs=1&o=7&rm=3",
+        link: "/services/digital-marketing"
       },
       {
         category: "Web Development",
@@ -183,7 +186,8 @@ const homePageData = {
           "Performance Optimization"
         ],
         icon: "🔧",
-        image: "https://tse2.mm.bing.net/th/id/OIP.FC4TBhC6mLp8WOfZex3IrgHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3"
+        image: "https://tse2.mm.bing.net/th/id/OIP.FC4TBhC6mLp8WOfZex3IrgHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3",
+        link: "/services/web-development"
       },
       {
         category: "Video Production",
@@ -195,7 +199,8 @@ const homePageData = {
           "Video Advertising"
         ],
         icon: "🎥",
-        image: "https://tse4.mm.bing.net/th/id/OIP.CcA6fg-ieoi3-WzmDltB7AHaEJ?rs=1&pid=ImgDetMain&o=7&rm=3"
+        image: "https://tse4.mm.bing.net/th/id/OIP.CcA6fg-ieoi3-WzmDltB7AHaEJ?rs=1&pid=ImgDetMain&o=7&rm=3",
+        link: "/services/video-production"
       },
       {
         category: "Brand Strategy",
@@ -207,7 +212,8 @@ const homePageData = {
           "Growth Strategy"
         ],
         icon: "🚀",
-        image: "https://www.ey.com/content/dam/ey-unified-site/ey-com/en-gl/campaigns/transformation-realized/images/ey-transformations-film-billboards-still-3840px-v2.jpg"
+        image: "https://www.ey.com/content/dam/ey-unified-site/ey-com/en-gl/campaigns/transformation-realized/images/ey-transformations-film-billboards-still-3840px-v2.jpg",
+        link: "/services/brand-strategy"
       }
     ]
   },
