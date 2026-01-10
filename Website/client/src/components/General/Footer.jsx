@@ -173,9 +173,11 @@ const Footer = ({ data }) => {
               <p className="text-gray-500 dark:text-gray-400 text-sm">
                 {copyright}
               </p>
-              <p className="text-gray-400 text-xs mt-1">
+              {/*
+                            <p className="text-gray-400 text-xs mt-1">
                 Registered in India | GSTIN: {gstin}
               </p>
+              */}
             </div>
           </div>
         </div>
