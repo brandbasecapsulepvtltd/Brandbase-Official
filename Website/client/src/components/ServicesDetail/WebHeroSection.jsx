@@ -17,7 +17,7 @@ const WebHeroSection = ({ data }) => {
   const loopFeatures = [...data.features, ...data.features, ...data.features];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black font-sans flex flex-col items-center justify-center mt-10">
+    <div className="min-h-screen bg-white dark:bg-black font-sans flex flex-col items-center justify-center mt-15">
       <main className="w-full max-w-6xl px-4 py-16 md:py-24 flex flex-col items-center text-center">
         {/* Headline */}
         <h1 className="text-5xl lg:text-6xl leading-[0.95] font-bold tracking-tight text-slate-900 dark:text-white uppercase mb-6 max-w-5xl">
@@ -31,9 +31,12 @@ const WebHeroSection = ({ data }) => {
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-4 mb-20">
-          <button className="group bg-orange-400 hover:bg-orange-500 text-white text-lg md:text-xl font-bold py-4 px-10 rounded-full transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 flex items-center gap-2">
+          <a
+            href={data.ctaLink || "#"}
+            className="group bg-orange-400 hover:bg-orange-500 text-white text-lg md:text-xl font-bold py-4 px-10 rounded-full transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 flex items-center gap-2"
+          >
             {data.ctaText}
-          </button>
+          </a>
 
           <div className="flex items-center gap-3 text-sm font-medium text-slate-400">
             <span>* {data.trustNote1}</span>

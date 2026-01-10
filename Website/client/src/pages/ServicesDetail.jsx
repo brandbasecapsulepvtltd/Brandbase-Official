@@ -12,11 +12,11 @@ const ServicesDetail = ({ data }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
-  
+
   console.log("ServicesDetail rendering with data:", data.hero.headline);
-  
+
   return (
-    <> 
+    <>
       <WebHeroSection data={data.hero} />
       <AnimateImage data={data.animateImage} />
       <ComparisonSection data={data.comparison} />

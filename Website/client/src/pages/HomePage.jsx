@@ -14,9 +14,9 @@ import HeroSlider from '@/components/homeComponents/HeroSlider';
 import { api } from '@/lib/api';
 import InteractiveImageBentoGalleryDemo from '@/components/homeComponents/BentoGallery/demo';
 
-const HomePage = () => {
-  const [homePageData, setHomePageData] = useState(null);
-  const [loading, setLoading] = useState(true);
+const HomePage = ({ initialData }) => {
+  const [homePageData, setHomePageData] = useState(initialData || null);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState(null);
 
   // Fix: Scroll to top on page load/reload
@@ -161,7 +161,8 @@ const HomePage = () => {
     recentWork,
     clients,
     testimonials,
-    faqs
+    faqs,
+    ctaSection
   } = homePageData;
 
   // Render the complete page with fetched data
@@ -196,7 +197,7 @@ const HomePage = () => {
       {faqs && <Faqs data={faqs} />}
 
       {/* CTA Section */}
-      <CTASection />
+      <CTASection data={ctaSection} />
     </main>
   );
 };

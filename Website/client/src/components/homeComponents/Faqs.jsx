@@ -48,7 +48,7 @@ export default function Faqs({ data }) {
           role="list"
           aria-label="Frequently asked questions list"
         >
-          {data.faqs.map((faq, faqIndex) => (
+          {(data?.faqs || []).map((faq, faqIndex) => (
             <article
               key={faqIndex}
               className={twMerge(

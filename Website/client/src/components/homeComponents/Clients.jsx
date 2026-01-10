@@ -7,8 +7,9 @@ export default function Clients({ data }) {
   const [selectedClient, setSelectedClient] = useState(null);
 
   // Calculate how many logos to show (2 rows × 6 logos = 12)
-  const clientsToShow = showAll ? data.clientData : data.clientData.slice(0, 12);
-  const hasMoreClients = data.clientData.length > 12;
+  const clientData = data?.clientData || [];
+  const clientsToShow = showAll ? clientData : clientData.slice(0, 12);
+  const hasMoreClients = clientData.length > 12;
 
   // Split clients into rows of 6
   const rows = [];

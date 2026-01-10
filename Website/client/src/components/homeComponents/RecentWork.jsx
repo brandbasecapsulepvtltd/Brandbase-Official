@@ -39,7 +39,7 @@ const recentWorks = [
   }
 ];
 
-export default function RecentWork() {
+export default function RecentWork({ data }) {
   return (
     <section
       aria-labelledby="recent-work-heading"
@@ -65,30 +65,32 @@ export default function RecentWork() {
           role="list"
           aria-label="Recent projects portfolio"
         >
-          {recentWorks.map((work, index) => (
-            <article
+          {(data?.works || recentWorks).map((work, index) => (
+            <a
               key={index}
-              className={`${work.span} rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-md`}
+              href={work.link || "#"}
+              className={`${work.span || (data?.spanClasses && data.spanClasses[index]) || 'col-span-1'} rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-md block`}
               role="listitem"
-              tabIndex={0}
-              aria-label={`View ${work.title} - ${work.category} project`}
+              aria-label={`View ${work.name || work.title} - ${work.description || work.category} project`}
             >
-              <figure className="w-full h-full relative">
-                <img
-                  src={work.image}
-                  alt={`${work.title} - ${work.category} project showcase`}
-                  title={`${work.title} Project`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                  width={400}
-                  height={300}
-                />
-                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h2 className="text-white font-semibold text-sm sm:text-base">{work.title}</h2>
-                  <p className="text-white/80 text-xs sm:text-sm">{work.category}</p>
-                </figcaption>
-              </figure>
-            </article>
+              <article className="w-full h-full">
+                <figure className="w-full h-full relative">
+                  <img
+                    src={work.image}
+                    alt={`${work.name || work.title} - ${work.description || work.category} project showcase`}
+                    title={`${work.name || work.title} Project`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    width={400}
+                    height={300}
+                  />
+                  <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h2 className="text-white font-semibold text-sm sm:text-base">{work.name || work.title}</h2>
+                    <p className="text-white/80 text-xs sm:text-sm line-clamp-1">{work.description || work.category}</p>
+                  </figcaption>
+                </figure>
+              </article>
+            </a>
           ))}
         </div>
 

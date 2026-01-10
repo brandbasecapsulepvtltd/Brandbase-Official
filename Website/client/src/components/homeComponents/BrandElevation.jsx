@@ -53,7 +53,7 @@ export default function BrandElevation({ data }) {
               }}
               aria-hidden="false"
             >
-              {data.services.map((service, index) => (
+              {(data?.services || []).map((service, index) => (
                 <ServiceCard
                   key={`first-${index}`}
                   service={service}
@@ -79,7 +79,7 @@ export default function BrandElevation({ data }) {
               }}
               aria-hidden="true"
             >
-              {data.services.map((service, index) => (
+              {(data?.services || []).map((service, index) => (
                 <ServiceCard
                   key={`second-${index}`}
                   service={service}

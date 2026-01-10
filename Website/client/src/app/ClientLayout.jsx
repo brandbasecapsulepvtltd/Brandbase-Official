@@ -44,7 +44,9 @@ export default function ClientLayout({ children }) {
       <ChatbaseWidget />
       <CursorFollower />
 
-      {children}
+      <main className="mt-5">
+        {children}
+      </main>
 
       <Footer />
     </>

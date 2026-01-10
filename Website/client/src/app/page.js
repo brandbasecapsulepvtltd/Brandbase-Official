@@ -8,13 +8,20 @@ export const revalidate = 10;
  */
 export async function generateMetadata() {
   let data = {};
-  
+
   try {
-    // Replace this with your actual Admin Dashboard API URL
-    const res = await fetch("https://your-admin-api.com/api/seo-settings", {
+    // Correct API URL for SEO settings (currently part of homepage data)
+    const res = await fetch("https://brandbase.onrender.com/api/homepage", {
       next: { revalidate: 10 },
+      headers: {
+        'X-API-Key': "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de"
+      }
     });
-    data = await res.json();
+
+    if (res.ok) {
+      const responseData = await res.json();
+      data = responseData.data?.seoSettings || {};
+    }
   } catch (error) {
     console.error("Metadata fetch failed, using defaults", error);
   }
@@ -95,11 +102,18 @@ export default async function Home() {
   let dbData = {};
 
   try {
-    // Fetch organization & schema data from your dashboard
-    const res = await fetch("https://your-admin-api.com/api/organization-settings", {
+    // Correct API URL for organization settings (currently part of homepage data or local fallbacks)
+    const res = await fetch("https://brandbase.onrender.com/api/homepage", {
       next: { revalidate: 10 },
+      headers: {
+        'X-API-Key': "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de"
+      }
     });
-    dbData = await res.json();
+
+    if (res.ok) {
+      const responseData = await res.json();
+      dbData = responseData.data?.organizationSettings || {};
+    }
   } catch (error) {
     dbData = {}; // Fallback to empty to allow hardcoded defaults below
   }
@@ -159,10 +173,10 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
       {/* 2. Google Verification (Static) */}
       <meta name="google-site-verification" content="FPOO4DhO411nxsu-z3MXNumhevuBGMhbv0mfKdj9y2Q" />
-      
+
       {/* 3. Render the Homepage Content */}
       {/* We pass the data to HomePage so the UI also updates every 10s */}
       <HomePage initialData={dbData} />

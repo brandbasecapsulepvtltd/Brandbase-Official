@@ -33,7 +33,7 @@ const services = [
   },
 ];
 
-export default function CTASection() {
+export default function CTASection({ data }) {
   return (
     <section
       aria-labelledby="cta-section-heading"
@@ -48,14 +48,16 @@ export default function CTASection() {
               id="cta-section-heading"
               className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mt-2 sm:mt-4 leading-tight sm:leading-snug text-black dark:text-white"
             >
-              Transform your{" "}
-              <span className="text-[#FF6A00]">digital</span> presence
+              {data?.title || (
+                <>
+                  Transform your <span className="text-[#FF6A00]">digital</span> presence
+                </>
+              )}
             </h1>
 
             {/* Description */}
             <p className="text-black dark:text-white mt-4 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl">
-              From stunning websites to powerful mobile apps and data-driven marketing strategies —
-              we provide complete digital solutions to elevate your business.
+              {data?.subheading || "From stunning websites to powerful mobile apps and data-driven marketing strategies — we provide complete digital solutions to elevate your business."}
             </p>
 
             {/* Feature Cards */}
@@ -80,30 +82,26 @@ export default function CTASection() {
             {/* Buttons */}
             <div className="mt-8 sm:mt-10 flex flex-col xs:flex-row gap-3 sm:gap-4">
               {/* Outline button */}
-              <button
-                className="relative overflow-hidden group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold transition-colors duration-300 text-[#FF6A00] bg-white dark:bg-black border border-[#FF6A00] shadow-lg hover:text-white text-sm sm:text-base"
+              <a
+                href={data?.primaryLink || "/appointment"}
+                className="relative overflow-hidden group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold transition-colors duration-300 text-[#FF6A00] bg-white dark:bg-black border border-[#FF6A00] shadow-lg hover:text-white text-sm sm:text-base inline-block text-center cursor-pointer"
                 aria-label="Schedule a call to discuss your digital project"
               >
-                <a
-                  href="/appointment"
-                  className="relative z-10"
-                  aria-label="Schedule a call with our team"
-                >
-                  Schedule a Call
-                </a>
+                <span className="relative z-10">{data?.primaryText || "Schedule a Call"}</span>
                 <span
                   className="absolute inset-0 bg-[#FF6A00] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"
                   aria-hidden="true"
                 ></span>
-              </button>
+              </a>
 
               {/* Solid button */}
-              <button
-                className="bg-[#FF6A00] hover:bg-[#E65D00] text-white font-semibold py-2.5 sm:py-3 md:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6A00]/25 text-sm sm:text-base"
+              <a
+                href={data?.secondaryLink || "#"}
+                className="bg-[#FF6A00] hover:bg-[#E65D00] text-white font-semibold py-2.5 sm:py-3 md:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6A00]/25 text-sm sm:text-base inline-block text-center cursor-pointer"
                 aria-label="View all our digital services"
               >
-                View All Services
-              </button>
+                {data?.secondaryText || "View All Services"}
+              </a>
             </div>
 
             {/* Trust Section */}

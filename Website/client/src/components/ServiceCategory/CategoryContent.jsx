@@ -27,7 +27,7 @@ const CategoryContent = ({ pageData }) => {
   // You must replace 'useNavigate()' with 'useRouter()' in those files.
 
   return (
-    <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-200 mt-[70px]">
+    <div className="bg-white dark:bg-black text-gray-800 dark:text-gray-200 mt-[80px]">
       <CategoryHero data={pageData.hero} />
       <VisionBanner data={pageData.visionBanner} />
       <ComparisonTable data={pageData.comparisonTable} />

@@ -71,8 +71,8 @@ const ServicePackages = ({ data }) => {
                   key={pkg.id}
                   onClick={() => handleTabChange(pkg.id)}
                   className={`flex-1 min-w-max sm:min-w-0 flex items-center justify-center gap-2 px-4 py-3 rounded-full text-sm sm:text-base transition-all duration-300 ${active
-                      ? "bg-white dark:bg-zinc-900 shadow-sm text-gray-800 dark:text-gray-200 font-medium"
-                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-300"
+                    ? "bg-white dark:bg-zinc-900 shadow-sm text-gray-800 dark:text-gray-200 font-medium"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-300"
                     }`}
                 >
                   <span className={active ? "text-gray-800 dark:text-gray-200" : "text-gray-400"}>
@@ -136,10 +136,13 @@ const ServicePackages = ({ data }) => {
                     ))}
                   </ul>
 
-                  <button className="mt-3 sm:mt-4 flex items-center gap-2 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg font-medium hover:opacity-90 bg-orange-600">
+                  <a
+                    href={activePackage.link || "#"}
+                    className="mt-3 sm:mt-4 flex items-center gap-2 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg font-medium hover:opacity-90 bg-orange-600 inline-flex"
+                  >
                     <CornerDownRight size={18} />
                     Get This Plan
-                  </button>
+                  </a>
                 </div>
               </div>
             </motion.div>

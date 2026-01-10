@@ -561,13 +561,14 @@ const AboutUsContent = () => {
                   </motion.div>
 
                   {/* CTA Button */}
-                  <motion.button
-                    className="bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold py-4 px-10 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#FF6600]/25"
+                  <motion.a
+                    href={impact?.impactButtonLink || "#"}
+                    className="bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold py-4 px-10 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#FF6600]/25 inline-block"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Start Your Project
-                  </motion.button>
+                    {impact?.impactButtonText || "Start Your Project"}
+                  </motion.a>
                 </div>
               </motion.div>
             </div>
@@ -586,23 +587,32 @@ const AboutUsContent = () => {
           variants={fadeUp}
         >
           <div className="mb-4 text-3xl font-bold uppercase tracking-wide text-[#FF6600]">
-            Your Growth. Our Mission.
+            {aboutSection?.cta?.title || "Your Growth. Our Mission."}
           </div>
           <h2 className="text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-            Let’s Create Something {' '}
-            <span className="text-[#FF6600] font-bold">That Stands Out.</span>
+            {aboutSection?.cta?.subtitle || "Let’s Create Something That Stands Out."}
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Whether it's a new build or an upgrade, we help brands scale with modern, efficient digital solutions.Your next big step starts with one conversation.
+            {aboutSection?.cta?.text || "Whether it's a new build or an upgrade, we help brands scale with modern, efficient digital solutions.Your next big step starts with one conversation."}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="relative overflow-hidden group px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-[#FF6600] bg-white dark:bg-zinc-900 border border-[#FF6600] shadow-lg hover:text-white">
-              <span className="relative z-10">Schedule a Call</span>
+            <motion.a
+              href={aboutSection?.cta?.buttonLink || "#"}
+              className="relative overflow-hidden group px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-[#FF6600] bg-white dark:bg-zinc-900 border border-[#FF6600] shadow-lg hover:text-white inline-block cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10">{aboutSection?.cta?.buttonText || "Schedule a Call"}</span>
               <span className="absolute inset-0 bg-[#FF6600] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></span>
-            </button>
-            <button className="px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-white bg-[#FF6600] border border-[#FF6600] shadow-lg hover:bg-[#E55A00]">
+            </motion.a>
+            <motion.a
+              href="#"
+              className="px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-white bg-[#FF6600] border border-[#FF6600] shadow-lg hover:bg-[#E55A00] inline-block cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               View Our Work
-            </button>
+            </motion.a>
           </div>
         </motion.div>
       </section>
