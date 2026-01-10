@@ -26,6 +26,10 @@ const HeroSchema = new mongoose.Schema({
     type: String,
     required: [true, 'CTA text is required']
   },
+  ctaLink: {
+    type: String,
+    default: '#'
+  },
   trustNote1: {
     type: String,
     required: [true, 'Trust note 1 is required']
@@ -46,7 +50,7 @@ const AnimateImageCardSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Card image URL is required'],
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^(https?:\/\/)/.test(v);
       },
       message: 'Image must be a valid URL'
@@ -112,7 +116,7 @@ const FeatureItemSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Feature item image is required'],
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^(https?:\/\/)/.test(v);
       },
       message: 'Image must be a valid URL'
@@ -146,7 +150,7 @@ const PackageItemSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Package image is required'],
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^(https?:\/\/)/.test(v);
       },
       message: 'Image must be a valid URL'
@@ -155,7 +159,11 @@ const PackageItemSchema = new mongoose.Schema({
   features: [{
     type: String,
     required: [true, 'Package features are required']
-  }]
+  }],
+  link: {
+    type: String,
+    default: '#'
+  }
 });
 
 const PackagesHeaderSchema = new mongoose.Schema({
@@ -194,7 +202,7 @@ const VideoMakerSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Video maker image URL is required'],
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^(https?:\/\/)/.test(v);
       },
       message: 'Image URL must be valid'
@@ -274,34 +282,34 @@ ServiceSchema.index({
 });
 
 // Static methods
-ServiceSchema.statics.getCategories = async function() {
+ServiceSchema.statics.getCategories = async function () {
   return this.distinct('category');
 };
 
-ServiceSchema.statics.getByCategory = async function(category) {
-  return this.find({ 
-    category, 
-    published: true 
+ServiceSchema.statics.getByCategory = async function (category) {
+  return this.find({
+    category,
+    published: true
   }).sort({ order: 1 });
 };
 
-ServiceSchema.statics.getService = async function(category, slug) {
-  return this.findOne({ 
-    category, 
-    slug, 
-    published: true 
+ServiceSchema.statics.getService = async function (category, slug) {
+  return this.findOne({
+    category,
+    slug,
+    published: true
   });
 };
 
 // Helper methods
-ServiceSchema.methods.toJSON = function() {
+ServiceSchema.methods.toJSON = function () {
   const obj = this.toObject();
-  
+
   // Convert packages Map to object for better JSON serialization
   if (obj.data && obj.data.packages && obj.data.packages.packages instanceof Map) {
     obj.data.packages.packages = Object.fromEntries(obj.data.packages.packages);
   }
-  
+
   return obj;
 };
 

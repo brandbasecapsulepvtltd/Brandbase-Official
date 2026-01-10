@@ -8,7 +8,9 @@ const heroSchema = new mongoose.Schema({
   imgUrl: { type: String, required: true },
   cta: {
     primary: { type: String, required: true },
-    secondary: { type: String, required: true }
+    primaryLink: { type: String, default: '#' },
+    secondary: { type: String, required: true },
+    secondaryLink: { type: String, default: '#' }
   }
 });
 
@@ -48,10 +50,10 @@ const categoryServicesSchema = new mongoose.Schema({
 });
 
 const contentItemSchema = new mongoose.Schema({
-  type: { 
-    type: String, 
+  type: {
+    type: String,
     enum: ['text', 'list', 'image'],
-    required: true 
+    required: true
   },
   value: { type: String },
   items: [{ type: String }],
@@ -91,8 +93,8 @@ const whyBuildWithBcplSchema = new mongoose.Schema({
 
 const tagSchema = new mongoose.Schema({
   label: { type: String, required: true },
-  type: { 
-    type: String, 
+  type: {
+    type: String,
     enum: ['primary', 'secondary'],
     default: 'primary'
   }
@@ -132,7 +134,11 @@ const pageMetadataSchema = new mongoose.Schema({
 
 const ctaDataSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  subheading: { type: String, required: true }
+  subheading: { type: String, required: true },
+  primaryText: { type: String },
+  primaryLink: { type: String },
+  secondaryText: { type: String },
+  secondaryLink: { type: String }
 });
 
 const faqSchema = new mongoose.Schema({
@@ -184,13 +190,13 @@ serviceCategorySchema.index({ isActive: 1 });
 serviceCategorySchema.index({ order: 1 });
 
 // Middleware to update updatedAt timestamp
-serviceCategorySchema.pre('save', function(next) {
+serviceCategorySchema.pre('save', function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
 // Middleware to update updatedAt on update operations
-serviceCategorySchema.pre('findOneAndUpdate', function(next) {
+serviceCategorySchema.pre('findOneAndUpdate', function (next) {
   this.set({ updatedAt: Date.now() });
   next();
 });

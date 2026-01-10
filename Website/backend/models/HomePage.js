@@ -33,7 +33,8 @@ const brandElevationSchema = new mongoose.Schema({
 const workSchema = new mongoose.Schema({
   image: String,
   name: String,
-  description: String
+  description: String,
+  link: { type: String, default: '#' }
 });
 
 const recentWorkSchema = new mongoose.Schema({
@@ -80,13 +81,23 @@ const faqsSchema = new mongoose.Schema({
   faqs: [faqSchema]
 });
 
+const ctaSectionSchema = new mongoose.Schema({
+  title: String,
+  subheading: String,
+  primaryText: String,
+  primaryLink: String,
+  secondaryText: String,
+  secondaryLink: String
+});
+
 const homePageSchema = new mongoose.Schema({
   heroSection: heroSectionSchema,
   brandElevation: brandElevationSchema,
   recentWork: recentWorkSchema,
   clients: clientsSchema,
   testimonials: testimonialsSchema,
-  faqs: faqsSchema
+  faqs: faqsSchema,
+  ctaSection: ctaSectionSchema
 }, {
   timestamps: true
 });

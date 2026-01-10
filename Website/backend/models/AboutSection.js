@@ -19,7 +19,8 @@ const ctaSchema = new mongoose.Schema({
     title: String,
     subtitle: String,
     text: String,
-    buttonText: String
+    buttonText: String,
+    buttonLink: { type: String, default: '#' }
 }, { _id: false });
 
 const statsSchema = new mongoose.Schema({
@@ -103,7 +104,9 @@ const aboutContentSchema = new mongoose.Schema({
         subheading: String,
         body: String,
         stats: [String],
-        tagline: String
+        tagline: String,
+        impactButtonText: String,
+        impactButtonLink: String
     },
     principles: {
         title: String,
