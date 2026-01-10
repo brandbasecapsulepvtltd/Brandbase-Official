@@ -7,7 +7,7 @@ import {
 
 const PortfolioHero = () => {
   return (
-    <ContainerScroll className="mt-25 bg-white dark:bg-black text-center text-black dark:text-white">
+    <ContainerScroll className="mt-32 bg-white dark:bg-black text-center text-black dark:text-white">
       <ContainerStagger viewport={{ once: false }}>
         {/* Main Headline */}
         <ContainerAnimated animation="top">

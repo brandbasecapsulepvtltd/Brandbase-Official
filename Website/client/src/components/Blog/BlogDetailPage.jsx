@@ -142,7 +142,7 @@ export default function BlogDetailPage({ blogData }) {
   }));
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-white dark:bg-black mt-10">
       {/* Floating top Menu Box */}
       {/* Responsive positioning: Centered on mobile, Offset to right on desktop */}
       <div

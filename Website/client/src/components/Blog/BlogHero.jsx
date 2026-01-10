@@ -32,7 +32,7 @@ const BlogHero = ({ sliderBlogs = [] }) => {
   }
 
   return (
-    <div className="mt-20 bg-white dark:bg-zinc-900 dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
+    <div className="mt-27 bg-white dark:bg-zinc-900 dark:bg-black min-h-[600px] font-sans text-white relative overflow-hidden">
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-5">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-[#303236] dark:text-white leading-tight">
