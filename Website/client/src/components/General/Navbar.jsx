@@ -163,7 +163,7 @@ const Navbar = ({ data, topBarData }) => {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <img
-            src={isHome && !scrolled ? logoDark : logoLight}
+            src={logoLight}
             alt="Brandbase capsule Logo"
             className="h-17 w-auto block dark:hidden"
             width={180}
