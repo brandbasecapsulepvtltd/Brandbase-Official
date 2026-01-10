@@ -99,6 +99,10 @@ const portfolioRoutes = require('./routes/portfolioRoutes');
 
 const aboutSectionRoutes = require('./routes/aboutSectionRoutes');
 
+const topBarRoutes = require('./routes/topBarRoutes')
+const navbarRoutes = require('./routes/navbarRoutes')
+const footerRoutes = require('./routes/footerRoutes')
+const floatingLatestRoutes = require('./routes/floatingLatestRoutes')
 
 // Routes (all protected by API key except health check)
 app.use("/api/appointments", appointmentRoutes);
@@ -112,6 +116,10 @@ app.use('/api/events', eventRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/portfolios', portfolioRoutes);
 app.use('/api/about-section', aboutSectionRoutes);
+app.use('/api/topbar', topBarRoutes);
+app.use('/api/navbar', navbarRoutes);
+app.use('/api/footer', footerRoutes);
+app.use('/api/floatinglatest', floatingLatestRoutes);
 
 // Health check route (public)
 app.get('/api/health', (req, res) => {
