@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Card Data ---
-const cardData = {
+const defaultCardData = {
   1: {
     title: "Website Development",
     description: "Need a website that actually converts? Explore how we design fast, scalable, high-impact websites for modern brands.",
@@ -50,7 +50,7 @@ const positionStyles = [
 
 // --- Sub-components ---
 
-function CardContent({ contentType }) {
+function CardContent({ contentType, cardData }) {
   const data = cardData[contentType];
   return (
     <div className="flex h-full w-full flex-col gap-3 bg-white dark:bg-zinc-900 dark:bg-black">
@@ -67,18 +67,25 @@ function CardContent({ contentType }) {
           <span className="truncate text-xs text-gray-700 dark:text-gray-300">{data.description}</span>
         </div>
         <button
-  onClick={() => window.location.href = data.link}
-  className="flex h-8 shrink-0 items-center gap-1 rounded-full bg-black px-3 text-xs font-medium text-white"
->
-  Read
-</button>
+          onClick={() => window.location.href = data.link}
+          className="flex h-8 shrink-0 items-center gap-1 rounded-full bg-black px-3 text-xs font-medium text-white"
+        >
+          Read
+        </button>
       </div>
     </div>
   );
 }
 
-const FloatingLatest = () => {
+const FloatingLatest = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const cardData = data?.cards && data.cards.length > 0
+    ? data.cards.reduce((acc, card, idx) => {
+      acc[idx + 1] = card;
+      return acc;
+    }, {})
+    : defaultCardData;
+
   const [cards, setCards] = useState(initialCards);
   const [nextId, setNextId] = useState(4);
 
@@ -86,14 +93,15 @@ const FloatingLatest = () => {
 
   const handleAnimate = (e) => {
     e.stopPropagation(); // Prevent closing the popup
-    const nextContentType = ((cards[2].contentType % 3) + 1);
+    const totalCards = Object.keys(cardData).length;
+    const nextContentType = ((cards[2].contentType % totalCards) + 1);
     setCards([...cards.slice(1), { id: nextId, contentType: nextContentType }]);
     setNextId((prev) => prev + 1);
   };
 
   return (
     <div className="fixed bottom-5 left-5 z-50 flex flex-col items-start">
-      
+
       {/* Card Stack Popup */}
       <AnimatePresence>
         {isOpen && (
@@ -118,7 +126,7 @@ const FloatingLatest = () => {
                       style={{ zIndex: 3 - index }}
                       className="absolute bottom-0 left-0 right-0 flex h-[220px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-gray-200 bg-white dark:bg-zinc-900 dark:bg-black p-2 shadow-2xl dark:border-gray-800 dark:bg-zinc-900"
                     >
-                      <CardContent contentType={card.contentType} />
+                      <CardContent contentType={card.contentType} cardData={cardData} />
                     </motion.div>
                   );
                 })}
@@ -141,9 +149,8 @@ const FloatingLatest = () => {
       {/* Floating Globe Icon Button */}
       <button
         onClick={toggleOpen}
-        className={`group relative flex h-17 w-17 items-center justify-center rounded-full bg-white dark:bg-zinc-900 dark:bg-black shadow-xl transition-all duration-300 hover:scale-110 active:scale-90 ${
-          isOpen ? 'ring-2 ring-orange-500' : ''
-        }`}
+        className={`group relative flex h-17 w-17 items-center justify-center rounded-full bg-white dark:bg-zinc-900 dark:bg-black shadow-xl transition-all duration-300 hover:scale-110 active:scale-90 ${isOpen ? 'ring-2 ring-orange-500' : ''
+          }`}
         aria-label="Latest Resources"
       >
         <img
@@ -151,7 +158,7 @@ const FloatingLatest = () => {
           alt="Resources Globe"
           className={`h-full w-full object-contain transition-transform duration-500 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
         />
-        
+
         {/* Decorative Ring */}
         <span className="absolute inset-0 rounded-full border-2 border-orange-500/20 group-hover:border-orange-500/50"></span>
       </button>

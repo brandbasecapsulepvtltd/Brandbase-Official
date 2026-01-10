@@ -11,7 +11,7 @@ import ChatbaseWidget from '@/components/General/ChatbaseWidget';
 import FloatingLatest from '@/components/General/FloatingLatest';
 import EventPopup from '@/components/General/EventPopup';
 
-export default function ClientLayout({ children }) {
+export default function ClientLayout({ children, generalData }) {
   const pathname = usePathname();
   const [showPopup, setShowPopup] = useState(false);
 
@@ -34,13 +34,13 @@ export default function ClientLayout({ children }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar data={generalData.navbar} topBarData={generalData.topBar} />
 
       {/* ✅ Show popup only first time */}
       {showPopup && <EventPopup />}
 
       <FloatingWhatsApp />
-      <FloatingLatest />
+      <FloatingLatest data={generalData.floatingLatest} />
       <ChatbaseWidget />
       <CursorFollower />
 
@@ -48,7 +48,7 @@ export default function ClientLayout({ children }) {
         {children}
       </main>
 
-      <Footer />
+      <Footer data={generalData.footer} />
     </>
   );
 }

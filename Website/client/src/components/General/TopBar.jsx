@@ -4,22 +4,26 @@ import React, { useState, useEffect } from 'react';
 import { Mail, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const offers = [
+const defaultOffers = [
     "🚀 Get 20% OFF on your first Digital Marketing package!",
     "🎨 Free Logo Design with any Website Development package!",
     "📱 15% OFF on Mobile App Maintenance for the first year!",
     "✨ Special discount on Stall Design for upcoming Exhibitions!"
 ];
 
-const TopBar = () => {
+const TopBar = ({ data }) => {
     const [currentOffer, setCurrentOffer] = useState(0);
+    const offers = data?.offers && data.offers.length > 0 ? data.offers : defaultOffers;
+    const email = data?.email || "info@brandbasecapsule.com";
+    const locations = data?.locations || "Serving: USA, UK, Europe, Saudi, India, SG";
 
     useEffect(() => {
+        if (offers.length <= 1) return;
         const timer = setInterval(() => {
             setCurrentOffer((prev) => (prev + 1) % offers.length);
         }, 4000);
         return () => clearInterval(timer);
-    }, []);
+    }, [offers.length]);
 
     return (
         <div className="w-full bg-[#FF6600] text-white text-xs sm:text-sm font-medium h-10 sm:h-12 flex items-center relative overflow-hidden z-50">
@@ -28,8 +32,8 @@ const TopBar = () => {
                 {/* Left: Email */}
                 <div className="flex items-center gap-2 min-w-fit">
                     <Mail size={16} className="text-white shrink-0" />
-                    <a href="mailto:info@brandbasecapsule.com" className="hover:underline hidden md:block">
-                        info@brandbasecapsule.com
+                    <a href={`mailto:${email}`} className="hover:underline hidden md:block">
+                        {email}
                     </a>
                 </div>
 
@@ -58,7 +62,7 @@ const TopBar = () => {
                 <div className="hidden lg:flex items-center gap-2 min-w-fit">
                     <MapPin size={16} className="text-white shrink-0" />
                     <span className="text-right text-md">
-                        Serving: USA, UK, Europe, Saudi, India, SG
+                        {locations}
                     </span>
                 </div>
             </div>

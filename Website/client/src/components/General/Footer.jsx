@@ -13,7 +13,16 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-const Footer = () => {
+const Footer = ({ data }) => {
+  const description = data?.description || "Helping startups transform ideas into reality with cutting-edge technology solutions.";
+  const contactInfo = data?.contactInfo || {
+    address: "Brandbase Capsule Pvt. Ltd \nOffice #204 2nd Floor, Near Bus Depot Pimpleshwar Temple, \nGulmohar Complex, Goregaon Railway Station, \nGoregaon East.",
+    email: "info@brandbasecapsule.com",
+    phone: "+91-9892211456"
+  };
+  const copyright = data?.copyright || "© 2025 Brandbase Capsule. All rights reserved.";
+  const gstin = data?.gstin || "27AAFCB8754H1Z7";
+
   return (
     <footer className="bg-white dark:bg-zinc-900 dark:bg-black pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -38,7 +47,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-xs">
-              Helping startups transform ideas into reality with cutting-edge technology solutions.
+              {description}
             </p>
 
             {/* Social Icons */}
@@ -51,32 +60,48 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Services */}
-          <div>
-            <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Services</h3>
-            <ul className="space-y-4 text-md">
-              <FooterLink>Digital Marketing Solutions</FooterLink>
-              <FooterLink>Website Development</FooterLink>
-              <FooterLink>App Development</FooterLink>
-              <FooterLink>Event & Exhibition Management</FooterLink>
-              <FooterLink>Data Engineering</FooterLink>
-              <FooterLink>Audio & Video Production</FooterLink>
-              <FooterLink>Branding & Creative Design</FooterLink>
-            </ul>
-          </div>
+          {/* Dynamic Columns */}
+          {data?.columns && data.columns.length > 0 ? (
+            data.columns.map((col, idx) => (
+              <div key={idx}>
+                <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">{col.title}</h3>
+                <ul className="space-y-4 text-md">
+                  {col.links.map((link, lIdx) => (
+                    <FooterLink key={lIdx} href={link.href}>{link.label}</FooterLink>
+                  ))}
+                </ul>
+              </div>
+            ))
+          ) : (
+            <>
+              {/* Column 2: Services (Fallback) */}
+              <div>
+                <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Services</h3>
+                <ul className="space-y-4 text-md">
+                  <FooterLink>Digital Marketing Solutions</FooterLink>
+                  <FooterLink>Website Development</FooterLink>
+                  <FooterLink>App Development</FooterLink>
+                  <FooterLink>Event & Exhibition Management</FooterLink>
+                  <FooterLink>Data Engineering</FooterLink>
+                  <FooterLink>Audio & Video Production</FooterLink>
+                  <FooterLink>Branding & Creative Design</FooterLink>
+                </ul>
+              </div>
 
-          {/* Column 3: Company */}
-          <div>
-            <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Company</h3>
-            <ul className="space-y-4 text-md">
-              <FooterLink>About Us</FooterLink>
-              <FooterLink>Team</FooterLink>
-              <FooterLink>Services</FooterLink>
-              <FooterLink>Blog</FooterLink>
-              <FooterLink>Careers</FooterLink>
-              <FooterLink>Contact Us</FooterLink>
-            </ul>
-          </div>
+              {/* Column 3: Company (Fallback) */}
+              <div>
+                <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Company</h3>
+                <ul className="space-y-4 text-md">
+                  <FooterLink href="/about">About Us</FooterLink>
+                  <FooterLink href="/about">Team</FooterLink>
+                  <FooterLink href="/services">Services</FooterLink>
+                  <FooterLink href="/blogs">Blog</FooterLink>
+                  <FooterLink href="/careers">Careers</FooterLink>
+                  <FooterLink href="/contact">Contact Us</FooterLink>
+                </ul>
+              </div>
+            </>
+          )}
 
           {/* Column 4: Contact */}
           <div>
@@ -89,11 +114,8 @@ const Footer = () => {
                   size={18}
                   className="mt-0.5 shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
-                <span className="relative leading-relaxed">
-                  Brandbase Capsule Pvt. Ltd <br />
-                  Office #204 2nd Floor, Near Bus Depot Pimpleshwar Temple, <br />
-                  Gulmohar Complex, Goregaon Railway Station, <br />
-                  Goregaon East.
+                <span className="relative leading-relaxed whitespace-pre-line">
+                  {contactInfo.address}
                 </span>
               </li>
 
@@ -103,9 +125,9 @@ const Footer = () => {
                   size={18}
                   className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
-                <span className="relative">
-                  info@brandbasecapsule.com
-                </span>
+                <Link href={`mailto:${contactInfo.email}`} className="relative">
+                  {contactInfo.email}
+                </Link>
               </li>
 
               {/* Phone */}
@@ -114,9 +136,9 @@ const Footer = () => {
                   size={18}
                   className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
-                <span className="relative">
-                  +91-9892211456
-                </span>
+                <Link href={`tel:${contactInfo.phone}`} className="relative">
+                  {contactInfo.phone}
+                </Link>
               </li>
 
             </ul>
@@ -129,30 +151,30 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Legal Links */}
             <div className="flex items-center gap-6">
-              <Link
-                href="/terms"
-                className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-orange-400 transition-colors text-sm group"
-              >
-                <FileText size={16} className="group-hover:text-orange-400 transition-colors" />
-                <span>Terms & Conditions</span>
-              </Link>
-              <div className="h-4 w-px bg-gray-300"></div>
-              <Link
-                href="/privacy-policy"
-                className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-orange-400 transition-colors text-sm group"
-              >
-                <Shield size={16} className="group-hover:text-orange-400 transition-colors" />
-                <span>Privacy Policy</span>
-              </Link>
+              {(data?.legalLinks && data.legalLinks.length > 0 ? data.legalLinks : [
+                { label: "Terms & Conditions", href: "/terms" },
+                { label: "Privacy Policy", href: "/privacy-policy" }
+              ]).map((link, idx, arr) => (
+                <React.Fragment key={idx}>
+                  <Link
+                    href={link.href}
+                    className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-orange-400 transition-colors text-sm group"
+                  >
+                    {link.label === "Privacy Policy" ? <Shield size={16} className="group-hover:text-orange-400 transition-colors" /> : <FileText size={16} className="group-hover:text-orange-400 transition-colors" />}
+                    <span>{link.label}</span>
+                  </Link>
+                  {idx < arr.length - 1 && <div className="h-4 w-px bg-gray-300"></div>}
+                </React.Fragment>
+              ))}
             </div>
 
             {/* Copyright */}
             <div className="text-center md:text-right">
               <p className="text-gray-500 dark:text-gray-400 text-sm">
-                © 2025 Brandbase Capsule. All rights reserved.
+                {copyright}
               </p>
               <p className="text-gray-400 text-xs mt-1">
-                Registered in India | GSTIN: 27AAFCB8754H1Z7
+                Registered in India | GSTIN: {gstin}
               </p>
             </div>
           </div>

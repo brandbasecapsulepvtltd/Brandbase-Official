@@ -43,6 +43,11 @@ export async function apiCall(endpoint, options = {}) {
     config.body = JSON.stringify(config.body);
   }
 
+  // Handle revalidation for Next.js
+  if (options.revalidate !== undefined) {
+    config.next = { revalidate: options.revalidate };
+  }
+
   try {
     const response = await fetch(url, config);
 
@@ -301,6 +306,12 @@ export const api = {
 
   // Direct EmailJS email sending (for testing)
   sendEmailViaEmailJS,
+
+  // General Components
+  getTopBar: (revalidate = 10) => apiCall('/topbar', { revalidate }),
+  getNavbar: (revalidate = 10) => apiCall('/navbar', { revalidate }),
+  getFooter: (revalidate = 10) => apiCall('/footer', { revalidate }),
+  getFloatingLatest: (revalidate = 10) => apiCall('/floatinglatest', { revalidate }),
 
   // Health check
   checkHealth: async () => {

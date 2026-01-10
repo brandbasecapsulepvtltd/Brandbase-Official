@@ -9,7 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 import TopBar from "./TopBar";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Navbar = () => {
+const Navbar = ({ data, topBarData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHome, setIsHome] = useState(true);
   const [scrolled, setScrolled] = useState(false);
@@ -80,7 +80,7 @@ const Navbar = () => {
   const textColor = isHome && !scrolled ? "text-white" : "text-[#FF6600]";
   const hoverColor = isHome && !scrolled ? "bg-white dark:bg-zinc-900 dark:bg-black" : "bg-[#FF6600]";
 
-  const services = [
+  const defaultServices = [
     {
       category: "Digital Marketing Solutions",
       categoryLink: "/services/digital-marketing",
@@ -129,10 +129,15 @@ const Navbar = () => {
     }
   ];
 
-  const directLinkServices = [
+  const defaultDirectLinkServices = [
     { category: "Branding & Creative Design", link: "/services/branding-design" },
     { category: "Audio & Video Production", link: "/services/av-production" }
   ];
+
+  const services = data?.services && data.services.length > 0 ? data.services : defaultServices;
+  const directLinkServices = data?.directLinkServices && data.directLinkServices.length > 0 ? data.directLinkServices : defaultDirectLinkServices;
+  const logoLight = data?.logoLight || "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819";
+  const logoDark = data?.logoDark || "https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png";
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -150,7 +155,7 @@ const Navbar = () => {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
           >
-            <TopBar />
+            <TopBar data={topBarData} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -158,14 +163,14 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <img
-            src={isHome && !scrolled ? "https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png" : "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"}
+            src={isHome && !scrolled ? logoDark : logoLight}
             alt="Brandbase capsule Logo"
             className="h-17 w-auto block dark:hidden"
             width={180}
             height={60}
           />
           <img
-            src="https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png"
+            src={logoDark}
             alt="Brandbase capsule Logo Dark"
             className="h-17 w-auto hidden dark:block"
             width={180}
