@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import adminAxios from '../utils/axios';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Eye, 
-  Search, 
-  Filter, 
-  ChevronDown, 
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Eye,
+  Search,
+  Filter,
+  ChevronDown,
   ChevronUp,
   CheckCircle,
   XCircle,
@@ -209,14 +209,14 @@ const AdminServicesDashboard = () => {
       setLoading(true);
       setError('');
       const response = await adminAxios.get('/api/services');
-      
+
       // Backend returns { success: true, data: [...] }
       setServices(response.data.data || []);
-      
+
       // Extract unique categories from services
       const uniqueCategories = [...new Set((response.data.data || []).map(service => service.category))];
       setCategories(uniqueCategories);
-      
+
       setSuccess('Services loaded successfully');
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
@@ -254,7 +254,7 @@ const AdminServicesDashboard = () => {
       if (selectedCategory !== 'all' && service.category !== selectedCategory) {
         return false;
       }
-      
+
       // Filter by search term
       if (searchTerm) {
         const searchLower = searchTerm.toLowerCase();
@@ -265,7 +265,7 @@ const AdminServicesDashboard = () => {
           service.data?.hero?.subHeadline?.toLowerCase().includes(searchLower)
         );
       }
-      
+
       return true;
     });
   };
@@ -274,20 +274,20 @@ const AdminServicesDashboard = () => {
   const groupedServices = () => {
     const filtered = filteredServices();
     const grouped = {};
-    
+
     filtered.forEach(service => {
       if (!grouped[service.category]) {
         grouped[service.category] = [];
       }
       grouped[service.category].push(service);
     });
-    
+
     return grouped;
   };
 
   // Get category icon
   const getCategoryIcon = (category) => {
-    switch(category.toLowerCase()) {
+    switch (category.toLowerCase()) {
       case 'website-development': return <Globe className="w-5 h-5" />;
       case 'mobile-app-development': return <Smartphone className="w-5 h-5" />;
       case 'digital-marketing': return <TrendingUp className="w-5 h-5" />;
@@ -307,12 +307,12 @@ const AdminServicesDashboard = () => {
     setFormData(prev => {
       const newData = deepClone(prev);
       let current = newData;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         if (!current[keys[i]]) current[keys[i]] = {};
         current = current[keys[i]];
       }
-      
+
       current[keys[keys.length - 1]] = value;
       return newData;
     });
@@ -324,22 +324,22 @@ const AdminServicesDashboard = () => {
     setFormData(prev => {
       const newData = deepClone(prev);
       let current = newData;
-      
+
       // Navigate to the array
       for (let i = 0; i < keys.length; i++) {
         current = current[keys[i]];
       }
-      
+
       // Handle nested field path
       if (fieldPath) {
         const fieldKeys = fieldPath.split('.');
         let target = current[index];
-        
+
         for (let i = 0; i < fieldKeys.length - 1; i++) {
           if (!target[fieldKeys[i]]) target[fieldKeys[i]] = {};
           target = target[fieldKeys[i]];
         }
-        
+
         if (fieldKeys.length > 0) {
           target[fieldKeys[fieldKeys.length - 1]] = value;
         }
@@ -347,7 +347,7 @@ const AdminServicesDashboard = () => {
         // Direct array value (for simple arrays like paragraphs)
         current[index] = value;
       }
-      
+
       return newData;
     });
   };
@@ -358,11 +358,11 @@ const AdminServicesDashboard = () => {
     setFormData(prev => {
       const newData = deepClone(prev);
       let current = newData;
-      
+
       for (let i = 0; i < keys.length; i++) {
         current = current[keys[i]];
       }
-      
+
       current.push(newItem);
       return newData;
     });
@@ -374,11 +374,11 @@ const AdminServicesDashboard = () => {
     setFormData(prev => {
       const newData = deepClone(prev);
       let current = newData;
-      
+
       for (let i = 0; i < keys.length; i++) {
         current = current[keys[i]];
       }
-      
+
       current.splice(index, 1);
       return newData;
     });
@@ -416,12 +416,12 @@ const AdminServicesDashboard = () => {
   // Validate form
   const validateForm = () => {
     const errors = {};
-    
+
     if (!formData.category) errors.category = 'Category is required';
     if (!formData.slug) errors.slug = 'Slug is required';
     if (!formData.data?.hero?.headline) errors.headline = 'Headline is required';
     if (!formData.data?.hero?.subHeadline) errors.subHeadline = 'Sub-headline is required';
-    
+
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -429,25 +429,25 @@ const AdminServicesDashboard = () => {
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       setError('Please fix the errors in the form');
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       // Prepare data for backend - ensure packages is a Map-like structure
       const dataToSend = deepClone(formData);
-      
+
       // Convert packages to Map structure expected by backend
       if (dataToSend.data?.packages?.packages) {
         const packagesObj = dataToSend.data.packages.packages;
         // Backend expects Map-like structure
         dataToSend.data.packages.packages = packagesObj;
       }
-      
+
       if (selectedService) {
         // Update existing service
         await adminAxios.put('/api/services/${selectedService._id}', dataToSend);
@@ -457,10 +457,10 @@ const AdminServicesDashboard = () => {
         await adminAxios.post('/api/services', dataToSend);
         setSuccess('Service created successfully!');
       }
-      
+
       // Refresh services
       await fetchServices();
-      
+
       // Reset form and close modal
       setFormData(getInitialFormData());
       setSelectedService(null);
@@ -468,7 +468,7 @@ const AdminServicesDashboard = () => {
       setActiveTab('basic');
       setShowNewCategoryInput(false);
       setNewCategoryInput('');
-      
+
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
       console.error('Error saving service:', err.response?.data || err);
@@ -481,10 +481,10 @@ const AdminServicesDashboard = () => {
   // Handle edit service
   const handleEdit = (service) => {
     console.log('Editing service:', service);
-    
+
     // Start with the service data
     const serviceData = deepClone(service);
-    
+
     // Ensure all fields exist with defaults
     const mergedFormData = {
       ...getInitialFormData(),
@@ -524,7 +524,7 @@ const AdminServicesDashboard = () => {
         }
       }
     };
-    
+
     setSelectedService(service);
     setFormData(mergedFormData);
     setIsFormModalOpen(true);
@@ -536,18 +536,18 @@ const AdminServicesDashboard = () => {
   // Handle delete
   const handleDelete = async () => {
     if (!selectedService) return;
-    
+
     try {
       await adminAxios.delete(`/api/services/${selectedService._id}`);
       setSuccess('Service deleted successfully!');
-      
+
       // Refresh services
       await fetchServices();
-      
+
       // Close modal
       setIsDeleteModalOpen(false);
       setSelectedService(null);
-      
+
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to delete service');
@@ -575,8 +575,8 @@ const AdminServicesDashboard = () => {
   const handleExport = () => {
     const exportData = services;
     const dataStr = JSON.stringify(exportData, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
     const exportFileDefaultName = `services-export-${new Date().toISOString().split('T')[0]}.json`;
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -670,7 +670,7 @@ const AdminServicesDashboard = () => {
               Manage all your services from one dashboard. Create, edit, delete, and organize services.
             </p>
           </div>
-          
+
           <div className="flex flex-wrap gap-3 mt-4 md:mt-0">
             <button
               onClick={() => {
@@ -682,7 +682,7 @@ const AdminServicesDashboard = () => {
               <Plus className="w-5 h-5 mr-2" />
               New Service
             </button>
-            
+
             <button
               onClick={handleExport}
               className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
@@ -690,7 +690,7 @@ const AdminServicesDashboard = () => {
               <Download className="w-5 h-5 mr-2" />
               Export JSON
             </button>
-            
+
             <button
               onClick={() => setIsImportModalOpen(true)}
               className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
@@ -698,7 +698,7 @@ const AdminServicesDashboard = () => {
               <Upload className="w-5 h-5 mr-2" />
               Import JSON
             </button>
-            
+
             <button
               onClick={fetchServices}
               className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
@@ -722,7 +722,7 @@ const AdminServicesDashboard = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-xl shadow p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -734,7 +734,7 @@ const AdminServicesDashboard = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-xl shadow p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -746,7 +746,7 @@ const AdminServicesDashboard = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-xl shadow p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -774,7 +774,7 @@ const AdminServicesDashboard = () => {
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
-          
+
           <div className="flex items-center gap-4">
             <div className="flex items-center">
               <Filter className="w-5 h-5 text-gray-400 mr-2" />
@@ -805,10 +805,10 @@ const AdminServicesDashboard = () => {
           </button>
         </div>
       )}
-      
+
       {success && (
         <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg flex items-center">
-          <CheckCircle className="w-5 h-5 mr-2"/>
+          <CheckCircle className="w-5 h-5 mr-2" />
           {success}
           <button onClick={() => setSuccess('')} className="ml-auto">
             <X className="w-5 h-5" />
@@ -828,9 +828,9 @@ const AdminServicesDashboard = () => {
                 {services.length === 0 ? 'No services found' : 'No matching services'}
               </h3>
               <p className="text-gray-600 mb-6">
-                {services.length === 0 
+                {services.length === 0
                   ? 'Start by creating your first service'
-                  : searchTerm || selectedCategory !== 'all' 
+                  : searchTerm || selectedCategory !== 'all'
                     ? 'Try adjusting your search or filter criteria'
                     : 'All services are hidden by filters'}
               </p>
@@ -966,22 +966,22 @@ const AdminServicesDashboard = () => {
                               )}
                             </ul>
                           </div>
-                          
+
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <h4 className="font-medium text-gray-900 mb-2">Packages</h4>
                             <div className="space-y-2">
-                              {service.data?.packages?.packages && typeof service.data.packages.packages === 'object' 
+                              {service.data?.packages?.packages && typeof service.data.packages.packages === 'object'
                                 ? Object.values(service.data.packages.packages).map(pkg => (
-                                    <div key={pkg.id} className="flex items-center justify-between">
-                                      <span className="text-sm text-gray-600">{pkg.title || pkg.id}</span>
-                                      <span className="text-sm font-medium text-blue-600">{pkg.price || 'N/A'}</span>
-                                    </div>
-                                  ))
+                                  <div key={pkg.id} className="flex items-center justify-between">
+                                    <span className="text-sm text-gray-600">{pkg.title || pkg.id}</span>
+                                    <span className="text-sm font-medium text-blue-600">{pkg.price || 'N/A'}</span>
+                                  </div>
+                                ))
                                 : <p className="text-sm text-gray-500 italic">No packages defined</p>
                               }
                             </div>
                           </div>
-                          
+
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <h4 className="font-medium text-gray-900 mb-2">Quick Actions</h4>
                             <div className="flex gap-2">
@@ -1022,8 +1022,8 @@ const AdminServicesDashboard = () => {
                     {selectedService ? 'Edit Service' : 'Create New Service'}
                   </h2>
                   <p className="text-blue-100 mt-1">
-                    {selectedService 
-                      ? `Editing: ${selectedService.data?.hero?.headline || 'Service'}` 
+                    {selectedService
+                      ? `Editing: ${selectedService.data?.hero?.headline || 'Service'}`
                       : 'Fill in all the details to create a new service'}
                   </p>
                 </div>
@@ -1044,11 +1044,10 @@ const AdminServicesDashboard = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center px-4 py-2 mr-2 rounded-lg transition-colors ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-blue-600' 
+                    className={`flex items-center px-4 py-2 mr-2 rounded-lg transition-colors ${activeTab === tab.id
+                        ? 'bg-white text-blue-600'
                         : 'text-blue-100 hover:bg-white hover:bg-opacity-20'
-                    }`}
+                      }`}
                   >
                     {tab.icon}
                     <span className="ml-2 whitespace-nowrap">{tab.label}</span>
@@ -1066,7 +1065,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-blue-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Basic Information</h3>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1075,9 +1074,8 @@ const AdminServicesDashboard = () => {
                       <select
                         value={formData.category === '' && showNewCategoryInput ? 'new' : formData.category}
                         onChange={handleCategoryChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          formErrors.category ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${formErrors.category ? 'border-red-500' : 'border-gray-300'
+                          }`}
                       >
                         <option value="">Select a category</option>
                         {categories.map(category => (
@@ -1093,7 +1091,7 @@ const AdminServicesDashboard = () => {
                       <p className="mt-1 text-sm text-gray-500">
                         Group services by category (e.g., website-development)
                       </p>
-                      
+
                       {/* New Category Input */}
                       {showNewCategoryInput && (
                         <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
@@ -1142,7 +1140,7 @@ const AdminServicesDashboard = () => {
                         </div>
                       )}
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Slug (URL) *
@@ -1151,9 +1149,8 @@ const AdminServicesDashboard = () => {
                         type="text"
                         value={formData.slug}
                         onChange={(e) => handleInputChange('slug', e.target.value.toLowerCase().replace(/\s+/g, '-'))}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          formErrors.slug ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${formErrors.slug ? 'border-red-500' : 'border-gray-300'
+                          }`}
                         placeholder="e.g., dynamic-static"
                       />
                       {formErrors.slug && (
@@ -1163,7 +1160,7 @@ const AdminServicesDashboard = () => {
                         URL: /services/{formData.category || 'category'}/{formData.slug || 'slug'}
                       </p>
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Display Order
@@ -1178,7 +1175,7 @@ const AdminServicesDashboard = () => {
                         Lower numbers appear first within category
                       </p>
                     </div>
-                    
+
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center">
                         <input
@@ -1207,7 +1204,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-green-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Hero Section</h3>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1217,16 +1214,15 @@ const AdminServicesDashboard = () => {
                         type="text"
                         value={formData.data?.hero?.headline || ''}
                         onChange={(e) => handleInputChange('data.hero.headline', e.target.value)}
-                        className={`w-full px-4 py-3 text-lg border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          formErrors.headline ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 text-lg border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${formErrors.headline ? 'border-red-500' : 'border-gray-300'
+                          }`}
                         placeholder="Build Stunning Static & Dynamic Websites"
                       />
                       {formErrors.headline && (
                         <p className="mt-1 text-sm text-red-600">{formErrors.headline}</p>
                       )}
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Sub-headline *
@@ -1234,9 +1230,8 @@ const AdminServicesDashboard = () => {
                       <textarea
                         value={formData.data?.hero?.subHeadline || ''}
                         onChange={(e) => handleInputChange('data.hero.subHeadline', e.target.value)}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                          formErrors.subHeadline ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${formErrors.subHeadline ? 'border-red-500' : 'border-gray-300'
+                          }`}
                         rows="3"
                         placeholder="High-performance custom websites built for speed, SEO, conversions, and business growth."
                       />
@@ -1244,7 +1239,7 @@ const AdminServicesDashboard = () => {
                         <p className="mt-1 text-sm text-red-600">{formErrors.subHeadline}</p>
                       )}
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1258,7 +1253,20 @@ const AdminServicesDashboard = () => {
                           placeholder="Get Your Website Now"
                         />
                       </div>
-                      
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          CTA Button Link
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.data?.hero?.ctaLink || ''}
+                          onChange={(e) => handleInputChange('data.hero.ctaLink', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="/appointment or https://..."
+                        />
+                      </div>
+
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1286,7 +1294,7 @@ const AdminServicesDashboard = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Hero Features */}
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -1349,7 +1357,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-purple-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Animate Images Section</h3>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
@@ -1364,7 +1372,7 @@ const AdminServicesDashboard = () => {
                           placeholder="Designed to Convert,"
                         />
                       </div>
-                      
+
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Header Highlight
@@ -1378,7 +1386,7 @@ const AdminServicesDashboard = () => {
                         />
                       </div>
                     </div>
-                    
+
                     {/* Image Cards */}
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -1408,17 +1416,17 @@ const AdminServicesDashboard = () => {
                                   <div className="text-xs text-gray-500 mb-1">Preview:</div>
                                   <div className="h-32 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
                                     {card.image.startsWith('http') ? (
-                                      <img 
-                                        src={card.image} 
+                                      <img
+                                        src={card.image}
                                         alt={`Card ${card.id || index + 1}`}
                                         className="w-full h-full object-cover"
                                         onError={(e) => {
-  e.target.style.display = 'none';
-  const sibling = e.target.nextElementSibling;
-  if (sibling) {
-    sibling.style.display = 'flex';
-  }
-}}
+                                          e.target.style.display = 'none';
+                                          const sibling = e.target.nextElementSibling;
+                                          if (sibling) {
+                                            sibling.style.display = 'flex';
+                                          }
+                                        }}
                                       />
                                     ) : null}
                                     <div className={`${card.image.startsWith('http') ? 'hidden' : 'flex'} items-center justify-center w-full h-full`}>
@@ -1443,7 +1451,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-orange-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Comparison Table</h3>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1457,7 +1465,7 @@ const AdminServicesDashboard = () => {
                         placeholder="Static vs WordPress vs Dynamic"
                       />
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Table Subheading
@@ -1470,7 +1478,7 @@ const AdminServicesDashboard = () => {
                         placeholder="Compare the three approaches to find what's right for your project"
                       />
                     </div>
-                    
+
                     {/* Columns */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1492,7 +1500,7 @@ const AdminServicesDashboard = () => {
                         First column is "Feature", other columns can be customized
                       </p>
                     </div>
-                    
+
                     {/* Comparison Rows */}
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -1561,7 +1569,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-pink-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Features Section</h3>
                   </div>
-                  
+
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <label className="block text-sm font-medium text-gray-700">
@@ -1569,7 +1577,7 @@ const AdminServicesDashboard = () => {
                       </label>
                       <button
                         type="button"
-                        onClick={() => addArrayItem('data.features', { 
+                        onClick={() => addArrayItem('data.features', {
                           id: (formData.data?.features || []).length + 1,
                           title: '',
                           description: '',
@@ -1612,7 +1620,7 @@ const AdminServicesDashboard = () => {
                               <Trash2 className="w-5 h-5" />
                             </button>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
                               <div>
@@ -1627,7 +1635,7 @@ const AdminServicesDashboard = () => {
                                   placeholder="Custom Websites Built for Your Business"
                                 />
                               </div>
-                              
+
                               <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                   Description
@@ -1641,7 +1649,7 @@ const AdminServicesDashboard = () => {
                                 />
                               </div>
                             </div>
-                            
+
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Image URL
@@ -1658,17 +1666,17 @@ const AdminServicesDashboard = () => {
                                   <div className="text-sm text-gray-500 mb-2">Image Preview:</div>
                                   <div className="h-48 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
                                     {feature.image.startsWith('http') ? (
-                                      <img 
-                                        src={feature.image} 
+                                      <img
+                                        src={feature.image}
                                         alt={`Feature ${feature.id || index + 1}`}
                                         className="w-full h-full object-cover"
                                         onError={(e) => {
-  e.target.style.display = 'none';
-  const sibling = e.target.nextElementSibling;
-  if (sibling) {
-    sibling.style.display = 'flex';
-  }
-}}
+                                          e.target.style.display = 'none';
+                                          const sibling = e.target.nextElementSibling;
+                                          if (sibling) {
+                                            sibling.style.display = 'flex';
+                                          }
+                                        }}
                                       />
                                     ) : null}
                                     <div className={`${feature.image.startsWith('http') ? 'hidden' : 'flex'} items-center justify-center w-full h-full`}>
@@ -1693,7 +1701,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-teal-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Packages Section</h3>
                   </div>
-                  
+
                   <div className="space-y-8">
                     {/* Packages Header */}
                     <div className="bg-blue-50 p-6 rounded-lg">
@@ -1782,6 +1790,18 @@ const AdminServicesDashboard = () => {
                               onChange={(e) => handleInputChange('data.packages.packages.essential.icon', e.target.value)}
                               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                               placeholder="layers"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Button Link
+                            </label>
+                            <input
+                              type="text"
+                              value={formData.data?.packages?.packages?.essential?.link || ''}
+                              onChange={(e) => handleInputChange('data.packages.packages.essential.link', e.target.value)}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="/appointment or https://..."
                             />
                           </div>
                         </div>
@@ -1880,6 +1900,18 @@ const AdminServicesDashboard = () => {
                               placeholder="server"
                             />
                           </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Button Link
+                            </label>
+                            <input
+                              type="text"
+                              value={formData.data?.packages?.packages?.signature?.link || ''}
+                              onChange={(e) => handleInputChange('data.packages.packages.signature.link', e.target.value)}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="/appointment or https://..."
+                            />
+                          </div>
                         </div>
                         <div className="space-y-4">
                           <div>
@@ -1976,6 +2008,18 @@ const AdminServicesDashboard = () => {
                               placeholder="cpu"
                             />
                           </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Button Link
+                            </label>
+                            <input
+                              type="text"
+                              value={formData.data?.packages?.packages?.royal?.link || ''}
+                              onChange={(e) => handleInputChange('data.packages.packages.royal.link', e.target.value)}
+                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="/appointment or https://..."
+                            />
+                          </div>
                         </div>
                         <div className="space-y-4">
                           <div>
@@ -2036,7 +2080,7 @@ const AdminServicesDashboard = () => {
                     <div className="w-1 h-8 bg-red-600 rounded-full mr-3" />
                     <h3 className="text-lg font-bold text-gray-900">Video Section</h3>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -2050,7 +2094,7 @@ const AdminServicesDashboard = () => {
                         placeholder="More Than Just a Website Service"
                       />
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Image URL
@@ -2067,17 +2111,17 @@ const AdminServicesDashboard = () => {
                           <div className="text-sm text-gray-500 mb-2">Image Preview:</div>
                           <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
                             {formData.data.videoMaker.imageUrl.startsWith('http') ? (
-                              <img 
-                                src={formData.data.videoMaker.imageUrl} 
+                              <img
+                                src={formData.data.videoMaker.imageUrl}
                                 alt="Video maker"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
-  e.target.style.display = 'none';
-  const sibling = e.target.nextElementSibling;
-  if (sibling) {
-    sibling.style.display = 'flex';
-  }
-}}
+                                  e.target.style.display = 'none';
+                                  const sibling = e.target.nextElementSibling;
+                                  if (sibling) {
+                                    sibling.style.display = 'flex';
+                                  }
+                                }}
                               />
                             ) : null}
                             <div className={`${formData.data.videoMaker.imageUrl.startsWith('http') ? 'hidden' : 'flex'} items-center justify-center w-full h-full`}>
@@ -2087,7 +2131,7 @@ const AdminServicesDashboard = () => {
                         </div>
                       )}
                     </div>
-                    
+
                     <div>
                       <div className="flex items-center justify-between mb-4">
                         <label className="block text-sm font-medium text-gray-700">
@@ -2158,7 +2202,7 @@ const AdminServicesDashboard = () => {
                     </button>
                   )}
                 </div>
-                
+
                 <div className="flex space-x-4">
                   <button
                     type="button"
@@ -2205,11 +2249,11 @@ const AdminServicesDashboard = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">Delete Service</h3>
               </div>
-              
+
               <p className="text-gray-600 mb-6">
                 Are you sure you want to delete <span className="font-semibold">"{selectedService.data?.hero?.headline || 'Untitled Service'}"</span>? This action cannot be undone.
               </p>
-              
+
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
                 <div className="flex items-start">
                   <AlertCircle className="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" />
@@ -2221,7 +2265,7 @@ const AdminServicesDashboard = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex justify-end space-x-4">
                 <button
                   onClick={() => {
@@ -2264,7 +2308,7 @@ const AdminServicesDashboard = () => {
                   <X className="w-6 h-6" />
                 </button>
               </div>
-              
+
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   JSON Data
@@ -2300,7 +2344,7 @@ const AdminServicesDashboard = () => {
                   Make sure the JSON is valid and follows the service schema structure.
                 </p>
               </div>
-              
+
               <div className="flex justify-end space-x-4">
                 <button
                   onClick={() => setIsImportModalOpen(false)}

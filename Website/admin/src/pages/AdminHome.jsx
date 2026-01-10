@@ -47,6 +47,14 @@ const AdminHome = () => {
         clients: data.clients || { clientData: [] },
         testimonials: data.testimonials || { testimonials: [] },
         faqs: data.faqs || { faqs: [] },
+        ctaSection: data.ctaSection || {
+          title: '',
+          subheading: '',
+          primaryText: '',
+          primaryLink: '',
+          secondaryText: '',
+          secondaryLink: ''
+        },
         ...data
       };
 
@@ -101,7 +109,8 @@ const AdminHome = () => {
     { id: 'recentWork', name: 'Recent Work', icon: Image },
     { id: 'clients', name: 'Clients', icon: Users },
     { id: 'testimonials', name: 'Testimonials', icon: MessageSquare },
-    { id: 'faqs', name: 'FAQs', icon: HelpCircle }
+    { id: 'faqs', name: 'FAQs', icon: HelpCircle },
+    { id: 'ctaSection', name: 'CTA Section', icon: MessageSquare }
   ];
 
   const getActiveSectionName = () => {
@@ -251,6 +260,12 @@ const AdminHome = () => {
             <FaqsManager
               data={homePageData.faqs}
               onChange={(data) => updateSectionData('faqs', data)}
+            />
+          )}
+          {activeSection === 'ctaSection' && (
+            <CTASectionManager
+              data={homePageData.ctaSection}
+              onChange={(data) => updateSectionData('ctaSection', data)}
             />
           )}
         </div>
@@ -850,7 +865,8 @@ const RecentWorkManager = ({ data, onChange }) => {
     const newWork = {
       image: '',
       name: 'New Work Project',
-      description: 'Project description'
+      description: 'Project description',
+      link: ''
     };
     setEditingWork(newWork);
     setShowWorkForm(true);
@@ -1026,6 +1042,19 @@ const RecentWorkManager = ({ data, onChange }) => {
                   />
                 </div>
               )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Project Link (Optional)
+                </label>
+                <input
+                  type="text"
+                  value={editingWork?.link || ''}
+                  onChange={(e) => setEditingWork({ ...editingWork, link: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600]"
+                  placeholder="e.g., /portfolio/project-name"
+                />
+              </div>
 
               <div className="flex flex-col sm:flex-row sm:justify-end space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
                 <button

@@ -423,6 +423,12 @@ const AboutSectionManagement = () => {
                     value={content?.aboutSection?.cta?.buttonText}
                     onChange={(v) => updateField('aboutSection', 'cta.buttonText', v)}
                 />
+                <InputField
+                    label="Button Link"
+                    value={content?.aboutSection?.cta?.buttonLink}
+                    onChange={(v) => updateField('aboutSection', 'cta.buttonLink', v)}
+                    placeholder="/services"
+                />
             </div>
         </div>
     );
@@ -639,6 +645,20 @@ const AboutSectionManagement = () => {
                     value={content?.impact?.tagline}
                     onChange={(v) => updateField('impact', 'tagline', v)}
                 />
+                <div className="grid grid-cols-2 gap-4">
+                    <InputField
+                        label="Button Text"
+                        value={content?.impact?.impactButtonText}
+                        onChange={(v) => updateField('impact', 'impactButtonText', v)}
+                        placeholder="Start Your Project"
+                    />
+                    <InputField
+                        label="Button Link"
+                        value={content?.impact?.impactButtonLink}
+                        onChange={(v) => updateField('impact', 'impactButtonLink', v)}
+                        placeholder="/appointment"
+                    />
+                </div>
             </div>
 
             <div>

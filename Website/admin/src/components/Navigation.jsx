@@ -13,7 +13,8 @@ import {
   Palette,
   LogOut,
   User,
-  Mail
+  Mail,
+  Settings
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext"; // Make sure to import your AuthContext
 
@@ -40,6 +41,16 @@ export function Navigation() {
         { label: "Service Category", path: "/admin/dashboard/service-category" },
         { label: "Service", path: "/admin/dashboard/service-management" },
         { label: "Portfolio", path: "/admin/dashboard/portfolio" },
+      ]
+    },
+    {
+      label: "General",
+      icon: Settings,
+      children: [
+        { label: "Top Bar", path: "/admin/dashboard/general/topbar" },
+        { label: "Navbar", path: "/admin/dashboard/general/navbar" },
+        { label: "Footer", path: "/admin/dashboard/general/footer" },
+        { label: "Floating Latest", path: "/admin/dashboard/general/floating-latest" },
       ]
     },
     {

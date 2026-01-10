@@ -18,6 +18,10 @@ import LeadManagement from './pages/LeadManagement';
 import ServiceCategoryManagement from './pages/ServiceCategoryManagement';
 import AboutSectionManagement from './pages/AboutSectionManagement';
 import PortfolioManagement from './pages/PortfolioManagement';
+import TopBarManagement from './pages/TopBarManagement';
+import NavbarManagement from './pages/NavbarManagement';
+import FooterManagement from './pages/FooterManagement';
+import FloatingLatestManagement from './pages/FloatingLatestManagement';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -61,6 +65,10 @@ function AppRoutes() {
         <Route path="event-management" element={<EventManagement />} />
         <Route path="event-leads" element={<LeadManagement />} />
         <Route path="portfolio" element={<PortfolioManagement />} />
+        <Route path="general/topbar" element={<TopBarManagement />} />
+        <Route path="general/navbar" element={<NavbarManagement />} />
+        <Route path="general/footer" element={<FooterManagement />} />
+        <Route path="general/floating-latest" element={<FloatingLatestManagement />} />
       </Route>
 
       {/* Redirect root to login */}
