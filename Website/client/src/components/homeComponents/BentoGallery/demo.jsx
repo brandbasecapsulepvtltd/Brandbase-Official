@@ -758,67 +758,51 @@ export default function InteractiveImageBentoGallery({ data }) {
       </div>
 
       <div ref={containerRef} className="relative w-full cursor-grab active:cursor-grabbing">
-        <motion.div
-          drag="x"
-          dragConstraints={{ left: dragConstraint, right: 0 }}
-          dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
-          className="w-max"
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-4 sm:px-6 md:px-8"
         >
-          <div
-            ref={gridRef}
-            className="grid auto-cols-[280px] sm:auto-cols-[320px] md:auto-cols-[350px] lg:auto-cols-[380px] xl:auto-cols-[400px] grid-flow-col gap-4 sm:gap-6 px-4 sm:px-6 md:px-8"
-          >
-            {displayItems.map((item) => (
-              <motion.div
-                key={item.id}
-                className={cn(
-                  "relative h-[320px] sm:h-[380px] md:h-[420px] overflow-hidden rounded-xl sm:rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-500",
-                  item.span
-                )}
-                onClick={() => setSelectedItem(item)}
-                whileHover={{ scale: 1.02, y: -5 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <img
-                  src={item.url}
-                  alt={item.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 flex flex-col justify-end">
-                  <div className="mb-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-6 h-6 rounded bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                        <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
-                      </div>
-                      <span className="text-orange-300 text-xs font-bold uppercase tracking-wider">
-                        {item.companyName}
-                      </span>
+          {displayItems.map((item) => (
+            <motion.div
+              key={item.id}
+              className={cn(
+                "relative h-[320px] sm:h-[380px] md:h-[420px] overflow-hidden rounded-xl sm:rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-500"
+              )}
+              onClick={() => setSelectedItem(item)}
+              whileHover={{ scale: 1.02, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <img
+                src={item.url}
+                alt={item.title}
+                className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 flex flex-col justify-end">
+                <div className="mb-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 rounded bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
+                      <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
                     </div>
-                    <h3 className="text-white text-lg sm:text-xl font-bold leading-tight mb-2 line-clamp-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-300 text-sm line-clamp-2">{item.desc}</p>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-sm rounded-full">
-                      View Case Study
+                    <span className="text-orange-300 text-xs font-bold uppercase tracking-wider">
+                      {item.companyName}
                     </span>
-                    <div className="w-8 h-8 rounded-full bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
+                  </div>
+                  <h3 className="text-white text-lg sm:text-xl font-bold leading-tight mb-2 line-clamp-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm line-clamp-2">{item.desc}</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-sm rounded-full">
+                    View Case Study
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
+                    <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 hidden lg:block">
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-1 h-12 bg-gradient-to-b from-orange-500 to-transparent rounded-full"></div>
-            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wider">DRAG</span>
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -834,6 +818,6 @@ export default function InteractiveImageBentoGallery({ data }) {
       <AnimatePresence mode="wait">
         {selectedItem && <ImageModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
       </AnimatePresence>
-    </section>
+    </section >
   );
 }
