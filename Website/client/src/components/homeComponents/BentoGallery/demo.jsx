@@ -708,12 +708,16 @@ const ImageModal = ({ item, onClose }) => {
 };
 
 // --- MAIN GALLERY COMPONENT ---
-export default function InteractiveImageBentoGallery() {
+export default function InteractiveImageBentoGallery({ data }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [dragConstraint, setDragConstraint] = useState(0);
   const containerRef = useRef(null);
   const gridRef = useRef(null);
   const targetRef = useRef(null);
+
+  // Use data from props or fallback to imageItems (static data)
+  // Check if data is provided and has caseStudies array with items
+  const displayItems = data?.caseStudies && data.caseStudies.length > 0 ? data.caseStudies : imageItems;
 
   useEffect(() => {
     const calculateConstraints = () => {
@@ -764,7 +768,7 @@ export default function InteractiveImageBentoGallery() {
             ref={gridRef}
             className="grid auto-cols-[280px] sm:auto-cols-[320px] md:auto-cols-[350px] lg:auto-cols-[380px] xl:auto-cols-[400px] grid-flow-col gap-4 sm:gap-6 px-4 sm:px-6 md:px-8"
           >
-            {imageItems.map((item) => (
+            {displayItems.map((item) => (
               <motion.div
                 key={item.id}
                 className={cn(

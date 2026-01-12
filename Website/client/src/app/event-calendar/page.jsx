@@ -6,10 +6,10 @@ import ExCalendar from "@/pages/ExCalendar";
 // -------------------------------------------
 export const metadata = {
   // 🌐 Basic SEO
-  title: "Event Calendar 2025 | India",
+  title: "Event Calendar 2026 | India",
   description:
     "Contact BrandBase Capsule for web development, digital marketing, branding & app development services. 📞 +91-XXXXXXXXXX | 📍 Mumbai-based agency",
-  
+
   keywords: [
     "contact digital agency Mumbai",
     "web development company contact",
@@ -48,7 +48,7 @@ export const metadata = {
   // 🖼️ Social Sharing (Open Graph) - WhatsApp Friendly
   openGraph: {
     title: "📞 Contact BrandBase Capsule | Mumbai Digital Agency",
-    description: 
+    description:
       "Get expert digital solutions! Web development • App development • Branding • Digital marketing. WhatsApp: +91-XXXXXXXXXX | Mumbai-based agency",
     url: "https://www.brandbasecapsule.com/contact",
     siteName: "BrandBase Capsule",
@@ -77,7 +77,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Contact BrandBase Capsule | Mumbai Digital Agency",
-    description: 
+    description:
       "📱 Get in touch for web/app development, branding & digital marketing services. WhatsApp: +91-XXXXXXXXXX",
     images: ["https://www.brandbasecapsule.com/og-contact.jpg"],
     creator: "@brandbasecapsule",
@@ -98,10 +98,10 @@ export const metadata = {
     "og:locality": "Mumbai",
     "og:region": "Maharashtra",
     "og:country-name": "India",
-    
+
     // Telegram Specific
     "telegram:channel": "@brandbasecapsule",
-    
+
     // Additional SEO
     "contact:phone": "+91-XXXXXXXXXX",
     "contact:email": "contact@brandbasecapsule.com",
@@ -112,7 +112,7 @@ export const metadata = {
 
   // 🌐 Browser Settings
   referrer: "origin-when-cross-origin",
-  viewport: 
+  viewport:
     "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
 
   // 📌 Icons
@@ -167,7 +167,7 @@ const jsonLd = {
       "url": "https://www.brandbasecapsule.com",
       "logo": "https://www.brandbasecapsule.com/logo.png",
       "description": "Creative digital agency based in Mumbai specializing in web development, branding, and marketing solutions.",
-      
+
       "sameAs": [
         "https://www.instagram.com/brandbasecapsule",
         "https://www.facebook.com/brandbasecapsule",
@@ -376,7 +376,7 @@ export default function EventCalendar() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ExCalendar />
-      
+
       {/* Additional Schema for Rich Snippets */}
       <script
         type="application/ld+json"

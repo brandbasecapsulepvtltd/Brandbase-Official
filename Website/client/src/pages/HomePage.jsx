@@ -162,7 +162,8 @@ const HomePage = ({ initialData }) => {
     clients,
     testimonials,
     faqs,
-    ctaSection
+    ctaSection,
+    caseStudiesSection
   } = homePageData;
 
   // Render the complete page with fetched data
@@ -188,7 +189,7 @@ const HomePage = ({ initialData }) => {
 
 
       {/**/}
-      <InteractiveImageBentoGalleryDemo />
+      <InteractiveImageBentoGalleryDemo data={caseStudiesSection} />
 
       {/* Testimonials Section */}
       {testimonials && <TestimonialSlider data={testimonials} />}
