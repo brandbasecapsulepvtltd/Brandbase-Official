@@ -110,7 +110,8 @@ const AdminHome = () => {
     { id: 'clients', name: 'Clients', icon: Users },
     { id: 'testimonials', name: 'Testimonials', icon: MessageSquare },
     { id: 'faqs', name: 'FAQs', icon: HelpCircle },
-    { id: 'ctaSection', name: 'CTA Section', icon: MessageSquare }
+    { id: 'ctaSection', name: 'CTA Section', icon: MessageSquare },
+    { id: 'caseStudiesSection', name: 'Case Studies', icon: Layout }
   ];
 
   const getActiveSectionName = () => {
@@ -266,6 +267,12 @@ const AdminHome = () => {
             <CTASectionManager
               data={homePageData.ctaSection}
               onChange={(data) => updateSectionData('ctaSection', data)}
+            />
+          )}
+          {activeSection === 'caseStudiesSection' && (
+            <CaseStudiesManager
+              data={homePageData.caseStudiesSection}
+              onChange={(data) => updateSectionData('caseStudiesSection', data)}
             />
           )}
         </div>
@@ -1800,6 +1807,269 @@ const FaqsManager = ({ data, onChange }) => {
                 >
                   Save FAQ
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// CTA Section Manager
+const CTASectionManager = ({ data, onChange }) => {
+  const safeData = {
+    title: data?.title || '',
+    subheading: data?.subheading || '',
+    primaryText: data?.primaryText || '',
+    primaryLink: data?.primaryLink || '',
+    secondaryText: data?.secondaryText || '',
+    secondaryLink: data?.secondaryLink || ''
+  };
+
+  const handleChange = (field, value) => {
+    onChange({ ...safeData, [field]: value });
+  };
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-xl font-semibold text-gray-900">CTA Section</h2>
+
+      <div className="grid gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+          <input
+            type="text"
+            value={safeData.title}
+            onChange={(e) => handleChange('title', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Subheading</label>
+          <textarea
+            value={safeData.subheading}
+            onChange={(e) => handleChange('subheading', e.target.value)}
+            rows={3}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600]"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <h3 className="font-medium text-gray-900">Primary Button</h3>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Text</label>
+              <input
+                type="text"
+                value={safeData.primaryText}
+                onChange={(e) => handleChange('primaryText', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+              <input
+                type="text"
+                value={safeData.primaryLink}
+                onChange={(e) => handleChange('primaryLink', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600]"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="font-medium text-gray-900">Secondary Button</h3>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Text</label>
+              <input
+                type="text"
+                value={safeData.secondaryText}
+                onChange={(e) => handleChange('secondaryText', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+              <input
+                type="text"
+                value={safeData.secondaryLink}
+                onChange={(e) => handleChange('secondaryLink', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6600]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Case Studies Manager
+const CaseStudiesManager = ({ data, onChange }) => {
+  const [editingItem, setEditingItem] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const safeData = {
+    heading: data?.heading || 'Case Studies',
+    subHeading: data?.subHeading || 'Explore our digital transformation projects',
+    caseStudies: data?.caseStudies || []
+  };
+
+  const handleHeaderChange = (field, value) => {
+    onChange({ ...safeData, [field]: value });
+  };
+
+  const addItem = () => {
+    setEditingItem({
+      id: Date.now(),
+      companyName: 'New Company',
+      industry: 'Industry',
+      title: 'Project Title',
+      desc: 'Project Description',
+      url: '',
+      companyLogo: '',
+      services: ['Service 1'],
+      results: [{ value: '100%', label: 'Growth' }, { value: '50%', label: 'Savings' }],
+      testimonial: { quote: 'Great work!', author: 'Author', role: 'Role', avatar: '' },
+      galleryImages: []
+    });
+    setShowForm(true);
+  };
+
+  const editItem = (item, index) => {
+    setEditingItem({ ...item, _index: index });
+    setShowForm(true);
+  };
+
+  const saveItem = () => {
+    const updatedStudies = [...safeData.caseStudies];
+    // Clean up _index from item before saving
+    const { _index, ...itemToSave } = editingItem;
+
+    if (editingItem._index !== undefined) {
+      updatedStudies[editingItem._index] = itemToSave;
+    } else {
+      updatedStudies.push(itemToSave);
+    }
+    onChange({ ...safeData, caseStudies: updatedStudies });
+    setShowForm(false);
+    setEditingItem(null);
+  };
+
+  const deleteItem = (index) => {
+    if (confirm('Are you sure?')) {
+      const updatedStudies = safeData.caseStudies.filter((_, i) => i !== index);
+      onChange({ ...safeData, caseStudies: updatedStudies });
+    }
+  };
+
+  const updateResult = (rIndex, field, val) => {
+    const newResults = [...(editingItem.results || [])];
+    if (!newResults[rIndex]) newResults[rIndex] = {};
+    newResults[rIndex][field] = val;
+    setEditingItem({ ...editingItem, results: newResults });
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-semibold">Case Studies</h2>
+        <button onClick={addItem} className="px-4 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-[#E55A00] flex items-center">
+          <Plus className="w-4 h-4 mr-2" /> Add Case Study
+        </button>
+      </div>
+
+      <div className="grid gap-4">
+        <div>
+          <label className="block text-sm font-medium mb-1">Section Heading</label>
+          <input type="text" value={safeData.heading} onChange={e => handleHeaderChange('heading', e.target.value)} className="w-full px-3 py-2 border rounded-lg" />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Section Subheading</label>
+          <input type="text" value={safeData.subHeading} onChange={e => handleHeaderChange('subHeading', e.target.value)} className="w-full px-3 py-2 border rounded-lg" />
+        </div>
+      </div>
+
+      <div className="space-y-4 mt-6">
+        {safeData.caseStudies.map((study, idx) => (
+          <div key={idx} className="border p-4 rounded-lg bg-gray-50 flex justify-between items-start">
+            <div>
+              <h3 className="font-bold">{study.companyName}</h3>
+              <p className="text-sm text-gray-600">{study.title}</p>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => editItem(study, idx)} className="p-2 text-blue-600 hover:bg-blue-100 rounded"><Edit className="w-4 h-4" /></button>
+              <button onClick={() => deleteItem(idx)} className="p-2 text-red-600 hover:bg-red-100 rounded"><Trash2 className="w-4 h-4" /></button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {showForm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+          <div className="bg-white rounded-xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between mb-4">
+              <h3 className="text-lg font-bold">Edit Case Study</h3>
+              <button onClick={() => setShowForm(false)}><X className="w-5 h-5" /></button>
+            </div>
+            <div className="grid gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium">Company Name</label>
+                  <input type="text" value={editingItem.companyName} onChange={e => setEditingItem({ ...editingItem, companyName: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium">Industry</label>
+                  <input type="text" value={editingItem.industry} onChange={e => setEditingItem({ ...editingItem, industry: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium">Title</label>
+                <input type="text" value={editingItem.title} onChange={e => setEditingItem({ ...editingItem, title: e.target.value })} className="w-full px-3 py-2 border rounded" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium">Description</label>
+                <textarea value={editingItem.desc} onChange={e => setEditingItem({ ...editingItem, desc: e.target.value })} className="w-full px-3 py-2 border rounded" rows={3} />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium">Main Image URL</label>
+                  <input type="text" value={editingItem.url} onChange={e => setEditingItem({ ...editingItem, url: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium">Logo URL</label>
+                  <input type="text" value={editingItem.companyLogo} onChange={e => setEditingItem({ ...editingItem, companyLogo: e.target.value })} className="w-full px-3 py-2 border rounded" />
+                </div>
+              </div>
+
+              {/* Results Editor (Simple) */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Key Results (4 Items)</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[0, 1, 2, 3].map(i => (
+                    <div key={i} className="flex gap-2">
+                      <input placeholder="Value (e.g. 300%)" value={editingItem.results?.[i]?.value || ''} onChange={e => updateResult(i, 'value', e.target.value)} className="w-1/2 p-2 border rounded text-sm" />
+                      <input placeholder="Label (e.g. Growth)" value={editingItem.results?.[i]?.label || ''} onChange={e => updateResult(i, 'label', e.target.value)} className="w-1/2 p-2 border rounded text-sm" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Services (comma separated)</label>
+                <input type="text" value={editingItem.services.join(', ')} onChange={e => setEditingItem({ ...editingItem, services: e.target.value.split(',').map(s => s.trim()) })} className="w-full px-3 py-2 border rounded" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Gallery Images (comma separated URLs)</label>
+                <textarea rows={3} value={editingItem.galleryImages.join(', ')} onChange={e => setEditingItem({ ...editingItem, galleryImages: e.target.value.split(',').map(s => s.trim()) })} className="w-full px-3 py-2 border rounded" />
+              </div>
+
+              <div className="flex justify-end gap-2 mt-4">
+                <button onClick={() => setShowForm(false)} className="px-4 py-2 border rounded">Cancel</button>
+                <button onClick={saveItem} className="px-4 py-2 bg-[#FF6600] text-white rounded">Save</button>
               </div>
             </div>
           </div>
