@@ -31,6 +31,7 @@ export default function AppointmentContent() {
     country: "",
     state: "",
     city: "",
+    contactNumber: "",
     consent: false,
     marketing: false,
   });
@@ -99,6 +100,7 @@ export default function AppointmentContent() {
       formData.country.trim() &&
       formData.state.trim() &&
       formData.city.trim() &&
+      formData.contactNumber.trim() &&
       formData.consent
     );
   };
@@ -119,20 +121,20 @@ export default function AppointmentContent() {
 
     try {
       const formattedDate = selectedDate.toISOString();
-      
+
       const payload = {
         ...formData,
         appointmentDate: formattedDate,
         appointmentTime: selectedTime,
         name: `${formData.firstName} ${formData.lastName}`, // Combine first and last name
-        phone: "N/A", // Add phone field if your backend expects it
+        contactNumber: formData.contactNumber,
       };
 
       console.log("Frontend sending payload:", payload);
 
       // Use your API client instead of direct fetch
       const response = await api.createAppointment(payload);
-      
+
       console.log("API Response:", response);
 
       // Check if appointment was created successfully
@@ -141,9 +143,9 @@ export default function AppointmentContent() {
         console.log("Appointment created successfully!");
       } else {
         // Handle different error formats from API
-        const errorMessage = response.message || 
-                            response.error?.message || 
-                            "Failed to create appointment. Please try again.";
+        const errorMessage = response.message ||
+          response.error?.message ||
+          "Failed to create appointment. Please try again.";
         setError(errorMessage);
       }
     } catch (err) {
@@ -152,7 +154,7 @@ export default function AppointmentContent() {
         message: err.message,
         stack: err.stack
       });
-      
+
       // Handle specific error cases
       if (err.message?.includes("401") || err.message?.includes("403")) {
         setError("Authentication failed. Please check your API key configuration.");
@@ -183,7 +185,7 @@ export default function AppointmentContent() {
               {selectedDate && format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-              Confirmation sent to {formData.email}
+              Confirmation sent to {formData.email} • Mobile: {formData.contactNumber}
             </p>
           </div>
           <button
@@ -238,17 +240,15 @@ export default function AppointmentContent() {
         <div className="flex items-center justify-center mb-6">
           <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>1</div>
           <div
-            className={`flex-1 h-1 mx-4 transition-all duration-300 max-w-40 ${
-              currentStep > 1
+            className={`flex-1 h-1 mx-4 transition-all duration-300 max-w-40 ${currentStep > 1
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500'
                 : 'bg-gray-300'
-            }`}
+              }`}
           />
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold ${
-            currentStep > 1 
+          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold ${currentStep > 1
               ? 'bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg'
               : 'bg-gray-100 border-gray-300 text-gray-400'
-          }`}>2</div>
+            }`}>2</div>
         </div>
 
         <div className="flex justify-center mb-8">
@@ -296,8 +296,8 @@ export default function AppointmentContent() {
                   isDateDisabled(date)
                     ? "bg-gray-100 text-gray-400 cursor-not-allowed rounded-lg"
                     : selectedDate && isSameDay(date, selectedDate)
-                    ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg shadow-lg"
-                    : "hover:bg-orange-50 hover:text-orange-900 cursor-pointer rounded-lg transition-colors"
+                      ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg shadow-lg"
+                      : "hover:bg-orange-50 hover:text-orange-900 cursor-pointer rounded-lg transition-colors"
                 }
                 calendarClassName="!text-sm !rounded-2xl !shadow-lg !border !border-orange-200 !p-4"
               />
@@ -315,11 +315,10 @@ export default function AppointmentContent() {
                       key={slot}
                       onClick={() => handleTimeSelect(slot)}
                       disabled={isLoading}
-                      className={`p-3 border-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                        selectedTime === slot
+                      className={`p-3 border-2 rounded-xl text-sm font-semibold transition-all duration-200 ${selectedTime === slot
                           ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-500 shadow-lg scale-105"
                           : "bg-white dark:bg-zinc-900 dark:bg-black text-gray-700 dark:text-gray-300 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
-                      } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                        } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {slot}
                     </button>
@@ -396,8 +395,8 @@ export default function AppointmentContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input 
-                    placeholder="First Name *" 
+                  <input
+                    placeholder="First Name *"
                     className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.firstName}
                     onChange={(e) => handleChange("firstName", e.target.value)}
@@ -406,8 +405,8 @@ export default function AppointmentContent() {
                 </div>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input 
-                    placeholder="Last Name *" 
+                  <input
+                    placeholder="Last Name *"
                     className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.lastName}
                     onChange={(e) => handleChange("lastName", e.target.value)}
@@ -418,9 +417,9 @@ export default function AppointmentContent() {
 
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input 
-                  type="email" 
-                  placeholder="Email Address *" 
+                <input
+                  type="email"
+                  placeholder="Email Address *"
                   className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
@@ -429,9 +428,21 @@ export default function AppointmentContent() {
               </div>
 
               <div className="relative">
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="tel"
+                  placeholder="Contact Number *"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 font-sans"
+                  value={formData.contactNumber}
+                  onChange={(e) => handleChange("contactNumber", e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
+
+              <div className="relative">
                 <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input 
-                  placeholder="Organization *" 
+                <input
+                  placeholder="Organization *"
                   className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                   value={formData.organization}
                   onChange={(e) => handleChange("organization", e.target.value)}
@@ -442,7 +453,7 @@ export default function AppointmentContent() {
               {/* Dropdown Sections */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <select 
+                  <select
                     className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 appearance-none"
                     value={formData.region}
                     onChange={(e) => handleChange("region", e.target.value)}
@@ -457,7 +468,7 @@ export default function AppointmentContent() {
                   </select>
                 </div>
                 <div>
-                  <select 
+                  <select
                     className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 appearance-none"
                     value={formData.industry}
                     onChange={(e) => handleChange("industry", e.target.value)}
@@ -488,7 +499,7 @@ export default function AppointmentContent() {
               )}
 
               <div>
-                <select 
+                <select
                   className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 appearance-none"
                   value={formData.category}
                   onChange={(e) => handleChange("category", e.target.value)}
@@ -520,8 +531,8 @@ export default function AppointmentContent() {
 
               <div className="relative">
                 <MessageCircle className="absolute left-3 top-4 text-gray-400 w-5 h-5" />
-                <textarea 
-                  placeholder="How can we help you? Tell us about your project... *" 
+                <textarea
+                  placeholder="How can we help you? Tell us about your project... *"
                   className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900 resize-none"
                   rows="4"
                   value={formData.message}
@@ -537,8 +548,8 @@ export default function AppointmentContent() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="sm:col-span-3 relative">
                   <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input 
-                    placeholder="Country *" 
+                  <input
+                    placeholder="Country *"
                     className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.country}
                     onChange={(e) => handleChange("country", e.target.value)}
@@ -546,8 +557,8 @@ export default function AppointmentContent() {
                   />
                 </div>
                 <div>
-                  <input 
-                    placeholder="State *" 
+                  <input
+                    placeholder="State *"
                     className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.state}
                     onChange={(e) => handleChange("state", e.target.value)}
@@ -555,8 +566,8 @@ export default function AppointmentContent() {
                   />
                 </div>
                 <div>
-                  <input 
-                    placeholder="City *" 
+                  <input
+                    placeholder="City *"
                     className="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-50 dark:bg-zinc-900"
                     value={formData.city}
                     onChange={(e) => handleChange("city", e.target.value)}
@@ -569,7 +580,7 @@ export default function AppointmentContent() {
             {/* Consent Section */}
             <div className="mt-8 space-y-4">
               <label className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl border border-gray-200 hover:border-orange-300 transition-colors">
-                <input 
+                <input
                   type="checkbox"
                   checked={formData.consent}
                   onChange={(e) => handleChange("consent", e.target.checked)}
@@ -581,7 +592,7 @@ export default function AppointmentContent() {
                 </span>
               </label>
               <label className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl border border-gray-200 hover:border-orange-300 transition-colors">
-                <input 
+                <input
                   type="checkbox"
                   checked={formData.marketing}
                   onChange={(e) => handleChange("marketing", e.target.checked)}
