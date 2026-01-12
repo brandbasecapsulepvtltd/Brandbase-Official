@@ -312,6 +312,7 @@ export const api = {
   getNavbar: (revalidate = 10) => apiCall('/navbar', { revalidate }),
   getFooter: (revalidate = 10) => apiCall('/footer', { revalidate }),
   getFloatingLatest: (revalidate = 10) => apiCall('/floatinglatest', { revalidate }),
+  getPolicy: (type, revalidate = 10) => apiCall(`/policies/${type}`, { revalidate }),
 
   // Health check
   checkHealth: async () => {

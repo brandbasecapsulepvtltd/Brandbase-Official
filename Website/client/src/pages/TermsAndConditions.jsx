@@ -1,200 +1,28 @@
 'use client';
 import React from "react";
 import Link from 'next/link';
-import { ArrowLeft, FileText, Scale, Shield, AlertCircle, Globe, Mail, Phone, MapPin } from 'lucide-react';
+import {
+  ArrowLeft,
+  FileText,
+  Scale,
+  Shield,
+  AlertCircle,
+  Globe,
+  Mail,
+  Phone,
+  MapPin
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const termsData = {
-  title: 'Terms and Conditions',
-  lastUpdated: 'December 17, 2025',
-  intro: 'Welcome to Brandbase Capsule. These Terms and Conditions govern your use of our website and services. Please read them carefully before accessing or using our platform.',
-  sections: [
-    {
-      icon: <FileText className="w-5 h-5" />,
-      heading: 'Interpretation and Definitions',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.'
-        },
-        {
-          type: 'subheading',
-          text: 'Definitions'
-        },
-        {
-          type: 'list',
-          items: [
-            {
-              term: 'Affiliate',
-              definition: 'means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.'
-            },
-            {
-              term: 'Country',
-              definition: 'refers to: India'
-            },
-            {
-              term: 'Company',
-              definition: '(referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Brandbase Capsule Pvt. Ltd.'
-            },
-            {
-              term: 'Device',
-              definition: 'means any device that can access the Service such as a computer, a cellphone or a digital tablet.'
-            },
-            {
-              term: 'Service',
-              definition: 'refers to the Website.'
-            },
-            {
-              term: 'Terms and Conditions',
-              definition: '(also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.'
-            },
-            {
-              term: 'Third-party Social Media Service',
-              definition: 'means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.'
-            },
-            {
-              term: 'Website',
-              definition: 'refers to Brandbase Capsule Pvt. Ltd, accessible from https://brandbasecapsule.com/'
-            },
-            {
-              term: 'You',
-              definition: 'means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      icon: <Scale className="w-5 h-5" />,
-      heading: 'Acknowledgment',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.'
-        },
-        {
-          type: 'paragraph',
-          text: 'Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms apply to all visitors, users and others who access or use the Service.'
-        },
-        {
-          type: 'paragraph',
-          text: 'By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms, then You may not access the Service.'
-        },
-        {
-          type: 'warning',
-          text: 'You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service.'
-        },
-        {
-          type: 'paragraph',
-          text: 'Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company.'
-        }
-      ]
-    },
-    {
-      icon: <Globe className="w-5 h-5" />,
-      heading: 'Links to Other Websites',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'Our Service may contain links to third-party websites or services that are not owned or controlled by the Company.'
-        },
-        {
-          type: 'paragraph',
-          text: 'The Company assumes no responsibility for the content, privacy policies, or practices of any third-party websites or services.'
-        }
-      ]
-    },
-    {
-      icon: <AlertCircle className="w-5 h-5" />,
-      heading: 'Termination',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.'
-        },
-        {
-          type: 'paragraph',
-          text: 'Upon termination, Your right to use the Service will cease immediately.'
-        }
-      ]
-    },
-    {
-      heading: '"AS IS" and "AS AVAILABLE" Disclaimer',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'The Service is provided to You "AS IS" and "AS AVAILABLE" without warranty of any kind, whether express or implied.'
-        },
-        {
-          type: 'paragraph',
-          text: 'The Company does not warrant that the Service will be uninterrupted, error-free, or free of harmful components.'
-        }
-      ]
-    },
-    {
-      heading: 'Governing Law',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'The laws of the Country, excluding its conflicts of law rules, shall govern these Terms and Your use of the Service.'
-        }
-      ]
-    },
-    {
-      heading: 'Disputes Resolution',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'If You have any dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.'
-        }
-      ]
-    },
-    {
-      heading: 'Severability and Waiver',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'If any provision of these Terms is held to be unenforceable, the remaining provisions will remain in effect.'
-        }
-      ]
-    },
-    {
-      heading: 'Translation Interpretation',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'The original English version shall prevail in case of dispute.'
-        }
-      ]
-    },
-    {
-      heading: 'Changes to These Terms and Conditions',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'We reserve the right to modify or replace these Terms at any time. Continued use of the Service means acceptance of the revised Terms.'
-        }
-      ]
-    },
-    {
-      heading: 'Contact Us',
-      content: [
-        {
-          type: 'paragraph',
-          text: 'If you have any questions about these Terms and Conditions, You can contact us:'
-        },
-        {
-          type: 'contact',
-          details: {
-            email: 'info@brandbasecapsule.com',
-            phone: '+91 9892211456',
-            address: 'Office #204, 2nd Floor, Near Bus Depot Pimpleshwar Temple, Gulmohar Complex, Goregaon Railway Station, Goregaon East, India',
-            company: 'Brandbase Capsule Pvt. Ltd.'
-          }
-        }
-      ]
-    }
-  ]
+const IconMap = {
+  FileText: <FileText className="w-5 h-5" />,
+  Scale: <Scale className="w-5 h-5" />,
+  Globe: <Globe className="w-5 h-5" />,
+  AlertCircle: <AlertCircle className="w-5 h-5" />,
+  Shield: <Shield className="w-5 h-5" />,
+  Mail: <Mail className="w-5 h-5" />,
+  Phone: <Phone className="w-5 h-5" />,
+  MapPin: <MapPin className="w-5 h-5" />
 };
 
 const fadeInUp = {
@@ -202,7 +30,9 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const TermsAndConditions = () => {
+const TermsAndConditions = ({ data }) => {
+  if (!data) return null;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-zinc-950 dark:to-black">
       {/* Mobile Back Button - Only visible on mobile */}
@@ -225,7 +55,7 @@ const TermsAndConditions = () => {
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-white dark:from-orange-950/20 dark:to-black pt-8 lg:pt-16 pb-12 lg:pb-16"
+        className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-white dark:from-orange-950/20 dark:to-black pt-8 lg:pt-16 pb-12 lg:pb-16 mt-25"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-6xl mx-auto px-4 lg:px-6 relative z-10">
@@ -242,7 +72,7 @@ const TermsAndConditions = () => {
             </p>
             <div className="inline-flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-lg px-4 lg:px-6 py-2 lg:py-3 shadow-sm border border-gray-200 dark:border-zinc-800 text-sm lg:text-base">
               <span className="text-gray-500 dark:text-gray-400 font-medium">Last Updated:</span>
-              <span className="text-gray-900 dark:text-white font-semibold">{termsData.lastUpdated}</span>
+              <span className="text-gray-900 dark:text-white font-semibold">{data.lastUpdated}</span>
             </div>
           </div>
         </div>
@@ -292,7 +122,7 @@ const TermsAndConditions = () => {
                 Agreement Overview
               </h2>
               <p className="text-base lg:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                {termsData.intro}
+                {data.intro}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-6 lg:mt-8 pt-6 lg:pt-8 border-t border-gray-100 dark:border-zinc-800">
                 <div className="text-center p-3 lg:p-4">
@@ -323,7 +153,7 @@ const TermsAndConditions = () => {
 
         {/* Terms Sections */}
         <div className="space-y-8 lg:space-y-12">
-          {termsData.sections.map((section, index) => (
+          {data.sections.map((section, index) => (
             <motion.section
               key={index}
               variants={fadeInUp}
@@ -337,11 +167,9 @@ const TermsAndConditions = () => {
                 {/* Section Header */}
                 <div className="bg-gradient-to-r from-orange-50 to-white dark:from-orange-900/10 dark:to-zinc-900 px-4 lg:px-8 py-4 lg:py-6 border-b border-gray-100 dark:border-zinc-800">
                   <div className="flex items-start lg:items-center gap-3 lg:gap-4">
-                    {section.icon && (
+                    {section.iconName && IconMap[section.iconName] && (
                       <div className="bg-orange-600 text-white p-2 lg:p-3 rounded-lg lg:rounded-xl dark:bg-orange-500">
-                        {React.cloneElement(section.icon, {
-                          className: "w-4 h-4 lg:w-5 lg:h-5"
-                        })}
+                        {IconMap[section.iconName]}
                       </div>
                     )}
                     <div className="flex-1">
@@ -353,7 +181,7 @@ const TermsAndConditions = () => {
                           Clause {index + 1}
                         </span>
                         <span className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
-                          Effective {termsData.lastUpdated}
+                          Effective {data.lastUpdated}
                         </span>
                       </div>
                     </div>
@@ -386,12 +214,20 @@ const TermsAndConditions = () => {
                             <div className="space-y-3 lg:space-y-4">
                               {item.items.map((listItem, idx) => (
                                 <div key={idx} className="border-l-4 border-orange-200 dark:border-orange-900/50 pl-3 lg:pl-4 py-1.5 lg:py-2">
-                                  <dt className="font-semibold text-gray-900 dark:text-white text-base lg:text-lg mb-0.5 lg:mb-1">
-                                    {listItem.term}
-                                  </dt>
-                                  <dd className="text-gray-700 dark:text-gray-300 text-sm lg:text-base">
-                                    {listItem.definition}
-                                  </dd>
+                                  {listItem.term ? (
+                                    <>
+                                      <dt className="font-semibold text-gray-900 dark:text-white text-base lg:text-lg mb-0.5 lg:mb-1">
+                                        {listItem.term}
+                                      </dt>
+                                      <dd className="text-gray-700 dark:text-gray-300 text-sm lg:text-base">
+                                        {listItem.definition}
+                                      </dd>
+                                    </>
+                                  ) : (
+                                    <p className="text-gray-700 dark:text-gray-300 text-sm lg:text-base">
+                                      {listItem.text}
+                                    </p>
+                                  )}
                                 </div>
                               ))}
                             </div>
@@ -413,6 +249,7 @@ const TermsAndConditions = () => {
                       }
 
                       if (item.type === 'contact') {
+                        const details = item.contactDetails;
                         return (
                           <div
                             key={i}
@@ -430,7 +267,7 @@ const TermsAndConditions = () => {
                                   </div>
                                   <div>
                                     <h3 className="text-base lg:text-lg font-bold text-gray-900 dark:text-white">
-                                      {item.details.company}
+                                      {details.company}
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 text-sm lg:text-base">Legal Department</p>
                                   </div>
@@ -446,10 +283,10 @@ const TermsAndConditions = () => {
                                   <div>
                                     <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Legal Inquiries</p>
                                     <a
-                                      href={`mailto:${item.details.email}`}
+                                      href={`mailto:${details.email}`}
                                       className="text-gray-900 dark:text-white font-medium hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm lg:text-base"
                                     >
-                                      {item.details.email}
+                                      {details.email}
                                     </a>
                                   </div>
                                 </div>
@@ -459,7 +296,7 @@ const TermsAndConditions = () => {
                                   <div>
                                     <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Phone Support</p>
                                     <span className="text-gray-900 dark:text-white font-medium text-sm lg:text-base">
-                                      {item.details.phone}
+                                      {details.phone}
                                     </span>
                                   </div>
                                 </div>
@@ -469,7 +306,7 @@ const TermsAndConditions = () => {
                                   <div>
                                     <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Registered Office</p>
                                     <span className="text-gray-900 dark:text-white text-sm lg:text-base">
-                                      {item.details.address}
+                                      {details.address}
                                     </span>
                                   </div>
                                 </div>
