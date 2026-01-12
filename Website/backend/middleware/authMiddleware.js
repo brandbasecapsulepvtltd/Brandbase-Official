@@ -1,63 +1,46 @@
-const API_KEY = process.env.API_KEY;
-const ADMIN_API_KEY = process.env.ADMIN_API_KEY;
+const jwt = require('jsonwebtoken');
+const Admin = require('../models/Admin');
 
-// Middleware to validate API key
-const apiKeyAuth = (req, res, next) => {
-  const apiKey = req.headers['x-api-key'] || req.headers['authorization'];
-  
-  if (!apiKey) {
-    return res.status(401).json({
-      success: false,
-      message: 'API key is required'
-    });
+const protect = async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      // Get token from header
+      token = req.headers.authorization.split(' ')[1];
+
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret_key_123');
+
+      // Get admin from the token
+      req.user = await Admin.findById(decoded.id).select('-password');
+
+      if (!req.user) {
+        return res.status(401).json({
+          success: false,
+          message: 'Not authorized, user not found'
+        });
+      }
+
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401).json({
+        success: false,
+        message: 'Not authorized, token failed'
+      });
+    }
   }
 
-  // Remove 'Bearer ' prefix if present
-  const key = apiKey.replace('Bearer ', '');
-  
-  // Check if key matches either regular or admin key
-  if (key === API_KEY || key === ADMIN_API_KEY) {
-    next();
-  } else {
-    return res.status(403).json({
+  if (!token) {
+    res.status(401).json({
       success: false,
-      message: 'Invalid API key'
-    });
-  }
-};
-
-// Middleware for admin-only endpoints
-const adminApiKeyAuth = (req, res, next) => {
-  const apiKey = req.headers['x-api-key'] || req.headers['authorization'];
-  
-  if (!apiKey) {
-    return res.status(401).json({
-      success: false,
-      message: 'API key is required'
-    });
-  }
-
-  const key = apiKey.replace('Bearer ', '');
-  
-  // Only allow admin key
-  if (key === ADMIN_API_KEY) {
-    next();
-  } else {
-    return res.status(403).json({
-      success: false,
-      message: 'Admin access required'
+      message: 'Not authorized, no token'
     });
   }
 };
 
-// Generate a secure API key (for initial setup)
-const generateApiKey = () => {
-  const crypto = require('crypto');
-  return crypto.randomBytes(32).toString('hex');
-};
-
-module.exports = {
-  apiKeyAuth,
-  adminApiKeyAuth,
-  generateApiKey
-};
+module.exports = { protect };
