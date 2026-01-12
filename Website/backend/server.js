@@ -98,6 +98,7 @@ const leadRoutes = require('./routes/leadRoutes');
 const portfolioRoutes = require('./routes/portfolioRoutes');
 
 const aboutSectionRoutes = require('./routes/aboutSectionRoutes');
+const policyRoutes = require('./routes/policyRoutes');
 
 const topBarRoutes = require('./routes/topBarRoutes')
 const navbarRoutes = require('./routes/navbarRoutes')
@@ -114,6 +115,7 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/service-categories', serviceCategoryRoutes); // Add this
 app.use('/api/events', eventRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/policies', policyRoutes);
 app.use('/api/portfolios', portfolioRoutes);
 app.use('/api/about-section', aboutSectionRoutes);
 app.use('/api/topbar', topBarRoutes);
