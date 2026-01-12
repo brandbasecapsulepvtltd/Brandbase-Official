@@ -117,7 +117,7 @@ export default function AppointmentsTable() {
 
     try {
       const response = await axios.delete(`${API_BASE_URL}/appointments/${appointmentId}`);
-      
+
       if (response.data.success) {
         setAppointments(prev => prev.filter(apt => apt._id !== appointmentId));
       }
@@ -325,21 +325,19 @@ export default function AppointmentsTable() {
         <nav className="flex space-x-8">
           <button
             onClick={() => setActiveTab("appointments")}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === "appointments"
+            className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === "appointments"
                 ? "border-[#FF6600] text-[#FF6600]"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-            }`}
+              }`}
           >
             Appointments
           </button>
           <button
             onClick={() => setActiveTab("config")}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === "config"
+            className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === "config"
                 ? "border-[#FF6600] text-[#FF6600]"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-            }`}
+              }`}
           >
             Appointments Config
           </button>
@@ -356,11 +354,10 @@ export default function AppointmentsTable() {
                 <button
                   key={status}
                   onClick={() => handleFilterChange(status)}
-                  className={`px-4 py-2 rounded-lg font-medium capitalize ${
-                    statusFilter === status
+                  className={`px-4 py-2 rounded-lg font-medium capitalize ${statusFilter === status
                       ? "bg-[#FF6600] text-white"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
+                    }`}
                 >
                   {status}
                 </button>
@@ -432,6 +429,7 @@ export default function AppointmentsTable() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm">
                         <div className="text-gray-900">{appointment.email}</div>
+                        <div className="text-gray-900 font-medium">{appointment.contactNumber}</div>
                         <div className="text-gray-500">
                           {appointment.city}, {appointment.country}
                         </div>
@@ -458,9 +456,8 @@ export default function AppointmentsTable() {
                         value={appointment.status}
                         onChange={(e) => handleStatusUpdate(appointment._id, e.target.value)}
                         disabled={updatingStatus === appointment._id}
-                        className={`px-2 py-1 text-xs font-medium rounded-full capitalize ${
-                          statusColors[appointment.status]
-                        } border-0 focus:ring-2 focus:ring-[#FF6600]`}
+                        className={`px-2 py-1 text-xs font-medium rounded-full capitalize ${statusColors[appointment.status]
+                          } border-0 focus:ring-2 focus:ring-[#FF6600]`}
                       >
                         <option value="pending">Pending</option>
                         <option value="confirmed">Confirmed</option>
@@ -488,7 +485,7 @@ export default function AppointmentsTable() {
               <div className="text-gray-400 text-6xl mb-4">📅</div>
               <h3 className="text-lg font-medium text-gray-900 mb-2">No appointments found</h3>
               <p className="text-gray-500">
-                {searchTerm || statusFilter !== "all" 
+                {searchTerm || statusFilter !== "all"
                   ? "Try changing your filters or search terms"
                   : "No appointments have been booked yet"
                 }
@@ -506,11 +503,11 @@ export default function AppointmentsTable() {
               >
                 Previous
               </button>
-              
+
               <span className="text-sm text-gray-600">
                 Page {currentPage} of {totalPages}
               </span>
-              
+
               <button
                 onClick={() => fetchAppointments(currentPage + 1, statusFilter, searchTerm)}
                 disabled={currentPage === totalPages}
@@ -545,7 +542,7 @@ export default function AppointmentsTable() {
             <p className="text-sm text-gray-600 mb-6">
               Set available time slots for each day of the week
             </p>
-            
+
             {configLoading && weeklySchedule.length === 0 ? (
               <div className="flex justify-center py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF6600]"></div>
@@ -593,7 +590,7 @@ export default function AppointmentsTable() {
             <p className="text-sm text-gray-600 mb-6">
               Add specific dates when appointments are not available (holidays, maintenance, etc.)
             </p>
-            
+
             <div className="space-y-4">
               <div className="flex space-x-4">
                 <div className="flex-1">
@@ -629,7 +626,7 @@ export default function AppointmentsTable() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="mt-4">
                 <h5 className="text-sm font-medium text-gray-700 mb-3">Currently Disabled Dates:</h5>
                 <div className="space-y-2">
@@ -666,7 +663,7 @@ export default function AppointmentsTable() {
             <p className="text-sm text-gray-600 mb-6">
               Disable specific time slots across all days
             </p>
-            
+
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -692,7 +689,7 @@ export default function AppointmentsTable() {
                   />
                 </div>
               </div>
-              
+
               <div className="flex space-x-4">
                 <div className="flex-1">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -715,7 +712,7 @@ export default function AppointmentsTable() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="mt-4">
                 <h5 className="text-sm font-medium text-gray-700 mb-3">Currently Disabled Time Slots:</h5>
                 <div className="space-y-2">

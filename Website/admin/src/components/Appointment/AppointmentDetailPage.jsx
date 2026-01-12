@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import adminAxios from "../../utils/axios";
-import { 
-  ArrowLeft, 
-  Calendar, 
-  Clock, 
-  Mail, 
-  MapPin, 
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Mail,
+  MapPin,
   Building,
   CheckCircle,
   XCircle,
@@ -163,7 +163,7 @@ const AppointmentDetailPage = () => {
         month: 'long',
         day: 'numeric'
       });
-      
+
       let defaultMsg = actions[type].defaultMessage
         .replace("[Name]", name)
         .replace("[Date]", date)
@@ -185,7 +185,7 @@ const AppointmentDetailPage = () => {
       setError("Email and message are required fields.");
       return;
     }
-    
+
     if (actionType === "accept") {
       if (!meetingLink.trim()) {
         setError("Meeting link is required for accepting appointments.");
@@ -221,21 +221,21 @@ const AppointmentDetailPage = () => {
       };
 
       await adminAxios.post(`/api/appointments/${id}/respond`, payload);
-      
+
       // Show success notification
       alert(`✅ ${actions[actionType].title} completed successfully!`);
-      
+
       // Refresh appointment data
       const res = await adminAxios.get(`/api/appointments/${id}`);
       setAppointment(res.data.data);
-      
+
       // Reset form
       setActionType(null);
       setMessage("");
       setMeetingLink("");
       setContact("");
       setSelectedEmployee(null);
-      
+
     } catch (error) {
       console.error("Error sending response:", error);
       setError("Failed to send response. Please check your connection and try again.");
@@ -345,13 +345,14 @@ const AppointmentDetailPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InfoItem icon={User} label="Client Name" value={`${appointment.firstName} ${appointment.lastName}`} />
                 <InfoItem icon={Mail} label="Email" value={appointment.email} />
+                <InfoItem icon={Phone} label="Contact Number" value={appointment.contactNumber || "Not provided"} />
                 <InfoItem icon={Building} label="Organization" value={appointment.organization || "Not provided"} />
                 <InfoItem icon={MapPin} label="Region" value={appointment.region || "Not specified"} />
-                <InfoItem icon={Calendar} label="Date" value={new Date(appointment.date).toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
+                <InfoItem icon={Calendar} label="Date" value={new Date(appointment.date).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
                 })} />
                 <InfoItem icon={Clock} label="Time" value={appointment.time} />
                 <InfoItem icon={MapPin} label="Location" value={[appointment.city, appointment.state, appointment.country].filter(Boolean).join(', ') || "Not specified"} />
@@ -405,11 +406,10 @@ const AppointmentDetailPage = () => {
                     key={status}
                     onClick={() => handleStatusUpdate(status)}
                     disabled={appointment.status === status}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition ${
-                      appointment.status === status
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition ${appointment.status === status
                         ? 'bg-[#FF6600] text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                      }`}
                   >
                     {status.charAt(0).toUpperCase() + status.slice(1)}
                   </button>
@@ -469,13 +469,13 @@ const AppointmentDetailPage = () => {
               {ActionIcon && <ActionIcon className={`h-6 w-6 mr-3 text-${actions[actionType].color}-600`} />}
               <h3 className="text-xl font-bold text-gray-900">{actions[actionType].title}</h3>
             </div>
-            
+
             <div className="space-y-6">
-              <TextField 
-                label="Recipient Email" 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
+              <TextField
+                label="Recipient Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 disabled={actionType === "ban"}
                 icon={Mail}
               />
@@ -484,31 +484,31 @@ const AppointmentDetailPage = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Response Message
                 </label>
-                <textarea 
-                  className="w-full border border-gray-300 rounded-lg p-4 min-h-[200px] focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] resize-none" 
-                  value={message} 
-                  onChange={(e) => setMessage(e.target.value)} 
+                <textarea
+                  className="w-full border border-gray-300 rounded-lg p-4 min-h-[200px] focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] resize-none"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   placeholder="Customize your response message..."
                 />
               </div>
 
               {actionType === "accept" && (
                 <div className="space-y-4 pt-4 border-t">
-                  <TextField 
-                    label="Meeting Link" 
-                    type="url" 
-                    placeholder="https://meet.google.com/abc-def-ghi" 
-                    value={meetingLink} 
-                    onChange={(e) => setMeetingLink(e.target.value)} 
+                  <TextField
+                    label="Meeting Link"
+                    type="url"
+                    placeholder="https://meet.google.com/abc-def-ghi"
+                    value={meetingLink}
+                    onChange={(e) => setMeetingLink(e.target.value)}
                     icon={LinkIcon}
                     required
                   />
-                  <TextField 
-                    label="Contact Number" 
-                    type="tel" 
-                    placeholder="+91 12345 67890" 
-                    value={contact} 
-                    onChange={(e) => setContact(e.target.value)} 
+                  <TextField
+                    label="Contact Number"
+                    type="tel"
+                    placeholder="+91 12345 67890"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
                     icon={Phone}
                   />
 
@@ -516,12 +516,11 @@ const AppointmentDetailPage = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Assign Representative
                     </label>
-                    <button 
-                      className={`w-full border-2 border-dashed rounded-lg p-4 text-left transition ${
-                        selectedEmployee 
-                          ? 'border-green-500 bg-green-50' 
+                    <button
+                      className={`w-full border-2 border-dashed rounded-lg p-4 text-left transition ${selectedEmployee
+                          ? 'border-green-500 bg-green-50'
                           : 'border-gray-300 hover:border-[#FF6600] hover:bg-gray-50'
-                      }`}
+                        }`}
                       onClick={() => setShowAssignPopup(true)}
                     >
                       {selectedEmployee ? (
@@ -561,7 +560,7 @@ const AppointmentDetailPage = () => {
                 </div>
               )}
             </div>
-            
+
             {error && (
               <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
                 <p className="text-red-700 text-sm">{error}</p>
@@ -596,7 +595,7 @@ const AppointmentDetailPage = () => {
 
         {/* Assign Employee Modal */}
         {showAssignPopup && (
-          <EmployeeAssignmentPopup 
+          <EmployeeAssignmentPopup
             employees={filteredEmployees}
             teams={teams}
             selectedTeam={selectedTeam}
@@ -622,7 +621,7 @@ const StatusBadge = ({ status }) => {
   };
 
   const config = statusConfig[status] || statusConfig.pending;
-  
+
   return (
     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${config.color}`}>
       {config.label}
@@ -652,9 +651,8 @@ const ActionButton = ({ type, action, onClick, isActive }) => {
   return (
     <button
       onClick={onClick}
-      className={`w-full flex items-center px-4 py-3 rounded-lg text-white font-medium transition ${
-        colorClasses[color]
-      } ${isActive ? 'ring-2 ring-offset-2 ring-opacity-50' : ''}`}
+      className={`w-full flex items-center px-4 py-3 rounded-lg text-white font-medium transition ${colorClasses[color]
+        } ${isActive ? 'ring-2 ring-offset-2 ring-opacity-50' : ''}`}
     >
       <Icon className="h-5 w-5 mr-3" />
       {title}
@@ -671,13 +669,12 @@ const TextField = ({ label, type, value, onChange, placeholder, disabled = false
       {Icon && (
         <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
       )}
-      <input 
-        type={type} 
-        className={`w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] transition ${
-          Icon ? 'pl-10' : ''
-        } ${disabled ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-        placeholder={placeholder} 
-        value={value} 
+      <input
+        type={type}
+        className={`w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-[#FF6600] focus:border-[#FF6600] transition ${Icon ? 'pl-10' : ''
+          } ${disabled ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+        placeholder={placeholder}
+        value={value}
         onChange={onChange}
         disabled={disabled}
         required={required}
@@ -712,7 +709,7 @@ const EmployeeAssignmentPopup = ({ employees, teams, selectedTeam, onTeamChange,
           ))}
         </select>
       </div>
-      
+
       <div className="flex-grow overflow-y-auto pr-2">
         {loading ? (
           <div className="flex justify-center items-center py-12">
@@ -723,8 +720,8 @@ const EmployeeAssignmentPopup = ({ employees, teams, selectedTeam, onTeamChange,
             <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             <h4 className="text-lg font-medium text-gray-900 mb-2">No employees found</h4>
             <p className="text-gray-500">
-              {selectedTeam === "all" 
-                ? "No active employees available." 
+              {selectedTeam === "all"
+                ? "No active employees available."
                 : `No employees found in ${selectedTeam} team.`}
             </p>
           </div>
@@ -741,7 +738,7 @@ const EmployeeAssignmentPopup = ({ employees, teams, selectedTeam, onTeamChange,
         )}
       </div>
 
-      <button 
+      <button
         onClick={onClose}
         className="mt-6 bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold transition"
       >
@@ -753,23 +750,22 @@ const EmployeeAssignmentPopup = ({ employees, teams, selectedTeam, onTeamChange,
 
 const EmployeeCard = ({ employee, onSelect }) => {
   const isRecommended = employee.isRecommended;
-  
+
   return (
     <div
-      className={`border-2 rounded-xl p-4 flex flex-col items-center text-center transition duration-200 cursor-pointer bg-white hover:shadow-lg ${
-        isRecommended 
-          ? 'border-orange-400 bg-orange-50 hover:border-orange-500' 
+      className={`border-2 rounded-xl p-4 flex flex-col items-center text-center transition duration-200 cursor-pointer bg-white hover:shadow-lg ${isRecommended
+          ? 'border-orange-400 bg-orange-50 hover:border-orange-500'
           : 'border-gray-200 hover:border-[#FF6600]'
-      }`}
+        }`}
       onClick={() => onSelect(employee)}
     >
       {/* Employee Avatar */}
       <div className="relative mb-3">
         {employee.profileImage ? (
-          <img 
-            src={employee.profileImage} 
-            alt={`${employee.firstName} ${employee.lastName}`} 
-            className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 shadow-inner" 
+          <img
+            src={employee.profileImage}
+            alt={`${employee.firstName} ${employee.lastName}`}
+            className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 shadow-inner"
           />
         ) : (
           <div className="w-16 h-16 bg-gradient-to-br from-[#FF6600] to-orange-500 rounded-full flex items-center justify-center text-white font-medium text-lg border-2 border-gray-100">
@@ -790,9 +786,9 @@ const EmployeeCard = ({ employee, onSelect }) => {
             {employee.firstName} {employee.lastName}
           </h4>
         </div>
-        
+
         <p className="text-xs text-gray-600 mb-2 truncate">{employee.designation}</p>
-        
+
         <div className="bg-gray-100 rounded-lg px-2 py-1 mb-2">
           <p className="text-xs font-medium text-gray-700 truncate">{employee.team}</p>
         </div>
@@ -809,9 +805,8 @@ const EmployeeCard = ({ employee, onSelect }) => {
 
       {/* Selection Indicator */}
       <div className="mt-3">
-        <span className={`text-xs font-semibold ${
-          isRecommended ? 'text-orange-600' : 'text-[#FF6600]'
-        }`}>
+        <span className={`text-xs font-semibold ${isRecommended ? 'text-orange-600' : 'text-[#FF6600]'
+          }`}>
           {isRecommended ? '⭐ Recommended' : 'Click to Assign'}
         </span>
       </div>
