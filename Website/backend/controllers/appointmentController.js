@@ -25,6 +25,7 @@ router.post("/", async (req, res) => {
       city,
       consent,
       marketing,
+      contactNumber,  // New field
       appointmentDate,  // From frontend
       appointmentTime   // From frontend
     } = req.body;
@@ -44,6 +45,7 @@ router.post("/", async (req, res) => {
       city,
       consent,
       marketing,
+      contactNumber,      // Save to schema
       date: appointmentDate,      // Map to schema field
       time: appointmentTime       // Map to schema field
     };
@@ -113,6 +115,10 @@ router.post("/", async (req, res) => {
                 <span class="detail-value">${appointment.email}</span>
               </div>
               <div class="detail-row">
+                <span class="detail-label">Contact Number:</span>
+                <span class="detail-value">${appointment.contactNumber || 'Not provided'}</span>
+              </div>
+              <div class="detail-row">
                 <span class="detail-label">Organization:</span>
                 <span class="detail-value">${appointment.organization || 'Not provided'}</span>
               </div>
@@ -170,13 +176,13 @@ router.post("/", async (req, res) => {
               <div class="detail-row">
                 <span class="detail-label">Request Time:</span>
                 <span class="detail-value">${new Date(appointment.createdAt).toLocaleString('en-US', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}</span>
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })}</span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Appointment ID:</span>
@@ -204,7 +210,7 @@ router.post("/", async (req, res) => {
 
     await transporter.sendMail(notificationMailOptions);
 
-    res.status(201).json({ 
+    res.status(201).json({
       success: true,
       message: "Appointment booked successfully!",
       data: {
@@ -215,10 +221,10 @@ router.post("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error saving appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
       message: "Internal server error",
-      error: error.message 
+      error: error.message
     });
   }
 });
@@ -233,9 +239,9 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching appointments:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -245,9 +251,9 @@ router.get("/:id", async (req, res) => {
   try {
     const appointment = await Appointment.findById(req.params.id);
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
     res.status(200).json({
@@ -256,9 +262,9 @@ router.get("/:id", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -268,20 +274,20 @@ router.delete("/:id", async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.params.id);
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
-      message: "Appointment deleted successfully" 
+      message: "Appointment deleted successfully"
     });
   } catch (error) {
     console.error("Error deleting appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -301,9 +307,9 @@ router.post("/:id/respond", async (req, res) => {
   try {
     const appointment = await Appointment.findById(id);
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
 
@@ -372,15 +378,15 @@ router.post("/:id/respond", async (req, res) => {
       await transporter.sendMail(employeeMailOptions);
     }
 
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
-      message: `Appointment ${actionType}ed and email(s) sent.` 
+      message: `Appointment ${actionType}ed and email(s) sent.`
     });
   } catch (error) {
     console.error("Error responding to appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
