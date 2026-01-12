@@ -22,6 +22,7 @@ import TopBarManagement from './pages/TopBarManagement';
 import NavbarManagement from './pages/NavbarManagement';
 import FooterManagement from './pages/FooterManagement';
 import FloatingLatestManagement from './pages/FloatingLatestManagement';
+import PolicyManagement from './pages/PolicyManagement';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -69,6 +70,7 @@ function AppRoutes() {
         <Route path="general/navbar" element={<NavbarManagement />} />
         <Route path="general/footer" element={<FooterManagement />} />
         <Route path="general/floating-latest" element={<FloatingLatestManagement />} />
+        <Route path="general/policies" element={<PolicyManagement />} />
       </Route>
 
       {/* Redirect root to login */}

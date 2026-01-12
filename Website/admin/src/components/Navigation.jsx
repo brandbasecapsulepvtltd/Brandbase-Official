@@ -51,6 +51,7 @@ export function Navigation() {
         { label: "Navbar", path: "/admin/dashboard/general/navbar" },
         { label: "Footer", path: "/admin/dashboard/general/footer" },
         { label: "Floating Latest", path: "/admin/dashboard/general/floating-latest" },
+        { label: "Policies", path: "/admin/dashboard/general/policies" },
       ]
     },
     {
