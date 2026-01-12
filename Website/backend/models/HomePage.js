@@ -81,6 +81,39 @@ const faqsSchema = new mongoose.Schema({
   faqs: [faqSchema]
 });
 
+const caseStudyResultSchema = new mongoose.Schema({
+  value: String,
+  label: String
+});
+
+const caseStudyTestimonialSchema = new mongoose.Schema({
+  quote: String,
+  author: String,
+  role: String,
+  avatar: String
+});
+
+const caseStudySchema = new mongoose.Schema({
+  id: Number,
+  companyLogo: String,
+  companyName: String,
+  industry: String,
+  title: String,
+  desc: String,
+  url: String, // Main image
+  galleryImages: [String],
+  services: [String],
+  results: [caseStudyResultSchema],
+  testimonial: caseStudyTestimonialSchema,
+  span: String
+});
+
+const caseStudiesSectionSchema = new mongoose.Schema({
+  heading: String,
+  subHeading: String,
+  caseStudies: [caseStudySchema]
+});
+
 const ctaSectionSchema = new mongoose.Schema({
   title: String,
   subheading: String,
@@ -95,6 +128,7 @@ const homePageSchema = new mongoose.Schema({
   brandElevation: brandElevationSchema,
   recentWork: recentWorkSchema,
   clients: clientsSchema,
+  caseStudiesSection: caseStudiesSectionSchema,
   testimonials: testimonialsSchema,
   faqs: faqsSchema,
   ctaSection: ctaSectionSchema

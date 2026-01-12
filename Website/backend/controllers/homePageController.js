@@ -6,7 +6,7 @@ const HomePage = require('../models/HomePage');
 const getHomePageData = async (req, res) => {
   try {
     const homePageData = await HomePage.findOne();
-    
+
     if (!homePageData) {
       return res.status(404).json({
         success: false,
@@ -106,7 +106,8 @@ const updateHomePageSection = async (req, res) => {
       'recentWork',
       'clients',
       'testimonials',
-      'faqs'
+      'faqs',
+      'caseStudiesSection'
     ];
 
     if (!validSections.includes(sectionName)) {
