@@ -1,5 +1,7 @@
 const Admin = require('../models/Admin');
 const jwt = require('jsonwebtoken');
+const { sendPasswordResetOTP } = require('../utils/emailService');
+const crypto = require('crypto');
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -73,16 +75,59 @@ exports.getMe = async (req, res) => {
 };
 
 /**
- * @desc    Update admin password
+ * @desc    Request password reset OTP
+ * @route   POST /api/auth/request-password-reset
+ * @access  Private
+ */
+exports.requestPasswordReset = async (req, res) => {
+    try {
+        const admin = await Admin.findById(req.user._id);
+
+        if (!admin) {
+            return res.status(404).json({
+                success: false,
+                message: 'Admin not found'
+            });
+        }
+
+        // Generate 6-digit OTP
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+        // Set OTP and expiry (10 minutes)
+        admin.resetOTP = otp;
+        admin.resetOTPExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+        await admin.save();
+
+        // Send OTP email
+        await sendPasswordResetOTP(admin.email, otp, admin.name);
+
+        res.json({
+            success: true,
+            message: 'Verification code sent to your email',
+            expiresIn: '10 minutes'
+        });
+    } catch (error) {
+        console.error('Error requesting password reset:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to send verification code',
+            error: error.message
+        });
+    }
+};
+
+/**
+ * @desc    Update admin password with OTP verification
  * @route   PUT /api/auth/update-password
  * @access  Private
  */
 exports.updatePassword = async (req, res) => {
-    const { currentPassword, newPassword } = req.body;
+    const { currentPassword, newPassword, otp } = req.body;
 
     try {
         const admin = await Admin.findById(req.user._id);
 
+        // Verify current password
         if (!(await admin.comparePassword(currentPassword))) {
             return res.status(401).json({
                 success: false,
@@ -90,7 +135,32 @@ exports.updatePassword = async (req, res) => {
             });
         }
 
+        // Verify OTP
+        if (!admin.resetOTP || !admin.resetOTPExpires) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please request a verification code first'
+            });
+        }
+
+        if (admin.resetOTP !== otp) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid verification code'
+            });
+        }
+
+        if (Date.now() > admin.resetOTPExpires) {
+            return res.status(401).json({
+                success: false,
+                message: 'Verification code has expired. Please request a new one'
+            });
+        }
+
+        // Update password
         admin.password = newPassword;
+        admin.resetOTP = undefined;
+        admin.resetOTPExpires = undefined;
         await admin.save();
 
         res.json({
