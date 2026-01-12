@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 
 router.post("/", async (req, res) => {
   let appointment;
-  
+
   try {
     const {
       firstName,
@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
       city,
       consent,
       marketing,
+      contactNumber,
       appointmentDate,
       appointmentTime
     } = req.body;
@@ -70,6 +71,7 @@ router.post("/", async (req, res) => {
       country: country?.trim(),
       state: state?.trim(),
       city: city?.trim(),
+      contactNumber: contactNumber?.trim(),
       consent: !!consent,
       marketing: !!marketing,
       date: parsedDate,
@@ -83,7 +85,7 @@ router.post("/", async (req, res) => {
     console.log("✅ Appointment saved to database:", appointment._id);
 
     // 🚨 CRITICAL FIX: Send response FIRST, then send email in background
-    res.status(201).json({ 
+    res.status(201).json({
       success: true,
       message: "Appointment booked successfully!",
       data: {
@@ -102,11 +104,11 @@ router.post("/", async (req, res) => {
 
   } catch (error) {
     console.error("❌ Error saving appointment:", error);
-    
+
     // Special handling for email errors
     if (error.message.includes('EMAIL_FAILED_BUT_APPOINTMENT_SAVED')) {
       // Appointment was saved but email failed
-      res.status(201).json({ 
+      res.status(201).json({
         success: true,
         message: "Appointment booked! (Email notification failed)",
         data: {
@@ -116,10 +118,10 @@ router.post("/", async (req, res) => {
         }
       });
     } else {
-      res.status(500).json({ 
+      res.status(500).json({
         success: false,
         message: "Internal server error",
-        error: error.message 
+        error: error.message
       });
     }
   }
@@ -129,9 +131,9 @@ router.post("/", async (req, res) => {
 async function sendEmailInBackground(appointment) {
   try {
     console.log("📧 Attempting to send email for appointment:", appointment._id);
-    
+
     const notificationEmailHtml = createNotificationEmail(appointment);
-    
+
     const notificationMailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER, // Send to admin
@@ -146,12 +148,12 @@ async function sendEmailInBackground(appointment) {
     });
 
     await Promise.race([emailPromise, timeoutPromise]);
-    
+
     console.log("✅ Email sent successfully for appointment:", appointment._id);
-    
+
   } catch (emailError) {
     console.error("❌ Email error for appointment", appointment._id, ":", emailError.message);
-    
+
     // Don't throw the error - just log it
     // We'll mark this in the database that email failed
     try {
@@ -163,7 +165,7 @@ async function sendEmailInBackground(appointment) {
     } catch (updateError) {
       console.error("Failed to update email status:", updateError.message);
     }
-    
+
     // Throw a special error that won't crash the main request
     throw new Error('EMAIL_FAILED_BUT_APPOINTMENT_SAVED');
   }
@@ -173,7 +175,7 @@ async function sendEmailInBackground(appointment) {
 router.get("/", async (req, res) => {
   try {
     const { status, date, page = 1, limit = 10 } = req.query;
-    
+
     let filter = {};
     if (status && status !== 'all') {
       filter.status = status;
@@ -204,9 +206,9 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching appointments:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -232,9 +234,9 @@ router.get("/stats/summary", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching stats:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -244,9 +246,9 @@ router.get("/:id", async (req, res) => {
   try {
     const appointment = await Appointment.findById(req.params.id);
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
     res.status(200).json({
@@ -255,9 +257,9 @@ router.get("/:id", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -272,9 +274,9 @@ router.put("/:id", async (req, res) => {
     );
 
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
 
@@ -285,9 +287,9 @@ router.put("/:id", async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -297,20 +299,20 @@ router.delete("/:id", async (req, res) => {
   try {
     const appointment = await Appointment.findByIdAndDelete(req.params.id);
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
-      message: "Appointment deleted successfully" 
+      message: "Appointment deleted successfully"
     });
   } catch (error) {
     console.error("Error deleting appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -331,9 +333,9 @@ router.post("/:id/respond", async (req, res) => {
   try {
     const appointment = await Appointment.findById(id);
     if (!appointment) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: "Appointment not found" 
+        message: "Appointment not found"
       });
     }
 
@@ -341,7 +343,7 @@ router.post("/:id/respond", async (req, res) => {
     let newStatus = appointment.status;
     let responseType = null;
 
-    switch(actionType) {
+    switch (actionType) {
       case 'accept':
         newStatus = 'confirmed';
         responseType = 'accepted';
@@ -381,7 +383,7 @@ router.post("/:id/respond", async (req, res) => {
 
     // Send email to client
     const userEmailHtml = createResponseEmail(appointment, actionType, message, meetingLink, contact, assignedEmployee);
-    
+
     const userMailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
@@ -403,16 +405,16 @@ router.post("/:id/respond", async (req, res) => {
       await transporter.sendMail(employeeMailOptions);
     }
 
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
       message: `Appointment ${actionType}ed successfully and notifications sent.`,
       data: { status: newStatus }
     });
   } catch (error) {
     console.error("Error responding to appointment:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: "Internal server error" 
+      message: "Internal server error"
     });
   }
 });
@@ -445,6 +447,7 @@ function createNotificationEmail(appointment) {
             <h4 style="color: #FF6600; margin: 0 0 15px 0;">👤 Client Information</h4>
             <p><strong>Name:</strong> ${appointment.firstName} ${appointment.lastName}</p>
             <p><strong>Email:</strong> ${appointment.email}</p>
+            <p><strong>Contact Number:</strong> ${appointment.contactNumber || 'Not provided'}</p>
             <p><strong>Organization:</strong> ${appointment.organization || 'Not provided'}</p>
           </div>
 
