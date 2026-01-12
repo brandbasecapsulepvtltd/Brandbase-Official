@@ -10,7 +10,7 @@ import {
   addDays,
   startOfDay,
 } from "date-fns";
-import { Calendar, Clock, User, Building, MapPin, Mail, MessageCircle, CheckCircle2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, User, Building, MapPin, Mail, MessageCircle, CheckCircle2, ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function AppointmentContent() {
@@ -241,13 +241,13 @@ export default function AppointmentContent() {
           <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg`}>1</div>
           <div
             className={`flex-1 h-1 mx-4 transition-all duration-300 max-w-40 ${currentStep > 1
-                ? 'bg-gradient-to-r from-orange-500 to-amber-500'
-                : 'bg-gray-300'
+              ? 'bg-gradient-to-r from-orange-500 to-amber-500'
+              : 'bg-gray-300'
               }`}
           />
           <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 font-semibold ${currentStep > 1
-              ? 'bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg'
-              : 'bg-gray-100 border-gray-300 text-gray-400'
+            ? 'bg-gradient-to-r from-orange-500 to-amber-500 border-orange-500 text-white shadow-lg'
+            : 'bg-gray-100 border-gray-300 text-gray-400'
             }`}>2</div>
         </div>
 
@@ -316,8 +316,8 @@ export default function AppointmentContent() {
                       onClick={() => handleTimeSelect(slot)}
                       disabled={isLoading}
                       className={`p-3 border-2 rounded-xl text-sm font-semibold transition-all duration-200 ${selectedTime === slot
-                          ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-500 shadow-lg scale-105"
-                          : "bg-white dark:bg-zinc-900 dark:bg-black text-gray-700 dark:text-gray-300 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                        ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-500 shadow-lg scale-105"
+                        : "bg-white dark:bg-zinc-900 dark:bg-black text-gray-700 dark:text-gray-300 border-gray-300 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
                         } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {slot}

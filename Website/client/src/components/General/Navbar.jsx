@@ -290,8 +290,7 @@ const Navbar = ({ data, topBarData }) => {
             <Calendar size={24} />
           </a>
           <GlobalSearch />
-          <div className="flex items-center gap-4 md:hidden">
-            <ThemeToggle />
+          <div className="flex items-center md:hidden">
             <button className="" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -304,12 +303,13 @@ const Navbar = ({ data, topBarData }) => {
         className={`fixed inset-0 h-screen w-full md:hidden transform transition-transform duration-300 ease-in-out z-[60] ${isOpen ? "translate-x-0" : "translate-x-full"
           } text-black dark:text-white flex flex-col`}
       >
-        <div className="relative flex justify-center items-center px-6 py-4 border-b border-gray-700 bg-[#f8f8f0]/90 dark:bg-black/95 mt-20 flex-shrink-0">
+        <div className="relative flex justify-between items-center px-6 py-4 border-b border-gray-300 dark:border-zinc-800 bg-[#f8f8f0] dark:bg-black mt-20 flex-shrink-0">
+          <ThemeToggle />
           <h2 className="text-2xl font-bold text-[#FF6600]">Menu</h2>
           <button
             onClick={() => setIsOpen(false)}
             aria-label="Close Menu"
-            className="absolute right-6 text-[#FF6600] hover:opacity-70 transition"
+            className="text-[#FF6600] hover:opacity-70 transition"
           >
             <X size={26} />
           </button>
