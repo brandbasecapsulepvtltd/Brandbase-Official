@@ -11,7 +11,7 @@ export async function generateMetadata() {
 
   try {
     // Correct API URL for SEO settings (currently part of homepage data)
-    const res = await fetch("https://brandbase.onrender.com/api/homepage", {
+    const res = await fetch("https://api.brandbasecapsule.com/api/homepage", {
       next: { revalidate: 10 },
       headers: {
         'X-API-Key': "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de"
@@ -103,7 +103,7 @@ export default async function Home() {
 
   try {
     // Correct API URL for organization settings (currently part of homepage data or local fallbacks)
-    const res = await fetch("https://brandbase.onrender.com/api/homepage", {
+    const res = await fetch("https://api.brandbasecapsule.com/api/homepage", {
       next: { revalidate: 10 },
       headers: {
         'X-API-Key': "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de"

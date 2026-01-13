@@ -6,7 +6,7 @@ import PortfolioDetailContent from '@/components/Portfolio/PorfolioDetail/Portfo
 // Helper function to fetch data
 async function getPortfolio(slug) {
   try {
-    const res = await fetch(`https://brandbase.onrender.com/api/portfolios/${slug}`, {
+    const res = await fetch(`https://api.brandbasecapsule.com/api/portfolios/slug/${slug}`, {
       headers: {
         'Content-Type': 'application/json',
         'X-API-Key': '8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de'

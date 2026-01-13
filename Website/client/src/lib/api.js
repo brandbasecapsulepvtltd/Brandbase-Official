@@ -1,7 +1,7 @@
 import emailjs from '@emailjs/browser';
 
 // Simple API client for Next.js
-const API_URL = "https://brandbase.onrender.com/api";
+const API_URL = "https://api.brandbasecapsule.com/api";
 const API_KEY = "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de";
 
 // EmailJS Configuration

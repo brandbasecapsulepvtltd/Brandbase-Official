@@ -5,7 +5,7 @@ import { apiCall } from '@/lib/api';
  * Even though the page is "static," it will check the DB for updates 
  * in the background after this timer expires.
  */
-export const revalidate = 10; 
+export const revalidate = 10;
 
 // Helper function to fetch category data
 async function getCategoryData(categorySlug) {
@@ -47,7 +47,7 @@ export async function generateStaticParams() {
 // 2. Metadata Generation
 export async function generateMetadata({ params }) {
   const { category } = await params; // Awaiting params for Next.js 15 compatibility
-  
+
   try {
     const pageData = await getCategoryData(category);
     if (pageData) {
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }) {
   } catch (error) {
     console.error('Error generating metadata:', error);
   }
-  
+
   return {
     title: `${category?.replace('-', ' ')} Services`,
     description: `Professional ${category?.replace('-', ' ')} services`,
@@ -96,7 +96,7 @@ export default async function CategoryPage({ params }) {
 // Simple API call function (you can also use your existing apiCall from lib/api)
 {/*
 async function apiCall(endpoint) {
-  const API_URL = "https://brandbase.onrender.com/api";
+  const API_URL = "https://api.brandbasecapsule.com/api";
   const API_KEY = "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de";
   
   const url = `${API_URL}${endpoint}`;

@@ -14,13 +14,12 @@ const PortfolioList = () => {
         const fetchPortfolios = async () => {
             try {
                 // Fetch from the backend we just created
-                const res = await fetch('https://brandbase.onrender.com/api/portfolios?' + (filter !== 'all' ? `category=${filter}` : ''), {
+                const response = await fetch('https://api.brandbasecapsule.com/api/portfolios' + (filter !== 'all' ? `?category=${filter}` : ''), {
                     headers: {
                         'Content-Type': 'application/json',
                         'X-API-Key': '8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de' // Matches lib/api.js
                     }
                 });
-                if (!res.ok) throw new Error('Failed to fetch');
                 const data = await res.json();
                 setPortfolios(data.data || []);
             } catch (err) {

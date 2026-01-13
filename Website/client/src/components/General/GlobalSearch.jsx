@@ -16,7 +16,7 @@ const GlobalSearch = () => {
         // Use the slug and category from the API response
         const category = service.category?.toLowerCase().replace(/\s+/g, '-') || 'services';
         const slug = service.slug || service.data?.hero?.headline?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-        
+
         if (category && slug) {
             return `/services/${category}/${slug}`;
         }
@@ -28,7 +28,7 @@ const GlobalSearch = () => {
         // Use the slug and category from the API response
         const category = blog.metadata?.category?.toLowerCase().replace(/\s+/g, '-') || 'blogs';
         const slug = blog.metadata?.slug || blog.metadata?.title?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-        
+
         if (category && slug) {
             return `/blogs/${category}/${slug}`;
         }
@@ -60,14 +60,28 @@ const GlobalSearch = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const headers = { 'Authorization': `Bearer ${API_KEY}` };
-                const [servicesRes, blogsRes] = await Promise.all([
-                    axios.get('https://brandbase.onrender.com/api/services', { headers }),
-                    axios.get('https://brandbase.onrender.com/api/blogs', { headers })
+                const [blogsRawRes, servicesRawRes, portfoliosRawRes] = await Promise.all([
+                    fetch(`https://api.brandbasecapsule.com/api/blogs?search=${encodeURIComponent(query)}&limit=5`, {
+                        headers: { 'X-API-Key': API_KEY }
+                    }),
+                    fetch(`https://api.brandbasecapsule.com/api/services?search=${encodeURIComponent(query)}&limit=5`, {
+                        headers: { 'X-API-Key': API_KEY }
+                    }),
+                    fetch(`https://api.brandbasecapsule.com/api/portfolios?search=${encodeURIComponent(query)}&limit=5`, {
+                        headers: { 'X-API-Key': API_KEY }
+                    })
                 ]);
+
+                const [blogsRes, servicesRes, portfoliosRes] = await Promise.all([
+                    blogsRawRes.json(),
+                    servicesRawRes.json(),
+                    portfoliosRawRes.json()
+                ]);
+
                 setData({
-                    services: servicesRes.data.data || [],
-                    blogs: blogsRes.data.data || []
+                    services: servicesRes.data || [],
+                    blogs: blogsRes.data || [],
+                    portfolios: portfoliosRes.data || []
                 });
             } catch (error) {
                 console.error("Fetch error:", error);
@@ -93,16 +107,16 @@ const GlobalSearch = () => {
     const highlightText = (text, highlight) => {
         if (!text || !highlight.trim()) return text;
         const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-        return parts.map((part, i) => 
-            part.toLowerCase() === highlight.toLowerCase() ? 
-            <span key={i} className="text-blue-600 font-bold underline decoration-blue-200">{part}</span> : part
+        return parts.map((part, i) =>
+            part.toLowerCase() === highlight.toLowerCase() ?
+                <span key={i} className="text-blue-600 font-bold underline decoration-blue-200">{part}</span> : part
         );
     };
 
     return (
         <div className="relative w-full max-w-sm">
             {/* 1. NAVBAR TRIGGER */}
-            <div 
+            <div
                 onClick={() => setIsModalOpen(true)}
                 className="group flex items-center justify-between px-3 py-1.5 bg-white dark:bg-zinc-900 dark:bg-black rounded-xl cursor-pointer transition-all duration-200"
             >
@@ -114,14 +128,14 @@ const GlobalSearch = () => {
             {/* 2. COMMAND PALETTE MODAL */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-[9999] flex items-start justify-center pt-24 px-4">
-                    <div 
+                    <div
                         className="absolute inset-0 animate-in fade-in duration-300"
                         onClick={() => setIsModalOpen(false)}
                     />
 
                     {/* Search Container */}
                     <div className="relative w-full max-w-2xl bg-white dark:bg-zinc-900 dark:bg-black rounded-[2rem] shadow-[0_20px_70px_-10px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300">
-                        
+
                         {/* Search Input Area */}
                         <div className="flex items-center px-6 py-5 border-b border-gray-50">
                             <Search className="w-6 h-6 text-blue-500" />
@@ -133,7 +147,7 @@ const GlobalSearch = () => {
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                             />
-                            <button 
+                            <button
                                 onClick={() => setIsModalOpen(false)}
                                 className="p-2 bg-gray-50 dark:bg-zinc-900 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-600 dark:text-gray-300"
                             >
@@ -147,11 +161,10 @@ const GlobalSearch = () => {
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`mr-8 py-3 text-sm font-bold transition-all border-b-2 ${
-                                        activeTab === tab 
-                                        ? 'border-blue-600 text-blue-600' 
-                                        : 'border-transparent text-gray-400 hover:text-gray-600 dark:text-gray-300'
-                                    }`}
+                                    className={`mr-8 py-3 text-sm font-bold transition-all border-b-2 ${activeTab === tab
+                                            ? 'border-blue-600 text-blue-600'
+                                            : 'border-transparent text-gray-400 hover:text-gray-600 dark:text-gray-300'
+                                        }`}
                                 >
                                     {tab}
                                     {(tab === 'Services' || tab === 'Blogs') && (
@@ -176,8 +189,8 @@ const GlobalSearch = () => {
                                     {(activeTab === 'All' || activeTab === 'Services') && filteredServices.map((service) => {
                                         const serviceUrl = getServiceUrl(service);
                                         return (
-                                            <a 
-                                                key={service._id} 
+                                            <a
+                                                key={service._id}
                                                 href={serviceUrl}
                                                 onClick={() => handleResultClick(serviceUrl)}
                                                 className="block no-underline text-inherit hover:no-underline"
@@ -215,8 +228,8 @@ const GlobalSearch = () => {
                                     {(activeTab === 'All' || activeTab === 'Blogs') && filteredBlogs.map((blog) => {
                                         const blogUrl = getBlogUrl(blog);
                                         return (
-                                            <a 
-                                                key={blog._id} 
+                                            <a
+                                                key={blog._id}
                                                 href={blogUrl}
                                                 onClick={() => handleResultClick(blogUrl)}
                                                 className="block no-underline text-inherit hover:no-underline"
