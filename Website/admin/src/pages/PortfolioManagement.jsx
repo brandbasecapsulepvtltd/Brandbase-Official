@@ -49,6 +49,7 @@ const PortfolioManagement = () => {
             sectionTitle: '',
             faqs: [] // Array
         },
+        gallery: [], // Array of image URLs for kinetic scroll gallery
         metadata: {
             title: '',
             description: '',
@@ -273,35 +274,185 @@ const PortfolioManagement = () => {
                 <button onClick={() => addArrayItem('clientPortfolio', {
                     imagePosition: 'right', logo: '', companyName: '', industry: '',
                     projectTitle: '', projectDescription: '', servicesProvided: [],
-                    results: [], mediaItems: [], testimonial: {}
+                    results: [], mediaItems: [], testimonial: { clientName: '', position: '', quote: '', clientImage: '' }
                 })} className="bg-blue-100 text-blue-700 px-3 py-1 rounded flex items-center"><Plus size={16} /> Add Case Study</button>
             </div>
 
             {formData.clientPortfolio.map((client, index) => (
-                <div key={index} className="border rounded-lg p-4 bg-gray-50">
-                    <div className="flex justify-between mb-4">
-                        <h4 className="font-bold text-md">Case Study #{index + 1}</h4>
-                        <button onClick={() => removeArrayItem('clientPortfolio', index)} className="text-red-600 font-medium">Remove</button>
+                <div key={index} className="border rounded-lg p-6 bg-gray-50 space-y-4">
+                    <div className="flex justify-between items-center border-b pb-2">
+                        <h4 className="font-bold text-md text-blue-700">Case Study #{index + 1}</h4>
+                        <button onClick={() => removeArrayItem('clientPortfolio', index)} className="text-red-600 font-medium hover:bg-red-50 px-2 py-1 rounded">Remove Case Study</button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                        <input className="border p-2 rounded" placeholder="Company Name" value={client.companyName} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, companyName: e.target.value })} />
-                        <input className="border p-2 rounded" placeholder="Industry" value={client.industry} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, industry: e.target.value })} />
-                        <input className="border p-2 rounded" placeholder="Project Title" value={client.projectTitle} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, projectTitle: e.target.value })} />
-                        <input className="border p-2 rounded" placeholder="Logo URL" value={client.logo} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, logo: e.target.value })} />
+                    {/* Basic Info */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="text-sm font-semibold text-gray-600">Company Name</label>
+                            <input className="w-full border p-2 rounded" placeholder="Company Name" value={client.companyName} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, companyName: e.target.value })} />
+                        </div>
+                        <div>
+                            <label className="text-sm font-semibold text-gray-600">Industry</label>
+                            <input className="w-full border p-2 rounded" placeholder="Industry" value={client.industry} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, industry: e.target.value })} />
+                        </div>
+                        <div>
+                            <label className="text-sm font-semibold text-gray-600">Project Title</label>
+                            <input className="w-full border p-2 rounded" placeholder="Project Title" value={client.projectTitle} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, projectTitle: e.target.value })} />
+                        </div>
+                        <div>
+                            <label className="text-sm font-semibold text-gray-600">Logo URL</label>
+                            <input className="w-full border p-2 rounded" placeholder="Logo URL" value={client.logo} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, logo: e.target.value })} />
+                        </div>
+                        <div>
+                            <label className="text-sm font-semibold text-gray-600">Image Position</label>
+                            <select className="w-full border p-2 rounded" value={client.imagePosition || 'right'} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, imagePosition: e.target.value })}>
+                                <option value="right">Right</option>
+                                <option value="left">Left</option>
+                            </select>
+                        </div>
                     </div>
-                    <textarea className="w-full border p-2 rounded mb-4" placeholder="Project Description" rows={3} value={client.projectDescription} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, projectDescription: e.target.value })} />
 
-                    {/* Nested Arrays in Client like Results, MediaItems would be even more complex. 
-                    For simplicity in this turn, I'm providing TextAreas for JSON or simple comma lists, or simple placeholders.
-                    Ideally this needs sub-sub-components. I will do simple implementation for now.
-                */}
-                    <div className="mb-4">
-                        <label className="text-xs font-bold uppercase text-gray-500">Services Provided (Comma separated)</label>
+                    <div>
+                        <label className="text-sm font-semibold text-gray-600">Project Description</label>
+                        <textarea className="w-full border p-2 rounded" placeholder="Project Description" rows={3} value={client.projectDescription} onChange={e => handleArrayChange('clientPortfolio', index, { ...client, projectDescription: e.target.value })} />
+                    </div>
+
+                    <div>
+                        <label className="text-sm font-semibold text-gray-600">Services Provided (Comma separated)</label>
                         <input className="w-full border p-2 rounded"
                             value={client.servicesProvided?.join(', ') || ''}
-                            onChange={e => handleArrayChange('clientPortfolio', index, { ...client, servicesProvided: e.target.value.split(',').map(s => s.trim()) })}
+                            onChange={e => handleArrayChange('clientPortfolio', index, { ...client, servicesProvided: e.target.value.split(',') })}
                         />
+                    </div>
+
+                    {/* Results Section */}
+                    <div className="bg-white p-4 rounded border">
+                        <div className="flex justify-between items-center mb-2">
+                            <h5 className="font-semibold text-sm text-gray-700">Key Results/Stats</h5>
+                            <button
+                                onClick={() => {
+                                    const updated = { ...client, results: [...(client.results || []), { value: '', label: '' }] };
+                                    handleArrayChange('clientPortfolio', index, updated);
+                                }}
+                                className="text-xs text-blue-600 font-medium flex items-center"
+                            >
+                                <Plus size={12} className="mr-1" /> Add Result
+                            </button>
+                        </div>
+                        {client.results?.map((res, rIndex) => (
+                            <div key={rIndex} className="flex gap-2 mb-2 items-center">
+                                <input className="w-1/3 border p-1 rounded text-sm" placeholder="Value (e.g. 500%)" value={res.value}
+                                    onChange={e => {
+                                        const newResults = [...client.results];
+                                        newResults[rIndex] = { ...res, value: e.target.value };
+                                        handleArrayChange('clientPortfolio', index, { ...client, results: newResults });
+                                    }}
+                                />
+                                <input className="flex-1 border p-1 rounded text-sm" placeholder="Label (e.g. Traffic Growth)" value={res.label}
+                                    onChange={e => {
+                                        const newResults = [...client.results];
+                                        newResults[rIndex] = { ...res, label: e.target.value };
+                                        handleArrayChange('clientPortfolio', index, { ...client, results: newResults });
+                                    }}
+                                />
+                                <button
+                                    onClick={() => {
+                                        const newResults = client.results.filter((_, i) => i !== rIndex);
+                                        handleArrayChange('clientPortfolio', index, { ...client, results: newResults });
+                                    }}
+                                    className="text-red-500 hover:text-red-700"
+                                >
+                                    <X size={14} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Media Items Section */}
+                    <div className="bg-white p-4 rounded border">
+                        <div className="flex justify-between items-center mb-2">
+                            <h5 className="font-semibold text-sm text-gray-700">Media Gallery</h5>
+                            <button
+                                onClick={() => {
+                                    const updated = { ...client, mediaItems: [...(client.mediaItems || []), { type: 'image', url: '', alt: '', title: '' }] };
+                                    handleArrayChange('clientPortfolio', index, updated);
+                                }}
+                                className="text-xs text-blue-600 font-medium flex items-center"
+                            >
+                                <Plus size={12} className="mr-1" /> Add Media
+                            </button>
+                        </div>
+                        {client.mediaItems?.map((media, mIndex) => (
+                            <div key={mIndex} className="border p-2 rounded mb-2 bg-gray-50 flex flex-col gap-2">
+                                <div className="flex gap-2">
+                                    <select
+                                        className="border p-1 rounded text-sm w-24"
+                                        value={media.type}
+                                        onChange={e => {
+                                            const newMedia = [...client.mediaItems];
+                                            newMedia[mIndex] = { ...media, type: e.target.value };
+                                            handleArrayChange('clientPortfolio', index, { ...client, mediaItems: newMedia });
+                                        }}
+                                    >
+                                        <option value="image">Image</option>
+                                        <option value="video">Video</option>
+                                    </select>
+                                    <input className="flex-1 border p-1 rounded text-sm" placeholder="Media URL" value={media.url}
+                                        onChange={e => {
+                                            const newMedia = [...client.mediaItems];
+                                            newMedia[mIndex] = { ...media, url: e.target.value };
+                                            handleArrayChange('clientPortfolio', index, { ...client, mediaItems: newMedia });
+                                        }}
+                                    />
+                                    <button
+                                        onClick={() => {
+                                            const newMedia = client.mediaItems.filter((_, i) => i !== mIndex);
+                                            handleArrayChange('clientPortfolio', index, { ...client, mediaItems: newMedia });
+                                        }}
+                                        className="text-red-500 hover:text-red-700"
+                                    >
+                                        <X size={14} />
+                                    </button>
+                                </div>
+                                <div className="flex gap-2">
+                                    <input className="flex-1 border p-1 rounded text-sm" placeholder="Alt Text" value={media.alt}
+                                        onChange={e => {
+                                            const newMedia = [...client.mediaItems];
+                                            newMedia[mIndex] = { ...media, alt: e.target.value };
+                                            handleArrayChange('clientPortfolio', index, { ...client, mediaItems: newMedia });
+                                        }}
+                                    />
+                                    <input className="flex-1 border p-1 rounded text-sm" placeholder="Title/Caption" value={media.title}
+                                        onChange={e => {
+                                            const newMedia = [...client.mediaItems];
+                                            newMedia[mIndex] = { ...media, title: e.target.value };
+                                            handleArrayChange('clientPortfolio', index, { ...client, mediaItems: newMedia });
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Testimonial Section */}
+                    <div className="bg-white p-4 rounded border">
+                        <h5 className="font-semibold text-sm text-gray-700 mb-2">Client Testimonial</h5>
+                        <div className="grid grid-cols-2 gap-2 mb-2">
+                            <input className="border p-2 rounded text-sm" placeholder="Client Name" value={client.testimonial?.clientName || ''}
+                                onChange={e => handleArrayChange('clientPortfolio', index, { ...client, testimonial: { ...(client.testimonial || {}), clientName: e.target.value } })}
+                            />
+                            <input className="border p-2 rounded text-sm" placeholder="Position" value={client.testimonial?.position || ''}
+                                onChange={e => handleArrayChange('clientPortfolio', index, { ...client, testimonial: { ...(client.testimonial || {}), position: e.target.value } })}
+                            />
+                        </div>
+                        <div className="mb-2">
+                            <input className="w-full border p-2 rounded text-sm mb-2" placeholder="Client Image URL" value={client.testimonial?.clientImage || ''}
+                                onChange={e => handleArrayChange('clientPortfolio', index, { ...client, testimonial: { ...(client.testimonial || {}), clientImage: e.target.value } })}
+                            />
+                            <textarea className="w-full border p-2 rounded text-sm" placeholder="Quote" rows={2} value={client.testimonial?.quote || ''}
+                                onChange={e => handleArrayChange('clientPortfolio', index, { ...client, testimonial: { ...(client.testimonial || {}), quote: e.target.value } })}
+                            />
+                        </div>
                     </div>
                 </div>
             ))}
@@ -345,12 +496,30 @@ const PortfolioManagement = () => {
         </div>
     );
 
+    const renderGalleryTab = () => (
+        <div className="space-y-4">
+            <h3 className="font-bold text-lg">Gallery Images</h3>
+            <p className="text-sm text-gray-600">Add image URLs for the kinetic scroll gallery section. These images will be displayed below the bento grid.</p>
+
+            <div>
+                <label className="font-medium">Gallery Images (URLs)</label>
+                {formData.gallery?.map((img, i) => (
+                    <div key={i} className="flex gap-2 mb-2">
+                        <input className="flex-1 border p-2 rounded" value={img} onChange={e => handleArrayChange('gallery', i, e.target.value)} placeholder="Image URL" />
+                        <button onClick={() => removeArrayItem('gallery', i)} className="text-red-500 hover:bg-red-50 px-2 rounded"><X size={16} /></button>
+                    </div>
+                ))}
+                <button onClick={() => addArrayItem('gallery')} className="text-blue-500 text-sm flex items-center mt-2"><Plus size={14} /> Add Image</button>
+            </div>
+        </div>
+    );
+
     const renderMetadataTab = () => (
         <div className="space-y-4">
             <h3 className="font-bold text-lg">Metadata (SEO)</h3>
             <div><label>Meta Title</label><input className="w-full border p-2 rounded" value={formData.metadata.title} onChange={e => updateField('metadata.title', e.target.value)} /></div>
             <div><label>Meta Description</label><textarea className="w-full border p-2 rounded" rows={3} value={formData.metadata.description} onChange={e => updateField('metadata.description', e.target.value)} /></div>
-            <div><label>Keywords (comma separated)</label><input className="w-full border p-2 rounded" value={formData.metadata.keywords.join(', ')} onChange={e => updateField('metadata.keywords', e.target.value.split(',').map(s => s.trim()))} /></div>
+            <div><label>Keywords (comma separated)</label><input className="w-full border p-2 rounded" value={formData.metadata.keywords.join(', ')} onChange={e => updateField('metadata.keywords', e.target.value.split(','))} /></div>
         </div>
     );
 
@@ -391,7 +560,7 @@ const PortfolioManagement = () => {
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     {/* Tabs Header */}
                     <div className="flex border-b bg-gray-50 overflow-x-auto">
-                        {['hero', 'bento', 'clientPortfolio', 'testimonials', 'faqs', 'metadata'].map(tab => (
+                        {['hero', 'bento', 'clientPortfolio', 'testimonials', 'faqs', 'gallery', 'metadata'].map(tab => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
@@ -409,6 +578,7 @@ const PortfolioManagement = () => {
                         {activeTab === 'clientPortfolio' && renderClientPortfolioTab()}
                         {activeTab === 'testimonials' && renderTestimonialsTab()}
                         {activeTab === 'faqs' && renderFaqsTab()}
+                        {activeTab === 'gallery' && renderGalleryTab()}
                         {activeTab === 'metadata' && renderMetadataTab()}
                     </div>
 

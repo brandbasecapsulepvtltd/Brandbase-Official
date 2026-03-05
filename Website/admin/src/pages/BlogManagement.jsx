@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import adminAxios from '../utils/axios';
 import {
   Plus, Search, Edit, Trash2, Eye,
-  Filter, Upload,
+  Filter, Upload, Sparkles,
   ChevronLeft, ChevronRight, CheckCircle,
   XCircle, AlertCircle, Loader2, FileText
 } from 'lucide-react';
 
-//const API_BASE_URL = 'https://brandbase.onrender.com/api';
+//const API_BASE_URL = 'https://api.brandbasecapsule.com/api';
+const API_BASE_URL = 'https://slateblue-spider-674066.hostingersite.com/api';
 
 const BlogManagement = () => {
   const [blogs, setBlogs] = useState([]);
@@ -15,6 +16,7 @@ const BlogManagement = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedSource, setSelectedSource] = useState('all');
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -39,16 +41,23 @@ const BlogManagement = () => {
       },
       readTime: '5 min read',
       featuredImage: '',
-      publishDate: new Date().toISOString().split('T')[0]
+      publishDate: new Date().toISOString().split('T')[0],
+      seo: {
+        metaTitle: '',
+        metaDescription: '',
+        keywords: [],
+        canonicalUrl: ''
+      }
     },
     sections: [{
       id: 'intro',
       title: 'Introduction',
       content: [''],
-      listItems: []
+      listItems: [],
+      media: []
     }]
   });
-  const [newSection, setNewSection] = useState({ id: '', title: '', content: [''] });
+  const [newSection, setNewSection] = useState({ id: '', title: '', content: [''], media: [] });
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [showJsonImport, setShowJsonImport] = useState(false);
@@ -66,7 +75,7 @@ const BlogManagement = () => {
       setError(null);
       const response = await adminAxios.get(`/api/blogs`);
       setBlogs(response.data.data);
-      
+
       // Calculate pagination
       const total = response.data.count;
       setTotalPages(Math.ceil(total / itemsPerPage));
@@ -95,16 +104,20 @@ const BlogManagement = () => {
 
   // Filter blogs
   const filteredBlogs = blogs.filter(blog => {
-    const matchesSearch = 
+    const matchesSearch =
       blog.metadata.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.metadata.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.metadata.author.name.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = 
-      selectedCategory === 'all' || 
+
+    const matchesCategory =
+      selectedCategory === 'all' ||
       blog.metadata.category === selectedCategory;
-    
-    return matchesSearch && matchesCategory;
+
+    const matchesSource =
+      selectedSource === 'all' ||
+      (selectedSource === 'ai' ? blog.metadata.isAI : !blog.metadata.isAI);
+
+    return matchesSearch && matchesCategory && matchesSource;
   });
 
   // Paginate blogs
@@ -116,10 +129,10 @@ const BlogManagement = () => {
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
+
     if (name.startsWith('metadata.')) {
       const field = name.split('metadata.')[1];
-      
+
       if (field.includes('author.')) {
         const authorField = field.split('author.')[1];
         setFormData(prev => ({
@@ -157,10 +170,10 @@ const BlogManagement = () => {
     } else if (name.startsWith('section.')) {
       const [sectionIndex, field] = name.split('.').slice(1);
       const index = parseInt(sectionIndex);
-      
+
       setFormData(prev => ({
         ...prev,
-        sections: prev.sections.map((section, i) => 
+        sections: prev.sections.map((section, i) =>
           i === index ? { ...section, [field]: value } : section
         )
       }));
@@ -182,6 +195,39 @@ const BlogManagement = () => {
         ...newSections[sectionIndex],
         content: newContent
       };
+      return { ...prev, sections: newSections };
+    });
+  };
+
+  // Handle section media changes
+  const handleSectionMediaChange = (sectionIndex, mediaIndex, field, value) => {
+    setFormData(prev => {
+      const newSections = [...prev.sections];
+      const newMedia = [...newSections[sectionIndex].media];
+      newMedia[mediaIndex] = { ...newMedia[mediaIndex], [field]: value };
+      newSections[sectionIndex] = { ...newSections[sectionIndex], media: newMedia };
+      return { ...prev, sections: newSections };
+    });
+  };
+
+  // Add media to section
+  const addSectionMedia = (sectionIndex) => {
+    setFormData(prev => {
+      const newSections = [...prev.sections];
+      if (!newSections[sectionIndex].media) {
+        newSections[sectionIndex].media = [];
+      }
+      newSections[sectionIndex].media.push({ type: 'image', url: '', caption: '' });
+      return { ...prev, sections: newSections };
+    });
+  };
+
+  // Remove media from section
+  const removeSectionMedia = (sectionIndex, mediaIndex) => {
+    setFormData(prev => {
+      const newSections = [...prev.sections];
+      const newMedia = newSections[sectionIndex].media.filter((_, i) => i !== mediaIndex);
+      newSections[sectionIndex] = { ...newSections[sectionIndex], media: newMedia };
       return { ...prev, sections: newSections };
     });
   };
@@ -216,11 +262,13 @@ const BlogManagement = () => {
         sections: [...prev.sections, {
           id: newSection.id.toLowerCase().replace(/\s+/g, '-'),
           title: newSection.title,
+          title: newSection.title,
           content: [''],
-          listItems: []
+          listItems: [],
+          media: []
         }]
       }));
-      setNewSection({ id: '', title: '', content: [''] });
+      setNewSection({ id: '', title: '', content: [''], media: [] });
     }
   };
 
@@ -258,7 +306,7 @@ const BlogManagement = () => {
     try {
       setJsonError('');
       const parsedData = JSON.parse(jsonText);
-      
+
       // Validate the JSON structure
       if (!parsedData.metadata || !parsedData.metadata.title || !parsedData.metadata.slug) {
         throw new Error('Invalid JSON structure. Must include metadata with title and slug.');
@@ -270,7 +318,8 @@ const BlogManagement = () => {
           id: 'intro',
           title: 'Introduction',
           content: [''],
-          listItems: []
+          listItems: [],
+          media: []
         }];
       }
 
@@ -294,7 +343,7 @@ const BlogManagement = () => {
       setShowJsonImport(false);
       setJsonText('');
       setSuccessMessage('JSON imported successfully!');
-      
+
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       setJsonError(err.message || 'Invalid JSON format');
@@ -329,13 +378,20 @@ const BlogManagement = () => {
         },
         readTime: '5 min read',
         featuredImage: '',
-        publishDate: new Date().toISOString().split('T')[0]
+        publishDate: new Date().toISOString().split('T')[0],
+        seo: {
+          metaTitle: '',
+          metaDescription: '',
+          keywords: [],
+          canonicalUrl: ''
+        }
       },
       sections: [{
         id: 'intro',
         title: 'Introduction',
         content: [''],
-        listItems: []
+        listItems: [],
+        media: []
       }]
     });
     setModalType('create');
@@ -367,7 +423,7 @@ const BlogManagement = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      
+
       if (modalType === 'create') {
         await adminAxios.post('/api/blogs', formData);
         setSuccessMessage('Blog created successfully!');
@@ -375,11 +431,11 @@ const BlogManagement = () => {
         await adminAxios.put(`/api/blogs/${currentBlog._id}`, formData);
         setSuccessMessage('Blog updated successfully!');
       }
-      
+
       await fetchBlogs();
       await fetchCategories(); // Refresh categories after creating new blog
       setShowModal(false);
-      
+
       // Clear success message after 3 seconds
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
@@ -398,7 +454,7 @@ const BlogManagement = () => {
       setSuccessMessage('Blog deleted successfully!');
       setDeleteConfirm(null);
       await fetchBlogs();
-      
+
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       setError('Failed to delete blog. Please try again.');
@@ -421,6 +477,7 @@ const BlogManagement = () => {
   const resetFilters = () => {
     setSearchTerm('');
     setSelectedCategory('all');
+    setSelectedSource('all');
     setCurrentPage(1);
   };
 
@@ -451,7 +508,7 @@ const BlogManagement = () => {
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center">
           <AlertCircle className="w-5 h-5 text-red-500 mr-3" />
           <span className="text-red-700">{error}</span>
-          <button 
+          <button
             onClick={() => setError(null)}
             className="ml-auto text-red-500 hover:text-red-700"
           >
@@ -475,7 +532,7 @@ const BlogManagement = () => {
               />
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <div className="relative">
               <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -492,14 +549,27 @@ const BlogManagement = () => {
                 ))}
               </select>
             </div>
-            
+
+            <div className="relative">
+              <Sparkles className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <select
+                value={selectedSource}
+                onChange={(e) => setSelectedSource(e.target.value)}
+                className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white"
+              >
+                <option value="all">All Sources</option>
+                <option value="manual">Manual</option>
+                <option value="ai">AI Generated</option>
+              </select>
+            </div>
+
             <button
               onClick={resetFilters}
               className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
             >
               Reset Filters
             </button>
-            
+
             <button
               onClick={openCreateModal}
               className="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
@@ -551,8 +621,8 @@ const BlogManagement = () => {
             </div>
             <h3 className="mt-4 text-lg font-medium text-gray-900">No blogs found</h3>
             <p className="mt-2 text-gray-600">
-              {searchTerm || selectedCategory !== 'all' 
-                ? 'Try adjusting your search or filters' 
+              {searchTerm || selectedCategory !== 'all'
+                ? 'Try adjusting your search or filters'
                 : 'Get started by creating your first blog'}
             </p>
             <button
@@ -609,13 +679,12 @@ const BlogManagement = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          blog.metadata.category === 'productivity' ? 'bg-blue-100 text-blue-800' :
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${blog.metadata.category === 'productivity' ? 'bg-blue-100 text-blue-800' :
                           blog.metadata.category === 'technology' ? 'bg-purple-100 text-purple-800' :
-                          blog.metadata.category === 'wellness' ? 'bg-green-100 text-green-800' :
-                          blog.metadata.category === 'marketing' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-gray-100 text-gray-800'
-                        }`}>
+                            blog.metadata.category === 'wellness' ? 'bg-green-100 text-green-800' :
+                              blog.metadata.category === 'marketing' ? 'bg-yellow-100 text-yellow-800' :
+                                'bg-gray-100 text-gray-800'
+                          }`}>
                           {blog.metadata.category}
                         </span>
                       </td>
@@ -638,6 +707,12 @@ const BlogManagement = () => {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col gap-1">
+                          {blog.metadata.isAI && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800">
+                              <Sparkles className="w-3 h-3 mr-1" />
+                              AI Generated
+                            </span>
+                          )}
                           {blog.metadata.isEditorPick && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
                               <CheckCircle className="w-3 h-3 mr-1" />
@@ -704,15 +779,14 @@ const BlogManagement = () => {
                   <button
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
-                    className={`p-2 rounded-lg ${
-                      currentPage === 1
-                        ? 'text-gray-400 cursor-not-allowed'
-                        : 'text-gray-600 hover:bg-gray-100'
-                    }`}
+                    className={`p-2 rounded-lg ${currentPage === 1
+                      ? 'text-gray-400 cursor-not-allowed'
+                      : 'text-gray-600 hover:bg-gray-100'
+                      }`}
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  
+
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     let pageNum;
                     if (totalPages <= 5) {
@@ -724,30 +798,28 @@ const BlogManagement = () => {
                     } else {
                       pageNum = currentPage - 2 + i;
                     }
-                    
+
                     return (
                       <button
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
-                        className={`w-10 h-10 rounded-lg ${
-                          currentPage === pageNum
-                            ? 'bg-blue-600 text-white'
-                            : 'text-gray-600 hover:bg-gray-100'
-                        }`}
+                        className={`w-10 h-10 rounded-lg ${currentPage === pageNum
+                          ? 'bg-blue-600 text-white'
+                          : 'text-gray-600 hover:bg-gray-100'
+                          }`}
                       >
                         {pageNum}
                       </button>
                     );
                   })}
-                  
+
                   <button
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                     disabled={currentPage === totalPages}
-                    className={`p-2 rounded-lg ${
-                      currentPage === totalPages
-                        ? 'text-gray-400 cursor-not-allowed'
-                        : 'text-gray-600 hover:bg-gray-100'
-                    }`}
+                    className={`p-2 rounded-lg ${currentPage === totalPages
+                      ? 'text-gray-400 cursor-not-allowed'
+                      : 'text-gray-600 hover:bg-gray-100'
+                      }`}
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
@@ -1075,6 +1147,71 @@ const BlogManagement = () => {
                   </div>
                 </div>
 
+                {/* SEO Settings */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">SEO Settings</h3>
+                  <div className="grid grid-cols-1 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Meta Title
+                      </label>
+                      <input
+                        type="text"
+                        name="metadata.seo.metaTitle"
+                        value={formData.metadata.seo?.metaTitle || ''}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="SEO Title (defaults to blog title)"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Meta Description
+                      </label>
+                      <textarea
+                        name="metadata.seo.metaDescription"
+                        value={formData.metadata.seo?.metaDescription || ''}
+                        onChange={handleInputChange}
+                        rows={2}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="SEO Description (defaults to blog description)"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Canonical URL
+                        </label>
+                        <input
+                          type="url"
+                          name="metadata.seo.canonicalUrl"
+                          value={formData.metadata.seo?.canonicalUrl || ''}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="https://brandbasecapsule.com/blogs/..."
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Keywords (comma separated)
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.metadata.seo?.keywords ? formData.metadata.seo.keywords.join(', ') : ''}
+                          onChange={(e) => handleInputChange({
+                            target: {
+                              name: 'metadata.seo.keywords',
+                              value: e.target.value.split(',')
+                            }
+                          })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="marketing, branding, productivity"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Blog Settings */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Blog Settings</h3>
@@ -1117,7 +1254,7 @@ const BlogManagement = () => {
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold text-gray-900">Content Sections</h3>
                   </div>
-                  
+
                   {formData.sections.map((section, sectionIndex) => (
                     <div key={sectionIndex} className="mb-6 p-4 border border-gray-200 rounded-lg">
                       <div className="flex items-center justify-between mb-4">
@@ -1189,6 +1326,120 @@ const BlogManagement = () => {
                           </button>
                         </div>
                       </div>
+
+                      {/* List Items Section */}
+                      <div className="pt-4 border-t border-gray-100 mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          List Items (Bullet points)
+                        </label>
+                        {section.listItems && section.listItems.map((item, listIndex) => (
+                          <div key={listIndex} className="flex gap-2 mb-2">
+                            <input
+                              type="text"
+                              value={item}
+                              onChange={(e) => {
+                                const newSections = [...formData.sections];
+                                const newListItems = [...newSections[sectionIndex].listItems];
+                                newListItems[listIndex] = e.target.value;
+                                newSections[sectionIndex] = {
+                                  ...newSections[sectionIndex],
+                                  listItems: newListItems
+                                };
+                                setFormData({ ...formData, sections: newSections });
+                              }}
+                              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              placeholder="List item content"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newSections = [...formData.sections];
+                                const newListItems = newSections[sectionIndex].listItems.filter((_, i) => i !== listIndex);
+                                newSections[sectionIndex] = {
+                                  ...newSections[sectionIndex],
+                                  listItems: newListItems
+                                };
+                                setFormData({ ...formData, sections: newSections });
+                              }}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newSections = [...formData.sections];
+                            if (!newSections[sectionIndex].listItems) {
+                              newSections[sectionIndex].listItems = [];
+                            }
+                            newSections[sectionIndex].listItems.push('');
+                            setFormData({ ...formData, sections: newSections });
+                          }}
+                          className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                        >
+                          <Plus className="w-4 h-4" />
+                          Add List Item
+                        </button>
+                      </div>
+
+                      {/* Media Section */}
+                      <div className="pt-4 border-t border-gray-100">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Section Media (Images/Videos)
+                        </label>
+                        {section.media && section.media.map((media, mediaIndex) => (
+                          <div key={mediaIndex} className="bg-gray-50 p-3 rounded-lg mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-2">
+                              <div className="md:col-span-2">
+                                <select
+                                  value={media.type}
+                                  onChange={(e) => handleSectionMediaChange(sectionIndex, mediaIndex, 'type', e.target.value)}
+                                  className="w-full px-2 py-2 border border-gray-300 rounded-lg text-sm"
+                                >
+                                  <option value="image">Image</option>
+                                  <option value="video">Video</option>
+                                </select>
+                              </div>
+                              <div className="md:col-span-10">
+                                <input
+                                  type="text"
+                                  value={media.url}
+                                  onChange={(e) => handleSectionMediaChange(sectionIndex, mediaIndex, 'url', e.target.value)}
+                                  placeholder="Media URL"
+                                  className="w-full px-2 py-2 border border-gray-300 rounded-lg text-sm"
+                                />
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              <input
+                                type="text"
+                                value={media.caption}
+                                onChange={(e) => handleSectionMediaChange(sectionIndex, mediaIndex, 'caption', e.target.value)}
+                                placeholder="Caption (optional)"
+                                className="flex-1 px-2 py-2 border border-gray-300 rounded-lg text-sm"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => removeSectionMedia(sectionIndex, mediaIndex)}
+                                className="p-2 text-red-600 hover:bg-red-100 rounded-lg"
+                                title="Remove Media"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => addSectionMedia(sectionIndex)}
+                          className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1 mt-2"
+                        >
+                          <Plus className="w-4 h-4" />
+                          Add Media
+                        </button>
+                      </div>
                     </div>
                   ))}
 
@@ -1203,7 +1454,7 @@ const BlogManagement = () => {
                         <input
                           type="text"
                           value={newSection.id}
-                          onChange={(e) => setNewSection({...newSection, id: e.target.value})}
+                          onChange={(e) => setNewSection({ ...newSection, id: e.target.value })}
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="section-id"
                         />
@@ -1215,7 +1466,7 @@ const BlogManagement = () => {
                         <input
                           type="text"
                           value={newSection.title}
-                          onChange={(e) => setNewSection({...newSection, title: e.target.value})}
+                          onChange={(e) => setNewSection({ ...newSection, title: e.target.value })}
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                           placeholder="Section Title"
                         />

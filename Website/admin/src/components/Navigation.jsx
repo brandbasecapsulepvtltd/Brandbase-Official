@@ -16,12 +16,12 @@ import {
   Mail,
   Settings
 } from "lucide-react";
-import { useAuth } from "../context/AuthContext"; // Make sure to import your AuthContext
+import { useAuth } from "../context/AuthContext";
 
 export function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuth(); // Get logout function from AuthContext
+  const { logout, user } = useAuth(); // Get logout function from AuthContext
   const [menuOpen, setMenuOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -52,6 +52,7 @@ export function Navigation() {
         { label: "Footer", path: "/admin/dashboard/general/footer" },
         { label: "Floating Latest", path: "/admin/dashboard/general/floating-latest" },
         { label: "Policies", path: "/admin/dashboard/general/policies" },
+        { label: "Security", path: "/admin/dashboard/general/security" },
       ]
     },
     {
@@ -222,8 +223,8 @@ export function Navigation() {
                   <User className="h-4 w-4 text-white" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Admin User</p>
-                  <p className="text-xs text-gray-500">Administrator</p>
+                  <p className="text-sm font-medium text-gray-900 truncate">{user?.name || "Admin User"}</p>
+                  <p className="text-xs text-gray-500 truncate">{user?.email || "Administrator"}</p>
                 </div>
               </div>
 
@@ -292,8 +293,8 @@ export function Navigation() {
               <User className="h-5 w-5 text-white" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-medium text-gray-900">Admin User</p>
-              <p className="text-xs text-gray-500">Administrator</p>
+              <p className="text-sm font-medium text-gray-900">{user?.name || "Admin User"}</p>
+              <p className="text-xs text-gray-500">{user?.email || "Administrator"}</p>
             </div>
           </div>
 

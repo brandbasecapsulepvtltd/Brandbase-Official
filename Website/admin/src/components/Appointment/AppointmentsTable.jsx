@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "https://brandbase.onrender.com/api";
+//const API_BASE_URL = "https://api.brandbasecapsule.com/api";
+const API_BASE_URL = "https://slateblue-spider-674066.hostingersite.com/api";
 
 export default function AppointmentsTable() {
   const [appointments, setAppointments] = useState([]);

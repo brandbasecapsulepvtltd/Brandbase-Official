@@ -217,15 +217,15 @@ export function LoginForm() {
     }
 
     // Attempt login
-    const result = login(email, password);
-    
+    const result = await login(email, password);
+
     if (result.success) {
       // Redirect to dashboard
       navigate('/admin/dashboard/ui/home');
     } else {
       setError(result.message || 'Login failed');
     }
-    
+
     setLoading(false);
   };
 
@@ -235,13 +235,13 @@ export function LoginForm() {
         <h2 className="text-3xl font-bold text-white">Admin Login</h2>
         <p className="mt-2 text-sm text-gray-300">Enter your credentials to access the dashboard</p>
       </div>
-      
+
       {error && (
         <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
           <p className="text-red-200 text-sm">{error}</p>
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Email Input */}
         <div className="relative z-0">
@@ -266,7 +266,7 @@ export function LoginForm() {
             Admin Email
           </label>
         </div>
-        
+
         {/* Password Input */}
         <div className="relative z-0">
           <input
@@ -294,9 +294,8 @@ export function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className={`group w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-orange-500 transition-all duration-300 ${
-            loading ? 'bg-orange-700 cursor-not-allowed' : 'bg-orange-600 hover:bg-orange-700'
-          }`}
+          className={`group w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-orange-500 transition-all duration-300 ${loading ? 'bg-orange-700 cursor-not-allowed' : 'bg-orange-600 hover:bg-orange-700'
+            }`}
         >
           {loading ? (
             <>
@@ -317,7 +316,7 @@ export function LoginForm() {
           )}
         </button>
       </form>
-      
+
       <div className="text-center">
         <p className="text-xs text-gray-400">
           Admin credentials are managed via backend

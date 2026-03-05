@@ -17,7 +17,8 @@ import {
   Menu
 } from 'lucide-react';
 
-const API_BASE_URL = 'https://brandbase.onrender.com/api';
+//const API_BASE_URL = 'https://api.brandbasecapsule.com/api';
+const API_BASE_URL = 'https://slateblue-spider-674066.hostingersite.com/api';
 
 const AdminHome = () => {
   const [homePageData, setHomePageData] = useState(null);

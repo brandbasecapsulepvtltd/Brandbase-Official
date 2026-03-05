@@ -48,7 +48,8 @@ import {
 } from 'lucide-react';
 
 // Use environment variable or default process.env.NEXT_PUBLIC_API_URL || 
-const API_URL = 'https://brandbase.onrender.com/api';
+//const API_URL = 'https://api.brandbasecapsule.com/api';
+const API_URL = 'https://slateblue-spider-674066.hostingersite.com/api';
 
 const AdminServicesDashboard = () => {
   // States
@@ -1045,8 +1046,8 @@ const AdminServicesDashboard = () => {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center px-4 py-2 mr-2 rounded-lg transition-colors ${activeTab === tab.id
-                        ? 'bg-white text-blue-600'
-                        : 'text-blue-100 hover:bg-white hover:bg-opacity-20'
+                      ? 'bg-white text-blue-600'
+                      : 'text-blue-100 hover:bg-white hover:bg-opacity-20'
                       }`}
                   >
                     {tab.icon}

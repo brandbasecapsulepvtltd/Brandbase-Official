@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from '../utils/axios';
 
 const AuthContext = createContext();
 
@@ -13,85 +14,94 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in on mount
-    try {
-      const token = localStorage.getItem('adminToken');
-      if (token) {
-        setIsAuthenticated(true);
-      }
-    } catch (error) {
-      console.warn('Could not read from localStorage:', error);
-      // Clear localStorage if it's corrupted
+    const checkAuth = async () => {
       try {
-        localStorage.clear();
-      } catch (e) {
-        console.error('Could not clear localStorage:', e);
-      }
-    }
-    setLoading(false);
-  }, []);
-
-  const login = (email, password) => {
-    try {
-      // Clear any existing corrupted storage first
-      localStorage.removeItem('adminToken');
-      
-      // In a real app, you would make an API call here
-      // For demo, we'll hardcode admin credentials
-      const hardcodedAdmin = {
-        email: 'admin@example.com',
-        password: 'admin123'
-      };
-
-      if (email === hardcodedAdmin.email && password === hardcodedAdmin.password) {
-        const token = 'demo_admin_token_' + Date.now();
-        
-        // Try to store with error handling
-        try {
-          localStorage.setItem('adminToken', token);
-        } catch (storageError) {
-          // If localStorage is full, clear it and try again
-          if (storageError.name === 'QuotaExceededError') {
-            localStorage.clear();
-            localStorage.setItem('adminToken', token);
+        const token = localStorage.getItem('adminToken');
+        if (token) {
+          const response = await axios.get('/api/auth/me');
+          if (response.data.success) {
+            setUser(response.data.data);
+            setIsAuthenticated(true);
           } else {
-            throw storageError;
+            localStorage.removeItem('adminToken');
           }
         }
-        
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        localStorage.removeItem('adminToken');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  const login = async (email, password) => {
+    try {
+      const response = await axios.post('/api/auth/login', { email, password });
+
+      if (response.data.success) {
+        const { token, ...userData } = response.data.data;
+        localStorage.setItem('adminToken', token);
+        setUser(userData);
         setIsAuthenticated(true);
         navigate('/admin/dashboard/ui/home');
         return { success: true };
       }
-      
-      return { success: false, message: 'Invalid email or password' };
+
+      return { success: false, message: response.data.message || 'Login failed' };
     } catch (error) {
       console.error('Login error:', error);
-      return { 
-        success: false, 
-        message: error.name === 'QuotaExceededError' 
-          ? 'Storage is full. Please clear browser data.' 
-          : 'An error occurred. Please try again.' 
+      return {
+        success: false,
+        message: error.response?.data?.message || 'An error occurred. Please try again.'
       };
     }
   };
 
   const logout = () => {
-    try {
-      localStorage.removeItem('adminToken');
-    } catch (error) {
-      console.warn('Could not remove token from localStorage:', error);
-    }
+    localStorage.removeItem('adminToken');
+    setUser(null);
     setIsAuthenticated(false);
     navigate('/admin/login');
   };
 
+  const updatePassword = async (currentPassword, newPassword, otp) => {
+    try {
+      const response = await axios.put('/api/auth/update-password', {
+        currentPassword,
+        newPassword,
+        otp
+      });
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Failed to update password'
+      };
+    }
+  };
+
+  const requestPasswordResetOTP = async () => {
+    try {
+      const response = await axios.post('/api/auth/request-password-reset');
+      return response.data;
+    } catch (error) {
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Failed to send verification code'
+      };
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, updatePassword, requestPasswordResetOTP, loading }}>
       {children}
     </AuthContext.Provider>
   );
