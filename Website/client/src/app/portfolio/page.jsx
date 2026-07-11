@@ -36,6 +36,7 @@ function sanitize(list = []) {
       title: item.hero?.title || 'Untitled project',
       description: item.hero?.description || '',
       image: Array.isArray(item.hero?.images) ? item.hero.images[0] : item.hero?.images || '',
+      cardImage: item.hero?.cardImage || '',
       heading: item.bento?.mainHeading || 'Explore Project',
     });
   }
@@ -126,11 +127,11 @@ export default async function PortfolioPage({ searchParams }) {
                     <Link href={`/portfolio/${project.slug}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={project.image || '/images/placeholder.jpg'}
+                        src={project.cardImage || project.image || '/images/placeholder.jpg'}
                         alt={project.title}
                         width={640}
                         height={400}
-                        className="h-64 w-full object-cover"
+                        className="aspect-[16/10] h-auto w-full object-cover object-center"
                       />
                     </Link>
                     <div className="p-5">

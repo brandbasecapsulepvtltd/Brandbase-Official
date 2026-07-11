@@ -16,7 +16,13 @@ const IMAGES = {
   artToDecorLighting: IMG('08-art-to-decor-lighting.jpg'),
 };
 
-const GALLERY = Object.values(IMAGES);
+/** Primary hero / thumbnail for HGH India 2026 across portfolio, home, blog, and SEO pages */
+const MAIN_IMAGE = IMAGES.corelleHall;
+
+const GALLERY = [
+  MAIN_IMAGE,
+  ...Object.values(IMAGES).filter((url) => url !== MAIN_IMAGE),
+];
 
 const logo = (name) =>
   `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=FF6600&color=fff&size=128&bold=true`;
@@ -42,7 +48,8 @@ const PORTFOLIO = {
       'BrandBase Capsule delivered full stall design, fabrication, lighting, and on-site management for leading brands at the 19th edition of HGH India — 30 June to 3 July 2026 at BEC Goregaon, Mumbai.',
     ctaText: 'Plan Your Next Exhibition',
     videoUrl: '',
-    images: [IMAGES.corelleHall, IMAGES.artToDecorExterior, IMAGES.irekaHomes, IMAGES.artToDecorLighting],
+    cardImage: MAIN_IMAGE,
+    images: [MAIN_IMAGE, IMAGES.irekaHomes, IMAGES.artToDecorExterior, IMAGES.artToDecorInterior],
   },
   bento: {
     mainHeading: 'HGH India 2026 — Design, Build, Deliver',
@@ -50,7 +57,7 @@ const PORTFOLIO = {
       conceptToReality: {
         title: 'From Concept to Booth',
         imageAlt: 'ART TO DECOR exhibition stall at HGH India 2026',
-        imageUrl: IMAGES.artToDecorExterior,
+        imageUrl: MAIN_IMAGE,
       },
       projectsDelivered: {
         count: '4+',
@@ -62,7 +69,7 @@ const PORTFOLIO = {
         structureAlt: 'Exhibition stall interior fabrication at HGH India',
       },
       showcaseStall: {
-        imageUrl: IMAGES.corelleHall,
+        imageUrl: MAIN_IMAGE,
         alt: 'Corelle exhibition booth at HGH India 2026',
         location: 'Bombay Exhibition Centre, Mumbai',
       },
@@ -270,7 +277,7 @@ const BLOG = {
       linkedin: 'https://www.linkedin.com/company/brandbasecapsule',
     },
     readTime: '8 min read',
-    featuredImage: IMAGES.corelleHall,
+    featuredImage: MAIN_IMAGE,
     publishDate: new Date('2026-06-30'),
     seo: {
       metaTitle: 'HGH India 2026 | Exhibition Stalls by BrandBase Capsule',
@@ -289,7 +296,7 @@ const BLOG = {
         'The stage is set for the 19th edition of HGH India 2026, one of the country’s largest and most influential B2B trade exhibitions dedicated to home textiles, home décor, furniture, houseware, gifts, and lifestyle products.',
         'The event opened on 30 June 2026 at the Bombay Exhibition Centre, Goregaon, Mumbai, and continued until 3 July 2026, attracting thousands of trade visitors, buyers, manufacturers, retailers, architects, interior designers, and industry professionals from across India and international markets.',
       ],
-      media: [{ type: 'image', url: IMAGES.corelleHall, caption: 'HGH India 2026 — Bombay Exhibition Centre, Mumbai' }],
+      media: [{ type: 'image', url: MAIN_IMAGE, caption: 'HGH India 2026 — Bombay Exhibition Centre, Mumbai' }],
     },
     {
       id: 'platform',
@@ -314,7 +321,7 @@ const BLOG = {
         'HGH India 2026 featured an extensive display covering home textiles, furnishing fabrics, curtains, upholstery, furniture, mattresses, decorative accessories, carpets, rugs, lighting, kitchenware, tableware, houseware, gifts, and lifestyle products.',
         'Leading Indian and international brands unveiled latest innovations, sustainable solutions, and contemporary designs reflecting current market trends.',
       ],
-      media: [{ type: 'image', url: IMAGES.artToDecorExterior, caption: 'ART TO DECOR — lifestyle exhibition stall' }],
+      media: [{ type: 'image', url: MAIN_IMAGE, caption: 'HGH India 2026 — Corelle pavilion at Bombay Exhibition Centre' }],
     },
     {
       id: 'festive',
@@ -359,7 +366,7 @@ const BLOG = {
 
 const HOME_RECENT_WORK_ITEMS = [
   {
-    image: IMAGES.corelleHall,
+    image: MAIN_IMAGE,
     name: 'HGH India 2026',
     description: 'Exhibition management at Bombay Exhibition Centre',
     link: `/portfolio/${PORTFOLIO_SLUG}`,
@@ -398,8 +405,8 @@ const CASE_STUDY_ITEMS = [
     industry: 'Exhibition Management',
     title: 'Turnkey Exhibition Stalls at India’s Premier Home Products Trade Show',
     desc: 'BrandBase Capsule delivered full stall design, fabrication, lighting, and on-site management for leading brands at HGH India 2026 — Bombay Exhibition Centre, Mumbai.',
-    url: IMAGES.corelleHall,
-    galleryImages: [IMAGES.corelleHall, IMAGES.artToDecorExterior, IMAGES.irekaHomes, IMAGES.berghoffCorelle],
+    url: MAIN_IMAGE,
+    galleryImages: [MAIN_IMAGE, IMAGES.artToDecorExterior, IMAGES.irekaHomes, IMAGES.berghoffCorelle],
     services: SERVICES,
     results: [
       { value: '4+', label: 'Brand Stalls' },
@@ -490,6 +497,7 @@ module.exports = {
   PORTFOLIO_SLUG,
   BLOG_SLUG,
   BLOG_CATEGORY,
+  MAIN_IMAGE,
   IMAGES,
   PORTFOLIO,
   BLOG,

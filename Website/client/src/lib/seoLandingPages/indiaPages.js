@@ -1,4 +1,4 @@
-import { IK, HGH_IMAGES, indiaMarkets, baseBottomCta } from './shared';
+import { IK, HGH_MAIN_IMAGE, HGH_IMAGES, indiaMarkets, baseBottomCta } from './shared';
 
 const PORTFOLIO_HGH = '/portfolio/hgh-india-2026-exhibition-management';
 
@@ -42,7 +42,7 @@ export const INDIA_SEO_PAGES = [
       secondaryCta: { label: 'HGH India Case Study', href: PORTFOLIO_HGH },
     },
     about: {
-      image: '/images/hgh-india-2026/02-corelle-hall-wide.jpg',
+      image: HGH_MAIN_IMAGE,
       imageAlt: 'HGH India 2026 exhibition stalls by BrandBase Capsule',
       statValue: '450+',
       statLabel: 'Stalls Delivered',

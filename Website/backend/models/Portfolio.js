@@ -16,6 +16,7 @@ const portfolioSchema = new mongoose.Schema({
         description: String,
         ctaText: String,
         videoUrl: String,
+        cardImage: String,
         images: [String]
     },
     bento: {
