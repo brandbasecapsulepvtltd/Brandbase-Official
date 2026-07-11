@@ -434,276 +434,183 @@ const imageItems = [
 ];
 
 // --- RESPONSIVE MODAL COMPONENT ---
+// --- REPLACED MODAL COMPONENT (MATCHING CLIENTS STYLE) ---
 const ImageModal = ({ item, onClose }) => {
   const [currentImg, setCurrentImg] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const nextImg = () => setCurrentImg((prev) => (prev + 1) % item.galleryImages.length);
-  const prevImg = () => setCurrentImg((prev) => (prev - 1 + item.galleryImages.length) % item.galleryImages.length);
+  // Gallery slider logic
+  const hasMultipleImages = item.galleryImages && item.galleryImages.length > 1;
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        if (isFullscreen) {
-          document.exitFullscreen?.();
-          setIsFullscreen(false);
-        } else {
-          onClose();
-        }
-      }
-      if (e.key === 'ArrowLeft') prevImg();
-      if (e.key === 'ArrowRight') nextImg();
-    };
+  const nextImg = (e) => {
+    e?.stopPropagation();
+    if (hasMultipleImages) {
+      setCurrentImg((prev) => (prev + 1) % item.galleryImages.length);
+    }
+  };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isFullscreen, onClose]);
-
-  const handleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
+  const prevImg = (e) => {
+    e?.stopPropagation();
+    if (hasMultipleImages) {
+      setCurrentImg((prev) => (prev - 1 + item.galleryImages.length) % item.galleryImages.length);
     }
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4 md:p-6 lg:p-8"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-all duration-300"
+      role="dialog"
+      aria-modal="true"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.95, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.95, opacity: 0, y: 20 }}
-        transition={{ type: "spring", damping: 25 }}
-        className="relative w-full h-full max-w-7xl bg-white dark:bg-black rounded-xl md:rounded-2xl xl:rounded-3xl overflow-hidden flex flex-col lg:flex-row shadow-2xl"
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="bg-white dark:bg-black relative rounded-2xl md:rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* MOBILE HEADER */}
-        <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
-              <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 dark:text-white text-sm leading-tight">{item.companyName}</h4>
-              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">{item.industry}</p>
-            </div>
-          </div>
-          <button onClick={onClose} className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-gray-100 dark:text-gray-100 transition-colors">
-            <X size={20} />
-          </button>
-        </div>
+        {/* Scrollable Container */}
+        <div className="overflow-y-auto custom-scrollbar">
 
-        {/* LEFT CONTENT AREA */}
-        <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 overflow-y-auto max-h-[calc(100vh-2rem)] lg:max-h-[90vh]">
-          {/* Desktop Header */}
-          <div className="hidden lg:flex items-center justify-between mb-8">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center overflow-hidden shadow-sm">
-                <img src={item.companyLogo} alt="logo" className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <h4 className="font-bold text-gray-900 dark:text-white text-lg">{item.companyName}</h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium">{item.industry}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleFullscreen}
-                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800"
-              >
-                {isFullscreen ? <Minus size={20} /> : <Maximize2 size={20} />}
-              </button>
-              <button
-                onClick={onClose}
-                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800"
-              >
-                <X size={20} />
-              </button>
-            </div>
-          </div>
-
-          {/* Project Meta */}
-          <div className="flex flex-wrap gap-4 mb-6">
-            <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-lg">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span className="text-sm font-medium text-blue-700">{item.timeline}</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-lg">
-              <Users className="w-4 h-4 text-purple-600" />
-              <span className="text-sm font-medium text-purple-700">{item.teamSize}</span>
-            </div>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-            {item.title}
-          </h2>
-
-          <p className="text-gray-600 dark:text-gray-300 mb-8 text-sm sm:text-base leading-relaxed">
-            {item.desc}
-          </p>
-
-          {/* Services */}
-          <div className="mb-8">
-            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
-              <span className="w-1 h-4 bg-orange-500 rounded-full"></span>
-              Services Provided
-            </h5>
-            <div className="flex flex-wrap gap-2">
-              {item.services.map((s, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1.5 bg-gradient-to-r from-orange-50 to-amber-50 text-orange-700 rounded-lg text-xs font-medium border border-orange-200 hover:scale-105 transition-transform cursor-default shadow-sm"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Results Grid */}
-          <div className="mb-8">
-            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
-              <span className="w-1 h-4 bg-green-500 rounded-full"></span>
-              Key Results
-            </h5>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100 shadow-sm">
-              {item.results.map((res, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white dark:bg-zinc-800 rounded-lg border border-gray-200 dark:border-zinc-700 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex items-center gap-2 mb-2 text-gray-500 dark:text-gray-400">
-                    {res.icon}
-                  </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{res.value}</div>
-                  <div className="text-[10px] sm:text-xs uppercase font-semibold text-gray-500 dark:text-gray-400 tracking-wider mt-1 text-center">
-                    {res.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Testimonial */}
-          <div className="mb-6">
-            <h5 className="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
-              <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
-              Client Testimonial
-            </h5>
-            <div className="relative p-4 sm:p-6 bg-gradient-to-r from-orange-50/50 to-amber-50/50 rounded-xl border border-orange-100">
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs">"</span>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                <img
-                  src={item.testimonial.avatar}
-                  className="w-12 h-12 rounded-full border-2 border-white shadow-sm"
-                  alt="author"
+          {/* Modal Header / Image Section */}
+          <div className="relative group">
+            <figure className="relative h-48 sm:h-64 md:h-80 overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImg}
+                  src={item.galleryImages?.[currentImg] || item.url}
+                  alt={`${item.companyName} project showcase`}
+                  className="w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                 />
-                <div className="flex-1">
-                  <p className="italic text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-3">
-                    "{item.testimonial.quote}"
-                  </p>
-                  <div>
-                    <p className="font-bold text-sm text-gray-900 dark:text-white">{item.testimonial.author}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.testimonial.role}</p>
-                  </div>
+              </AnimatePresence>
+
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"></div>
+            </figure>
+
+            {/* Slider Controls (Only if multiple images) */}
+            {hasMultipleImages && (
+              <>
+                <button
+                  onClick={prevImg}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all opacity-0 group-hover:opacity-100"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  onClick={nextImg}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-all opacity-0 group-hover:opacity-100"
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={24} />
+                </button>
+
+                {/* Image Dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {item.galleryImages.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`h-1.5 rounded-full transition-all ${currentImg === idx ? 'w-6 bg-white' : 'w-1.5 bg-white/50'}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-3 right-3 md:top-4 md:right-4 bg-white/90 dark:bg-black/90 hover:bg-white dark:hover:bg-black rounded-full p-2 transition-all duration-300 hover:scale-110 shadow-sm z-10 text-gray-900 dark:text-white"
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Floating Logo Badge (Transparent Background) */}
+            <div className="absolute -bottom-6 left-5 md:bottom-4 md:left-4 z-20">
+              <img
+                src={item.companyLogo}
+                alt={item.companyName}
+                className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Modal Content */}
+          <div className="pt-10 px-5 pb-8 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
+              <div className="flex-1">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+                  {item.title}
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-[#FF6600] text-white rounded-full text-xs md:text-sm font-medium">
+                    {item.industry}
+                  </span>
+                  {item.services.slice(0, 3).map((s, i) => (
+                    <span key={i} className="px-3 py-1 bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 rounded-full text-xs md:text-sm font-medium border border-gray-200 dark:border-zinc-700">
+                      {s}
+                    </span>
+                  ))}
                 </div>
               </div>
+
+              {/* Results Highlight */}
+              {item.results && item.results.length > 0 && (
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 min-w-[140px] text-center md:text-left">
+                  <div className="text-green-600 dark:text-green-400 font-bold text-xl md:text-2xl">
+                    {item.results[0].value}
+                  </div>
+                  <div className="text-green-800 dark:text-green-300 text-xs md:text-sm font-medium mt-1">
+                    {item.results[0].label}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
 
-          {/* CTA Button */}
-          <button className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium rounded-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
-            View Full Case Study
-            <ArrowUpRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* RIGHT IMAGE SLIDER AREA */}
-        <div className="lg:w-[45%] xl:w-[40%] relative bg-gray-900 min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] lg:h-auto group">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={currentImg}
-              src={item.galleryImages[currentImg]}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 w-full h-full object-cover"
-              alt={`Project image ${currentImg + 1}`}
-            />
-          </AnimatePresence>
-
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent lg:bg-gradient-to-r lg:from-black/80 lg:via-black/40 lg:to-transparent flex flex-col justify-end p-4 sm:p-6 md:p-8">
-            <div className="mb-2">
-              <span className="text-white/70 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-1 block">
-                Project Gallery
-              </span>
-              <h3 className="text-white font-bold text-lg sm:text-xl lg:text-2xl leading-tight">
-                Digital Transformation Overview
-              </h3>
+            <div className="prose max-w-none mb-8">
+              <p className="text-gray-600 dark:text-gray-300 md:text-gray-400 text-base md:text-lg leading-relaxed text-left">
+                {item.desc}
+              </p>
             </div>
-            <p className="text-white/60 text-xs sm:text-sm">
-              {currentImg + 1} of {item.galleryImages.length} images
-            </p>
-          </div>
 
-          {/* Navigation Controls */}
-          <button
-            onClick={prevImg}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-black/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white dark:bg-black/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
-            aria-label="Previous image"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            onClick={nextImg}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-black/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white dark:bg-black/20 transition-all hover:scale-110 active:scale-95 shadow-lg"
-            aria-label="Next image"
-          >
-            <ChevronRight size={20} />
-          </button>
+            {/* Key Achievements Grid */}
+            {item.results && item.results.some(r => r.value && r.label) && (
+              <div
+                className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+                role="list"
+                aria-label="Key achievements"
+              >
+                {item.results
+                  .filter(res => res.value && res.label)
+                  .map((res, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center justify-center p-3 md:p-4 bg-gray-50 dark:bg-zinc-900 rounded-xl md:rounded-2xl border border-gray-100 dark:border-zinc-800"
+                      role="listitem"
+                    >
+                      <div className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
+                        {res.value}
+                      </div>
+                      <div className="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 font-medium leading-tight text-center mt-1">
+                        {res.label}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
 
-          {/* Image Indicators */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {item.galleryImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentImg(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${idx === currentImg ? 'bg-white dark:bg-black w-6' : 'bg-white dark:bg-black/40'}`}
-                aria-label={`Go to image ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Image Counter */}
-          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white text-[10px] sm:text-xs px-3 py-1.5 rounded-full flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            {currentImg + 1} / {item.galleryImages.length}
+            {/* Removed CTA Button as requested */}
           </div>
         </div>
-
-        {/* Mobile Close Button (Bottom) */}
-        <div className="lg:hidden p-4 border-t border-gray-200">
-          <button
-            onClick={onClose}
-            className="w-full py-3 bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
-          >
-            Close
-          </button>
-        </div>
-      </motion.div >
-    </motion.div >
+      </motion.div>
+    </div>
   );
 };
 
@@ -750,10 +657,10 @@ export default function InteractiveImageBentoGallery({ data }) {
     <section ref={targetRef} className="relative w-full overflow-hidden bg-white dark:bg-black py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container mx-auto px-4 text-center mb-8 sm:mb-12">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-          Case Studies
+          {data?.heading || 'Case Studies'}
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
-          Explore our digital transformation projects across industries
+          {data?.subHeading || 'Explore our digital transformation projects across industries'}
         </p>
       </div>
 
@@ -764,7 +671,7 @@ export default function InteractiveImageBentoGallery({ data }) {
         >
           {displayItems.map((item) => (
             <motion.div
-              key={item.id}
+              key={item.id ?? item.companyName}
               className={cn(
                 "relative h-[320px] sm:h-[380px] md:h-[420px] overflow-hidden rounded-xl sm:rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-500"
               )}
@@ -793,10 +700,10 @@ export default function InteractiveImageBentoGallery({ data }) {
                   <p className="text-gray-300 text-sm line-clamp-2">{item.desc}</p>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-sm rounded-full">
+                  {/*                  <span className="text-white/70 text-xs font-medium px-3 py-1 bg-white dark:bg-zinc-900 dark:bg-black/10 backdrop-blur-sm rounded-full">
                     View Case Study
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-white dark:bg-black/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
+                  </span>*/}
+                  <div className="w-8 h-8 rounded-full bg-black dark:bg-black/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-orange-500 transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>

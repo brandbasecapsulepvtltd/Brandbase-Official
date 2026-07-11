@@ -23,12 +23,12 @@ export default function Faqs({ data }) {
           <div className="flex justify-center mb-6">
             <Tag>FAQ</Tag>
           </div>
-          <h1
+          <h2
             id="faqs-heading"
             className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
             Frequently Asked Questions
-          </h1>
+          </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Everything you need to know about our services and process.
             Can't find what you're looking for?{" "}
@@ -52,21 +52,20 @@ export default function Faqs({ data }) {
             <article
               key={faqIndex}
               className={twMerge(
-                "bg-white dark:bg-zinc-800/50 rounded-2xl border border-gray-200 dark:border-zinc-700 p-6 transition-all duration-300 cursor-pointer hover:border-[#FF6600]/50 hover:shadow-lg",
+                "bg-white dark:bg-zinc-800/50 rounded-2xl border border-gray-200 dark:border-zinc-700 transition-all duration-300 hover:border-[#FF6600]/50 hover:shadow-lg overflow-hidden",
                 selectedIndex === faqIndex && "border-[#FF6600] shadow-xl"
               )}
-              onClick={() => handleQuestionClick(faqIndex)}
-              onKeyDown={(e) => e.key === 'Enter' && handleQuestionClick(faqIndex)}
-              role="article"
-              tabIndex={0}
-              aria-expanded={selectedIndex === faqIndex}
-              aria-controls={`faq-answer-${faqIndex}`}
             >
-              {/* Question Header */}
-              <div className="flex justify-between items-center">
-                <h2 className="font-semibold text-gray-900 dark:text-white text-lg lg:text-xl pr-8">
+              <button
+                type="button"
+                onClick={() => handleQuestionClick(faqIndex)}
+                className="w-full flex justify-between items-center p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600] focus-visible:ring-inset"
+                aria-expanded={selectedIndex === faqIndex}
+                aria-controls={`faq-answer-${faqIndex}`}
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white text-lg lg:text-xl pr-8">
                   {faq.question}
-                </h2>
+                </h3>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -86,7 +85,7 @@ export default function Faqs({ data }) {
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-              </div>
+              </button>
 
               {/* Answer with Image */}
               <AnimatePresence>
@@ -97,7 +96,7 @@ export default function Faqs({ data }) {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="overflow-hidden"
+                    className="overflow-hidden px-6 pb-6"
                     role="region"
                   >
                     <div className="pt-6 border-t border-gray-100 mt-4">
@@ -133,29 +132,29 @@ export default function Faqs({ data }) {
                           <div className="mt-6 flex flex-wrap gap-3">
                             {faqIndex === 0 && (
                               <a
-                                href="/case-studies"
-                                className="px-4 py-2 bg-[#FF6600] text-white text-sm font-medium rounded-lg hover:bg-[#E55A00] transition-colors"
-                                aria-label="View our case studies"
+                                href="/portfolio"
+                                className="px-4 py-2 bg-[#FF6600] text-white text-sm font-medium rounded-lg hover:bg-[#E55A00] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600]"
+                                aria-label="View our portfolio and case studies"
                               >
-                                View Case Studies
+                                View Our Work
                               </a>
                             )}
                             {faqIndex === 1 && (
                               <a
-                                href="/process"
-                                className="px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:border-[#FF6600] hover:text-[#FF6600] transition-colors"
+                                href="/about"
+                                className="px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:border-[#FF6600] hover:text-[#FF6600] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600]"
                                 aria-label="Learn about our process"
                               >
-                                Learn About Our Process
+                                Learn About Us
                               </a>
                             )}
                             {faqIndex === 2 && (
                               <a
-                                href="/pricing"
-                                className="px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:border-[#FF6600] hover:text-[#FF6600] transition-colors"
-                                aria-label="View our pricing plans"
+                                href="/contact"
+                                className="px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:border-[#FF6600] hover:text-[#FF6600] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600]"
+                                aria-label="Get in touch for a quote"
                               >
-                                View Pricing
+                                Get a Quote
                               </a>
                             )}
                           </div>
@@ -208,8 +207,8 @@ export default function Faqs({ data }) {
                 Contact Our Team
               </a>
               <a
-                href="/schedule-demo"
-                className="px-8 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-300 hover:border-[#FF6600] hover:text-[#FF6600] hover:shadow-lg"
+                href="/appointment"
+                className="px-8 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-300 hover:border-[#FF6600] hover:text-[#FF6600] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600]"
                 aria-label="Schedule a free consultation"
               >
                 Schedule Free Consultation

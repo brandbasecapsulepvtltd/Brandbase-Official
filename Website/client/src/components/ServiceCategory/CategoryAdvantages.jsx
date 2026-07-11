@@ -75,8 +75,8 @@ const CategoryAdvantages = ({ data }) => {
                   <button
                     onClick={() => setActiveTab(key)}
                     className={`block w-full text-left py-4 text-lg border-b border-gray-200 dark:border-zinc-800 transition-colors duration-200 ${activeTab === key
-                        ? 'text-orange-600 font-bold'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-orange-600'
+                      ? 'text-orange-600 font-bold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-orange-600'
                       }`}
                   >
                     {section.title}

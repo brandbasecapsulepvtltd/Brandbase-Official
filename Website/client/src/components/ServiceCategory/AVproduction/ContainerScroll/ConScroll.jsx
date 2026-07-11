@@ -9,59 +9,57 @@ export default function ConScroll() {
       {/* Section 1 */}
       <ContainerScroll
         titleComponent={
-          <h1 className="text-4xl font-semibold text-black dark:text-white dark:text-white">
-            Dive into the Depths of Creativity
+          <h2 className="text-4xl font-semibold text-black dark:text-white">
+            Cinematic storytelling
             <br />
             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-              Where Every Scroll Breathes Life
+              Built for your brand
             </span>
-          </h1>
+          </h2>
         }
       >
         <img
-          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&h=720&auto=format&fit=crop"
-          alt="hero"
-          className="mx-auto rounded-2xl object-cover h-full object-left-top"
+          src="https://images.pexels.com/photos/8412361/pexels-photo-8412361.jpeg?auto=compress&cs=tinysrgb&w=1400"
+          alt="Director reviewing footage on a film set"
+          className="mx-auto rounded-2xl object-cover h-full object-center"
           draggable={false}
         />
       </ContainerScroll>
 
-      {/* Section 2 */}
       <ContainerScroll
         titleComponent={
-          <h1 className="text-4xl font-semibold text-black dark:text-white dark:text-white">
-            Build with the Power of Code
+          <h2 className="text-4xl font-semibold text-black dark:text-white">
+            Commercial & corporate films
             <br />
             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-              Your Vision, Seamlessly Integrated
+            From concept to final cut
             </span>
-          </h1>
+          </h2>
         }
       >
         <img
-          src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1400&h=720&auto=format&fit=crop"
-          alt="hero"
-          className="mx-auto rounded-2xl object-cover h-full object-left-top"
+          src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg?auto=compress&cs=tinysrgb&w=1400"
+          alt="Professional cinema camera rig"
+          className="mx-auto rounded-2xl object-cover h-full object-center"
           draggable={false}
         />
       </ContainerScroll>
 
-      {/* Section 3 */}
       <ContainerScroll
         titleComponent={
-          <h1 className="text-4xl font-semibold text-black dark:text-white dark:text-white">
-            Collaborate and Create, Together
+          <h2 className="text-4xl font-semibold text-black dark:text-white">
+            Event coverage & social reels
             <br />
             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-              Unlock Your Team's Potential
+              Content that performs
             </span>
-          </h1>
+          </h2>
         }
       >
         <img
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1400&h=720&auto=format&fit=crop"
-          alt="hero"
-          className="mx-auto rounded-2xl object-cover h-full object-left-top"
+          src="https://images.pexels.com/photos/6883796/pexels-photo-6883796.jpeg?auto=compress&cs=tinysrgb&w=1400"
+          alt="Video production studio lighting setup"
+          className="mx-auto rounded-2xl object-cover h-full object-center"
           draggable={false}
         />
       </ContainerScroll>

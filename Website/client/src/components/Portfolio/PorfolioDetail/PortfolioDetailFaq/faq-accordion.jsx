@@ -24,13 +24,13 @@ const CustomAccordionTrigger = React.forwardRef(({ className, children, ...props
         'group flex flex-1 items-center justify-between gap-4 rounded-2xl p-4 text-left',
         'bg-white dark:bg-zinc-800/50 dark:text-white transition-all hover:bg-gray-50 dark:hover:bg-zinc-700/50 hover:shadow-md',
         'focus-visible:outline-none focus-visible:ring-2',
-        'data-[state=open]:shadow-md',
+        'data-[state=open]:shadow-md data-[state=open]:border-[#FF6600]/20 border border-transparent',
         className
       )}
       {...props}
     >
       <div className="flex items-center gap-4">
-        <HelpCircle className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+        <HelpCircle className="h-5 w-5 text-[#FF6600]" />
         <span className="text-lg font-medium text-zinc-700 dark:text-zinc-50 tracking-wide">
           {children}
         </span>
@@ -76,11 +76,14 @@ export function AccordionComponent({ faqsData }) {
   const { sectionTitle, faqs } = faqsData;
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
+    <main className="py-16 md:py-20 px-4 bg-white dark:bg-zinc-950">
       <div className="w-full max-w-4xl mx-auto">
-        <h2 className="mb-8 text-center text-2xl font-bold dark:text-white md:text-3xl">
+        <h2 className="mb-3 text-center text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
           {sectionTitle}
         </h2>
+        <p className="text-center text-gray-500 dark:text-gray-400 mb-10 text-sm">
+          Common questions about this project and our process
+        </p>
         <CustomAccordion
           type="single"
           collapsible

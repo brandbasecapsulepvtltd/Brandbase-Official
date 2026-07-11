@@ -38,4 +38,10 @@ router.get('/industries/all', eventController.getAllIndustries);
 // POST bulk import
 router.post('/bulk-import', eventController.bulkImport);
 
+// POST trigger blog generation manually
+router.post('/generate-blogs', eventController.triggerBlogGeneration);
+
+// POST generate event details via AI
+router.post('/generate-ai-event', eventController.generateEventAI);
+
 module.exports = router;

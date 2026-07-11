@@ -1,9 +1,9 @@
+'use client';
+
 import React from 'react';
 import {
   Facebook,
-  Twitter,
   Linkedin,
-  Github,
   Instagram,
   MapPin,
   Mail,
@@ -12,19 +12,23 @@ import {
   FileText
 } from 'lucide-react';
 import Link from 'next/link';
+import { normalizeFooterData } from '@/lib/brandText';
+import { CONTACT, CONTACT_FORM_PROMPT, SHOW_PUBLIC_ADDRESS, SHOW_PUBLIC_PHONE } from '@/lib/contactConstants';
 
-const Footer = ({ data }) => {
+const Footer = ({ data: rawData }) => {
+  const data = normalizeFooterData(rawData);
   const description = data?.description || "Helping startups transform ideas into reality with cutting-edge technology solutions.";
   const contactInfo = data?.contactInfo || {
-    address: "Brandbase Capsule Pvt. Ltd \nOffice #204 2nd Floor, Near Bus Depot Pimpleshwar Temple, \nGulmohar Complex, Goregaon Railway Station, \nGoregaon East.",
-    email: "info@brandbasecapsule.com",
-    phone: "+91-9892211456"
+    address: CONTACT.address.full,
+    email: CONTACT.email,
+    phone: CONTACT.phoneMasked,
   };
-  const copyright = data?.copyright || "© 2025 Brandbase Capsule. All rights reserved.";
+  const copyrightYear = new Date().getFullYear();
+  const copyright = `© ${copyrightYear} BrandBase Capsule. All rights reserved.`;
   const gstin = data?.gstin || "27AAFCB8754H1Z7";
 
   return (
-    <footer className="bg-white dark:bg-zinc-900 dark:bg-black pt-20 pb-10">
+    <footer className="bg-white dark:bg-zinc-900 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* Main Grid Layout */}
@@ -36,12 +40,12 @@ const Footer = ({ data }) => {
               <div className="flex items-center gap-3">
                 <img
                   src="https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819"
-                  alt="Brandbase Capsule Logo"
+                  alt="BrandBase Capsule Logo"
                   className="h-auto w-[40%] lg:w-[70%] block dark:hidden"
                 />
                 <img
                   src="https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png"
-                  alt="Brandbase Capsule Logo Dark"
+                  alt="BrandBase Capsule Logo Dark"
                   className="h-auto w-[40%] lg:w-[70%] hidden dark:block"
                 />
               </div>
@@ -51,12 +55,10 @@ const Footer = ({ data }) => {
             </p>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-3">
-              <SocialIcon icon={<Facebook size={18} />} />
-              <SocialIcon icon={<Twitter size={18} />} />
-              <SocialIcon icon={<Linkedin size={18} />} />
-              <SocialIcon icon={<Github size={18} />} />
-              <SocialIcon icon={<Instagram size={18} />} />
+            <div className="flex items-center gap-3" suppressHydrationWarning>
+              {SOCIAL_LINKS.map(({ href, icon, label }) => (
+                <SocialIcon key={label} href={href} icon={icon} label={label} />
+              ))}
             </div>
           </div>
 
@@ -80,11 +82,10 @@ const Footer = ({ data }) => {
                 <ul className="space-y-4 text-md">
                   <FooterLink>Digital Marketing Solutions</FooterLink>
                   <FooterLink>Website Development</FooterLink>
-                  <FooterLink>App Development</FooterLink>
                   <FooterLink>Event & Exhibition Management</FooterLink>
-                  <FooterLink>Data Engineering</FooterLink>
                   <FooterLink>Audio & Video Production</FooterLink>
                   <FooterLink>Branding & Creative Design</FooterLink>
+                  <FooterLink href="/best-stall-design-company-in-mumbai" className="font-bold text-orange-500">Best Stall Design Company (Mumbai)</FooterLink>
                 </ul>
               </div>
 
@@ -95,7 +96,7 @@ const Footer = ({ data }) => {
                   <FooterLink href="/about">About Us</FooterLink>
                   <FooterLink href="/about">Team</FooterLink>
                   <FooterLink href="/services">Services</FooterLink>
-                  <FooterLink href="/blogs">Blog</FooterLink>
+                  <FooterLink href="/blogs">Blogs</FooterLink>
                   <FooterLink href="/careers">Careers</FooterLink>
                   <FooterLink href="/contact">Contact Us</FooterLink>
                 </ul>
@@ -108,18 +109,18 @@ const Footer = ({ data }) => {
             <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-6 text-xl">Contact</h3>
             <ul className="space-y-5">
 
-              {/* Address */}
-              <li className="flex items-start gap-3 text-gray-500 dark:text-gray-400 text-md group cursor-pointer">
+              {SHOW_PUBLIC_ADDRESS && (
+              <li className="flex items-start gap-3 text-gray-500 dark:text-gray-400 text-md group">
                 <MapPin
                   size={18}
                   className="mt-0.5 shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
                 <span className="relative leading-relaxed whitespace-pre-line">
-                  {contactInfo.address}
+                  {CONTACT.address.footerDisplay}
                 </span>
               </li>
+              )}
 
-              {/* Email */}
               <li className="flex items-center gap-3 text-gray-500 dark:text-gray-400 text-sm group cursor-pointer">
                 <Mail
                   size={18}
@@ -130,16 +131,27 @@ const Footer = ({ data }) => {
                 </Link>
               </li>
 
-              {/* Phone */}
+              {SHOW_PUBLIC_PHONE ? (
               <li className="flex items-center gap-3 text-gray-500 dark:text-gray-400 text-sm group cursor-pointer">
                 <Phone
                   size={18}
                   className="shrink-0 text-gray-400 group-hover:text-orange-400 transition-colors"
                 />
-                <Link href={`tel:${contactInfo.phone}`} className="relative">
-                  {contactInfo.phone}
+                <Link href="/contact" className="relative hover:text-orange-400 transition-colors">
+                  {CONTACT.phoneMasked}
                 </Link>
               </li>
+              ) : (
+              <li className="flex items-start gap-3 text-gray-500 dark:text-gray-400 text-sm">
+                <Phone
+                  size={18}
+                  className="mt-0.5 shrink-0 text-gray-400"
+                />
+                <Link href="/contact" className="relative hover:text-orange-400 transition-colors leading-relaxed">
+                  {CONTACT_FORM_PROMPT}
+                </Link>
+              </li>
+              )}
 
             </ul>
           </div>
@@ -188,12 +200,12 @@ const Footer = ({ data }) => {
 };
 
 // Reusable Component for Links
-const FooterLink = ({ children, href = "#" }) => {
+const FooterLink = ({ children, href = "#", className = "" }) => {
   return (
     <li>
       <Link
         href={href}
-        className="text-gray-800 dark:text-gray-200 text-sm inline-block relative group"
+        className={`text-gray-800 dark:text-gray-200 text-sm inline-block relative group ${className}`}
       >
         <span className="group-hover:text-orange-400 transition-colors duration-300">
           {children}
@@ -204,17 +216,24 @@ const FooterLink = ({ children, href = "#" }) => {
   );
 };
 
+const SOCIAL_LINKS = [
+  { href: 'https://www.facebook.com/people/Brandbase-Capsule/', icon: Facebook, label: 'Facebook' },
+  { href: 'https://www.linkedin.com/company/brandbase-capsule-pvt-ltd/', icon: Linkedin, label: 'LinkedIn' },
+  { href: 'https://www.instagram.com/brandbase_capsule_pvt_ltd_', icon: Instagram, label: 'Instagram' },
+];
+
 // Social Icon Component
-const SocialIcon = ({ icon }) => {
+const SocialIcon = ({ href, icon: Icon, label }) => {
   return (
-    <a
-      href="#"
-      className="bg-white dark:bg-zinc-900 dark:bg-black border border-gray-100 p-2.5 rounded-xl text-gray-500 dark:text-gray-400 shadow-sm 
-                 hover:text-orange-400 hover:shadow-md hover:-translate-y-1 
-                 transition-all duration-300"
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="inline-flex items-center justify-center bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-2.5 rounded-xl text-gray-500 dark:text-gray-400 shadow-sm hover:text-orange-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
     >
-      {icon}
-    </a>
+      <Icon size={18} aria-hidden="true" />
+    </Link>
   );
 };
 

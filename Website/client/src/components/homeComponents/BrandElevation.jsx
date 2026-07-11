@@ -14,14 +14,14 @@ export default function BrandElevation({ data }) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-16">
-          <h1
+          <h2
             id="brand-elevation-heading"
             className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
             Beyond Websites – A Full{" "}
             <span className="text-[#FF6600]">360°</span>
             Approach to Brand Elevation
-          </h1>
+          </h2>
           <p className="text-xl text-gray-800 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
             Your website is just one piece of the puzzle. We take a holistic approach to brand
             elevation & convenience-focused growth. Our suite of creative services from Design

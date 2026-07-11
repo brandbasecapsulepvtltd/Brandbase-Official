@@ -270,6 +270,24 @@ const portfolioData = {
             ]
         },
 
+        gallery: [
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/5.JPG",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/6.JPG",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/1.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/8.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/9.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/10.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/11.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/12.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/13.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/14.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/15.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/16.jpg",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/2.JPG",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/3.JPG",
+            "https://ik.imagekit.io/vinayak06/stalls/Indian%20Exhibition/4.JPG"
+        ],
+
         metadata: {
             title: "Exhibition Stall Design & Fabrication | Custom Booth Manufacturing",
             description: "Professional exhibition stall design and fabrication services. Custom booth manufacturing, 3D design concepts, and turnkey solutions for trade shows.",
@@ -729,10 +747,195 @@ const portfolioData = {
             ]
         },
 
+        gallery: [
+            "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop&q=60"
+        ],
+
         metadata: {
             title: "Professional Content Writing Services | SEO Content & Copywriting",
             description: "Expert content writing services including SEO articles, blog posts, website copy, and marketing content. Professional writers for all industries.",
             keywords: ["content writing", "SEO content", "copywriting services", "content marketing"]
+        }
+    },
+
+    eventManagement: {
+        slug: "event-management",
+        category: "event-management",
+        hero: {
+            tagline: "Orchestrated 200+ unforgettable experiences",
+            title: "Events That Don't Just Happen—They Trend",
+            description: "From intimate gatherings to massive festivals, we create experiences that attendees remember and talk about for years. Every detail meticulously planned, every moment Instagram-worthy.",
+            ctaText: "Plan Your Event",
+            videoUrl: "https://www.pexels.com/download/video/2495382/",
+            images: [
+                "/images/portfolio/event-management-trilegal-stage.png",
+                "https://images.unsplash.com/photo-1511578314322-379afb476865?w=900&auto=format&fit=crop&q=60",
+                "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&auto=format&fit=crop&q=60",
+                "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=900&auto=format&fit=crop&q=60",
+                "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&auto=format&fit=crop&q=60",
+                "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&auto=format&fit=crop&q=60",
+                "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&auto=format&fit=crop&q=60"
+            ]
+        },
+
+        bento: {
+            mainHeading: "Experiences Worth Remembering",
+            cards: {
+                conceptToReality: {
+                    title: "Concept to Celebration",
+                    imageAlt: "Event Planning Process",
+                    imageUrl: "https://images.unsplash.com/photo-1511578194003-00c80e42dc9b?w=800&auto=format&fit=crop&q=80"
+                },
+                projectsDelivered: {
+                    count: "200+",
+                    label: "Events Delivered"
+                },
+                amazingWork: {
+                    title: "We don't just plan events. We create viral moments.",
+                    structureImage: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=80",
+                    structureAlt: "Event Setup"
+                },
+                showcaseStall: {
+                    imageUrl: "/images/portfolio/event-management-trilegal-stage.png",
+                    alt: "Outdoor corporate event stage production",
+                    location: "Annual Summit 2024"
+                },
+                citiesReach: {
+                    count: "20+",
+                    label: "Cities Covered"
+                }
+            },
+            services: [
+                "Corporate Events",
+                "Product Launches",
+                "Conferences & Summits",
+                "Brand Activations",
+                "Wedding Planning",
+                "Festival Management",
+                "Virtual & Hybrid Events",
+                "Entertainment Booking"
+            ]
+        },
+
+        clientPortfolio: [
+            {
+                id: 1,
+                imagePosition: "right",
+                logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop",
+                companyName: "Fortune Tech Corp",
+                industry: "Technology",
+                projectTitle: "Annual Tech Summit 2024",
+                projectDescription: "Orchestrated a 3-day tech conference with 2,000+ attendees, featuring keynote speakers, breakout sessions, and interactive exhibitions that received overwhelming positive feedback.",
+                servicesProvided: [
+                    "Venue Management",
+                    "Speaker Coordination",
+                    "AV Production",
+                    "Attendee Registration"
+                ],
+                results: [
+                    { value: "2,000+", label: "Attendees" },
+                    { value: "98%", label: "Satisfaction Rate" },
+                    { value: "50+", label: "Industry Speakers" },
+                    { value: "5M+", label: "Social Reach" }
+                ],
+                mediaItems: [
+                    {
+                        type: "image",
+                        url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop",
+                        alt: "Conference Stage",
+                        title: "Main Stage Setup"
+                    },
+                    {
+                        type: "video",
+                        url: "https://www.pexels.com/download/video/2495382/",
+                        alt: "Event Highlights",
+                        title: "Summit Highlights",
+                        thumbnail: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=500&fit=crop"
+                    },
+                    {
+                        type: "image",
+                        url: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=500&fit=crop",
+                        alt: "Networking Area",
+                        title: "Networking Lounge"
+                    }
+                ],
+                testimonial: {
+                    clientImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+                    clientName: "Sarah Mitchell",
+                    position: "Events Director, Fortune Tech Corp",
+                    quote: "The summit exceeded all expectations. The attention to detail and seamless execution made it our most successful event to date. Attendees are still talking about it!"
+                }
+            }
+        ],
+
+        testimonials: {
+            sectionTitle: "What Our Event Clients Say",
+            sectionDescription: "Hear from brands that trusted us with their most important moments.",
+            testimonials: [
+                {
+                    text: "The product launch event they organized went viral on social media. Flawless execution from start to finish!",
+                    image: "https://randomuser.me/api/portraits/women/65.jpg",
+                    name: "Emily Roberts",
+                    role: "Marketing Head, Consumer Brand"
+                },
+                {
+                    text: "Our corporate gala was the talk of the industry. They turned our vision into an unforgettable reality.",
+                    image: "https://randomuser.me/api/portraits/men/45.jpg",
+                    name: "David Chen",
+                    role: "CEO, Financial Services"
+                },
+                {
+                    text: "The product launch event they organized went viral on social media. Flawless execution from start to finish!",
+                    image: "https://randomuser.me/api/portraits/women/65.jpg",
+                    name: "Emily Roberts",
+                    role: "Marketing Head, Consumer Brand"
+                },
+                {
+                    text: "Our corporate gala was the talk of the industry. They turned our vision into an unforgettable reality.",
+                    image: "https://randomuser.me/api/portraits/men/45.jpg",
+                    name: "David Chen",
+                    role: "CEO, Financial Services"
+                }
+            ]
+        },
+
+        faqs: {
+            sectionTitle: "Event Management Questions Answered",
+            faqs: [
+                {
+                    question: "What types of events do you manage?",
+                    answer: "We manage all types of events including corporate conferences, product launches, brand activations, weddings, festivals, virtual events, and hybrid experiences. From intimate gatherings of 20 to large-scale events with 10,000+ attendees."
+                },
+                {
+                    question: "How far in advance should we book?",
+                    answer: "For major events, we recommend booking 3-6 months in advance. However, we've successfully executed events with 2-week notice for urgent requirements. Early booking ensures better vendor availability and venue options."
+                },
+                {
+                    question: "Do you handle virtual and hybrid events?",
+                    answer: "Yes! We specialize in virtual and hybrid events with professional streaming, interactive platforms, virtual booths, and engagement tools that create seamless experiences for both in-person and remote participants."
+                }
+            ]
+        },
+
+        gallery: [
+            "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1519167758481-83f29da8fd88?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&auto=format&fit=crop&q=60",
+            "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&auto=format&fit=crop&q=60"
+        ],
+
+        metadata: {
+            title: "Professional Event Management Services | Corporate & Social Events",
+            description: "Expert event management and planning services for corporate events, conferences, product launches, and social gatherings. Full-service event coordination.",
+            keywords: ["event management", "corporate events", "event planning", "conference management"]
         }
     }
 };

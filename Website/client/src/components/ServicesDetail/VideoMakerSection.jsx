@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import SafeImage from '@/components/General/SafeImage';
 
 const VideoMakerSection = ({ data }) => {
   if (!data) return null;
@@ -22,9 +23,10 @@ const VideoMakerSection = ({ data }) => {
 
         {/* Image */}
         <div className="flex justify-center">
-          <img
+          <SafeImage
             src={data.imageUrl}
-            alt="Brandbase Capsule website development"
+            alt={data.heading || 'Brandbase Capsule service showcase'}
+            fallbackKey="video"
             className="w-full max-w-6xl h-auto object-contain drop-shadow-sm"
             loading="lazy"
           />

@@ -44,7 +44,7 @@ export default function CTASection({ data }) {
           {/* Left Content */}
           <div className="lg:pr-4 xl:pr-8">
             {/* Heading */}
-            <h1
+            <h2
               id="cta-section-heading"
               className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mt-2 sm:mt-4 leading-tight sm:leading-snug text-black dark:text-white"
             >
@@ -53,7 +53,7 @@ export default function CTASection({ data }) {
                   Transform your <span className="text-[#FF6A00]">digital</span> presence
                 </>
               )}
-            </h1>
+            </h2>
 
             {/* Description */}
             <p className="text-black dark:text-white mt-4 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl">
@@ -96,7 +96,7 @@ export default function CTASection({ data }) {
 
               {/* Solid button */}
               <a
-                href={data?.secondaryLink || "#"}
+                href={data?.secondaryLink || "/services"}
                 className="bg-[#FF6A00] hover:bg-[#E65D00] text-white font-semibold py-2.5 sm:py-3 md:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6A00]/25 text-sm sm:text-base inline-block text-center cursor-pointer"
                 aria-label="View all our digital services"
               >

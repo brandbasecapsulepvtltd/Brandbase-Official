@@ -1,25 +1,39 @@
-import Head from 'next/head';
-
-// Metadata should be exported as a named export
-export const metadata = {
-  title: 'Our Services',
-  description: 'Explore our services',
-}
+import { api } from '@/lib/api';
+import BlogCategoryContent from '@/components/Blog/BlogCategoryContent';
+import { buildBlogCategoryJsonLd, buildBlogCategoryMetadata } from '@/lib/corePagesSeo';
 
 export const revalidate = 10;
 
-// Page component must be the default export
-export default function BlogCategoryPage() {
-  return (
-    <div>
-      {/* Option 1: Using Next.js Head component for metadata */}
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </Head>
+export async function generateMetadata({ params }) {
+  const { category } = await params;
+  return buildBlogCategoryMetadata(category);
+}
 
-      <h1>All blogs of specific category</h1>
-      {/* Page content */}
-    </div>
-  )
+export default async function BlogCategoryPage({ params }) {
+  const { category } = await params;
+
+  let blogs = [];
+  let error = null;
+
+  try {
+    const response = await api.getBlogsByCategory(category);
+    if (response.success) {
+      blogs = response.data || [];
+    }
+  } catch (err) {
+    console.error('Error fetching blogs by category:', err);
+    error = 'Failed to load blogs. Please try again later.';
+  }
+
+  const jsonLd = buildBlogCategoryJsonLd(category, blogs);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BlogCategoryContent category={category} blogs={blogs} error={error} />
+    </>
+  );
 }

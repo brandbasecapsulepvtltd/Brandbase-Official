@@ -1,83 +1,59 @@
-import React from 'react'
-import { notFound } from 'next/navigation'
-// import { portfolioData } from '@/Data/portfolioData' // REMOVE
-import PortfolioDetailContent from '@/components/Portfolio/PorfolioDetail/PortfolioDetailContent'
+import { notFound } from 'next/navigation';
+import PortfolioDetailContent from '@/components/Portfolio/PorfolioDetail/PortfolioDetailContent';
+import { api } from '@/lib/api';
+import {
+  buildPortfolioDetailJsonLd,
+  buildPortfolioDetailMetadata,
+} from '@/lib/corePagesSeo';
 
-// Helper function to fetch data
-async function getPortfolio(slug) {
+export const revalidate = 10;
+
+export async function generateStaticParams() {
   try {
-    const res = await fetch(`https://api.brandbasecapsule.com/api/portfolios/slug/${slug}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-Key': '8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de'
-      },
-      next: { revalidate: 10 } // ISR
-    });
-
-    if (!res.ok) {
-      console.error('Fetch failed for slug:', slug, 'Status:', res.status); // Log error
-      return null;
-    }
-
-    const data = await res.json();
-    return data.data;
-  } catch (error) {
-    console.error('Failed to fetch portfolio:', error);
-    return null;
+    const response = await api.getPortfolios();
+    return (response.data || []).map((item) => ({ slug: item.slug }));
+  } catch {
+    return [];
   }
 }
 
-// 2. Generate Metadata
 export async function generateMetadata({ params }) {
-  const { slug } = await params
-  const portfolioItem = await getPortfolio(slug)
+  const { slug } = await params;
 
-  if (!portfolioItem) {
-    return {
-      title: 'Portfolio Not Found | BrandBase Capsule',
-      description: 'The requested portfolio page could not be found.'
-    }
-  }
-
-  const { metadata, hero } = portfolioItem;
-
-  return {
-    title: metadata?.title || `${hero?.title} | BrandBase Capsule Portfolio`,
-    description: metadata?.description || hero?.description,
-    keywords: metadata?.keywords || [],
-    openGraph: {
-      title: metadata?.title || hero?.title,
-      description: metadata?.description || hero?.description,
-      url: `https://www.brandbasecapsule.com/portfolio/${slug}`,
-      siteName: 'BrandBase Capsule Portfolio',
-      images: hero?.images && hero.images.length > 0 ? [
-        {
-          url: hero.images[0],
-          width: 1200,
-          height: 630,
-          alt: hero.title
-        }
-      ] : [],
-      type: 'website',
-    },
+  try {
+    const response = await api.getPortfolioBySlug(slug);
+    return buildPortfolioDetailMetadata(slug, response?.data);
+  } catch {
+    return buildPortfolioDetailMetadata(slug, null);
   }
 }
 
-// 3. Main Page Component
 export default async function PortfolioDetailPage({ params }) {
-  const { slug } = await params
+  const { slug } = await params;
 
-  const portfolioItem = await getPortfolio(slug)
-
-  // Handle 404
-  if (!portfolioItem) {
-    notFound()
+  let portfolio;
+  try {
+    const response = await api.getPortfolioBySlug(slug);
+    portfolio = response?.data;
+  } catch {
+    portfolio = null;
   }
 
-  // Pass directly as schema matches frontend props
+  if (!portfolio) {
+    notFound();
+  }
+
+  const jsonLd = buildPortfolioDetailJsonLd(slug, portfolio);
+
   return (
     <>
-      <PortfolioDetailContent portfolioItem={portfolioItem} />
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      <PortfolioDetailContent portfolioItem={portfolio} slug={slug} />
     </>
-  )
+  );
 }

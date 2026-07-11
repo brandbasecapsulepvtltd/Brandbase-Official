@@ -91,6 +91,7 @@ const portfolioSchema = new mongoose.Schema({
             answer: String
         }]
     },
+    gallery: [String], // Array of image URLs for the kinetic scroll gallery
     metadata: {
         title: String,
         description: String,

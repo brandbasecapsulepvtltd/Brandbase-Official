@@ -1,8 +1,8 @@
 import emailjs from '@emailjs/browser';
 
 // Simple API client for Next.js
-const API_URL = "https://api.brandbasecapsule.com/api";
-const API_KEY = "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api-brandbasecapsule-com-432601.hostingersite.com/api";
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || "8c36f75937af6c0777eeda50d0a0ca4ab90e8ddc4b518c9dbe51a59f064392de";
 
 // EmailJS Configuration
 const EMAILJS_CONFIG = {
@@ -27,15 +27,16 @@ function initializeEmailJS() {
 // Simple function to make API calls
 export async function apiCall(endpoint, options = {}) {
   const url = `${API_URL}${endpoint}`;
+  const { silent = false, revalidate, cache, ...fetchOptions } = options;
 
   const headers = {
     'Content-Type': 'application/json',
     'X-API-Key': API_KEY,
-    ...options.headers,
+    ...fetchOptions.headers,
   };
 
   const config = {
-    ...options,
+    ...fetchOptions,
     headers,
   };
 
@@ -43,9 +44,13 @@ export async function apiCall(endpoint, options = {}) {
     config.body = JSON.stringify(config.body);
   }
 
+  if (cache !== undefined) {
+    config.cache = cache;
+  }
+
   // Handle revalidation for Next.js
-  if (options.revalidate !== undefined) {
-    config.next = { revalidate: options.revalidate };
+  if (revalidate !== undefined) {
+    config.next = { revalidate };
   }
 
   try {
@@ -60,7 +65,9 @@ export async function apiCall(endpoint, options = {}) {
 
     return await response.json();
   } catch (error) {
-    console.error('API Call Failed:', error.message);
+    if (!silent) {
+      console.error('API Call Failed:', error.message);
+    }
     throw error;
   }
 }
@@ -233,10 +240,12 @@ export async function submitContactForm(data) {
 // Ready-to-use functions for your app:
 export const api = {
   // Homepage
-  getHomepage: () => apiCall('/homepage'),
+  getHomepage: () => apiCall('/homepage', { revalidate: 10, silent: true }),
+
+  getSliderBlogs: () => apiCall('/blogs/slider', { revalidate: 10, silent: true }),
 
   // About Section
-  getAboutSection: () => apiCall('/about-section'),
+  getAboutSection: () => apiCall('/about-section', { revalidate: 10, silent: true }),
 
   // Appointments
   getAppointments: () => apiCall('/appointments'),
@@ -247,6 +256,7 @@ export const api = {
 
   // Services
   getServices: () => apiCall('/services'),
+  getServicesCategories: () => apiCall('/services/categories'),
   getServiceByCategorySlug: (category, slug) =>
     apiCall(`/services/${category}/${slug}`),
   getService: async (identifier) => {
@@ -265,7 +275,25 @@ export const api = {
   // Blogs
   getBlogs: () => apiCall('/blogs'),
 
-  getBlogBySlug: (slug) => apiCall(`/blogs/slug/${slug}`),
+  getBlogBySlug: (slug) => apiCall(`/blogs/slug/${slug}`, { revalidate: 10, silent: true }),
+
+  getEditorsPicks: () => apiCall('/blogs/editors-picks'),
+
+  getHelpfulResources: () => apiCall('/blogs/helpful-resources'),
+
+  getBlogsByCategory: (category) => apiCall(`/blogs/category/${category}`),
+
+  searchBlogs: (query) => {
+    const queryString = new URLSearchParams(query).toString();
+    return apiCall(`/blogs/search${queryString ? `?${queryString}` : ''}`);
+  },
+
+  // Portfolios
+  getPortfolios: (category, options = {}) =>
+    apiCall(`/portfolios${category && category !== 'all' ? `?category=${category}` : ''}`, options),
+
+  getPortfolioBySlug: (slug) =>
+    apiCall(`/portfolios/${slug}`, { revalidate: 10, silent: true }),
 
 
   // Add these to your existing api object:
@@ -299,7 +327,11 @@ export const api = {
   }),
 
   // Continue with existing methods...
-  getEvents: () => apiCall('/events'),
+  getEvents: (options = {}) => apiCall('/events', options),
+  getEvent: (slug, options = {}) => {
+    if (!slug) return Promise.resolve(null);
+    return apiCall(`/events/${slug}`, options);
+  },
 
   // Contact us page api
   createContact: submitContactForm,

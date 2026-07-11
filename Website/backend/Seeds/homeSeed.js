@@ -101,33 +101,43 @@ const homePageData = {
     slides: [
       {
         id: 1,
-        title: "Create Experiences That Stand Out",
-        subtext: "From exhibitions to large-scale events, we craft immersive experiences that leave a lasting impact on your audience.",
-        image: "https://ik.imagekit.io/vinayak06/11.jpg?updatedAt=1763372433537"
+        title: "Exhibition Stalls That Command the Floor",
+        subtext: "Custom stall design, fabrication, and on-site management — turnkey exhibition solutions that make your brand impossible to ignore.",
+        image: "https://ik.imagekit.io/vinayak06/ServiceSlider/fabrication.jpg",
+        link: "/services/events-exhibition/stall-design",
+        linkText: "Explore"
       },
       {
         id: 2,
-        title: "Expert Web & App Development Solutions",
-        subtext: "Get world-class website development, app creation, and modern interface design tailored to your business goals.",
-        image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+        title: "Where Events Become Iconic Experiences",
+        subtext: "From high-impact exhibitions to unforgettable brand events, we design, build, and manage experiences that command attention and leave a lasting legacy.",
+        image: "https://ik.imagekit.io/vinayak06/stalls/BlogsImages/exhibition.jpg",
+        link: "/services/exhibition-management",
+        linkText: "Explore"
       },
       {
         id: 3,
-        title: "Build a Brand That Truly Stands Out",
-        subtext: "We craft powerful brand identities with strategic design, strong messaging, and visuals that leave a lasting impression.",
-        image: "https://images.squarespace-cdn.com/content/v1/522ea6f5e4b074ba686e497c/1625541238887-BISTJ5IEUBKLV409GM31/Crowdstrike+_+NYCD-100+_+06-29-21+_+-20.jpg?format=1500w"
+        title: "Web Experiences Built to Perform",
+        subtext: "High-end websites engineered for speed, scalability, and conversions—where design meets precision and performance.",
+        image: "https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/Business-removebg-preview.png",
+        link: "/services/website-development",
+        linkText: "Explore"
       },
       {
         id: 4,
-        title: "Grow Faster in the Digital World",
-        subtext: "We handle everything—from SEO and social ads to social media setup, content design, and content marketing—to elevate your brand online.",
-        image: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg"
+        title: "Cinematic Stories. Flawless Execution.",
+        subtext: "Premium audio-visual production crafted to elevate your brand—sharp visuals, immersive sound, and storytelling that feels larger than life.",
+        image: "https://images.pexels.com/photos/8412361/pexels-photo-8412361.jpeg?auto=compress&cs=tinysrgb&w=2070",
+        link: "/services/av-production",
+        linkText: "Explore"
       },
       {
         id: 5,
-        title: "Create Stories That Captivate",
-        subtext: "High-quality audio and video production services that bring your brand's vision to life with cinematic visuals and crystal-clear sound.",
-        image: "https://images.pexels.com/photos/8412361/pexels-photo-8412361.jpeg"
+        title: "Marketing That Commands the Digital Space",
+        subtext: "Strategic digital marketing designed to build authority, drive demand, and turn attention into measurable growth across every platform.",
+        image: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=2070",
+        link: "/services/digital-marketing",
+        linkText: "Explore"
       }
     ],
     video: {

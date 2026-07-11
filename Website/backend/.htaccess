@@ -1,0 +1,11 @@
+# Enable Node.js application
+PassengerEnabled on
+PassengerAppType node
+PassengerStartupFile server.js
+
+# Redirect all requests to the app
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ server.js [L]
+    

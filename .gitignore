@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Deploy archives (upload to Hostinger manually — too large for GitHub)
+*.zip
+
+# Next.js
+.next/
+out/
+
+# Build outputs
+dist/
+dist-ssr/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

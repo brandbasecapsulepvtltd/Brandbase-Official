@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, CalendarX } from "lucide-react";
 import {
   format,
@@ -18,6 +19,7 @@ import {
   isAfter,
   addDays,
 } from "date-fns";
+import { countEventsInMonth, isEventPast, parseEventDate } from "@/lib/eventUtils";
 
 // --- CSS STYLES ---
 const styles = `
@@ -164,9 +166,9 @@ const styles = `
   }
 
   .cal-day-cell.is-today .cal-day-number {
-    background: #4f46e5; color: white;
+    background: #FF6600; color: white;
     font-weight: 700;
-    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.35);
   }
 
   /* --- EVENTS --- */
@@ -293,8 +295,9 @@ const styles = `
   }
 `;
 
-export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 12, 26));
+export function EventCalendar({ eventsData = [], onEventClick = () => { }, asOfDate }) {
+  const referenceDate = asOfDate || new Date().toISOString();
+  const [currentDate, setCurrentDate] = useState(() => new Date());
 
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
@@ -348,8 +351,8 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
     });
 
     sortedEvents.forEach((event) => {
-      const eventStart = startOfDay(new Date(event.startDate));
-      const eventEnd = endOfDay(new Date(event.endDate));
+      const eventStart = startOfDay(parseEventDate(event.startDate) || new Date(event.startDate));
+      const eventEnd = endOfDay(parseEventDate(event.endDate) || new Date(event.endDate));
 
       if (isAfter(eventStart, calendarEnd) || isBefore(eventEnd, calendarStart))
         return;
@@ -401,10 +404,8 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
   const nextMonth = () => setCurrentDate(addMonths(currentDate, 1));
   const prevMonth = () => setCurrentDate(subMonths(currentDate, 1));
 
-  const eventsInMonth = Object.values(layoutData).reduce(
-    (acc, day) => acc + day.filter((e) => e).length,
-    0
-  );
+  const eventsInMonth = countEventsInMonth(eventsData, currentDate);
+  const monthLabel = format(currentDate, "MMMM");
 
   return (
     <>
@@ -416,8 +417,8 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
             <h2>{format(currentDate, "MMMM yyyy")}</h2>
             <p>
               {eventsInMonth > 0
-                ? `${eventsData.length} exhibitions found`
-                : "No exhibitions scheduled"}
+                ? `${eventsInMonth} exhibition${eventsInMonth === 1 ? "" : "s"} in ${monthLabel}`
+                : `No exhibitions in ${monthLabel}`}
             </p>
           </div>
           <div className="cal-controls">
@@ -475,8 +476,8 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
                           />
                         );
 
-                      const eventStart = startOfDay(new Date(event.startDate));
-                      const eventEnd = startOfDay(new Date(event.endDate));
+                      const eventStart = startOfDay(parseEventDate(event.startDate) || new Date(event.startDate));
+                      const eventEnd = startOfDay(parseEventDate(event.endDate) || new Date(event.endDate));
                       const currentDay = startOfDay(day);
 
                       const isStart = isSameDay(currentDay, eventStart);
@@ -488,20 +489,19 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
                       else if (isStart) positionClass = "event-start";
                       else if (isEnd) positionClass = "event-end";
 
+                      const past = isEventPast(event, referenceDate);
+
                       return (
-                        <div
+                        <Link
                           key={`${event.id}-${dayKey}`}
-                          className="cal-event-wrapper"
+                          href={`/event-calendar/${event.slug || event.id}`}
+                          className="cal-event-wrapper block"
+                          title={past ? `${event.name} (ended)` : event.name}
                         >
                           <div
                             className={`cal-event-pill ${getEventColor(
                               event.id
-                            )} ${positionClass}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onEventClick(event);
-                            }}
-                            title={event.name}
+                            )} ${positionClass} ${past ? "opacity-50" : ""}`}
                           >
                             {/* Always show name on mobile, or check logic */}
                             {(isStart || isMonday) && <span>{event.name}</span>}
@@ -509,7 +509,7 @@ export function EventCalendar({ eventsData = [], onEventClick = () => { } }) {
                             {/* Force show name on mobile even if middle of event */}
                             <span className="sm:hidden">{event.name}</span>
                           </div>
-                        </div>
+                        </Link>
                       );
                     })}
                   </div>

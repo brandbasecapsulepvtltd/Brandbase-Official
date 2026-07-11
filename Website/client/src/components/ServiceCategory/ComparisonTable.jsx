@@ -1,75 +1,115 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const ComparisonTable = ({ data }) => {
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="bg-white dark:bg-black min-h-screen p-8 mt-10">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 text-center mb-12">
-          Choosing the Right {data.category} Partner: <span className="text-orange-600">BrandBase</span> vs. Others
-        </h1>
+    <section className="bg-slate-50 dark:bg-zinc-950 py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-sm font-semibold uppercase tracking-widest text-orange-600 mb-3">
+            The Competitive Edge
+          </h2>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+            Why Choose <span className="text-orange-600">Brandbase Capsule</span>
+          </h1>
+          <p className="mt-4 text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto text-lg">
+            See how our tailored approach to {data.category} stacks up against the industry standard.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-          <div className="relative bg-orange-100 dark:bg-zinc-800/50 rounded-3xl p-8 shadow-sm border border-transparent dark:border-zinc-800 hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-            <div className="absolute top-0 right-0 pointer-events-none">
-              <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H100V60C100 60 80 40 50 50C20 60 0 100 0 100V0Z" fill="#efcd85ff" fillOpacity="0.5" />
-                <path d="M40 0H100V30C100 30 90 20 70 20C50 20 40 40 40 40V0Z" fill="#cf9c49ff" fillOpacity="0.2" />
-              </svg>
-            </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
+        >
+          {/* Main Brand Card - The "Powerful" One */}
+          <motion.div
+            variants={itemVariants}
+            className="relative z-10 order-1 md:order-2 group"
+          >
+            <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-400 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+            <div className="relative h-full bg-white dark:bg-zinc-900 rounded-[2rem] p-8 md:p-10 shadow-2xl border border-orange-100 dark:border-orange-900/30 transform md:scale-105">
+              <div className="flex items-center justify-between mb-10">
+                <img
+                  src={data.brand.logoUrl}
+                  alt="BrandBase"
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                  Recommended
+                </span>
+              </div>
 
-            <div className="mb-8 relative z-10">
-              <img
-                src={data.brand.logoUrl}
-                alt="Brand Logo"
-                className="h-10 object-contain"
-              />
-            </div>
-
-            <ul className="space-y-8 relative z-10">
-              {data.brand.features.map((feature, index) => (
-                <li key={index} className="flex items-start">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 dark:text-gray-300 font-medium text-sm leading-relaxed">
-                    {feature}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {data.others.map((column, colIndex) => (
-            <div key={colIndex} className="p-4 md:p-8 md:pt-12">
-              <h3 className="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-8">
-                {column.title}
-              </h3>
-
-              <ul className="space-y-8">
-                {column.points.map((point, pointIndex) => (
-                  <li key={pointIndex} className="flex items-start">
-                    <div className="flex-shrink-0 mr-4">
-                      <div className="w-6 h-6 rounded-full bg-red-50 dark:bg-red-900/30 flex items-center justify-center border border-red-100 dark:border-red-900/50">
-                        <svg className="w-3 h-3 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+              <ul className="space-y-6">
+                {data.brand.features.map((feature, index) => (
+                  <li key={index} className="flex items-start group/item">
+                    <div className="mr-4 mt-1">
+                      <div className="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/40">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
                     </div>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                      {point}
-                    </p>
+                    <span className="text-zinc-800 dark:text-zinc-200 font-semibold text-base leading-snug">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
+          </motion.div>
+
+          {/* Competitor Cards */}
+          {data.others.map((column, colIndex) => (
+            <motion.div
+              key={colIndex}
+              variants={itemVariants}
+              className={`order-2 ${colIndex === 0 ? 'md:order-1' : 'md:order-3'}`}
+            >
+              <div className="h-full bg-zinc-100/50 dark:bg-zinc-900/40 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 rounded-[2rem] p-8 transition-all duration-300 hover:bg-white dark:hover:bg-zinc-900 shadow-sm">
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-10 pb-4 border-b border-zinc-200 dark:border-zinc-800">
+                  {column.title}
+                </h3>
+
+                <ul className="space-y-6">
+                  {column.points.map((point, pointIndex) => (
+                    <li key={pointIndex} className="flex items-start opacity-80">
+                      <div className="mr-4 mt-1">
+                        <div className="w-5 h-5 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">
+                          <svg className="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </div>
+                      </div>
+                      <span className="text-zinc-600 dark:text-zinc-400 text-sm font-medium leading-relaxed">
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

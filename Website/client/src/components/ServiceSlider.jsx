@@ -7,11 +7,11 @@ export default function ServiceSlider() {
   const scope = useRef();
 
   const services = [
+    "Event & Exhibition Management",
     "Digital Marketing",
-    "Branding & Creative Design",
-    "Audio & Video Production",
     "Website Development",
-    "Mobile App Development"
+    "Audio & Video Production",
+    "Branding & Creative Design",
   ];
 
   useEffect(() => {

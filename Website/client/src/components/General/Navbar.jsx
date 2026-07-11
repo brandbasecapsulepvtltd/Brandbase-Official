@@ -8,6 +8,11 @@ import GlobalSearch from "./GlobalSearch";
 import ThemeToggle from "./ThemeToggle";
 import TopBar from "./TopBar";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  getDefaultNavbarServices,
+  normalizeNavbarDirectLinks,
+  normalizeNavbarServices,
+} from "@/lib/navbarServices";
 
 const Navbar = ({ data, topBarData }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,69 +78,25 @@ const Navbar = ({ data, topBarData }) => {
 
   const navClasses = isHome
     ? scrolled
-      ? "backdrop-blur-md bg-[#f8f8f0]/80 dark:bg-black/80 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800"
-      : "bg-gradient-to-b from-black/60 to-transparent text-white"
-    : "backdrop-blur-md bg-white dark:bg-zinc-900 dark:bg-black/90 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800";
+      ? "backdrop-blur-md bg-[#f8f8f0]/95 dark:bg-black/90 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800"
+      : "backdrop-blur-md bg-gradient-to-b from-black/85 via-black/65 to-black/30 text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+    : "backdrop-blur-md bg-white/95 dark:bg-zinc-900/95 text-[#FF6600] shadow-sm border-b border-orange-100 dark:border-zinc-800";
 
-  const textColor = isHome && !scrolled ? "text-white" : "text-[#FF6600]";
-  const hoverColor = isHome && !scrolled ? "bg-white dark:bg-zinc-900 dark:bg-black" : "bg-[#FF6600]";
+  const navLinkClass =
+    isHome && !scrolled
+      ? "text-white font-semibold drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
+      : "text-[#FF6600] font-medium";
 
-  const defaultServices = [
-    {
-      category: "Digital Marketing Solutions",
-      categoryLink: "/services/digital-marketing",
-      items: [
-        { name: "SEO Optimization", link: "/services/digital-marketing/seo-optimization" },
-        { name: "Online Ads Campaigns", link: "/services/digital-marketing/online-ads-campaigns" },
-        { name: "Social Media Marketing", link: "/services/digital-marketing/social-media-marketing" },
-        { name: "Social Media Page Setup", link: "/services/digital-marketing/social-media-page-setup" },
-        { name: "Social Media Content Design", link: "/services/digital-marketing/social-media-content-design" },
-        { name: "Professional Content Writing", link: "/services/digital-marketing/content-writing" },
-      ]
-    },
-    {
-      category: "Website Development",
-      categoryLink: "/services/website-development",
-      items: [
-        { name: "Business Website", link: "/services/website-development/business-website" },
-        { name: "Portfolio Website", link: "/services/website-development/portfolio-website" },
-        { name: "Landing Page Development", link: "/services/website-development/landing-page-development" },
-        { name: "CMS Website", link: "/services/website-development/cms-website" },
-        { name: "E-Commerce Websites", link: "/services/website-development/ecommerce-websites" },
-        { name: "Dynamic and Static ", link: "/services/website-development/dynamic-static" }
-      ]
-    },
-    {
-      category: "Mobile App Development",
-      categoryLink: "/services/mobile-app-development",
-      items: [
-        { name: "Android App Development", link: "/services/mobile-app-development/android-app-development" },
-        { name: "iOS App Development", link: "/services/mobile-app-development/ios-app-development" },
-        { name: "UI/UX for Apps", link: "/services/mobile-app-development/ui-ux-design" },
-        { name: "Cross-platform App", link: "/services/mobile-app-development/cross-platform-app-development" },
-        { name: "app maintenance support", link: "/services/mobile-app-development/app-maintenance-support" }
-      ]
-    },
-    {
-      category: "Event & Exhibition Management",
-      categoryLink: "/services/events-exhibition",
-      items: [
-        { name: "Stall & Booth Design", link: "/services/events-exhibition/stall-design" },
-        { name: "Event Planning & Management", link: "/services/events-exhibition/event-planning-management" },
-        { name: "Wedding Service", link: "/services/events-exhibition/wedding-service" },
-        { name: "Event Branding", link: "/services/events-exhibition/event-branding" },
-        { name: "On-site Event Coordination", link: "/services/events-exhibition/onsite-event-coordination" }
-      ]
-    }
-  ];
+  const hoverColor = isHome && !scrolled ? "bg-white" : "bg-[#FF6600]";
+  const showHeroLogo = isHome && !scrolled;
 
-  const defaultDirectLinkServices = [
-    { category: "Branding & Creative Design", link: "/services/branding-design" },
-    { category: "Audio & Video Production", link: "/services/av-production" }
-  ];
+  const defaultServices = getDefaultNavbarServices();
 
-  const services = data?.services && data.services.length > 0 ? data.services : defaultServices;
-  const directLinkServices = data?.directLinkServices && data.directLinkServices.length > 0 ? data.directLinkServices : defaultDirectLinkServices;
+  const services = normalizeNavbarServices(
+    data?.services?.length ? data.services : defaultServices,
+    data?.directLinkServices || []
+  );
+  const directLinkServices = normalizeNavbarDirectLinks();
   const logoLight = data?.logoLight || "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819";
   const logoDark = data?.logoDark || "https://ik.imagekit.io/vinayak06/brandbasewhite-removebg-preview.png";
 
@@ -164,15 +125,15 @@ const Navbar = ({ data, topBarData }) => {
         <Link href="/" className="flex items-center">
           <img
             src={logoLight}
-            alt="Brandbase capsule Logo"
-            className="h-17 w-auto block dark:hidden"
+            alt="BrandBase Capsule logo"
+            className={`h-17 w-auto ${showHeroLogo ? "hidden" : "block dark:hidden"}`}
             width={180}
             height={60}
           />
           <img
             src={logoDark}
-            alt="Brandbase capsule Logo Dark"
-            className="h-17 w-auto hidden dark:block"
+            alt="BrandBase Capsule logo"
+            className={`h-17 w-auto ${showHeroLogo ? "block" : "hidden dark:block"}`}
             width={180}
             height={60}
           />
@@ -184,7 +145,7 @@ const Navbar = ({ data, topBarData }) => {
             <Link
               key={path}
               href={path}
-              className={`relative group ${textColor} transition`}
+              className={`relative group ${navLinkClass} transition`}
             >
               {i === 0 ? "Home" : "About"}
               <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
@@ -197,7 +158,7 @@ const Navbar = ({ data, topBarData }) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <button className={`relative group flex items-center gap-1 ${textColor} transition`}>
+            <button className={`relative group flex items-center gap-1 ${navLinkClass} transition`}>
               Services
               <ChevronDown size={16} className={`transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
               <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
@@ -205,26 +166,26 @@ const Navbar = ({ data, topBarData }) => {
 
             <div
               className={`absolute top-full left-1/2 transform -translate-x-1/2 pt-4 transition-all duration-300 ease-in-out ${servicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"}`}
-              style={{ minWidth: "1000px" }}
+              style={{ minWidth: "920px" }}
             >
-              <div className="bg-white dark:bg-zinc-900 dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
-                <div className="overflow-y-auto p-8" style={{ maxHeight: "70vh" }}>
-                  <div className="grid grid-cols-4 gap-8 mb-8">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
+                <div className="p-8">
+                  <div className="grid grid-cols-5 gap-6 items-start">
                     {services.map((service, index) => (
-                      <div key={index} className="space-y-4">
+                      <div key={index} className="flex flex-col">
                         <Link
                           href={service.categoryLink}
-                          className="font-bold text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 border-b-2 border-orange-500 pb-2 hover:text-orange-600 transition-colors block"
+                          className="min-h-[4.75rem] flex flex-col justify-end font-bold text-lg leading-tight text-gray-900 dark:text-gray-100 border-b-2 border-orange-500 pb-2.5 mb-3 hover:text-orange-600 transition-colors"
                           onClick={handleLinkClick}
                         >
                           {service.category}
                         </Link>
-                        <ul className="space-y-2">
+                        <ul className="space-y-1.5">
                           {service.items.map((item, itemIndex) => (
                             <li key={itemIndex}>
                               <Link
                                 href={item.link}
-                                className="text-gray-600 dark:text-gray-300 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors duration-200 text-lg block py-1 hover:pl-2 transition-all"
+                                className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 transition-colors duration-200 text-base block py-1 hover:pl-2 transition-all"
                                 onClick={handleLinkClick}
                               >
                                 {item.name}
@@ -236,16 +197,17 @@ const Navbar = ({ data, topBarData }) => {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-200 dark:border-zinc-800 pt-8">
-                    <div className="grid grid-cols-2 gap-8">
+                  {directLinkServices.length > 0 && (
+                  <div className="border-t border-gray-200 dark:border-zinc-800 pt-6 mt-6">
+                    <div className="grid grid-cols-2 gap-6">
                       {directLinkServices.map((service, index) => (
                         <Link
                           key={index}
                           href={service.link}
-                          className="group flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-900 dark:bg-zinc-800 rounded-lg hover:bg-orange-50 dark:hover:bg-zinc-700 transition-all duration-300 border border-transparent hover:border-orange-200"
+                          className="group flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg hover:bg-orange-50 dark:hover:bg-zinc-700 transition-all duration-300 border border-transparent hover:border-orange-200"
                           onClick={handleLinkClick}
                         >
-                          <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 dark:text-gray-100 group-hover:text-orange-600">
+                          <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 group-hover:text-orange-600">
                             {service.category}
                           </h3>
                           <div className="text-orange-500 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
@@ -255,6 +217,7 @@ const Navbar = ({ data, topBarData }) => {
                       ))}
                     </div>
                   </div>
+                  )}
                 </div>
 
                 <div className="border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 dark:bg-zinc-800 p-4">
@@ -273,7 +236,7 @@ const Navbar = ({ data, topBarData }) => {
           {["/portfolio", "/blogs", "/contact"].map((path, i) => {
             const labels = ["Portfolio", "Blogs", "Contact Us"];
             return (
-              <Link key={path} href={path} className={`relative group ${textColor} transition`}>
+              <Link key={path} href={path} className={`relative group ${navLinkClass} transition`}>
                 {labels[i]}
                 <span className={`absolute left-0 bottom-0 w-0 h-[2px] ${hoverColor} transition-all duration-300 group-hover:w-full`}></span>
               </Link>
@@ -282,11 +245,11 @@ const Navbar = ({ data, topBarData }) => {
         </div>
 
         {/* Icons + Mobile Toggle */}
-        <div className={`flex items-center gap-6 sm:gap-7 ${textColor}`}>
+        <div className={`flex items-center gap-6 sm:gap-7 ${navLinkClass}`}>
           <div className="hidden md:block">
             <ThemeToggle />
           </div>
-          <a href="https://brandbase-nu.vercel.app/event-calendar" className="hover:opacity-70 transition">
+          <a href="/event-calendar" className="hover:opacity-70 transition">
             <Calendar size={24} />
           </a>
           <GlobalSearch />

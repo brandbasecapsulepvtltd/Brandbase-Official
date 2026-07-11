@@ -1,102 +1,65 @@
-import {
-  ContainerAnimated,
-  ContainerInset,
-  ContainerScroll,
-  ContainerStagger,
-} from "./hero-video"
+import Link from 'next/link';
+import { Rocket, Palette, TrendingUp } from 'lucide-react';
+
+const HIGHLIGHTS = [
+  { icon: Rocket, title: 'Performance Driven', text: 'High-conversion digital experiences' },
+  { icon: Palette, title: 'Strategic Design', text: 'User-centric design principles' },
+  { icon: TrendingUp, title: 'Measurable Results', text: 'Data-backed marketing solutions' },
+];
 
 const PortfolioHero = () => {
   return (
-    <ContainerScroll className="mt-32 bg-white dark:bg-black text-center text-black dark:text-white">
-      <ContainerStagger viewport={{ once: false }}>
-        {/* Main Headline */}
-        <ContainerAnimated animation="top">
-          <h1 className="text-4xl font-bold leading-none tracking-tighter sm:text-5xl md:text-7xl">
-            Transformative Solutions for <span className="text-[#FF6600]">Digital Success</span>
-          </h1>
-        </ContainerAnimated>
+    <section className="bg-white px-4 pb-8 pt-8 text-center text-black dark:bg-zinc-950 dark:text-white md:px-8">
+      <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#FF6600]">
+        Our Work
+      </p>
+      <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+        Transformative Solutions for{' '}
+        <span className="bg-gradient-to-r from-[#FF6600] to-orange-500 bg-clip-text text-transparent">
+          Digital Success
+        </span>
+      </h1>
 
-        {/* Supporting Statement */}
-        <ContainerAnimated animation="bottom">
-          <h2 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl text-gray-700 dark:text-gray-300 mt-6">
-            Where Strategy Meets Execution
-          </h2>
-        </ContainerAnimated>
+      <p className="mt-6 text-xl font-medium text-gray-600 dark:text-gray-300 md:text-2xl">
+        Where Strategy Meets Execution
+      </p>
 
-        {/* Portfolio Value Proposition */}
-        <ContainerAnimated animation="blur" className="my-8 md:my-10">
-          <p className="text-lg md:text-xl leading-relaxed tracking-normal max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
-            Explore our portfolio of innovative projects where we've delivered exceptional results
-            through strategic digital solutions. From comprehensive marketing campaigns to
-            cutting-edge web development, our work demonstrates our commitment to excellence
-            and measurable business impact.
-          </p>
-        </ContainerAnimated>
+      <p className="mx-auto my-8 max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 md:my-10 md:text-xl">
+        Explore exhibition stalls, events, websites, and brand campaigns where we delivered
+        exceptional results and measurable business impact.
+      </p>
 
-        {/* Portfolio Highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
-            <div className="text-3xl mb-3">🚀</div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Performance Driven</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">High-conversion digital experiences</p>
-          </div>
-          <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
-            <div className="text-3xl mb-3">🎨</div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Strategic Design</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">User-centric design principles</p>
-          </div>
-          <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
-            <div className="text-3xl mb-3">📈</div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Measurable Results</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Data-backed marketing solutions</p>
-          </div>
-        </div>
-
-        {/* CTAs */}
-        <div className="py-5 mt-5 flex flex-col sm:flex-row justify-center items-center gap-6">
-          <button
-            className="rounded-lg bg-[#FF6600] text-white hover:bg-[#E55A00] px-8 py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg"
+      <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
+        {HIGHLIGHTS.map(({ icon: Icon, title, text }) => (
+          <div
+            key={title}
+            className="flex flex-col items-center rounded-xl border border-gray-100 bg-gray-50 p-6 transition-colors hover:border-[#FF6600]/30 dark:border-zinc-800 dark:bg-zinc-900"
           >
-            Explore Our Portfolio
-          </button>
-          <button
-            className="rounded-lg border-2 border-gray-300 text-gray-700 dark:text-gray-300 hover:border-[#FF6600] hover:text-[#FF6600] px-8 py-4 text-lg font-semibold transition-all duration-300 bg-transparent"
-          >
-            Schedule a Consultation
-          </button>
-        </div>
-      </ContainerStagger>
-
-      {/* Portfolio Showcase Video */}
-      <ContainerInset>
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-          <video
-            width="100%"
-            height="100%"
-            loop
-            playsInline
-            autoPlay
-            muted
-            className="relative z-10 block h-auto w-full max-h-[600px] object-cover"
-          >
-            <source
-              src="https://www.pexels.com/download/video/6774633/"
-              type="video/mp4"
-            />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-
-          {/* Video Caption */}
-          <div className="absolute bottom-6 left-6 right-6 text-left">
-            <div className="inline-flex items-center gap-2 bg-white dark:bg-zinc-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
-              <div className="w-2 h-2 bg-[#FF6600] rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Portfolio Showcase: Recent Project Highlight</span>
+            <div className="mb-3 rounded-lg bg-[#FF6600]/10 p-3 text-[#FF6600]">
+              <Icon className="h-6 w-6" aria-hidden="true" />
             </div>
+            <h2 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">{title}</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{text}</p>
           </div>
-        </div>
-      </ContainerInset>
-    </ContainerScroll>
-  )
-}
+        ))}
+      </div>
 
-export { PortfolioHero }
+      <div className="mt-5 flex flex-col items-center justify-center gap-4 py-5 sm:flex-row">
+        <Link
+          href="/contact"
+          className="rounded-xl border-2 border-[#FF6600] px-8 py-3.5 text-base font-semibold text-[#FF6600] transition-all duration-300 hover:bg-[#FF6600] hover:text-white"
+        >
+          Schedule a Consultation
+        </Link>
+        <Link
+          href="/services"
+          className="rounded-xl px-8 py-3.5 text-base font-semibold text-gray-600 transition-colors hover:text-[#FF6600] dark:text-gray-300"
+        >
+          View Our Services
+        </Link>
+      </div>
+    </section>
+  );
+};
+
+export { PortfolioHero };

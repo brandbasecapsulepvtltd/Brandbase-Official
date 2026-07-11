@@ -9,20 +9,26 @@ const seedAdmin = async () => {
     try {
         await connectDB();
 
-        // Clear existing admins (optional, but good for consistent seed)
-        await Admin.deleteMany({ email: 'wayne5403n@gmail.com' });
+        // Create or update admin
+        const adminData = {
+            name: 'Main Admin',
+            email: 'info@brandbasecapsule.com',
+            password: 'bcpl2030' // This will be hashed by the pre-save hook
+        };
 
-        const admin = new Admin({
-            name: 'Wayne Admin',
-            email: 'wayne5403n@gmail.com',
-            password: 'vinayak5403' // This will be hashed by the pre-save hook
-        });
+        const existingAdmin = await Admin.findOne({ email: adminData.email });
+        if (existingAdmin) {
+            existingAdmin.password = adminData.password;
+            await existingAdmin.save();
+            console.log('✅ Admin user updated successfully');
+        } else {
+            const admin = new Admin(adminData);
+            await admin.save();
+            console.log('✅ Admin user created successfully');
+        }
 
-        await admin.save();
-
-        console.log('✅ Admin user seeded successfully');
-        console.log('Email: wayne5403n@gmail.com');
-        console.log('Password: vinayak5403');
+        console.log('Email: ' + adminData.email);
+        console.log('Password: ' + adminData.password);
 
         process.exit();
     } catch (error) {

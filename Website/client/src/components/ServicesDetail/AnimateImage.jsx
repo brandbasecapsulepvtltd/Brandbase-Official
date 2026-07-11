@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import SafeImage from '@/components/General/SafeImage';
 
 const MediaCard = ({ data, isSelected, onClick }) => {
   // --- REVISED WIDTH LOGIC ---
@@ -51,10 +52,12 @@ const MediaCard = ({ data, isSelected, onClick }) => {
       onClick={() => onClick(data.id)}
       className={`relative ${heightClass} rounded-[1rem] cursor-pointer overflow-hidden transition-all duration-500 ease-in-out transform hover:shadow-2xl hover:scale-[1.01] ${finalWidthClass}`}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-500 ease-in-out hover:shadow-xl"
-        style={{ backgroundImage: `url(${data.image})` }}
-      ></div>
+      <SafeImage
+        src={data.image}
+        alt={data.title || `Service highlight ${data.id}`}
+        fallbackKey="animate"
+        className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out"
+      />
       {/* Optional: Add content overlay for mobile view to show context when stacked 
        {finalWidthClass.includes('w-full') && (
          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white">

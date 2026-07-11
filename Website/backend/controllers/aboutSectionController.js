@@ -290,7 +290,7 @@ exports.updateSection = async (req, res) => {
                 runValidators: true,
                 upsert: true
             }
-        );
+        ); 
 
         // Convert milestones Map to plain object for JSON response
         const contentObj = content.toObject();

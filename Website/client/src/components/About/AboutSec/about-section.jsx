@@ -1,6 +1,7 @@
 "use client";
 import { VerticalCutReveal } from "./vertical-cut-reveal";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutSection3({ content }) {
   const { socials, image, stats, title, description1, description2, cta } = content || {};
@@ -129,7 +130,7 @@ export default function AboutSection3({ content }) {
         {/* Main Content */}
         <div className="grid md:grid-cols-3 gap-8 mt-4">
           <div className="md:col-span-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-white mb-6 md:mb-8">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl !leading-[110%] font-semibold text-gray-900 dark:text-white mb-6 md:mb-8">
               <VerticalCutReveal
                 splitBy="words"
                 staggerDuration={0.1}
@@ -144,7 +145,7 @@ export default function AboutSection3({ content }) {
               >
                 {title}
               </VerticalCutReveal>
-            </h1>
+            </h2>
 
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 text-gray-600 dark:text-gray-300">
               <div className="text-xs sm:text-base">
@@ -176,9 +177,12 @@ export default function AboutSection3({ content }) {
               </div>
 
               {/* Button: w-full on mobile, then w-fit ml-auto on md and up */}
-              <button className="bg-neutral-900 hover:bg-neutral-950 dark:bg-orange-600 dark:hover:bg-orange-700 shadow-lg shadow-neutral-900 border border-neutral-700 dark:border-orange-500 flex w-full md:w-fit md:ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold justify-center md:justify-start">
-                {cta?.buttonText} <ArrowRight className="" />
-              </button>
+              <Link
+                href={cta?.buttonLink || '/contact'}
+                className="bg-neutral-900 hover:bg-neutral-950 dark:bg-orange-600 dark:hover:bg-orange-700 shadow-lg shadow-neutral-900/20 dark:shadow-orange-900/20 border border-neutral-700 dark:border-orange-500 flex w-full md:w-fit md:ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg font-semibold justify-center md:justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600]"
+              >
+                {cta?.buttonText || "Let's Collaborate"} <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>

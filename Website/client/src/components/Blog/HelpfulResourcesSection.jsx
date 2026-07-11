@@ -1,5 +1,6 @@
 // HelpfulResourcesSection.jsx
 import React from 'react';
+import SafeImage from '@/components/General/SafeImage';
 
 const HelpfulResourcesSection = ({ helpfulResources = [] }) => {
   // If no helpful resources, return null
@@ -24,10 +25,11 @@ const HelpfulResourcesSection = ({ helpfulResources = [] }) => {
         </div>
 
         {/* Image Container */}
-        <div className="relative w-full aspect-[4/3] sm:aspect-video rounded-xl overflow-hidden mt-6">
-          <img
+        <div className="relative w-full aspect-[4/3] sm:aspect-video rounded-xl overflow-hidden mt-6 bg-gray-100 dark:bg-zinc-800">
+          <SafeImage
             src={resource.metadata.featuredImage}
             alt={resource.metadata.title}
+            fallbackKey="blog"
             className="object-cover w-full h-full transform transition duration-500 group-hover:scale-[1.03]"
             loading="lazy"
           />

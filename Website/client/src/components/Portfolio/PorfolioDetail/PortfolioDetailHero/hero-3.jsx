@@ -3,16 +3,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../../../lib/utils"; // Assuming you have a `cn` utility from shadcn
+import Link from 'next/link';
 
 // Reusable Button component styled like in the image
 const ActionButton = ({ children }) => (
-  <motion.button
+  <motion.span
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
-    className="mt-12 px-8 py-3 rounded-full bg-orange-500 text-white font-semibold shadow-lg transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-75"
+    className="inline-block mt-10 px-8 py-3.5 rounded-xl bg-[#FF6600] text-white font-semibold shadow-lg transition-colors hover:bg-[#E55A00] focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:ring-offset-2"
   >
     {children}
-  </motion.button>
+  </motion.span>
 );
 
 // The main hero component
@@ -36,7 +37,7 @@ export const AnimatedMarqueeHero = ({
   return (
     <section
       className={cn(
-        "relative w-full h-screen overflow-hidden bg-white dark:bg-black flex flex-col items-center justify-center text-center px-4",
+        "relative w-full h-screen overflow-hidden bg-white dark:bg-zinc-950 flex flex-col items-center justify-center text-center px-4",
         className
       )}
     >
@@ -46,7 +47,7 @@ export const AnimatedMarqueeHero = ({
           initial="hidden"
           animate="show"
           variants={FADE_IN_ANIMATION_VARIANTS}
-          className="mb-4 inline-block rounded-full border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800/50 px-4 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 backdrop-blur-sm"
+          className="mb-4 inline-block rounded-full border border-[#FF6600]/20 bg-[#FF6600]/5 px-4 py-1.5 text-sm font-semibold text-[#FF6600] backdrop-blur-sm"
         >
           {tagline}
         </motion.div>
@@ -63,7 +64,7 @@ export const AnimatedMarqueeHero = ({
               },
             },
           }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 dark:text-white"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white max-w-5xl"
         >
           {typeof title === 'string' ? (
             title.split(" ").map((word, i) => (
@@ -80,27 +81,28 @@ export const AnimatedMarqueeHero = ({
           )}
         </motion.h1>
 
-        {/* Description 
-        
-                <motion.p
-          initial="hidden"
-          animate="show"
-          variants={FADE_IN_ANIMATION_VARIANTS}
-          transition={{ delay: 0.5 }}
-          className="mt-6 max-w-2xl text-lg font-bold text-orange-600"
-        >
-          {description}
-        </motion.p>
-        */}
+        {description && (
+          <motion.p
+            initial="hidden"
+            animate="show"
+            variants={FADE_IN_ANIMATION_VARIANTS}
+            transition={{ delay: 0.4 }}
+            className="mt-6 max-w-2xl text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+          >
+            {description}
+          </motion.p>
+        )}
 
-        {/* Call to Action Button */}
+        {/* Call to Action */}
         <motion.div
           initial="hidden"
           animate="show"
           variants={FADE_IN_ANIMATION_VARIANTS}
           transition={{ delay: 0.6 }}
         >
-          <ActionButton>{ctaText}</ActionButton>
+          <Link href="/appointment">
+            <ActionButton>{ctaText}</ActionButton>
+          </Link>
         </motion.div>
       </div>
 

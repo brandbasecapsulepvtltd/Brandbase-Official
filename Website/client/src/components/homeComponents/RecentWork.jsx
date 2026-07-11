@@ -1,4 +1,5 @@
 import Tag from "../Tag";
+import Link from "next/link";
 
 const recentWorks = [
   {
@@ -51,12 +52,12 @@ export default function RecentWork({ data }) {
           <div className="flex justify-center lg:justify-start">
             <Tag>Our Recent Work</Tag>
           </div>
-          <h1
+          <h2
             id="recent-work-heading"
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium mt-3 sm:mt-4 leading-tight text-black dark:text-white"
           >
             Work We're Proud Of
-          </h1>
+          </h2>
         </header>
 
         {/* Bento Grid */}
@@ -96,12 +97,13 @@ export default function RecentWork({ data }) {
 
         {/* CTA Button */}
         <div className="mt-8 sm:mt-10 md:mt-12 flex justify-center">
-          <button
-            className="bg-[#FF6A00] hover:bg-[#E65D00] text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6A00]/25 text-sm sm:text-base"
+          <Link
+            href="/portfolio"
             aria-label="View all our recent projects portfolio"
+            className="bg-[#FF6A00] hover:bg-[#E65D00] text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6A00]/25 text-sm sm:text-base"
           >
             View All Projects
-          </button>
+          </Link>
         </div>
       </div>
     </section>

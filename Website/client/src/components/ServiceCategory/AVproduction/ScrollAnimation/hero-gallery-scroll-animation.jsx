@@ -11,28 +11,13 @@ import {
 import { cn } from "@/lib/utils"
 
 const bentoGridVariants = cva(
-    "relative grid gap-4 [&>*:first-child]:origin-top-right [&>*:nth-child(3)]:origin-bottom-right [&>*:nth-child(4)]:origin-top-right",
+    "relative grid gap-4 p-4",
     {
         variants: {
             variant: {
-                default: `
-          grid-cols-8 grid-rows-[1fr_0.5fr_0.5fr_1fr]
-          [&>*:first-child]:col-span-8 md:[&>*:first-child]:col-span-6 [&>*:first-child]:row-span-3
-          [&>*:nth-child(2)]:col-span-2 md:[&>*:nth-child(2)]:row-span-2 [&>*:nth-child(2)]:hidden md:[&>*:nth-child(2)]:block
-          [&>*:nth-child(3)]:col-span-2 md:[&>*:nth-child(3)]:row-span-2 [&>*:nth-child(3)]:hidden md:[&>*:nth-child(3)]:block
-          [&>*:nth-child(4)]:col-span-4 md:[&>*:nth-child(4)]:col-span-3
-          [&>*:nth-child(5)]:col-span-4 md:[&>*:nth-child(5)]:col-span-3
-        `,
-                threeCells: `
-          grid-cols-2 grid-rows-2
-          [&>*:first-child]:col-span-2
-      `,
-                fourCells: `
-        grid-cols-3 grid-rows-2
-        [&>*:first-child]:col-span-1
-        [&>*:nth-child(2)]:col-span-2
-        [&>*:nth-child(3)]:col-span-2
-      `,
+                default: "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[300px]",
+                threeCells: "grid-cols-2 grid-rows-2 [&>*:first-child]:col-span-2",
+                fourCells: "grid-cols-3 grid-rows-2 [&>*:first-child]:col-span-1 [&>*:nth-child(2)]:col-span-2 [&>*:nth-child(3)]:col-span-2",
             },
         },
         defaultVariants: {
@@ -57,16 +42,19 @@ const ContainerScroll = ({ children, className, ...props }) => {
     const scrollRef = React.useRef(null)
     const { scrollYProgress } = useScroll({
         target: scrollRef,
+        offset: ["start start", "end end"],
     })
 
     return (
         <ContainerScrollContext.Provider value={{ scrollYProgress }}>
             <div
                 ref={scrollRef}
-                className={cn("relative min-h-screen w-full", className)}
+                className={cn("relative h-[200vh] w-full", className)} // Reduced height from 350vh
                 {...props}
             >
-                {children}
+                <div className="sticky top-0 h-screen w-full overflow-hidden">
+                    {children}
+                </div>
             </div>
         </ContainerScrollContext.Provider>
     )
@@ -76,23 +64,34 @@ const BentoGrid = React.forwardRef(({ variant, className, ...props }, ref) => {
     return (
         <div
             ref={ref}
-            className={cn(bentoGridVariants({ variant }), className)}
+            className={cn(
+                "absolute inset-0 flex items-center justify-center", // Center grid in the sticky container
+                className
+            )}
             {...props}
-        />
+        >
+            <div className={cn("w-full max-w-7xl", bentoGridVariants({ variant }))}>
+                {props.children}
+            </div>
+        </div>
     )
 })
 BentoGrid.displayName = "BentoGrid"
 
-const BentoCell = React.forwardRef(({ className, style, ...props }, ref) => {
+const BentoCell = React.forwardRef(({ className, style, index, ...props }, ref) => {
     const { scrollYProgress } = useContainerScrollContext()
-    const translate = useTransform(scrollYProgress, [0.1, 0.9], ["-35%", "0%"])
-    const scale = useTransform(scrollYProgress, [0, 0.9], [0.5, 1])
+
+    // Staggered parallax effect based on index if provided, otherwise uniform
+    const translateY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"])
+    const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9])
+    const opacity = useTransform(scrollYProgress, [0.6, 1], [1, 0])
+
 
     return (
         <motion.div
             ref={ref}
-            className={className}
-            style={{ translate, scale, ...style }}
+            className={cn("overflow-hidden rounded-xl shadow-sm", className)} // Refined styles
+            style={{ y: translateY, scale, opacity, ...style }}
             {...props}
         />
     )
@@ -101,26 +100,25 @@ BentoCell.displayName = "BentoCell"
 
 const ContainerScale = React.forwardRef(({ className, style, ...props }, ref) => {
     const { scrollYProgress } = useContainerScrollContext()
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
-    const position = useTransform(scrollYProgress, (pos) =>
-        pos >= 0.6 ? "absolute" : "fixed"
-    )
+    const scale = useTransform(scrollYProgress, [0, 0.4], [0.8, 1])
+    const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+    const y = useTransform(scrollYProgress, [0, 0.4], ["100%", "0%"])
 
     return (
         <motion.div
             ref={ref}
-            className={cn("left-1/2 top-1/2 size-fit", className)}
+            className={cn("absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none", className)} // Centered overlay
             style={{
-                translate: "-50% -50%",
                 scale,
-                position,
                 opacity,
+                y,
                 ...style,
             }}
-            {...props}
-        />
+        >
+            <div className="pointer-events-auto text-center px-4">
+                {props.children}
+            </div>
+        </motion.div>
     )
 })
 ContainerScale.displayName = "ContainerScale"

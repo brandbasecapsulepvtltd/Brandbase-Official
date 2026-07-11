@@ -1,5 +1,6 @@
 // EditorPicksSection.jsx
 import React from 'react';
+import SafeImage from '@/components/General/SafeImage';
 
 const EditorPicksSection = ({ editorPicks = [] }) => {
   // If no editor picks, return null
@@ -26,10 +27,11 @@ const EditorPicksSection = ({ editorPicks = [] }) => {
           <div className="lg:col-span-2">
             <a href={`/blogs/${mainPick.metadata.category}/${mainPick.metadata.slug}`} className="group block h-full">
               {/* Image Container */}
-              <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden mb-6">
-                <img
+              <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden mb-6 bg-gray-100 dark:bg-zinc-800">
+                <SafeImage
                   src={mainPick.metadata.featuredImage}
                   alt={mainPick.metadata.title}
+                  fallbackKey="blog"
                   className="object-cover w-full h-full transform transition duration-500 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
@@ -53,9 +55,10 @@ const EditorPicksSection = ({ editorPicks = [] }) => {
                 {index > 0 && <div className="border-t border-gray-200 dark:border-zinc-800"></div>}
                 <a href={`/blogs/${pick.metadata.category}/${pick.metadata.slug}`} className="group flex items-start pt-8">
                   <div className="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden mr-4 bg-gray-100 dark:bg-zinc-800">
-                    <img
+                    <SafeImage
                       src={pick.metadata.featuredImage}
                       alt={pick.metadata.title}
+                      fallbackKey="blog"
                       className="object-cover w-full h-full"
                       loading="lazy"
                     />

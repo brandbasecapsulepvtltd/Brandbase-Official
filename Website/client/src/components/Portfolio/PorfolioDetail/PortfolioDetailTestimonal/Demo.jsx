@@ -1,3 +1,5 @@
+"use client";
+
 import { TestimonialsColumn } from "./testimonials-columns-1";
 import { motion } from "framer-motion";
 
@@ -12,7 +14,7 @@ const TestimonalsOne = ({ testimonialsData }) => {
   return (
     <section className="bg-white dark:bg-black my-20 relative">
       <div className="container z-10 mx-auto">
-        <div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -29,7 +31,7 @@ const TestimonalsOne = ({ testimonialsData }) => {
           <p className="text-center mt-5 text-gray-600 dark:text-gray-400">
             {sectionDescription}
           </p>
-        </div>
+        </motion.div>
 
         <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
           <TestimonialsColumn testimonials={firstColumn} duration={15} />

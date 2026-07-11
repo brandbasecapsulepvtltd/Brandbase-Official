@@ -52,8 +52,8 @@ const ComparisonSection = ({ data }) => {
         <div className="px-4 sm:px-6 lg:px-8 max-w-full mx-auto overflow-x-auto">
           <div className="inline-block min-w-full align-middle bg-gray-50 dark:bg-zinc-900 rounded-xl shadow-lg">
             {/* Table Container with horizontal scroll on very small screens */}
-            <div className="overflow-x-auto rounded-xl">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-zinc-800">
+            <div className="comparison-table-scroll overflow-x-auto rounded-xl">
+              <table className="comparison-table min-w-full divide-y divide-gray-200 dark:divide-zinc-800">
                 {/* Table Header */}
                 <thead>
                   <tr className="bg-orange-100 dark:bg-orange-900/30 text-black dark:text-white">
@@ -141,30 +141,6 @@ const ComparisonSection = ({ data }) => {
         </div>
         */}
       </div>
-
-      {/* Responsive styles */}
-      <style jsx>{`
-        @media (max-width: 640px) {
-          /* Ensure table cells have minimum width */
-          th, td {
-            min-width: 120px;
-          }
-          /* First column stays fixed */
-          th:first-child,
-          td:first-child {
-            min-width: 150px;
-            position: sticky;
-            left: 0;
-            z-index: 10;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-          }
-        }
-        
-        /* Smooth scrolling for mobile */
-        .overflow-x-auto {
-          -webkit-overflow-scrolling: touch;
-        }
-      `}</style>
     </section>
   );
 };

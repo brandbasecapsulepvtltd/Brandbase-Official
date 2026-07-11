@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import SafeImage from '@/components/General/SafeImage';
 
 const FeatureSection = ({ data }) => {
   if (!data) return null;
@@ -26,11 +27,13 @@ const FeatureSection = ({ data }) => {
           {/* Image Content */}
           <div className="w-full lg:w-1/2 flex justify-center items-center">
             <div className="relative w-full max-w-md h-80 sm:h-96 lg:h-full lg:max-w-none">
-              <img
+              <SafeImage
                 src={feature.image}
                 alt={feature.title}
+                fallbackKey="feature"
                 className="object-contain w-full h-full"
-                priority={index === 0}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
               />
             </div>
           </div>

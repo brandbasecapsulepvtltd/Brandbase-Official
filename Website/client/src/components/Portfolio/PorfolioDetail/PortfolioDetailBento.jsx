@@ -6,7 +6,7 @@ const PortfolioDetailBento = ({ bentoData }) => {
   const { mainHeading, cards, services } = bentoData;
 
   return (
-    <div className="bg-white dark:bg-black min-h-screen p-8 flex flex-col items-center font-sans py-20">
+    <div className="bg-white dark:bg-zinc-950 min-h-0 p-8 flex flex-col items-center font-sans py-20">
 
       {/* Main Heading */}
       <h2 className="text-4xl md:text-6xl font-bold text-[#303236] dark:text-white leading-tight mb-6 text-center">

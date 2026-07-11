@@ -1,25 +1,42 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "overrides": {
+    "iconv-lite": "^0.6.3"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "fix:service-images": "node scripts/fixBrokenServiceImages.js",
+    "fix:blog-images": "node scripts/fixBrokenBlogImages.js",
+    "assign:blog-images": "node scripts/assignBlogFeaturedImages.js",
+    "patch:footer": "node scripts/patchFooterContent.js",
+    "patch:service-grid": "node scripts/patchServiceCategoriesGrid.js",
+    "patch:navbar": "node scripts/patchNavbarServices.js",
+    "assign:service-images": "node scripts/assignServiceImages.js",
+    "patch:hero-sliders": "node scripts/patchServiceHeroSliders.js",
+    "patch:home-hero": "node scripts/patchHomeHeroSlides.js",
+    "patch:event-portfolio": "node scripts/patchEventManagementPortfolio.js",
+    "seed:hgh-india-2026": "node scripts/seedHghIndia2026.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^4.19.2",
     "express-rate-limit": "^8.2.1",
     "helmet": "^8.1.0",
+    "iconv-lite": "^0.6.3",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.20.1",
     "nodemailer": "^7.0.10"

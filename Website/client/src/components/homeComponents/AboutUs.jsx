@@ -1,14 +1,14 @@
 "use client";
 import Tag from "../Tag";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import AnimatedCounter from "../General/AnimatedCounter";
 
 function AboutUs() {
   return (
     <section
       aria-labelledby="about-bcpl-heading"
       className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
-      itemScope
-      itemType="https://schema.org/Organization"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -16,7 +16,7 @@ function AboutUs() {
           <div className="flex justify-center mb-4 md:mb-6">
             <Tag>About BCPL</Tag>
           </div>
-          <motion.h1
+          <motion.h2
             id="about-bcpl-heading"
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 px-2"
             initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ function AboutUs() {
             Elevating Brands Through{" "}
             <span className="text-[#FF6600]" itemProp="slogan">Innovation</span> &{" "}
             <span className="text-[#FF6600]">Excellence</span>
-          </motion.h1>
+          </motion.h2>
           <motion.p
             className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6"
             initial={{ opacity: 0, y: 20 }}
@@ -77,14 +77,12 @@ function AboutUs() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="text-center p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-gray-100 dark:border-zinc-800" itemProp="areaServed" itemScope itemType="https://schema.org/Country">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#FF6600] mb-1 md:mb-2">50+</div>
-                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300 font-medium">Countries Served</div>
+              <div className="text-center p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-gray-100 dark:border-zinc-800 hover:border-[#FF6600]/30 hover:shadow-md transition-all duration-300" itemProp="areaServed" itemScope itemType="https://schema.org/Country">
+                <AnimatedCounter value="50+" label="Countries Served" />
                 <meta itemProp="name" content="Global" />
               </div>
-              <div className="text-center p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-gray-100 dark:border-zinc-800">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#FF6600] mb-1 md:mb-2">1000+</div>
-                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300 font-medium">Projects Completed</div>
+              <div className="text-center p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-gray-100 dark:border-zinc-800 hover:border-[#FF6600]/30 hover:shadow-md transition-all duration-300">
+                <AnimatedCounter value="1000+" label="Projects Completed" />
               </div>
             </motion.div>
           </div>
@@ -100,15 +98,14 @@ function AboutUs() {
             itemScope
             itemType="https://schema.org/ImageObject"
           >
-            <div className="rounded-2xl md:rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg md:shadow-2xl">
-              <img
+            <div className="rounded-2xl md:rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg md:shadow-2xl relative h-64 sm:h-80 md:h-96 lg:h-[500px]">
+              <Image
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                 alt="BCPL Event Management Team coordinating a successful corporate conference with detailed planning"
                 title="BCPL Professional Event Management Services"
-                className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
-                loading="lazy"
-                width={1000}
-                height={500}
+                className="object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 itemProp="url"
               />
               <meta itemProp="description" content="BCPL event management professionals organizing a corporate conference" />
@@ -138,7 +135,7 @@ function AboutUs() {
           transition={{ duration: 0.6 }}
           itemProp="serviceType"
         >
-          <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-[#FF6600]/20 hover:-translate-y-1 transition-all duration-300">
             <div className="w-12 h-12 bg-[#FF6600] rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
                 className="w-6 h-6 text-white"
@@ -155,7 +152,7 @@ function AboutUs() {
             <p className="text-gray-600 dark:text-gray-300 text-sm">Cutting-edge event technology and creative marketing solutions tailored to your business goals</p>
           </article>
 
-          <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-[#FF6600]/20 hover:-translate-y-1 transition-all duration-300">
             <div className="w-12 h-12 bg-[#FF6600] rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
                 className="w-6 h-6 text-white"
@@ -172,7 +169,7 @@ function AboutUs() {
             <p className="text-gray-600 dark:text-gray-300 text-sm">International event execution across 50+ countries with local expertise</p>
           </article>
 
-          <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <article className="text-center p-6 bg-gradient-to-br from-gray-50 to-white dark:from-zinc-800/50 dark:to-zinc-900/50 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-[#FF6600]/20 hover:-translate-y-1 transition-all duration-300">
             <div className="w-12 h-12 bg-[#FF6600] rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
                 className="w-6 h-6 text-white"

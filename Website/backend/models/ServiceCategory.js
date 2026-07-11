@@ -146,6 +146,17 @@ const faqSchema = new mongoose.Schema({
   answer: { type: String, required: true }
 });
 
+const heroSliderItemSchema = new mongoose.Schema({
+  img: { type: String, required: true },
+  text: [{ type: String, required: true }],
+  link: { type: String, required: true },
+  buttonText: { type: String, required: true }
+});
+
+const heroSliderSchema = new mongoose.Schema({
+  slides: [heroSliderItemSchema]
+});
+
 const serviceCategorySchema = new mongoose.Schema({
   category: {
     type: String,
@@ -155,6 +166,7 @@ const serviceCategorySchema = new mongoose.Schema({
     lowercase: true
   },
   hero: heroSchema,
+  heroSlider: heroSliderSchema,
   visionBanner: visionBannerSchema,
   comparisonTable: comparisonTableSchema,
   categoryServices: categoryServicesSchema,

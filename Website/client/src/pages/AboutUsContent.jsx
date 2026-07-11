@@ -1,12 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Timeline from '@/components/About/Timeline';
 import Tag from '@/components/Tag';
 import DemoOne from '@/components/About/AboutSec/demo';
 import DoAndDont from '@/components/About/Do&Dont';
-// Import the API client
+import Breadcrumbs from '@/components/General/Breadcrumbs';
+import AnimatedCounter from '@/components/General/AnimatedCounter';
+import AboutPageSkeleton from '@/components/About/AboutPageSkeleton';
 import { api } from '@/lib/api';
 
 const fadeUp = {
@@ -22,15 +25,15 @@ const fadeUp = {
   })
 };
 
-const AboutUsContent = () => {
-  const [pageData, setPageData] = useState(null);
-  const [loading, setLoading] = useState(true);
+const AboutUsContent = ({ initialData = null }) => {
+  const [pageData, setPageData] = useState(initialData);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState(null);
 
-  // Fetch About page data once
   useEffect(() => {
+    if (initialData) return;
     fetchAboutPageData();
-  }, []);
+  }, [initialData]);
 
   const fetchAboutPageData = async () => {
     try {
@@ -71,29 +74,15 @@ const AboutUsContent = () => {
 
   // Render loading state
   if (loading) {
-    return (
-      <main
-        className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950"
-        aria-label="Loading page content"
-      >
-        <div className="text-center">
-          <div
-            className="animate-spin rounded-full h-16 w-16 border-4 border-[#FF6600] border-t-transparent mx-auto mb-4"
-            aria-label="Loading indicator"
-            role="status"
-          ></div>
-          <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Loading About Us</h1>
-          <p className="text-gray-500 dark:text-gray-400">Fetching the latest content...</p>
-        </div>
-      </main>
-    );
+    return <AboutPageSkeleton />;
   }
 
   // Render error state
   if (error) {
     return (
-      <main
+      <div
         className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950"
+        role="alert"
         aria-label="Error page"
       >
         <article className="max-w-md mx-auto text-center p-8 bg-white dark:bg-zinc-900 rounded-lg shadow-lg">
@@ -121,15 +110,16 @@ const AboutUsContent = () => {
             </div>
           </div>
         </article>
-      </main>
+      </div>
     );
   }
 
   // Check if we have the minimum required data
   if (!pageData) {
     return (
-      <main
+      <div
         className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950"
+        role="status"
         aria-label="No data available"
       >
         <div className="text-center">
@@ -143,16 +133,30 @@ const AboutUsContent = () => {
             NEXT_PUBLIC_API_KEY=your_api_key_here
           </p>
         </div>
-      </main>
+      </div>
     );
   }
 
   // Destructure data for easier access
   const { hero, mission, vision, impact, timeline, principles, aboutSection } = pageData;
 
+  const heroStats = aboutSection?.stats
+    ? [
+        { value: aboutSection.stats.satisfaction || '98%', label: 'Client Satisfaction', sublabel: 'Trusted partnerships' },
+        { value: aboutSection.stats.projectsDelivered || '1000+', label: 'Projects Delivered', sublabel: 'Global reach' },
+        { value: aboutSection.stats.years || '10+', label: 'Years of Excellence', sublabel: 'Since 2010' },
+        { value: aboutSection.stats.projects || '500+', label: 'Active Clients', sublabel: 'Across industries' },
+      ]
+    : [
+        { value: '95%', label: 'Client Retention', sublabel: 'Long-term partnerships' },
+        { value: '350+', label: 'Projects Delivered', sublabel: 'Global reach' },
+        { value: '₹15Cr+', label: 'Revenue Generated', sublabel: 'For clients' },
+        { value: '24/7', label: 'Strategic Support', sublabel: 'Dedicated teams' },
+      ];
+
   return (
     <div className="bg-white dark:bg-zinc-950">
-      {/* Hero Section  <HumanoidSection/>*/}
+      {/* Hero Section */}
       <section className="relative overflow-hidden pt-24 pb-20 bg-white dark:bg-zinc-950">
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -162,6 +166,12 @@ const AboutUsContent = () => {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'About Us', href: '/about' },
+            ]}
+          />
           <div className="text-center">
             {/* Main Title with sophisticated animation */}
             <motion.div
@@ -185,10 +195,10 @@ const AboutUsContent = () => {
                     }
                   }}
                 >
-                  Redefining{' '}
+                  {hero?.heading || 'Redefining'}{' '}
                   <span className="relative">
                     <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6600] to-orange-500">
-                      Brand Excellence
+                      {hero?.highlighted || 'Brand Excellence'}
                     </span>
                     <motion.div
                       className="absolute -bottom-2 left-0 right-0 h-3 bg-gradient-to-r from-[#FF6600]/20 to-orange-500/20 -skew-y-1"
@@ -209,9 +219,11 @@ const AboutUsContent = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Where strategic vision meets{' '}
+                {hero?.title || 'Where strategic vision meets'}{' '}
                 <span className="relative">
-                  <span className="text-[#FF6600] font-bold">transformative execution</span>
+                  <span className="text-[#FF6600] font-bold">
+                    {hero?.description ? 'innovation & excellence' : 'transformative execution'}
+                  </span>
                   <svg
                     className="absolute -bottom-2 left-0 w-full h-3"
                     viewBox="0 0 200 12"
@@ -246,9 +258,7 @@ const AboutUsContent = () => {
               <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                 <div className="space-y-4">
                   <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                    At Brandbase Capsule, we architect brand narratives that resonate across markets.
-                    Our methodology blends deep market intelligence with creative precision to deliver
-                    measurable impact.
+                    {hero?.description || aboutSection?.description1 || 'At BrandBase Capsule, we architect brand narratives that resonate across markets. Our methodology blends deep market intelligence with creative precision to deliver measurable impact.'}
                   </p>
                   <div className="flex items-center gap-3 pt-4">
                     <div className="w-1 h-8 bg-gradient-to-b from-[#FF6600] to-orange-400 rounded-full"></div>
@@ -260,9 +270,7 @@ const AboutUsContent = () => {
 
                 <div className="space-y-4">
                   <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Through integrated solutions spanning digital transformation, experiential marketing,
-                    and brand strategy, we empower organizations to achieve sustainable growth in an
-                    evolving commercial landscape.
+                    {aboutSection?.description2 || 'Through integrated solutions spanning digital transformation, experiential marketing, and brand strategy, we empower organizations to achieve sustainable growth in an evolving commercial landscape.'}
                   </p>
                 </div>
               </div>
@@ -276,29 +284,21 @@ const AboutUsContent = () => {
                 className="mt-16 pt-8"
               >
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                  {[
-                    { value: "95%", label: "Client Retention", sublabel: "Long-term partnerships" },
-                    { value: "350+", label: "Projects Delivered", sublabel: "Global reach" },
-                    { value: "₹15Cr+", label: "Revenue Generated", sublabel: "For clients" },
-                    { value: "24/7", label: "Strategic Support", sublabel: "Dedicated teams" },
-                  ].map((stat, index) => (
+                  {heroStats.map((stat, index) => (
                     <motion.div
                       key={stat.label}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-                      className="text-center group"
+                      className="text-center group p-4 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50 hover:border-[#FF6600]/30 hover:shadow-md transition-all duration-300"
                     >
-                      <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF6600] transition-colors duration-300">
-                        {stat.value}
-                      </div>
-                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-1">
-                        {stat.label}
-                      </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                        {stat.sublabel}
-                      </div>
+                      <AnimatedCounter
+                        value={stat.value}
+                        label={stat.label}
+                        className="[&>div:first-child]:group-hover:text-[#FF6600] [&>div:first-child]:transition-colors"
+                      />
+                      <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stat.sublabel}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -470,22 +470,22 @@ const AboutUsContent = () => {
               transition={{ delay: 0.3 }}
               viewport={{ once: true }}
             >
-              {impact.title}
+              {impact?.title}
             </motion.h2>
 
             <motion.p
-              className="text-xl text-gray-700 max-w-4xl mx-auto"
+              className="text-xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              {impact.description}
+              {impact?.description}
             </motion.p>
           </div>
 
           {/* Main Content */}
-          <div className="bg-orange-100 dark:bg-zinc-900/50 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden">
+          <div className="bg-gradient-to-br from-orange-50 to-orange-100/80 dark:from-zinc-900 dark:to-zinc-900/80 rounded-3xl p-8 lg:p-12 relative overflow-hidden border border-orange-100 dark:border-zinc-800">
 
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -508,26 +508,26 @@ const AboutUsContent = () => {
               >
                 <div>
                   <h3 className="text-3xl font-bold text-black dark:text-white mb-6">
-                    {impact.subheading}
+                    {impact?.subheading}
                   </h3>
                   <p className="text-gray-900 dark:text-gray-200 text-lg leading-relaxed">
-                    {impact.body}
+                    {impact?.body}
                   </p>
                 </div>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 gap-4">
-                  {impact.stats.map((stat, i) => (
+                  {(impact?.stats || []).map((stat, i) => (
                     <motion.div
                       key={i}
-                      className="bg-white/5 backdrop-blur-sm border border-orange-500 rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-300"
+                      className="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm border border-orange-200 dark:border-zinc-700 rounded-2xl p-6 text-center hover:shadow-md transition-all duration-300"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 + i * 0.1 }}
                       whileHover={{ scale: 1.05 }}
                       viewport={{ once: true }}
                     >
-                      <div className="text-black dark:text-white font-semibold text-lg">
+                      <div className="text-gray-900 dark:text-white font-semibold text-lg">
                         {stat}
                       </div>
                     </motion.div>
@@ -546,14 +546,13 @@ const AboutUsContent = () => {
                 <div className="inline-flex flex-col items-center space-y-6">
                   {/* Image Container */}
                   <motion.div
-                    className="relative"
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-3xl overflow-hidden shadow-2xl">
                       <img
                         src="https://ik.imagekit.io/vinayak06/businesst.jpg"
-                        alt="Brandbase Business Impact and Success"
+                        alt="BrandBase business impact and client success"
                         className="w-full h-80 object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
@@ -561,14 +560,20 @@ const AboutUsContent = () => {
                   </motion.div>
 
                   {/* CTA Button */}
-                  <motion.a
-                    href={impact?.impactButtonLink || "#"}
-                    className="bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold py-4 px-10 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#FF6600]/25 inline-block"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  <motion.div whileHover={{ scale: 1.02 }} transition={{ type: 'spring', stiffness: 300 }}>
+                    <Link
+                      href={impact?.impactButtonLink || '/appointment'}
+                      className="bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold py-4 px-10 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#FF6600]/25 inline-block"
+                    >
+                      {impact?.impactButtonText || 'Book a Consultation'}
+                    </Link>
+                  </motion.div>
+                  <Link
+                    href="/contact"
+                    className="text-[#FF6600] font-semibold hover:underline"
                   >
-                    {impact?.impactButtonText || "Start Your Project"}
-                  </motion.a>
+                    Or contact our team →
+                  </Link>
                 </div>
               </motion.div>
             </div>
@@ -596,23 +601,23 @@ const AboutUsContent = () => {
             {aboutSection?.cta?.text || "Whether it's a new build or an upgrade, we help brands scale with modern, efficient digital solutions.Your next big step starts with one conversation."}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <motion.a
-              href={aboutSection?.cta?.buttonLink || "#"}
-              className="relative overflow-hidden group px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-[#FF6600] bg-white dark:bg-zinc-900 border border-[#FF6600] shadow-lg hover:text-white inline-block cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10">{aboutSection?.cta?.buttonText || "Schedule a Call"}</span>
-              <span className="absolute inset-0 bg-[#FF6600] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></span>
-            </motion.a>
-            <motion.a
-              href="#"
-              className="px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-white bg-[#FF6600] border border-[#FF6600] shadow-lg hover:bg-[#E55A00] inline-block cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Our Work
-            </motion.a>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href={aboutSection?.cta?.buttonLink || '/appointment'}
+                className="relative overflow-hidden group px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-[#FF6600] bg-white dark:bg-zinc-900 border border-[#FF6600] shadow-lg hover:text-white inline-block"
+              >
+                <span className="relative z-10">{aboutSection?.cta?.buttonText || 'Schedule a Call'}</span>
+                <span className="absolute inset-0 bg-[#FF6600] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href="/portfolio"
+                className="px-8 py-4 rounded-lg font-semibold text-xl transition-colors duration-300 text-white bg-[#FF6600] border border-[#FF6600] shadow-lg hover:bg-[#E55A00] inline-block"
+              >
+                View Our Work
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </section>

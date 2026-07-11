@@ -13,6 +13,10 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import LegalPolicyShell from '@/components/Legal/LegalPolicyShell';
+import { PRIVACY_PAGE } from '@/lib/legalPageData';
+import { CONTACT_FORM_PROMPT, SHOW_PUBLIC_ADDRESS, SHOW_PUBLIC_PHONE } from '@/lib/contactConstants';
 
 const IconMap = {
   Eye: <Eye className="w-5 h-5" />,
@@ -32,32 +36,37 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const PrivacyPolicy = ({ data }) => {
+const PrivacyPolicy = ({ data, pageConfig = PRIVACY_PAGE }) => {
   if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-zinc-950 dark:to-black">
+    <LegalPolicyShell pageConfig={pageConfig} lastUpdated={data.lastUpdated}>
       {/* Hero Section */}
       <motion.section
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-white dark:from-orange-950/20 dark:to-black pt-24 pb-12 md:py-20 mt-25"
+        className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-white dark:from-orange-950/20 dark:to-black pb-12 md:py-16"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-6">
-              <Lock className="w-3 h-3 md:w-4 md:h-4" />
-              Data Protection Policy
+            <div className="inline-flex items-center gap-2 bg-orange-100 dark:bg-orange-900/30 text-[#FF6600] dark:text-orange-400 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-6">
+              <Lock className="w-3 h-3 md:w-4 md:h-4" aria-hidden="true" />
+              {pageConfig.badge}
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-              {data.title.includes('Our Commitment') ? data.title : (
-                <>Our Commitment to <span className="text-orange-600 dark:text-orange-500">Your Privacy</span></>
+              {data.title?.includes('Commitment') ? (
+                data.title
+              ) : (
+                <>
+                  Our Commitment to{' '}
+                  <span className="text-[#FF6600]">Your Privacy</span>
+                </>
               )}
             </h1>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              Transparent practices for trusted partnerships
+              {pageConfig.heroSubtitle}
             </p>
             <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white dark:bg-zinc-900 rounded-lg px-6 py-3 shadow-sm border border-gray-200 dark:border-zinc-800">
               <span className="text-gray-500 dark:text-gray-400 font-medium text-sm">Last Updated:</span>
@@ -79,7 +88,7 @@ const PrivacyPolicy = ({ data }) => {
         >
           <div className="flex flex-col md:flex-row items-start gap-4">
             <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-xl flex-shrink-0">
-              <Shield className="w-6 h-6 text-orange-600 dark:text-orange-500" />
+              <Shield className="w-6 h-6 text-[#FF6600]" aria-hidden="true" />
             </div>
             <div>
               <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 md:mb-4">Our Privacy Philosophy</h2>
@@ -112,7 +121,7 @@ const PrivacyPolicy = ({ data }) => {
                 <div className="bg-gradient-to-r from-orange-50 to-white dark:from-orange-900/10 dark:to-zinc-900 px-5 py-4 md:px-8 md:py-6 border-b border-gray-100 dark:border-zinc-800">
                   <div className="flex items-start md:items-center gap-4">
                     {section.iconName && IconMap[section.iconName] && (
-                      <div className="bg-orange-600 text-white p-2.5 md:p-3 rounded-xl flex-shrink-0 mt-1 md:mt-0">
+                      <div className="bg-[#FF6600] text-white p-2.5 md:p-3 rounded-xl flex-shrink-0 mt-1 md:mt-0">
                         {IconMap[section.iconName]}
                       </div>
                     )}
@@ -121,7 +130,7 @@ const PrivacyPolicy = ({ data }) => {
                         {section.heading}
                       </h2>
                       <div className="flex flex-wrap items-center gap-2 md:gap-3 mt-2">
-                        <span className="text-xs md:text-sm font-semibold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 md:px-3 md:py-1 rounded-full border border-orange-100 dark:border-orange-900/50">
+                        <span className="text-xs md:text-sm font-semibold text-[#FF6600] dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30 px-2 py-0.5 md:px-3 md:py-1 rounded-full border border-orange-100 dark:border-orange-900/50">
                           Section {index + 1}
                         </span>
                         <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400 hidden sm:inline">
@@ -150,7 +159,7 @@ const PrivacyPolicy = ({ data }) => {
                               {block.items.map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-3">
                                   <div className="bg-orange-100 dark:bg-orange-900/30 rounded-full p-1 mt-1.5 flex-shrink-0">
-                                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-orange-600 dark:bg-orange-500 rounded-full"></div>
+                                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#FF6600] rounded-full"></div>
                                   </div>
                                   <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">{item.text}</span>
                                 </li>
@@ -169,7 +178,7 @@ const PrivacyPolicy = ({ data }) => {
                             <div className="grid md:grid-cols-2 gap-8">
                               <div>
                                 <div className="flex items-center gap-3 mb-6">
-                                  <div className="bg-orange-600 text-white p-3 rounded-xl">
+                                  <div className="bg-[#FF6600] text-white p-3 rounded-xl">
                                     <Mail className="w-6 h-6" />
                                   </div>
                                   <div>
@@ -184,12 +193,12 @@ const PrivacyPolicy = ({ data }) => {
 
                               <div className="space-y-4">
                                 <div className="flex items-center gap-3">
-                                  <Mail className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                                  <Mail className="w-5 h-5 text-[#FF6600] flex-shrink-0" aria-hidden="true" />
                                   <div className="min-w-0 flex-1">
                                     <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">General Inquiries</p>
                                     <a
                                       href={`mailto:${contact.email}`}
-                                      className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-orange-600 dark:hover:text-orange-400 transition-colors break-all"
+                                      className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-[#FF6600] transition-colors break-all"
                                     >
                                       {contact.email}
                                     </a>
@@ -198,12 +207,12 @@ const PrivacyPolicy = ({ data }) => {
 
                                 {contact.privacyEmail && (
                                   <div className="flex items-center gap-3">
-                                    <Shield className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                                    <Shield className="w-5 h-5 text-[#FF6600] flex-shrink-0" aria-hidden="true" />
                                     <div className="min-w-0 flex-1">
                                       <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Privacy Concerns</p>
                                       <a
                                         href={`mailto:${contact.privacyEmail}`}
-                                        className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-orange-600 dark:hover:text-orange-400 transition-colors break-all"
+                                        className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-[#FF6600] transition-colors break-all"
                                       >
                                         {contact.privacyEmail}
                                       </a>
@@ -211,24 +220,46 @@ const PrivacyPolicy = ({ data }) => {
                                   </div>
                                 )}
 
+                                {SHOW_PUBLIC_PHONE && (
                                 <div className="flex items-center gap-3">
-                                  <Phone className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                                  <Phone className="w-5 h-5 text-[#FF6600] flex-shrink-0" aria-hidden="true" />
                                   <div className="min-w-0 flex-1">
                                     <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Phone</p>
-                                    <span className="text-gray-900 dark:text-white text-sm md:text-base font-medium">{contact.phone}</span>
+                                    <Link
+                                      href="/contact"
+                                      className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-[#FF6600] transition-colors"
+                                    >
+                                      {contact.phone}
+                                    </Link>
                                   </div>
                                 </div>
+                                )}
+
+                                {!SHOW_PUBLIC_PHONE && (
+                                <div className="flex items-center gap-3">
+                                  <FileText className="w-5 h-5 text-[#FF6600] flex-shrink-0" aria-hidden="true" />
+                                  <div className="min-w-0 flex-1">
+                                    <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Contact</p>
+                                    <Link
+                                      href="/contact#contact-form"
+                                      className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-[#FF6600] transition-colors"
+                                    >
+                                      {CONTACT_FORM_PROMPT}
+                                    </Link>
+                                  </div>
+                                </div>
+                                )}
 
                                 {contact.website && (
                                   <div className="flex items-center gap-3">
-                                    <Globe className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                                    <Globe className="w-5 h-5 text-[#FF6600] flex-shrink-0" aria-hidden="true" />
                                     <div className="min-w-0 flex-1">
                                       <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Website</p>
                                       <a
                                         href={contact.website}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-orange-600 dark:hover:text-orange-400 transition-colors break-all"
+                                        className="text-gray-900 dark:text-white text-sm md:text-base font-medium hover:text-[#FF6600] transition-colors break-all"
                                       >
                                         {contact.website}
                                       </a>
@@ -236,13 +267,28 @@ const PrivacyPolicy = ({ data }) => {
                                   </div>
                                 )}
 
+                                {SHOW_PUBLIC_ADDRESS ? (
                                 <div className="flex items-start gap-3">
-                                  <MapPin className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" />
+                                  <MapPin className="w-5 h-5 text-[#FF6600] mt-1 flex-shrink-0" aria-hidden="true" />
                                   <div className="min-w-0 flex-1">
                                     <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Registered Office</p>
                                     <span className="text-gray-900 dark:text-white text-sm md:text-base block">{contact.address}</span>
                                   </div>
                                 </div>
+                                ) : (
+                                <div className="flex items-start gap-3">
+                                  <MapPin className="w-5 h-5 text-[#FF6600] mt-1 flex-shrink-0" aria-hidden="true" />
+                                  <div className="min-w-0 flex-1">
+                                    <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Registered Office</p>
+                                    <Link
+                                      href="/contact#contact-form"
+                                      className="text-gray-900 dark:text-white text-sm md:text-base hover:text-[#FF6600] transition-colors"
+                                    >
+                                      {CONTACT_FORM_PROMPT}
+                                    </Link>
+                                  </div>
+                                </div>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -254,7 +300,7 @@ const PrivacyPolicy = ({ data }) => {
                     {section.note && (
                       <div className="mt-6 p-4 md:p-6 bg-orange-50/50 dark:bg-orange-900/10 rounded-xl border border-orange-200 dark:border-orange-900/30">
                         <div className="flex items-start gap-3">
-                          <Shield className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                          <Shield className="w-5 h-5 text-[#FF6600] mt-0.5 flex-shrink-0" aria-hidden="true" />
                           <p
                             className="text-gray-800 dark:text-gray-200 text-sm md:text-base leading-relaxed"
                             dangerouslySetInnerHTML={{ __html: section.note }}
@@ -269,7 +315,7 @@ const PrivacyPolicy = ({ data }) => {
           ))}
         </div>
       </main>
-    </div>
+    </LegalPolicyShell>
   );
 };
 

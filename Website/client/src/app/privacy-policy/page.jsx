@@ -1,27 +1,36 @@
-// app/privacy-policy/page.jsx
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import { api } from "@/lib/api";
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
+import LegalPolicyShell, { LegalPolicyEmpty } from '@/components/Legal/LegalPolicyShell';
+import { api } from '@/lib/api';
+import { enrichPolicyData, PRIVACY_PAGE } from '@/lib/legalPageData';
+import { buildLegalPageJsonLd, buildLegalPageMetadata } from '@/lib/siteConfig';
 
-export const metadata = {
-  title: "Privacy Policy | BrandBase Capsule - Data Protection & Security",
-  description: "Read our comprehensive Privacy Policy. Learn how BrandBase Capsule protects your data.",
-  keywords: ["privacy policy", "data protection", "GDPR compliance"],
-};
+export const metadata = buildLegalPageMetadata(PRIVACY_PAGE);
 
 export default async function PrivacyPolicyPage() {
   let policyData = null;
+
   try {
-    const response = await api.getPolicy('privacy-policy');
+    const response = await api.getPolicy(PRIVACY_PAGE.apiType);
     if (response.success) {
-      policyData = response.data;
+      policyData = enrichPolicyData(response.data);
     }
   } catch (error) {
-    console.error("Error fetching privacy policy:", error);
+    console.error('Error fetching privacy policy:', error);
   }
+
+  if (!policyData) {
+    return <LegalPolicyEmpty pageConfig={PRIVACY_PAGE} />;
+  }
+
+  const jsonLd = buildLegalPageJsonLd(PRIVACY_PAGE, policyData);
 
   return (
     <>
-      {policyData && <PrivacyPolicy data={policyData} />}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PrivacyPolicy data={policyData} pageConfig={PRIVACY_PAGE} />
     </>
   );
 }

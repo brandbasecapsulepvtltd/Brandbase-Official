@@ -34,12 +34,12 @@ const TestimonialSlider = ({ data }) => {
       <div className="max-w-7xl space-y-5">
         <Tag>Testimonials</Tag>
         {/* Heading */}
-        <h1
+        <h2
           id="testimonials-heading"
           className="text-4xl lg:text-6xl font-medium leading-none"
         >
           THEIR WORDS,<br />NOT <span className='text-[#FF6600]'>OURS</span>
-        </h1>
+        </h2>
 
         {/* Testimonial */}
         <article className="mt-16">

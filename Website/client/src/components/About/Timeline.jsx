@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -116,14 +118,16 @@ function Timeline({ content }) {
 
             {/* TEXT CONTENT */}
             <div className="w-full lg:w-1/2 order-1 lg:order-2">
-              <motion.h1
+              <motion.p
                 className="text-6xl lg:text-[140px] font-bold text-[#FF6600] leading-none mb-4 lg:mb-6"
+                aria-hidden="true"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 {milestones ? milestones[activeYear].title : ''}
-              </motion.h1>
+              </motion.p>
+              <h3 className="sr-only">{milestones ? `Milestone ${milestones[activeYear].title}` : ''}</h3>
               <motion.p
                 className="text-lg lg:text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
                 initial={{ opacity: 0 }}

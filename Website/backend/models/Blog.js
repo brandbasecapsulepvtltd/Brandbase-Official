@@ -12,7 +12,6 @@ const blogSchema = new mongoose.Schema({
     category: {
       type: String,
       required: [true, 'Please add a category'],
-      enum: ['productivity', 'technology', 'wellness', 'marketing', 'business', 'lifestyle'],
       default: 'productivity'
     },
     isEditorPick: {
@@ -74,7 +73,15 @@ const blogSchema = new mongoose.Schema({
       type: Date,
       required: [true, 'Please add publish date'],
       default: Date.now
-    }
+    },
+    seo: {
+      metaTitle: { type: String, trim: true },
+      metaDescription: { type: String, trim: true },
+      keywords: [{ type: String, trim: true }],
+      canonicalUrl: { type: String, trim: true }
+    },
+    isAI: { type: Boolean, default: false },
+    eventId: { type: String }
   },
   sections: [{
     id: {
@@ -93,6 +100,21 @@ const blogSchema = new mongoose.Schema({
     }],
     listItems: [{
       type: String
+    }],
+    media: [{
+      type: {
+        type: String,
+        enum: ['image', 'video'],
+        default: 'image'
+      },
+      url: {
+        type: String,
+        required: [true, 'Please add media URL']
+      },
+      caption: {
+        type: String,
+        trim: true
+      }
     }]
   }],
   createdAt: {
@@ -115,33 +137,33 @@ blogSchema.index({ 'metadata.isSlider': 1 });
 blogSchema.index({ 'metadata.publishDate': -1 });
 
 // Middleware to update updatedAt before save
-blogSchema.pre('save', function(next) {
+blogSchema.pre('save', function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
 // Static method to get blog by slug
-blogSchema.statics.findBySlug = function(slug) {
+blogSchema.statics.findBySlug = function (slug) {
   return this.findOne({ 'metadata.slug': slug });
 };
 
 // Static method to get blogs by category
-blogSchema.statics.findByCategory = function(category) {
+blogSchema.statics.findByCategory = function (category) {
   return this.find({ 'metadata.category': category }).sort({ 'metadata.publishDate': -1 });
 };
 
 // Static method to get editor's picks
-blogSchema.statics.findEditorsPicks = function() {
+blogSchema.statics.findEditorsPicks = function () {
   return this.find({ 'metadata.isEditorPick': true }).sort({ 'metadata.publishDate': -1 });
 };
 
 // Static method to get slider blogs
-blogSchema.statics.findSliderBlogs = function() {
+blogSchema.statics.findSliderBlogs = function () {
   return this.find({ 'metadata.isSlider': true }).sort({ 'metadata.publishDate': -1 });
 };
 
 // Static method to get helpful resources
-blogSchema.statics.findHelpfulResources = function() {
+blogSchema.statics.findHelpfulResources = function () {
   return this.find({ 'metadata.isHelpfulResources': true }).sort({ 'metadata.publishDate': -1 });
 };
 

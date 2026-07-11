@@ -19,7 +19,7 @@ const services = [
   {
     title: 'Web and Mobile App Development',
     description: 'Build high-performing mobile apps for Android and iOS platforms.',
-    link: '/services/mobile-app-development', // Corrected path to match your folder structure
+    link: '/services/app-development',
     icon: FaMobileAlt,
   },
   {

@@ -4,82 +4,196 @@ import { api } from '@/lib/api';
 
 export const revalidate = 10;
 
-// 1. Generate static params
+function normalizeBlog(raw) {
+  if (!raw) return null;
+  return Array.isArray(raw) ? raw[0] : raw;
+}
+
+function formatCategory(category) {
+  if (!category) return 'Blog';
+  return category
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 export async function generateStaticParams() {
   try {
-    const response = await api.getBlogs(); // Assuming this fetches all blogs
-    const blogs = response.data || [];
-
-    return blogs.map((blog) => ({
-      category: blog.metadata.category,
-      slug: blog.metadata.slug,
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
+    const response = await api.getBlogs();
+    return (response.data || [])
+      .filter((blog) => blog.metadata?.slug && blog.metadata?.category)
+      .map((blog) => ({
+        category: blog.metadata.category,
+        slug: blog.metadata.slug,
+      }));
+  } catch {
     return [];
   }
 }
 
-// 2. Generate metadata
+function buildJsonLd(blog, category, slug) {
+  const { metadata } = blog;
+  const pageUrl = `https://www.brandbasecapsule.com/blogs/${category}/${slug}`;
+  const categoryLabel = formatCategory(category);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${pageUrl}#article`,
+        headline: metadata.title,
+        description: metadata.description,
+        image: metadata.featuredImage,
+        datePublished: metadata.publishDate,
+        author: {
+          '@type': 'Person',
+          name: metadata.author?.name || 'Brandbase Capsule',
+        },
+        publisher: { '@id': 'https://www.brandbasecapsule.com/#organization' },
+        url: pageUrl,
+        articleSection: categoryLabel,
+        inLanguage: 'en-IN',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.brandbasecapsule.com' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.brandbasecapsule.com/blogs' },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: categoryLabel,
+            item: `https://www.brandbasecapsule.com/blogs/${category}`,
+          },
+          { '@type': 'ListItem', position: 4, name: metadata.title, item: pageUrl },
+        ],
+      },
+    ],
+  };
+}
+
+function buildRelatedContext(allBlogs, slug, category) {
+  const posts = (allBlogs || []).filter((b) => b.metadata?.slug);
+  const sorted = [...posts].sort(
+    (a, b) => new Date(b.metadata.publishDate) - new Date(a.metadata.publishDate)
+  );
+  const index = sorted.findIndex((b) => b.metadata.slug === slug);
+
+  const prevPost = index > 0 ? sorted[index - 1] : null;
+  const nextPost = index >= 0 && index < sorted.length - 1 ? sorted[index + 1] : null;
+
+  const related = posts
+    .filter(
+      (b) =>
+        b.metadata.slug !== slug &&
+        b.metadata.category === category
+    )
+    .slice(0, 4);
+
+  const editorPicks = posts
+    .filter((b) => b.metadata.isEditorPick && b.metadata.slug !== slug)
+    .slice(0, 3);
+
+  return { prevPost, nextPost, related, editorPicks };
+}
+
 export async function generateMetadata({ params }) {
   const { category, slug } = await params;
 
   try {
     const response = await api.getBlogBySlug(slug);
+    const blog = normalizeBlog(response?.data);
 
-    // Normalize data: handle both Array and Object responses
-    const rawData = response.data;
-    const blogWrapper = Array.isArray(rawData) ? rawData[0] : rawData;
-
-    // Based on your JSON, the metadata is directly inside the object
-    if (!blogWrapper || !blogWrapper.metadata) {
+    if (!blog?.metadata) {
       return { title: 'Blog Post | Brandbase Capsule' };
     }
 
-    const formattedCategory = category
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    const { metadata } = blog;
+    const pageUrl = `https://www.brandbasecapsule.com/blogs/${category}/${slug}`;
+    const title =
+      metadata.seo?.metaTitle ||
+      `${metadata.title} | ${formatCategory(category)} | Brandbase Capsule`;
+    const description = metadata.seo?.metaDescription || metadata.description;
 
     return {
-      title: `${blogWrapper.metadata.title} | ${formattedCategory}`,
-      description: blogWrapper.metadata.description,
+      title,
+      description,
+      keywords: metadata.seo?.keywords || [],
+      metadataBase: new URL('https://www.brandbasecapsule.com'),
+      alternates: {
+        canonical: metadata.seo?.canonicalUrl || pageUrl,
+      },
+      openGraph: {
+        title,
+        description,
+        url: pageUrl,
+        siteName: 'Brandbase Capsule',
+        locale: 'en_IN',
+        type: 'article',
+        publishedTime: metadata.publishDate,
+        authors: [metadata.author?.name],
+        images: metadata.featuredImage
+          ? [{ url: metadata.featuredImage, alt: metadata.title }]
+          : [],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: metadata.featuredImage ? [metadata.featuredImage] : [],
+        creator: '@brandbasecapsule',
+      },
+      robots: { index: true, follow: true },
     };
-  } catch (error) {
+  } catch {
     return { title: 'Blog Post | Brandbase Capsule' };
   }
 }
 
-// 3. Main page component
-export default async function BlogPage({ params }) {
+export default async function BlogDetailRoute({ params }) {
   const { category, slug } = await params;
 
+  let blog;
+  let allBlogs = [];
+
   try {
-    const response = await api.getBlogBySlug(slug);
+    const [blogRes, allRes] = await Promise.all([
+      api.getBlogBySlug(slug),
+      api.getBlogs().catch(() => ({ data: [] })),
+    ]);
+    blog = normalizeBlog(blogRes?.data);
+    allBlogs = allRes?.data || [];
+  } catch {
+    blog = null;
+  }
 
-    // 1. Identify if we have data at all
-    const rawData = response.data;
-
-    // 2. Normalize the data: If it's an array, take the first item. If not, use it directly.
-    const blogWrapper = Array.isArray(rawData) ? rawData[0] : rawData;
-
-    console.log('Processed Blog Data:', {
-      found: !!blogWrapper,
-      hasMetadata: !!blogWrapper?.metadata
-    });
-
-    // 3. Validation: Check if the "metadata" property exists inside the wrapper
-    // In your Blog JSON, the data itself is the blog object (unlike services which had a nested .data)
-    if (!blogWrapper || !blogWrapper.metadata) {
-      console.error('Blog data structure invalid or missing metadata');
-      notFound();
-    }
-
-    // Pass the normalized blog object to BlogDetailPage
-    return <BlogDetailPage blogData={blogWrapper} />;
-
-  } catch (error) {
-    console.error('Error fetching blog data:', error);
+  if (!blog?.metadata) {
     notFound();
   }
+
+  const blogCategory = blog.metadata.category || category;
+  const { prevPost, nextPost, related, editorPicks } = buildRelatedContext(
+    allBlogs,
+    slug,
+    blogCategory
+  );
+  const jsonLd = buildJsonLd(blog, blogCategory, slug);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BlogDetailPage
+        blogData={blog}
+        category={blogCategory}
+        relatedBlogs={related}
+        editorPicks={editorPicks}
+        prevPost={prevPost}
+        nextPost={nextPost}
+      />
+    </>
+  );
 }

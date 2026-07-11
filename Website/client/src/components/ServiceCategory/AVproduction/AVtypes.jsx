@@ -82,7 +82,8 @@ const AVtypes = () => {
                 src={feature.image}
                 alt={feature.title}
                 className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
-                priority={index === 0}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             </div>

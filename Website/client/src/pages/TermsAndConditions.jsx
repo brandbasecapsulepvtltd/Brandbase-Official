@@ -1,8 +1,6 @@
 'use client';
 import React from "react";
-import Link from 'next/link';
 import {
-  ArrowLeft,
   FileText,
   Scale,
   Shield,
@@ -10,9 +8,13 @@ import {
   Globe,
   Mail,
   Phone,
-  MapPin
+  MapPin,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import LegalPolicyShell from '@/components/Legal/LegalPolicyShell';
+import { TERMS_PAGE } from '@/lib/legalPageData';
+import { CONTACT_FORM_PROMPT, SHOW_PUBLIC_ADDRESS, SHOW_PUBLIC_PHONE } from '@/lib/contactConstants';
 
 const IconMap = {
   FileText: <FileText className="w-5 h-5" />,
@@ -30,45 +32,30 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const TermsAndConditions = ({ data }) => {
+const TermsAndConditions = ({ data, pageConfig = TERMS_PAGE }) => {
   if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-zinc-950 dark:to-black">
-      {/* Mobile Back Button - Only visible on mobile */}
-      <div className="lg:hidden sticky top-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center py-3">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">Back</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
+    <LegalPolicyShell pageConfig={pageConfig} lastUpdated={data.lastUpdated}>
       {/* Hero Section */}
       <motion.section
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-white dark:from-orange-950/20 dark:to-black pt-8 lg:pt-16 pb-12 lg:pb-16 mt-25"
+        className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-white dark:from-orange-950/20 dark:to-black pb-12 lg:pb-16"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-6xl mx-auto px-4 lg:px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-semibold mb-4 lg:mb-6">
-              <Scale className="w-3 h-3 lg:w-4 lg:h-4" />
-              Legal Agreement
+            <div className="inline-flex items-center gap-2 bg-orange-100 dark:bg-orange-900/30 text-[#FF6600] dark:text-orange-400 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-semibold mb-4 lg:mb-6">
+              <Scale className="w-3 h-3 lg:w-4 lg:h-4" aria-hidden="true" />
+              {pageConfig.badge}
             </div>
             <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3 lg:mb-4 leading-tight">
-              Terms & <span className="text-orange-600 dark:text-orange-500">Conditions</span>
+              Terms & <span className="text-[#FF6600]">{pageConfig.heroTitleAccent || 'Conditions'}</span>
             </h1>
             <p className="text-base lg:text-xl text-gray-600 dark:text-gray-400 mb-6 lg:mb-8 leading-relaxed">
-              Governing your use of our digital services and platform
+              {pageConfig.heroSubtitle}
             </p>
             <div className="inline-flex items-center gap-3 bg-white dark:bg-zinc-900 rounded-lg px-4 lg:px-6 py-2 lg:py-3 shadow-sm border border-gray-200 dark:border-zinc-800 text-sm lg:text-base">
               <span className="text-gray-500 dark:text-gray-400 font-medium">Last Updated:</span>
@@ -94,7 +81,7 @@ const TermsAndConditions = ({ data }) => {
                 Important Legal Notice
               </h3>
               <p className="text-sm lg:text-base text-amber-800 dark:text-amber-300">
-                These Terms constitute a legally binding agreement between you and Brandbase Capsule Pvt. Ltd.
+                These Terms constitute a legally binding agreement between you and BrandBase Capsule Pvt. Ltd.
                 By accessing or using our services, you acknowledge that you have read, understood, and agree to
                 be bound by these Terms.
               </p>
@@ -115,7 +102,7 @@ const TermsAndConditions = ({ data }) => {
         >
           <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
             <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-xl lg:rounded-xl w-fit lg:w-auto">
-              <Shield className="w-6 h-6 lg:w-6 lg:h-6 text-orange-600 dark:text-orange-500" />
+              <Shield className="w-6 h-6 lg:w-6 lg:h-6 text-[#FF6600]" aria-hidden="true" />
             </div>
             <div className="flex-1">
               <h2 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-3 lg:mb-4">
@@ -127,21 +114,21 @@ const TermsAndConditions = ({ data }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-6 lg:mt-8 pt-6 lg:pt-8 border-t border-gray-100 dark:border-zinc-800">
                 <div className="text-center p-3 lg:p-4">
                   <div className="bg-orange-100 dark:bg-orange-900/30 w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mx-auto mb-2 lg:mb-3">
-                    <FileText className="w-5 h-5 lg:w-6 lg:h-6 text-orange-600 dark:text-orange-500" />
+                    <FileText className="w-5 h-5 lg:w-6 lg:h-6 text-[#FF6600]" aria-hidden="true" />
                   </div>
                   <h4 className="font-semibold text-gray-900 dark:text-white text-sm lg:text-base">Legal Contract</h4>
                   <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400 mt-1">Binding agreement between you and our company</p>
                 </div>
                 <div className="text-center p-3 lg:p-4">
                   <div className="bg-orange-100 dark:bg-orange-900/30 w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mx-auto mb-2 lg:mb-3">
-                    <Globe className="w-5 h-5 lg:w-6 lg:h-6 text-orange-600 dark:text-orange-500" />
+                    <Globe className="w-5 h-5 lg:w-6 lg:h-6 text-[#FF6600]" aria-hidden="true" />
                   </div>
                   <h4 className="font-semibold text-gray-900 dark:text-white text-sm lg:text-base">Global Standards</h4>
                   <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400 mt-1">Complies with international legal frameworks</p>
                 </div>
                 <div className="text-center p-3 lg:p-4 sm:col-span-2 lg:col-span-1">
                   <div className="bg-orange-100 dark:bg-orange-900/30 w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mx-auto mb-2 lg:mb-3">
-                    <AlertCircle className="w-5 h-5 lg:w-6 lg:h-6 text-orange-600 dark:text-orange-500" />
+                    <AlertCircle className="w-5 h-5 lg:w-6 lg:h-6 text-[#FF6600]" aria-hidden="true" />
                   </div>
                   <h4 className="font-semibold text-gray-900 dark:text-white text-sm lg:text-base">Clear Guidelines</h4>
                   <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400 mt-1">Transparent rules for service usage</p>
@@ -168,7 +155,7 @@ const TermsAndConditions = ({ data }) => {
                 <div className="bg-gradient-to-r from-orange-50 to-white dark:from-orange-900/10 dark:to-zinc-900 px-4 lg:px-8 py-4 lg:py-6 border-b border-gray-100 dark:border-zinc-800">
                   <div className="flex items-start lg:items-center gap-3 lg:gap-4">
                     {section.iconName && IconMap[section.iconName] && (
-                      <div className="bg-orange-600 text-white p-2 lg:p-3 rounded-lg lg:rounded-xl dark:bg-orange-500">
+                      <div className="bg-[#FF6600] text-white p-2 lg:p-3 rounded-lg lg:rounded-xl">
                         {IconMap[section.iconName]}
                       </div>
                     )}
@@ -177,7 +164,7 @@ const TermsAndConditions = ({ data }) => {
                         {section.heading}
                       </h2>
                       <div className="flex flex-wrap items-center gap-2 lg:gap-3 mt-1 lg:mt-2">
-                        <span className="text-xs lg:text-sm font-semibold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30 px-2 lg:px-3 py-0.5 lg:py-1 rounded-full">
+                        <span className="text-xs lg:text-sm font-semibold text-[#FF6600] dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30 px-2 lg:px-3 py-0.5 lg:py-1 rounded-full">
                           Clause {index + 1}
                         </span>
                         <span className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
@@ -213,7 +200,7 @@ const TermsAndConditions = ({ data }) => {
                           <div key={i} className="mt-4 lg:mt-6">
                             <div className="space-y-3 lg:space-y-4">
                               {item.items.map((listItem, idx) => (
-                                <div key={idx} className="border-l-4 border-orange-200 dark:border-orange-900/50 pl-3 lg:pl-4 py-1.5 lg:py-2">
+                                <div key={idx} className="border-l-4 border-[#FF6600]/30 dark:border-orange-900/50 pl-3 lg:pl-4 py-1.5 lg:py-2">
                                   {listItem.term ? (
                                     <>
                                       <dt className="font-semibold text-gray-900 dark:text-white text-base lg:text-lg mb-0.5 lg:mb-1">
@@ -262,7 +249,7 @@ const TermsAndConditions = ({ data }) => {
                             <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-8">
                               <div>
                                 <div className="flex items-center gap-3 mb-4 lg:mb-6">
-                                  <div className="bg-orange-600 text-white p-2 lg:p-3 rounded-lg lg:rounded-xl">
+                                  <div className="bg-[#FF6600] text-white p-2 lg:p-3 rounded-lg lg:rounded-xl">
                                     <FileText className="w-4 h-4 lg:w-6 lg:h-6" />
                                   </div>
                                   <div>
@@ -279,30 +266,49 @@ const TermsAndConditions = ({ data }) => {
 
                               <div className="space-y-3 lg:space-y-4">
                                 <div className="flex items-center gap-3">
-                                  <Mail className="w-4 h-4 lg:w-5 lg:h-5 text-orange-600" />
+                                  <Mail className="w-4 h-4 lg:w-5 lg:h-5 text-[#FF6600]" aria-hidden="true" />
                                   <div>
                                     <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Legal Inquiries</p>
                                     <a
                                       href={`mailto:${details.email}`}
-                                      className="text-gray-900 dark:text-white font-medium hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm lg:text-base"
+                                      className="text-gray-900 dark:text-white font-medium hover:text-[#FF6600] transition-colors text-sm lg:text-base"
                                     >
                                       {details.email}
                                     </a>
                                   </div>
                                 </div>
 
+                                {SHOW_PUBLIC_PHONE ? (
                                 <div className="flex items-center gap-3">
-                                  <Phone className="w-4 h-4 lg:w-5 lg:h-5 text-orange-600" />
+                                  <Phone className="w-4 h-4 lg:w-5 lg:h-5 text-[#FF6600]" aria-hidden="true" />
                                   <div>
                                     <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Phone Support</p>
-                                    <span className="text-gray-900 dark:text-white font-medium text-sm lg:text-base">
+                                    <Link
+                                      href="/contact"
+                                      className="text-gray-900 dark:text-white font-medium text-sm lg:text-base hover:text-[#FF6600] transition-colors"
+                                    >
                                       {details.phone}
-                                    </span>
+                                    </Link>
                                   </div>
                                 </div>
+                                ) : (
+                                <div className="flex items-center gap-3">
+                                  <FileText className="w-4 h-4 lg:w-5 lg:h-5 text-[#FF6600]" aria-hidden="true" />
+                                  <div>
+                                    <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Contact</p>
+                                    <Link
+                                      href="/contact#contact-form"
+                                      className="text-gray-900 dark:text-white font-medium text-sm lg:text-base hover:text-[#FF6600] transition-colors"
+                                    >
+                                      {CONTACT_FORM_PROMPT}
+                                    </Link>
+                                  </div>
+                                </div>
+                                )}
 
+                                {SHOW_PUBLIC_ADDRESS ? (
                                 <div className="flex items-start gap-3">
-                                  <MapPin className="w-4 h-4 lg:w-5 lg:h-5 text-orange-600 mt-1" />
+                                  <MapPin className="w-4 h-4 lg:w-5 lg:h-5 text-[#FF6600] mt-1" aria-hidden="true" />
                                   <div>
                                     <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Registered Office</p>
                                     <span className="text-gray-900 dark:text-white text-sm lg:text-base">
@@ -310,6 +316,20 @@ const TermsAndConditions = ({ data }) => {
                                     </span>
                                   </div>
                                 </div>
+                                ) : (
+                                <div className="flex items-start gap-3">
+                                  <MapPin className="w-4 h-4 lg:w-5 lg:h-5 text-[#FF6600] mt-1" aria-hidden="true" />
+                                  <div>
+                                    <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Registered Office</p>
+                                    <Link
+                                      href="/contact#contact-form"
+                                      className="text-gray-900 dark:text-white text-sm lg:text-base hover:text-[#FF6600] transition-colors"
+                                    >
+                                      {CONTACT_FORM_PROMPT}
+                                    </Link>
+                                  </div>
+                                </div>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -325,19 +345,7 @@ const TermsAndConditions = ({ data }) => {
           ))}
         </div>
       </main>
-
-      {/* Mobile CTA Button - Only visible on mobile */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-white/80 dark:from-black dark:via-black dark:to-black/80 p-4 border-t border-gray-200 dark:border-zinc-800">
-        <div className="max-w-6xl mx-auto">
-          <Link
-            href="/"
-            className="w-full bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl text-center block hover:bg-orange-700 transition-colors shadow-lg"
-          >
-            Back to Home
-          </Link>
-        </div>
-      </div>
-    </div>
+    </LegalPolicyShell>
   );
 };
 

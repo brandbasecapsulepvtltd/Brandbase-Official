@@ -15,6 +15,16 @@ const getIndustryLabel = (industry) => {
   return labels[industry] || industry;
 };
 
+
+const createSlug = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\W-]+/g, '-') // Replace spaces and non-word chars with -
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing -
+};
+
 // Get all events with filtering
 exports.getAllEvents = async (req, res) => {
   try {
@@ -118,7 +128,19 @@ exports.getAllEvents = async (req, res) => {
 // Get single event by ID
 exports.getEventById = async (req, res) => {
   try {
-    const event = await Event.findOne({ id: req.params.id });
+    // Try to find by custom ID first, then by slug, then by _id
+    let query = { id: req.params.id };
+    let event = await Event.findOne(query);
+
+    if (!event) {
+      // Try searching by slug
+      event = await Event.findOne({ slug: req.params.id });
+    }
+
+    if (!event && mongoose.Types.ObjectId.isValid(req.params.id)) {
+      // Fallback to MongoDB _id
+      event = await Event.findById(req.params.id);
+    }
 
     if (!event) {
       return res.status(404).json({
@@ -148,6 +170,11 @@ exports.createEvent = async (req, res) => {
     if (!req.body.id) {
       const aggregation = await Event.aggregate([
         {
+          $match: {
+            id: { $regex: /^\d+$/ }
+          }
+        },
+        {
           $project: {
             idNumber: { $toInt: "$id" }
           }
@@ -161,6 +188,20 @@ exports.createEvent = async (req, res) => {
       ]);
       const lastId = aggregation.length > 0 ? aggregation[0].idNumber : 0;
       req.body.id = (lastId + 1).toString();
+    }
+
+    // Generate slug from name if not provided
+    if (!req.body.slug && req.body.name) {
+      let baseSlug = createSlug(req.body.name);
+      let slug = baseSlug;
+      let counter = 1;
+
+      // Ensure slug uniqueness
+      while (await Event.findOne({ slug })) {
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+      req.body.slug = slug;
     }
 
     // Validate required fields
@@ -209,6 +250,18 @@ exports.createEvent = async (req, res) => {
 // Update event
 exports.updateEvent = async (req, res) => {
   try {
+    console.log('Updating event:', req.params.id);
+    console.log('Request body keys:', Object.keys(req.body));
+    console.log('FAQs:', req.body.faqs);
+    console.log('Sections:', req.body.sections);
+
+    // If name is updated but slug isn't provided, regenerate slug (optional, maybe unsafe if URLs break)
+    // For now, only update slug if explicitly passed or if it's a new draft
+    if (req.body.name && !req.body.slug) {
+      // We generally preserve slugs to prevent broken links, so we WON'T auto-regenerate on name change
+      // unless explicitly requested or logic added later.
+    }
+
     const event = await Event.findOneAndUpdate(
       { id: req.params.id },
       req.body,
@@ -222,6 +275,12 @@ exports.updateEvent = async (req, res) => {
       });
     }
 
+    // Trigger BlogScheduler in background if blogs are enabled
+    if (event.blogConfiguration?.enabled) {
+      const BlogScheduler = require('../services/BlogScheduler');
+      BlogScheduler.run().catch(err => console.error('Error triggering scheduler on update:', err));
+    }
+
     res.json({
       success: true,
       message: 'Event updated successfully',
@@ -229,10 +288,16 @@ exports.updateEvent = async (req, res) => {
     });
   } catch (error) {
     console.error('Error updating event:', error);
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    if (error.errors) {
+      console.error('Validation errors:', JSON.stringify(error.errors, null, 2));
+    }
     res.status(500).json({
       success: false,
       message: 'Server error while updating event',
-      error: error.message
+      error: error.message,
+      validationErrors: error.errors
     });
   }
 };
@@ -477,6 +542,77 @@ exports.bulkImport = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Server error while importing events',
+      error: error.message
+    });
+  }
+};
+
+// Trigger blog generation manually
+exports.triggerBlogGeneration = async (req, res) => {
+  try {
+    const BlogScheduler = require('../services/BlogScheduler');
+    // Run in background without awaiting to prevent timeout
+    BlogScheduler.run().catch(err => console.error('Background manual scheduler run failed:', err));
+
+    res.status(200).json({
+      success: true,
+      message: 'Blog generation process started in the background.'
+    });
+  } catch (err) {
+    console.error('Error triggering blog generation:', err);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to trigger blog generation.',
+      error: err.message
+    });
+  }
+};
+
+// Generate Event Details via AI
+exports.generateEventAI = async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    if (!prompt) {
+      return res.status(400).json({ success: false, message: 'Prompt is required' });
+    }
+
+    const GeminiService = require('../services/GeminiService');
+    const eventData = await GeminiService.generateEventDetails(prompt);
+
+    // Ensure we have a slug
+    if (!eventData.slug && eventData.name) {
+      eventData.slug = createSlug(eventData.name);
+    }
+
+    // Generate slug-based ID from the event name/slug
+    let baseId = eventData.slug || createSlug(eventData.name);
+    let generatedId = baseId;
+    let counter = 2;
+
+    // Ensure ID uniqueness by checking if it already exists
+    while (await Event.findOne({ id: generatedId })) {
+      generatedId = `${baseId}-${counter}`;
+      counter++;
+    }
+
+    // Set the generated slug-based ID
+    eventData.id = generatedId;
+
+    // Ensure canonical URL matches slug
+    if (eventData.slug) {
+      eventData.canonicalUrl = `https://brandbasecapsule.com/events/${eventData.slug}`;
+    }
+
+    res.json({
+      success: true,
+      data: eventData
+    });
+
+  } catch (error) {
+    console.error('Error generating event via AI:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to generate event details.',
       error: error.message
     });
   }

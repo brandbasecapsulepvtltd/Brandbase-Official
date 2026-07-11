@@ -60,7 +60,7 @@ export const masterData = [
     similarEvents: ['1', '7', '8']
   },
   {
-    id: '3',  
+    id: '3',
     name: 'Auto Expo 2026',
     startDate: new Date(2026, 0, 25),
     endDate: new Date(2026, 0, 28),
@@ -179,7 +179,7 @@ export const masterData = [
     portfolioItems: [],
     similarEvents: ['5', '4', '2']
   },
-    {
+  {
     id: '9',
     name: 'India Tech Summit 2026',
     startDate: new Date(2026, 0, 13),
@@ -209,7 +209,7 @@ export const masterData = [
     ],
     similarEvents: ['2', '4', '6']
   },
-      {
+  {
     id: '10',
     name: 'India Tech Summit 2026',
     startDate: new Date(2026, 0, 10),
@@ -241,6 +241,7 @@ export const masterData = [
   }
 ];
 
+
 // Helper functions
 export const getIndustryLabel = (industry) => {
   const labels = {
@@ -256,6 +257,7 @@ export const getIndustryLabel = (industry) => {
   return labels[industry] || industry;
 };
 
+
 export const getEventsForMonth = (year, month) => {
   return masterData.filter(event => {
     const eventMonth = event.startDate.getMonth();
@@ -263,6 +265,7 @@ export const getEventsForMonth = (year, month) => {
     return eventMonth === month && eventYear === year;
   });
 };
+
 
 export const getEventsForDate = (date) => {
   return masterData.filter(event => {
@@ -278,7 +281,7 @@ export const getEventsForDate = (date) => {
 
 export const getSimilarEvents = (event) => {
   if (!event || !event.similarEvents) return [];
-  return masterData.filter(e => 
+  return masterData.filter(e =>
     event.similarEvents.includes(e.id)
   ).slice(0, 3);
 };

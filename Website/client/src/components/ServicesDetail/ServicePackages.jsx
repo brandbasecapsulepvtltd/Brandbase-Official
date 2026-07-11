@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Layers, Server, Cpu, CornerDownRight, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SafeImage from '@/components/General/SafeImage';
 
 // ICON MAPPER
 const iconMap = {
@@ -12,14 +13,16 @@ const iconMap = {
 };
 
 const ServicePackages = ({ data }) => {
-  const [activeTab, setActiveTab] = useState("signature");
+  const packageKeys = data?.packages ? Object.keys(data.packages) : [];
+  const [activeTab, setActiveTab] = useState(() => packageKeys[0] || 'signature');
   const [direction, setDirection] = useState(0);
 
   if (!data) return null;
 
   const packages = data.packages;
-  const packageKeys = Object.keys(packages);
-  const activePackage = packages[activeTab];
+  const activePackage = packages[activeTab] || packages[packageKeys[0]];
+
+  if (!activePackage) return null;
 
   const handleTabChange = (newTabId) => {
     const currentIndex = packageKeys.indexOf(activeTab);
@@ -105,21 +108,16 @@ const ServicePackages = ({ data }) => {
 
                 {/* IMAGE */}
                 <div className="relative h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-zinc-800 shadow-sm">
-                  <img
+                  <SafeImage
                     src={activePackage.image}
                     alt={activePackage.title}
+                    fallbackKey={activePackage.id || activeTab}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
                 {/* TEXT CONTENT */}
                 <div className="pt-2 sm:pt-4 space-y-6 sm:space-y-8">
-                  <div className="inline-block px-4 py-2 bg-gray-50 dark:bg-zinc-800 rounded-xl">
-                    <span className="font-semibold text-lg text-orange-600">
-                      {activePackage.price}
-                    </span>
-                  </div>
-
                   <h3 className="text-3xl sm:text-4xl font-normal text-gray-900 dark:text-gray-100">
                     {activePackage.title}
                   </h3>

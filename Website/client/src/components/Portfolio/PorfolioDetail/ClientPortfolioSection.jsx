@@ -47,7 +47,7 @@ const ClientPortfolioSection = ({ clientsData }) => {
 
         return (
           <motion.div
-            key={client.id}
+            key={client.id ?? client._id ?? `client-${clientIndex}-${client.companyName ?? 'portfolio'}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}

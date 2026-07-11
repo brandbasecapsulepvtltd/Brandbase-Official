@@ -1,4 +1,7 @@
 const express = require('express');
+const iconv = require('iconv-lite');
+// Force loading of encodings to prevent Hostinger environment issues
+try { iconv.getCodec('utf8'); } catch (e) { }
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
@@ -9,6 +12,10 @@ dotenv.config();
 
 // Connect to database
 connectDB();
+
+// Initialize AI Blog Scheduler
+const { initScheduler } = require('./services/SchedulerService');
+initScheduler();
 
 const app = express();
 
@@ -21,7 +28,10 @@ const corsOptions = {
     'http://localhost:3000',
     'https://brandbase-nu.vercel.app',
     'https://brandbase1.netlify.app',
-    'https://bcpl-admin.netlify.app'
+    'https://bcpl-admin.netlify.app',
+    'https://brandbasecapsule.com',
+    'https://www.brandbasecapsule.com',
+    'https://teal-leopard-589782.hostingersite.com'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
@@ -300,7 +310,7 @@ app.get('/api', (req, res) => {
       }
     },
     usage: {
-      curlExample: 'curl -H "X-API-Key: your_key" https://brandbase.onrender.com/api/appointments',
+      curlExample: 'curl -H "X-API-Key: your_key" https://api.brandbasecapsule.com/api/appointments',
       javascriptExample: `fetch('/api/appointments', {
   headers: { 'X-API-Key': 'your_key' }
 })`

@@ -1,67 +1,34 @@
+"use client";
 import React, { useState, useEffect, useCallback } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { api } from '@/lib/api'; // Assuming you have this API client
+import { ArrowLeft, ArrowRight, ArrowRight as ArrowIcon } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { normalizeHomeHeroSlides } from '@/lib/homeHeroSlides';
 
-const HeroSlider = () => {
+function getHeroImageClasses(slide, animationClass) {
+  const base = animationClass || '';
+  if (slide?.imageFit === 'contain') {
+    return `${base} object-contain bg-gray-50 dark:bg-zinc-950`.trim();
+  }
+  return `${base} object-cover`.trim();
+}
+
+function getHeroImageStyle(slide) {
+  if (slide?.imageFit === 'contain') return undefined;
+  return { objectPosition: slide?.imageObjectPosition || 'center center' };
+}
+
+const HeroSlider = ({ data, blogs = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
-  const [slides, setSlides] = useState([]);
-  const [videoUrl, setVideoUrl] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
+  const slides = normalizeHomeHeroSlides(data?.slides);
+
+  const videoUrl = data?.video?.url || '';
   const totalSlides = slides.length;
 
-  // Fetch hero section data
-  useEffect(() => {
-    const fetchHeroData = async () => {
-      try {
-        setLoading(true);
-        const response = await api.getHomepage();
-
-        // Extract hero section data from the response
-        const heroData = response.data?.heroSection || response.heroSection;
-
-        if (heroData) {
-          // Set slides (with fallback to empty array)
-          setSlides(heroData.slides || []);
-
-          // Set video URL (with fallback to empty string)
-          setVideoUrl(heroData.video?.url || '');
-        } else {
-          // Use default slide if no data
-          setSlides([{
-            id: 1,
-            title: 'Welcome to BrandBase',
-            subtext: 'Elevating brands through strategic design and innovative solutions.',
-            image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3',
-            link: '/services',
-            linkText: 'Explore More'
-          }]);
-        }
-      } catch (err) {
-        console.error('Error fetching hero section data:', err);
-        setError('Failed to load hero content');
-
-        // Fallback data
-        setSlides([{
-          id: 1,
-          title: 'Welcome to BrandBase',
-          subtext: 'Elevating brands through strategic design and innovative solutions.',
-          image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3',
-          link: '/services',
-          linkText: 'Explore More'
-        }]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHeroData();
-  }, []);
-
-  // --- New Navigation Logic ---
+  // --- Navigation Logic ---
   const goToPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   }, [totalSlides]);
@@ -106,51 +73,14 @@ const HeroSlider = () => {
     };
   }, [isLargeScreen]);
 
-  // Show loading state
-  if (loading) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Loading hero section...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show error state
-  if (error && slides.length === 0) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
-        <div className="text-center p-8">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Unable to Load Content</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // If no slides, show empty state
-  if (slides.length === 0) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
-        <div className="text-center p-8">
-          <div className="text-6xl mb-4">📷</div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">No Hero Content</h2>
-          <p className="text-gray-600 dark:text-gray-300">Please add slides from the admin panel.</p>
-        </div>
-      </div>
-    );
-  }
-
   const currentSlide = slides[currentIndex];
+
+  // Find matching blog for current slide if available
+  const currentBlog = blogs.find(blog =>
+    blog.metadata.isSlider &&
+    (blog.metadata.featuredImage === currentSlide.image ||
+      blog.metadata.title.toLowerCase().includes(currentSlide.title?.toLowerCase()))
+  );
 
   // Desktop scroll effects
   const rightSectionWidth = isLargeScreen ? 50 + (50 * scrollProgress) : 100;
@@ -163,7 +93,7 @@ const HeroSlider = () => {
     if (!videoUrl) return null;
 
     return (
-      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0" aria-hidden="true">
         <video
           autoPlay
           muted
@@ -172,11 +102,40 @@ const HeroSlider = () => {
           className="absolute top-0 left-0 w-full h-full object-cover opacity-20"
         >
           <source src={videoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
       </div>
     );
   };
+
+  // Component for CTA buttons
+  const HeroCTAs = ({ slide, blog, compact = false }) => (
+    <div className={`flex flex-col sm:flex-row flex-wrap gap-3 ${compact ? 'mt-4' : 'mt-6'}`}>
+      {slide.link && (
+        <Link
+          href={slide.link}
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#FF6600] hover:bg-[#E55A00] text-white font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-[#FF6600]/25 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600] focus-visible:ring-offset-2"
+        >
+          {slide.linkText || 'Explore More'}
+          <ArrowIcon className="w-4 h-4" aria-hidden="true" />
+        </Link>
+      )}
+      <Link
+        href="/contact"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#FF6600] text-[#FF6600] hover:bg-[#FF6600] hover:text-white font-semibold rounded-xl transition-all duration-300 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6600] focus-visible:ring-offset-2"
+      >
+        Get a Free Quote
+      </Link>
+      {blog && (
+        <Link
+          href={`/blogs/${blog.metadata.category}/${blog.metadata.slug}`}
+          className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+        >
+          Read Blog
+          <ArrowIcon className="w-4 h-4" aria-hidden="true" />
+        </Link>
+      )}
+    </div>
+  );
 
   // Component for Navigation Arrows
   const NavArrows = ({ onPrev, onNext, className, iconColor = 'text-white' }) => (
@@ -199,25 +158,23 @@ const HeroSlider = () => {
   );
 
   return (
-    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-black font-sans`}>
+    <div className={`relative w-full ${outerHeightClass} bg-white dark:bg-black font-sans`} role="region" aria-label="Hero Slider">
       {/* Background Video */}
-
-      {/*
-      {renderBackgroundVideo()}
-      */}
+      {/* {renderBackgroundVideo()} */}
 
       {/* Mobile Layout — Image first, then Content */}
       {!isLargeScreen && (
         <div className="w-full flex flex-col pb-10 relative z-10">
           {/* Mobile Image */}
           <div className="relative w-full h-[55vh]">
-            <img
+            <Image
               src={currentSlide.image || '/placeholder-hero.jpg'}
-              alt="Hero Slide"
-              className="w-full h-full object-cover animate-fade-in rounded-none"
-              onError={(e) => {
-                e.target.src = 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3';
-              }}
+              alt={currentSlide.title || "Hero Slide"}
+              fill
+              className={getHeroImageClasses(currentSlide, 'animate-fade-in rounded-none')}
+              style={getHeroImageStyle(currentSlide)}
+              priority={true} // Prioritize LCP
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
             {/* Mobile Navigation Arrows */}
             {slides.length > 1 && (
@@ -240,14 +197,7 @@ const HeroSlider = () => {
               {currentSlide.subtext}
             </p>
 
-            {currentSlide.link && (
-              <a
-                href={currentSlide.link}
-                className="mt-4 text-sm font-bold tracking-widest text-orange-500 uppercase hover:text-orange-600 transition-colors inline-block"
-              >
-                {currentSlide.linkText || 'EXPLORE MORE'}
-              </a>
-            )}
+            <HeroCTAs slide={currentSlide} blog={currentBlog} compact />
           </div>
 
           {/* Slide Indicators for Mobile */}
@@ -258,8 +208,8 @@ const HeroSlider = () => {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
-                      ? 'bg-orange-500 w-6'
-                      : 'bg-gray-300 hover:bg-gray-400'
+                    ? 'bg-orange-500 w-6'
+                    : 'bg-gray-300 hover:bg-gray-400'
                     }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -284,18 +234,19 @@ const HeroSlider = () => {
                 transition: "clip-path 0.1s linear",
               }}
             >
-              <img
+              <Image
                 key={currentSlide.id || currentIndex}
                 src={currentSlide.image || '/placeholder-hero.jpg'}
-                alt="Hero Slide"
-                className="w-full h-full object-cover animate-slide-in-right"
+                alt={currentSlide.title || "Hero Slide"}
+                fill
+                className={getHeroImageClasses(currentSlide, 'animate-slide-in-right')}
                 style={{
+                  ...getHeroImageStyle(currentSlide),
                   clipPath: `polygon(${imageClipX}% 0, 100% 0, 100% 100%, 0% 100%)`,
-                  transition: "clip-path 0.1s linear",
+                  transition: 'clip-path 0.1s linear',
                 }}
-                onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3';
-                }}
+                priority={true} // Prioritize LCP
+                sizes="50vw"
               />
             </div>
           </div>
@@ -312,18 +263,11 @@ const HeroSlider = () => {
 
               <div className="w-25 h-1 bg-orange-600 mb-6"></div>
 
-              <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed mb-10">
+              <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed mb-6">
                 {currentSlide.subtext}
               </p>
 
-              {currentSlide.link && (
-                <a
-                  href={currentSlide.link}
-                  className="text-md font-bold tracking-widest text-orange-500 uppercase hover:text-orange-600 transition-colors inline-block"
-                >
-                  {currentSlide.linkText || 'EXPLORE MORE'}
-                </a>
-              )}
+              <HeroCTAs slide={currentSlide} blog={currentBlog} />
             </div>
           </div>
 
@@ -346,8 +290,8 @@ const HeroSlider = () => {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
-                        ? 'bg-orange-500 w-6'
-                        : 'bg-gray-300 hover:bg-gray-400'
+                      ? 'bg-orange-500 w-6'
+                      : 'bg-gray-300 hover:bg-gray-400'
                       }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
@@ -358,19 +302,6 @@ const HeroSlider = () => {
         </div>
       )}
 
-      {/* Animations */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideInRight {
-          from { transform: translateX(50%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        .animate-slide-in-right { animation: slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-      `}</style>
     </div>
   );
 };

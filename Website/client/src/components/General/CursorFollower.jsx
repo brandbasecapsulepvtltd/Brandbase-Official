@@ -7,6 +7,11 @@ const CursorFollower = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
   const [trail, setTrail] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const baseSize = 16;
   const trailLength = 6;
@@ -17,24 +22,24 @@ const CursorFollower = () => {
   const trailRef = useRef([]);
 
   // Orange color palette
-const orangeColors = {
-  default: "#fb923c",   // Tailwind orange-400 (still light but richer)
-  hover: "#fca66a",     // slightly darker hover
-  click: "#f88c3a",     // mild click shade, not too dark
-  text: "#f6934c",      // readable warm orange
-  light: "#fecba7",     // soft background tone
-  pale: "#ffe0c7"       // very light but a bit richer than before
-};
+  const orangeColors = {
+    default: "#fb923c",   // Tailwind orange-400 (still light but richer)
+    hover: "#fca66a",     // slightly darker hover
+    click: "#f88c3a",     // mild click shade, not too dark
+    text: "#f6934c",      // readable warm orange
+    light: "#fecba7",     // soft background tone
+    pale: "#ffe0c7"       // very light but a bit richer than before
+  };
 
 
   // Hide cursor when leaving window
   useEffect(() => {
     const handleMouseLeave = () => setIsHidden(true);
     const handleMouseEnter = () => setIsHidden(false);
-    
+
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
-    
+
     return () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
@@ -45,7 +50,7 @@ const orangeColors = {
   useEffect(() => {
     const handleMouseMove = (e) => {
       targetPos.current = { x: e.clientX, y: e.clientY };
-      
+
       // Add to trail
       trailRef.current = [
         { x: e.clientX, y: e.clientY, time: Date.now() },
@@ -53,7 +58,7 @@ const orangeColors = {
       ];
       setTrail(trailRef.current);
     };
-    
+
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
@@ -82,10 +87,10 @@ const orangeColors = {
       // Main cursor click effect
       setScale(1.8);
       setColor(orangeColors.click);
-      
+
       // Create ripple effect
       createRipple(e.clientX, e.clientY);
-      
+
       setTimeout(() => {
         setScale(isPointer ? 1.5 : 1);
         setColor(isPointer ? orangeColors.hover : orangeColors.default);
@@ -107,7 +112,7 @@ const orangeColors = {
         z-index: 9998;
         animation: ripple 0.6s ease-out forwards;
       `;
-      
+
       const style = document.createElement("style");
       style.textContent = `
         @keyframes ripple {
@@ -121,10 +126,10 @@ const orangeColors = {
           }
         }
       `;
-      
+
       document.head.appendChild(style);
       document.body.appendChild(ripple);
-      
+
       setTimeout(() => {
         document.body.removeChild(ripple);
         document.head.removeChild(style);
@@ -166,7 +171,7 @@ const orangeColors = {
 
     const onMouseOver = (e) => {
       const target = e.target;
-      
+
       // Check for clickable elements
       if (clickableSelectors.some(sel => target.closest(sel))) {
         setScale(2);
@@ -183,9 +188,9 @@ const orangeColors = {
 
     const onMouseOut = (e) => {
       const target = e.target;
-      
-      if (clickableSelectors.some(sel => target.closest(sel)) || 
-          textSelectors.some(sel => target.closest(sel))) {
+
+      if (clickableSelectors.some(sel => target.closest(sel)) ||
+        textSelectors.some(sel => target.closest(sel))) {
         setScale(1);
         setOpacity(1);
         setIsPointer(false);
@@ -225,6 +230,8 @@ const orangeColors = {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [color]);
 
+  if (!isMounted) return null;
+
   return (
     <>
       {/* Trail dots - using lighter orange shades */}
@@ -242,7 +249,7 @@ const orangeColors = {
           }}
         />
       ))}
-      
+
       {/* Main cursor */}
       <div
         ref={dotRef}
@@ -266,7 +273,7 @@ const orangeColors = {
             mixBlendMode: "difference",
           }}
         />
-        
+
         {/* Outer ring for pointer state */}
         {isPointer && (
           <div

@@ -13,7 +13,38 @@
 }
 
 .animate-scroll {
+  display: flex;
+  width: max-content;
+  will-change: transform;
   animation: scroll 18s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+.hero-feature-scroll {
+  animation-duration: 30s;
+}
+
+.comparison-table-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .comparison-table th,
+  .comparison-table td {
+    min-width: 120px;
+  }
+
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    min-width: 150px;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
 }
 
 
@@ -138,6 +169,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   --font-sans: var(--font-outfit);
+  --font-serif: var(--font-playfair);
 }
 
 /* Base Styles */
@@ -148,4 +180,88 @@ body {
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HeroSlider Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mumbai SEO landing page utilities */
+/* Mumbai SEO landing + welcome popup cursive */
+.mumbai-landing .font-cursive,
+.font-cursive {
+  font-family: var(--font-great-vibes), cursive;
+}
+
+.mumbai-landing .mumbai-glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.dark .mumbai-landing .mumbai-glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+}
+
+.mumbai-landing .mumbai-accent-gradient {
+  background: linear-gradient(135deg, #ff6600 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Modal Animation */
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }

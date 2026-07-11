@@ -57,7 +57,8 @@ export function LeadForm({ event, isOpen, onClose }) {
       console.log('Submitting lead data:', leadData);
 
       // Send to backend API
-      const response = await fetch('https://api.brandbasecapsule.com/api/leads', {
+      //const response = await fetch('https://api.brandbasecapsule.com/api/leads', {
+      const response = await fetch('https://api-brandbasecapsule-com-432601.hostingersite.com/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

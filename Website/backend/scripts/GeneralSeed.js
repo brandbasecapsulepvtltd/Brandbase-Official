@@ -27,7 +27,7 @@ const seedData = async () => {
                 "✨ Special discount on Stall Design for upcoming Exhibitions!"
             ],
             email: "info@brandbasecapsule.com",
-            locations: "Serving: USA, UK, Europe, Saudi, India, SG"
+            locations: "Serving: India, Europe, Saudi Arabia, Singapore, UK, USA"
         });
 
         // Seed Navbar
@@ -36,15 +36,23 @@ const seedData = async () => {
             logoDark: "https://ik.imagekit.io/vinayak06/brandbaseNew1-removebg-preview.png?updatedAt=1764581531819",
             services: [
                 {
-                    category: "Digital Marketing Solutions",
+                    category: "Event & Exhibition",
+                    categoryLink: "/services/exhibition-management",
+                    items: [
+                        { name: "Stall & Booth Design", link: "/services/events-exhibition/stall-design" },
+                        { name: "Event Planning & Management", link: "/services/events-exhibition/event-planning-management" },
+                        { name: "Exhibition Booth Fabrication", link: "/services/events-exhibition/stall-design" },
+                        { name: "On-site Event Coordination", link: "/services/events-exhibition/onsite-event-coordination" },
+                    ]
+                },
+                {
+                    category: "Digital Marketing",
                     categoryLink: "/services/digital-marketing",
                     items: [
                         { name: "SEO Optimization", link: "/services/digital-marketing/seo-optimization" },
-                        { name: "Online Ads Campaigns", link: "/services/digital-marketing/online-ads-campaigns" },
                         { name: "Social Media Marketing", link: "/services/digital-marketing/social-media-marketing" },
-                        { name: "Social Media Page Setup", link: "/services/digital-marketing/social-media-page-setup" },
-                        { name: "Social Media Content Design", link: "/services/digital-marketing/social-media-content-design" },
-                        { name: "Professional Content Writing", link: "/services/digital-marketing/content-writing" },
+                        { name: "Online Ads Campaigns", link: "/services/digital-marketing/online-ads-campaigns" },
+                        { name: "Content Writing", link: "/services/digital-marketing/content-writing" },
                     ]
                 },
                 {
@@ -52,40 +60,33 @@ const seedData = async () => {
                     categoryLink: "/services/website-development",
                     items: [
                         { name: "Business Website", link: "/services/website-development/business-website" },
-                        { name: "Portfolio Website", link: "/services/website-development/portfolio-website" },
+                        { name: "E-Commerce Websites", link: "/services/website-development/ecommerce-websites" },
                         { name: "Landing Page Development", link: "/services/website-development/landing-page-development" },
                         { name: "CMS Website", link: "/services/website-development/cms-website" },
-                        { name: "E-Commerce Websites", link: "/services/website-development/ecommerce-websites" },
-                        { name: "Dynamic and Static ", link: "/services/website-development/dynamic-static" }
                     ]
                 },
                 {
-                    category: "Mobile App Development",
-                    categoryLink: "/services/mobile-app-development",
+                    category: "Audio & Video Production",
+                    categoryLink: "/services/av-production",
                     items: [
-                        { name: "Android App Development", link: "/services/mobile-app-development/android-app-development" },
-                        { name: "iOS App Development", link: "/services/mobile-app-development/ios-app-development" },
-                        { name: "UI/UX for Apps", link: "/services/mobile-app-development/ui-ux-design" },
-                        { name: "Cross-platform App", link: "/services/mobile-app-development/cross-platform-app-development" },
-                        { name: "app maintenance support", link: "/services/mobile-app-development/app-maintenance-support" }
+                        { name: "Corporate Films", link: "/services/av-production" },
+                        { name: "Commercial & Ad Films", link: "/services/av-production" },
+                        { name: "Event Coverage", link: "/services/av-production" },
+                        { name: "Social & Reels Production", link: "/services/av-production" },
                     ]
                 },
                 {
-                    category: "Event & Exhibition Management",
-                    categoryLink: "/services/events-exhibition",
+                    category: "Branding & Creative Design",
+                    categoryLink: "/services/branding-design",
                     items: [
-                        { name: "Stall & Booth Design", link: "/services/events-exhibition/stall-design" },
-                        { name: "Event Planning & Management", link: "/services/events-exhibition/event-planning-management" },
-                        { name: "Wedding Service", link: "/services/events-exhibition/wedding-service" },
+                        { name: "Brand Identity Design", link: "/services/branding-design" },
+                        { name: "Logo & Visual Systems", link: "/services/branding-design" },
+                        { name: "Marketing Collateral", link: "/services/branding-design" },
                         { name: "Event Branding", link: "/services/events-exhibition/event-branding" },
-                        { name: "On-site Event Coordination", link: "/services/events-exhibition/onsite-event-coordination" }
                     ]
                 }
             ],
-            directLinkServices: [
-                { category: "Branding & Creative Design", link: "/services/branding-design" },
-                { category: "Audio & Video Production", link: "/services/av-production" }
-            ],
+            directLinkServices: [],
             mainLinks: [
                 { label: "Home", path: "/" },
                 { label: "About", path: "/about" },
@@ -111,9 +112,7 @@ const seedData = async () => {
                     links: [
                         { label: "Digital Marketing Solutions", href: "#" },
                         { label: "Website Development", href: "#" },
-                        { label: "App Development", href: "#" },
                         { label: "Event & Exhibition Management", href: "#" },
-                        { label: "Data Engineering", href: "#" },
                         { label: "Audio & Video Production", href: "#" },
                         { label: "Branding & Creative Design", href: "#" }
                     ]
@@ -124,22 +123,22 @@ const seedData = async () => {
                         { label: "About Us", href: "#" },
                         { label: "Team", href: "#" },
                         { label: "Services", href: "#" },
-                        { label: "Blog", href: "#" },
+                        { label: "Blogs", href: "/blogs" },
                         { label: "Careers", href: "#" },
                         { label: "Contact Us", href: "#" }
                     ]
                 }
             ],
             contactInfo: {
-                address: "Brandbase Capsule Pvt. Ltd Office #204 2nd Floor, Near Bus Depot Pimpleshwar Temple, Gulmohar Complex, Goregaon Railway Station, Goregaon East.",
+                address: "Brandbase Capsule Pvt. Ltd, R-34A, Office No. 34, NESCO IT Park, Goregaon East, Mumbai, Maharashtra 400063",
                 email: "info@brandbasecapsule.com",
-                phone: "+91-9892211456"
+                phone: "+91 7045390416"
             },
             legalLinks: [
                 { label: "Terms & Conditions", href: "/terms" },
                 { label: "Privacy Policy", href: "/privacy-policy" }
             ],
-            copyright: "2025 Brandbase Capsule. All rights reserved.",
+            copyright: "2025 BrandBase Capsule. All rights reserved.",
             gstin: "27AAFCB8754H1Z7"
         });
 

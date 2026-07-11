@@ -1,176 +1,95 @@
-import { 
-  Parallax, 
-  ParallaxItem, 
-  PrallaxContainer 
-} from "./parallax";
+import Link from 'next/link';
 import { StaggerText } from './stagger-text';
 
+const AV_GALLERY = [
+  {
+    src: 'https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg',
+    alt: 'Professional cinema camera on set',
+  },
+  {
+    src: 'https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg',
+    alt: 'Video production crew filming',
+  },
+  {
+    src: 'https://images.pexels.com/photos/8412361/pexels-photo-8412361.jpeg',
+    alt: 'Film director reviewing footage',
+  },
+  {
+    src: 'https://images.pexels.com/photos/6883796/pexels-photo-6883796.jpeg',
+    alt: 'Studio lighting for commercial shoot',
+  },
+  {
+    src: 'https://images.pexels.com/photos/6405771/pexels-photo-6405771.jpeg',
+    alt: 'Corporate video interview setup',
+  },
+  {
+    src: 'https://images.pexels.com/photos/7803253/pexels-photo-7803253.jpeg',
+    alt: 'Aerial drone filming',
+  },
+];
+
 export default function Demotwo() {
-
   return (
-    // Height is set to 3000px to allow room for the parallax scroll effect
-    <Parallax className="relative h-[3000px] md:h-[2500px] bg-black">
-      
-      {/* STICKY HERO SECTION - This stays fixed while you scroll */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden mt-15">
-        
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        >
-          <source
-            src="https://ik.imagekit.io/vinayak06/Mavnox/BrandBase/homepage-banner.mp4"
-            type="video/mp4"
-          />
-        </video>
+    <>
+      {/* Hero — single clean background, no overlapping parallax on load */}
+      <section className="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden mt-15">
+        <img
+          src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1920"
+          alt=""
+          role="presentation"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/10 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/80" />
 
-        {/* Hero Content */}
-        <div className="relative z-20 text-center px-6 flex flex-col items-center">
-          <p className="text-orange-500 font-bold uppercase tracking-[0.1em] text-[15px] md:text-lg mb-4">
-            Brandbase Capsule video Production Agency
+        <div className="relative z-10 text-center px-6 flex flex-col items-center max-w-4xl mx-auto py-24">
+          <p className="text-[#FF6600] font-bold uppercase tracking-[0.12em] text-sm md:text-base mb-5">
+            BrandBase Capsule Video Production Agency
           </p>
 
           <StaggerText
-            className="text-4xl md:text-7xl font-bold tracking-tighter text-white max-w-4xl mx-auto leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight"
             text="India's Leading Ad Film Production Agency for Bold Brands"
             direction="y"
           />
 
-          <p className="mt-6 text-gray-200 text-sm md:text-lg max-w-xl mx-auto">
-            We’re an ad production agency helping businesses and brands turn their vision into reality through dynamic video content.
+          <p className="mt-6 text-gray-200 text-base md:text-lg max-w-2xl leading-relaxed">
+            We help businesses and brands turn their vision into reality through
+            corporate films, commercials, event coverage, and social content.
           </p>
 
-          <button className="mt-8 bg-white dark:bg-zinc-900 dark:bg-black text-black dark:text-white hover:bg-blue-600 hover:text-white transition-colors px-8 py-3 rounded-full font-bold text-sm tracking-widest">
-            ENQUIRE NOW
-          </button>
+          <Link
+            href="/contact"
+            className="mt-10 bg-[#FF6600] hover:bg-[#E55A00] text-white transition-colors px-10 py-3.5 rounded-full font-semibold text-sm tracking-widest uppercase shadow-lg"
+          >
+            Enquire Now
+          </Link>
         </div>
-      </div>
+      </section>
 
-      {/* PARALLAX IMAGES SECTION - These float over the sticky video as you scroll */}
-      <PrallaxContainer className="relative z-30 flex flex-wrap justify-around gap-8 w-full px-12 mt-[-50vh]">
-        
-        <ParallaxItem
-
-          className="w-11/12 md:w-1/4 max-h-96"
-
-          start={250}
-
-          end={-200}
-
-        >
-
-          <img
-
-            className="size-full object-cover object-[50%_50%]"
-
-            src="https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg"
-
-            alt="camera"
-
-          />
-
-        </ParallaxItem>
-
-
-
-        <ParallaxItem
-
-          className="w-11/12 md:w-1/4 max-h-96"
-
-          start={500}
-
-          end={20}
-
-        >
-
-          <img
-
-            className="size-full object-cover object-[50%_50%]"
-
-            src="https://images.pexels.com/photos/2925312/pexels-photo-2925312.jpeg"
-
-            alt="street"
-
-          />
-
-        </ParallaxItem>
-
-        <ParallaxItem
-
-          className="w-11/12 md:w-1/4 max-h-96"
-
-          start={800}
-
-          end={50}
-
-        >
-
-          <img
-
-            className="size-full object-cover object-[50%_50%]"
-
-            src="https://images.pexels.com/photos/7803253/pexels-photo-7803253.jpeg"
-
-            alt="drone"
-
-          />
-
-        </ParallaxItem>
-
-        <ParallaxItem
-
-          className="w-11/12 md:w-1/4 max-h-96"
-
-          start={500}
-
-          end={50}
-
-        >
-
-          <img
-
-            className="size-full object-cover object-[50%_50%]"
-
-            src="https://images.pexels.com/photos/6405771/pexels-photo-6405771.jpeg"
-
-            alt="corporate"
-
-          />
-
-        </ParallaxItem>
-
-
-
-        <ParallaxItem
-
-          className="w-11/12 md:w-1/4 max-h-96"
-
-          start={800}
-
-          end={70}
-
-        >
-
-          <img
-
-            className="size-full object-cover object-[50%_50%]"
-
-            src="https://images.pexels.com/photos/6883796/pexels-photo-6883796.jpeg"
-
-            alt="film production"
-
-          />
-
-        </ParallaxItem>
-
-      </PrallaxContainer>
-    </Parallax>
+      {/* Gallery — below the hero, not stacked on top of it */}
+      <section className="bg-black py-16 md:py-24 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-white text-2xl md:text-3xl font-bold text-center mb-10">
+            Production that looks as good as your brand
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {AV_GALLERY.map((item) => (
+              <div
+                key={item.src}
+                className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10"
+              >
+                <img
+                  src={`${item.src}?auto=compress&cs=tinysrgb&w=800`}
+                  alt={item.alt}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

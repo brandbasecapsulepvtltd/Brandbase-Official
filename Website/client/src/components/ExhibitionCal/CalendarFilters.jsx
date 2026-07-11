@@ -15,6 +15,9 @@ export function CalendarFilters({
   venueType,
   onVenueTypeChange,
   onReset,
+  upcomingOnly = false,
+  onUpcomingOnlyChange,
+  pastHiddenCount = 0,
 }) {
   const hasActiveFilters =
     searchQuery ||
@@ -26,7 +29,7 @@ export function CalendarFilters({
     <div className="bg-white dark:bg-zinc-900 backdrop-blur-md border border-slate-200 dark:border-zinc-700 p-4 md:p-6 rounded-2xl shadow-sm mb-8 sticky top-20 z-30 transition-all duration-300">
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-          <Filter className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+          <Filter className="w-4 h-4 text-[#FF6600]" />
           Filter Events
         </h3>
         {hasActiveFilters && (
@@ -49,7 +52,7 @@ export function CalendarFilters({
             placeholder="Search event, venue or organizer..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-zinc-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors"
+            className="w-full pl-10 pr-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6600] focus:bg-white dark:focus:bg-zinc-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors"
           />
         </div>
 
@@ -60,7 +63,7 @@ export function CalendarFilters({
             <select
               value={selectedCity}
               onChange={(e) => onCityChange(e.target.value)}
-              className="w-[160px] px-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-slate-100 appearance-none"
+              className="w-[160px] px-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6600] text-slate-900 dark:text-slate-100 appearance-none"
             >
               {cities.map((city) => (
                 <option key={city} value={city}>
@@ -80,7 +83,7 @@ export function CalendarFilters({
             <select
               value={selectedIndustry}
               onChange={(e) => onIndustryChange(e.target.value)}
-              className="w-[180px] px-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-slate-100 appearance-none"
+              className="w-[180px] px-3 py-2 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6600] text-slate-900 dark:text-slate-100 appearance-none"
             >
               {industries.map((industry) => (
                 <option key={industry} value={industry}>
@@ -109,7 +112,7 @@ export function CalendarFilters({
             <button
               onClick={() => onVenueTypeChange("indoor")}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${venueType === "indoor"
-                  ? "bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                  ? "bg-white dark:bg-zinc-700 text-[#FF6600] dark:text-orange-400 shadow-sm"
                   : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
                 }`}
             >
@@ -127,6 +130,21 @@ export function CalendarFilters({
           </div>
         </div>
       </div>
+
+      <label className="flex items-center gap-2 mt-4 cursor-pointer select-none text-sm text-slate-600 dark:text-zinc-400">
+        <input
+          type="checkbox"
+          checked={upcomingOnly}
+          onChange={(e) => onUpcomingOnlyChange?.(e.target.checked)}
+          className="h-4 w-4 rounded border-slate-300 text-[#FF6600] focus:ring-[#FF6600]"
+        />
+        <span>
+          Show upcoming exhibitions only
+          {pastHiddenCount > 0 && upcomingOnly && (
+            <span className="text-slate-400"> — {pastHiddenCount} past event{pastHiddenCount === 1 ? "" : "s"} hidden</span>
+          )}
+        </span>
+      </label>
     </div>
   );
 }
