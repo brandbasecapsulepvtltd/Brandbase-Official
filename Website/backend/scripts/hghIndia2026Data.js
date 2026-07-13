@@ -6,14 +6,14 @@
 const IMG = (file) => `/images/hgh-india-2026/${file}`;
 
 const IMAGES = {
-  artToDecorExterior: IMG('01-art-to-decor-exterior.jpg'),
-  corelleHall: IMG('02-corelle-hall-wide.jpg'),
-  artToDecorInterior: IMG('03-art-to-decor-interior.jpg'),
-  artToDecorDisplay: IMG('04-art-to-decor-display.jpg'),
-  berghoffCorelle: IMG('05-berghoff-corelle-display.jpg'),
-  corelleBakersSecret: IMG('06-corelle-bakers-secret.jpg'),
-  irekaHomes: IMG('07-ireka-homes-booth.jpg'),
-  artToDecorLighting: IMG('08-art-to-decor-lighting.jpg'),
+  artToDecorExterior: IMG('01-art-to-decor-exterior-v2.jpg'),
+  corelleHall: IMG('02-corelle-hall-wide-v2.jpg'),
+  artToDecorInterior: IMG('03-art-to-decor-interior-v2.jpg'),
+  artToDecorDisplay: IMG('04-art-to-decor-display-v2.jpg'),
+  berghoffCorelle: IMG('05-berghoff-corelle-display-v2.jpg'),
+  corelleBakersSecret: IMG('06-corelle-bakers-secret-v2.jpg'),
+  irekaHomes: IMG('07-ireka-homes-booth-v2.jpg'),
+  artToDecorLighting: IMG('08-art-to-decor-lighting-v2.jpg'),
 };
 
 /** Primary hero / thumbnail for HGH India 2026 across portfolio, home, blog, and SEO pages */

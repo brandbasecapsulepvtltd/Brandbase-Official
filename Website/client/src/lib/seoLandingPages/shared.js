@@ -1,14 +1,14 @@
 export const IK = 'https://ik.imagekit.io/vinayak06';
 
-export const HGH_MAIN_IMAGE = '/images/hgh-india-2026/02-corelle-hall-wide.jpg';
+export const HGH_MAIN_IMAGE = '/images/hgh-india-2026/02-corelle-hall-wide-v2.jpg';
 
 export const HGH_IMAGES = [
   HGH_MAIN_IMAGE,
-  '/images/hgh-india-2026/01-art-to-decor-exterior.jpg',
-  '/images/hgh-india-2026/07-ireka-homes-booth.jpg',
-  '/images/hgh-india-2026/03-art-to-decor-interior.jpg',
-  '/images/hgh-india-2026/06-corelle-bakers-secret.jpg',
-  '/images/hgh-india-2026/08-art-to-decor-lighting.jpg',
+  '/images/hgh-india-2026/01-art-to-decor-exterior-v2.jpg',
+  '/images/hgh-india-2026/07-ireka-homes-booth-v2.jpg',
+  '/images/hgh-india-2026/03-art-to-decor-interior-v2.jpg',
+  '/images/hgh-india-2026/06-corelle-bakers-secret-v2.jpg',
+  '/images/hgh-india-2026/08-art-to-decor-lighting-v2.jpg',
 ];
 
 export function mumbaiVenues() {
